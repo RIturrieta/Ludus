@@ -12,6 +12,16 @@ height = 1.8
 [node name="ExampleCharacter" type="Node3D"]
 
 [node name="BaseCharacter" parent="." instance=ExtResource("2_navb4")]
+abilities = {
+"1": "",
+"2": "",
+"3": "",
+"4": "",
+"E": "",
+"Q": "",
+"R": "",
+"W": ""
+}
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
