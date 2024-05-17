@@ -8,8 +8,8 @@ const PORT = 5409
 
 enum Role {
 	NONE,
-	ROLE_A,
-	ROLE_B
+	TEAM_A,
+	TEAM_B
 }
 
 

@@ -9,7 +9,7 @@ func _ready():
 	
 	for test_player in Game.test_players:
 		var player = Statics.PlayerData.new(
-			0,
+			1,
 			test_player.name,
 			test_player.role
 		)

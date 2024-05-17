@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://rksngjfvhni8"]
+
+[ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="2_navb4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xi3h4"]
+height = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4hxlo"]
+radius = 0.4
+height = 1.8
+
+[node name="ExampleCharacter" type="Node3D"]
+
+[node name="BaseCharacter" parent="." instance=ExtResource("2_navb4")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BaseCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_xi3h4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BaseCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907356, 0)
+mesh = SubResource("CapsuleMesh_4hxlo")

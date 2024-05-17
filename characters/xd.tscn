@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://875aj4ot3cg"]
+
+[ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_3egp1"]
+[ext_resource type="PackedScene" uid="uid://scwsnp4fhldd" path="res://characters/Imported/char_1v_2.tscn" id="2_4csch"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o7wtb"]
+height = 0.5
+
+[node name="Xd" type="Node3D"]
+
+[node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_3egp1")]
+character_node = NodePath("char1v2")
+
+[node name="char1v2" parent="BaseCharacter" instance=ExtResource("2_4csch")]
+
+[node name="Armature" parent="BaseCharacter/char1v2" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
+bones/0/position = Vector3(4.66907e-05, 1.30672, -0.0201611)
+bones/0/rotation = Quaternion(-0.0406503, 0.703754, -0.0362452, 0.708353)
+bones/1/rotation = Quaternion(0.000109605, -0.000194898, 0.153728, 0.988113)
+bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
+bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
+bones/4/position = Vector3(-0.00670829, 0.442672, -0.360566)
+bones/4/rotation = Quaternion(-0.686859, -0.142346, 0.000831198, 0.712714)
+bones/5/rotation = Quaternion(0.000407655, -0.000243475, -0.268514, 0.963276)
+bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
+bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
+bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
+bones/8/rotation = Quaternion(-0.0789939, 0.696575, 0.649281, 0.294919)
+bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
+bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
+bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
+bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
+
+[node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
+transform = Transform3D(-0.00411948, 0.00802214, 0.0254184, 0.0186443, -0.0175135, 0.00854896, 0.0190483, 0.0188769, -0.00287053, 0.555035, 2.39281, -0.142617)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BaseCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_o7wtb")
+
+[editable path="BaseCharacter"]
+[editable path="BaseCharacter/char1v2"]

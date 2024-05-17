@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tw8t38ns0seh"
-path.s3tc="res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"
+uid="uid://16o1rh88bgog"
+path.s3tc="res://.godot/imported/char1_Texture_MAp_axHammers.png-29dda15d205ace6b320771aeee2195c8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "f7a0a5936f16e8668add9d9b333ddf75"
+}
 
 [deps]
 
-source_file="res://icon.svg"
-dest_files=["res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"]
+source_file="res://resources/meshes/char1_Texture_MAp_axHammers.png"
+dest_files=["res://.godot/imported/char1_Texture_MAp_axHammers.png-29dda15d205ace6b320771aeee2195c8.s3tc.ctex"]
 
 [params]
 
@@ -33,6 +36,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
