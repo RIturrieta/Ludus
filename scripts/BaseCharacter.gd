@@ -30,6 +30,7 @@ var prev_lookat = global_transform.basis.z
 # variables para ataque
 var is_attacking = false
 var target_player: CharacterBody3D = null
+var can_move = true
 
 var camera_follow_speed = 0.6
 # var screen_size: Vector2
@@ -49,6 +50,7 @@ var camera_follow_speed = 0.6
 @export var attack_speed: float = 100
 @export var attack_range: float = 1
 @export var cdr: float = 0
+@export var select_radius: float = 3.0
 
 func _ready():
 	label_3d.global_transform = character_node.get_node("HealthMarker").global_transform
@@ -84,14 +86,26 @@ func _physics_process(delta):
 				arrows_transform.global_position = target
 				animation_player.play("move_arrows")
 			target.y = -0.5
-			updateTargetLocation(target)
+			if can_move:
+				updateTargetLocation(target)
 			if is_target_player(target):
 				target_player = get_target_player(target)
-				start_attack(target_player)
-				if is_attacking:
-					updateTargetLocation(target)
-					if Input.is_action_just_pressed("Move"):
-						stop_attack()
+				#start_attack(target_player)
+				#if is_attacking:
+					#updateTargetLocation(target)
+					#if Input.is_action_just_pressed("Move"):
+						#stop_attack()
+			else:
+				#stop_attack()
+				target_player = null
+		if target_player:
+			target = target_player.global_position
+			if target_player != self:
+				if global_position.distance_to(target_player.global_position) <= attack_range:
+					start_attack(target_player)
+				else:
+					stop_attack()
+			updateTargetLocation(target)
 		if velocity.length() > 0.0:
 			sendData.rpc(global_position, velocity, target)
 		#if !agent.is_navigation_finished():
@@ -233,20 +247,30 @@ func is_target_player(position: Vector3) -> bool:
 	var target_players = get_tree().get_nodes_in_group("players")
 	for player in target_players:
 		var distance = position.distance_to(player.global_transform.origin)
-		if distance < attack_range:
+		if distance < player.select_radius:
 			return true
 	return false
 
+# Returns character closest to mouse cursor
 func get_target_player(position: Vector3) -> CharacterBody3D:
 	var target_players = get_tree().get_nodes_in_group("players")
+	var players_in_range = []
 	for player in target_players:
 		var distance = position.distance_to(player.global_transform.origin)
-		if distance < attack_range:
-			return player
-	return null
+		if distance < player.select_radius:
+			players_in_range.append([player, distance])
+	var closest_player = null
+	var shortest_distance = 999999
+	for pair in players_in_range:
+		if pair[1] < shortest_distance:
+			closest_player = pair[0]
+			shortest_distance = pair[1]
+	return closest_player
 
 func start_attack(player: CharacterBody3D):
 	is_attacking = true
+	can_move = false
+	target = global_position
 	print("Ataque")
 
 func stop_attack():
