@@ -4,3 +4,6 @@
 
 [node name="skillshot_test" type="Node"]
 script = ExtResource("1_2uxhn")
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true

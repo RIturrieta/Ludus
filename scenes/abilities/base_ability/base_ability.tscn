@@ -4,3 +4,6 @@
 
 [node name="base_ability" type="Node"]
 script = ExtResource("1_vql10")
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true

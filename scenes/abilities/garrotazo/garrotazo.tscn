@@ -4,3 +4,6 @@
 
 [node name="garrotazo" type="Node"]
 script = ExtResource("1_khasx")
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true

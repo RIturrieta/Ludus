@@ -204,7 +204,7 @@ func moveCameraByCursor(position: Vector2):
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
 	"Q": "garrotazo",
-	"W": "",
+	"W": "skillshot_test",
 	"E": "",
 	"R": "",
 	"1": "",
