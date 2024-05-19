@@ -203,7 +203,7 @@ func moveCameraByCursor(position: Vector2):
 # node of the ability instead of its name.
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
-	"Q": "",
+	"Q": "skillshot_test",
 	"W": "",
 	"E": "",
 	"R": "",
@@ -223,7 +223,8 @@ func loadAbility(key: String):
 			var scene = load("res://scenes/abilities/" + abilities[key] + "/" + abilities[key] + ".tscn")
 			var sceneNode = scene.instantiate()
 			abilities[key] = sceneNode
-			$Abilities.add_child(sceneNode)
+			$Abilities.add_child(sceneNode, true)
+			print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
 		
 # Adds a new ability to the character and loads it
 func addAbility(ability_name: String, key: String):
@@ -235,9 +236,15 @@ func addAbility(ability_name: String, key: String):
 # Executes abilities based on the input
 func executeAbilities():
 	for key in abilities.keys():
-		if Input.is_action_just_pressed(key):
-			var dir = screenPointToRay()
-			abilities[key].execute(self, dir)
+		if Input.is_action_just_pressed(key) and is_multiplayer_authority():
+			var p_forward = -projectile_ray.global_transform.basis.z.normalized()
+			var p_spawn_pos = projectile_spawn.global_position
+			executeRemote.rpc(key, p_spawn_pos, p_forward)
+
+# RPC call for executing abilities			
+@rpc("call_local", "reliable")
+func executeRemote(key, p_spawn_pos, p_forward):
+	abilities[key].execute(self, p_spawn_pos, p_forward)
 
 
 # ========== MULTIPLAYER ========== #

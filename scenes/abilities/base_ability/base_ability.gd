@@ -2,8 +2,8 @@ extends Node
 
 var is_passive_active: bool = false
 
-func execute(user: BaseCharacter, target: Vector3):
-	print("executing " + name)
+func execute(chara: BaseCharacter, p_spawn_pos: Vector3, forward: Vector3):
+	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 	# [Insert the ability here]
 	pass
 

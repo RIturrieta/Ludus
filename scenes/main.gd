@@ -21,5 +21,5 @@ func _ready() -> void:
 			or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB1"):
 				player.global_position = spawn_point.global_position
 				break
-		players.add_child(player)
+		players.add_child(player, true)
 		player.get_child(0).setup(player_data)
