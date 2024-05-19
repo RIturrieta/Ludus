@@ -40,14 +40,14 @@ var camera_follow_speed = 0.6
 
 # ========== STATS ========== #
 @export_category("Stats")
-@export var hp: float = 100
+@export var hp: float = 1000
 @export var mana: float = 100
 @export var attack_damage: float = 100
-@export var spell_power: float = 100
+@export var spell_power: float = 1
 @export var physical_armor: float = 100
 @export var spell_armor: float = 100
 @export var move_speed: float = 100
-@export var attack_speed: float = 100
+@export var attack_speed: float = 1
 @export var attack_range: float = 1
 @export var cdr: float = 0
 @export var select_radius: float = 3.0
@@ -203,7 +203,7 @@ func moveCameraByCursor(position: Vector2):
 # node of the ability instead of its name.
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
-	"Q": "skillshot_test",
+	"Q": "garrotazo",
 	"W": "",
 	"E": "",
 	"R": "",
@@ -239,12 +239,13 @@ func executeAbilities():
 		if Input.is_action_just_pressed(key) and is_multiplayer_authority():
 			var p_forward = -projectile_ray.global_transform.basis.z.normalized()
 			var p_spawn_pos = projectile_spawn.global_position
-			executeRemote.rpc(key, p_spawn_pos, p_forward)
+			var p_rotation = projectile_ray.rotation_degrees.y
+			executeRemote.rpc(key, p_spawn_pos, p_forward, p_rotation)
 
 # RPC call for executing abilities			
 @rpc("call_local", "reliable")
-func executeRemote(key, p_spawn_pos, p_forward):
-	abilities[key].execute(self, p_spawn_pos, p_forward)
+func executeRemote(key, p_spawn_pos, p_forward, p_rotation):
+	abilities[key].execute(p_spawn_pos, p_forward, p_rotation)
 
 
 # ========== MULTIPLAYER ========== #

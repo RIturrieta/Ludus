@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c024t3lso8hfn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb6hm"]
+size = Vector3(2, 2, 7)
+
+[node name="dmg_area" type="Area3D"]
+disable_mode = 2
+collision_layer = 0
+collision_mask = 2
+
+[node name="dmg_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+shape = SubResource("BoxShape3D_yb6hm")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true

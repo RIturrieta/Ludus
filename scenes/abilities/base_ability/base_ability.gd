@@ -1,8 +1,9 @@
 extends Node
 
+@onready var chara: CharacterBody3D = get_parent().get_parent()
 var is_passive_active: bool = false
 
-func execute(chara: BaseCharacter, p_spawn_pos: Vector3, forward: Vector3):
+func execute(spawn_pos: Vector3, forward: Vector3, rotation: float):
 	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 	# [Insert the ability here]
 	pass
