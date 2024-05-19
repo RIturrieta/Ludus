@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwapul6fqh6lf"]
+
+[ext_resource type="Script" path="res://scenes/abilities/garrotazo/garrotazo.gd" id="1_khasx"]
+[ext_resource type="Script" path="res://scenes/abilities/garrotazo/dmg_area.gd" id="2_435f8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a4dfl"]
+size = Vector3(1, 0.2, 3)
+
+[node name="garrotazo" type="Node"]
+script = ExtResource("1_khasx")
+
+[node name="dmg_area" type="Area3D" parent="."]
+script = ExtResource("2_435f8")
+
+[node name="dmg_collision" type="CollisionShape3D" parent="dmg_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+shape = SubResource("BoxShape3D_a4dfl")

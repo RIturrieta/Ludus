@@ -224,7 +224,7 @@ func loadAbility(key: String):
 			var sceneNode = scene.instantiate()
 			abilities[key] = sceneNode
 			$Abilities.add_child(sceneNode, true)
-			print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
+			# print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
 		
 # Adds a new ability to the character and loads it
 func addAbility(ability_name: String, key: String):

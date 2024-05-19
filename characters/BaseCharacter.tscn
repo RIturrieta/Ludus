@@ -48,6 +48,8 @@ radius = 0.1
 height = 0.2
 
 [node name="BaseCharacter" type="CharacterBody3D" groups=["players"]]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_00iuh")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
