@@ -15,6 +15,9 @@ extends MarginContainer
 @onready var role_a: Button = %RoleA
 @onready var role_b: Button = %RoleB
 
+@onready var char_1: Button = %Char1
+@onready var char_3: Button = %Char3
+
 @onready var back_ready: Button = %BackReady
 @onready var ready_toggle: Button = %Ready
 
@@ -64,6 +67,9 @@ func _ready():
 	
 	role_a.pressed.connect(func(): Game.set_current_player_role(Statics.Role.TEAM_A))
 	role_b.pressed.connect(func(): Game.set_current_player_role(Statics.Role.TEAM_B))
+	
+	char_1.pressed.connect(func(): Game.set_current_player_character(Statics.Character.CHAR1))
+	char_3.pressed.connect(func(): Game.set_current_player_character(Statics.Character.CHAR3))
 	
 	ready_toggle.pressed.connect(_on_ready_toggled)
 	
@@ -242,6 +248,10 @@ func _check_ready() -> void:
 		if not player.role in roles and player.role != Statics.Role.NONE:
 			roles.push_back(player.role)
 	ready_toggle.disabled = roles.size() != Statics.Role.size() - 1
+	for player in Game.players:
+		if player.character == Statics.Character.NONE:
+			ready_toggle.disabled = true
+			break
 
 
 func _disconnect():

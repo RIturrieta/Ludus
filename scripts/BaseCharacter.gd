@@ -27,6 +27,7 @@ var locked_camera = true
 @export var character_node: Node3D
 var character_animations: AnimationTree
 var prev_lookat = global_transform.basis.z
+var prev_velocity = 0.0
 # variables para ataque
 var is_attacking = false
 var target_player: CharacterBody3D = null
@@ -66,7 +67,9 @@ func _physics_process(delta):
 		
 	if character_animations:
 		var blend_val = min(velocity.length(), 1)
-		character_animations.set("parameters/IdleWalkBlend/blend_amount", blend_val)
+		var new_walk_vel = lerp(prev_velocity, float(blend_val), 0.5)
+		prev_velocity = new_walk_vel
+		character_animations.set("parameters/IdleWalkBlend/blend_amount", new_walk_vel)
 		
 	if target:
 		if (Vector3(global_transform.origin.x, 0.0, global_transform.origin.z) \
@@ -90,6 +93,8 @@ func _physics_process(delta):
 				updateTargetLocation(target)
 			if is_target_player(target):
 				target_player = get_target_player(target)
+				if target_player == self:
+					target_player = null
 				#start_attack(target_player)
 				#if is_attacking:
 					#updateTargetLocation(target)

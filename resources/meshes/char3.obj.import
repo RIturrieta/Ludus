@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bf83jmo3hyp8v"
+path="res://.godot/imported/char3.obj-3813c42a52ad12224da38c8d3fd85b07.mesh"
+
+[deps]
+
+files=["res://.godot/imported/char3.obj-3813c42a52ad12224da38c8d3fd85b07.mesh"]
+
+source_file="res://resources/meshes/char3.obj"
+dest_files=["res://.godot/imported/char3.obj-3813c42a52ad12224da38c8d3fd85b07.mesh", "res://.godot/imported/char3.obj-3813c42a52ad12224da38c8d3fd85b07.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -52,7 +52,16 @@ func set_player_role(id: int, role: Statics.Role) -> void:
 
 func set_current_player_role(role: Statics.Role) -> void:
 	set_player_role.rpc(multiplayer.get_unique_id(), role)
+	
 
+@rpc("any_peer", "reliable", "call_local")
+func set_player_character(id:int, character: Statics.Character) -> void:
+	var player = get_player(id)
+	player.character = character
+	player_updated.emit(id)
+
+func set_current_player_character(character: Statics.Character) -> void:
+	set_player_character.rpc(multiplayer.get_unique_id(), character)
 
 func is_online() -> bool:
 	return not multiplayer.multiplayer_peer is OfflineMultiplayerPeer and \
