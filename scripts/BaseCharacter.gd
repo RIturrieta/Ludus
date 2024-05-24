@@ -152,9 +152,11 @@ func _physics_process(delta):
 	
 	path_follow_3d.progress_ratio = lerp(path_follow_3d.progress_ratio, camera_target_pos, 0.2)
 	
-	var projectile_ray_target = screenPointToRay()
-	projectile_ray.look_at(projectile_ray_target, Vector3(0,2,0))
-	projectile_ray.rotation.x = 0
+	if is_multiplayer_authority():
+		var projectile_ray_target = screenPointToRay()
+		projectile_ray.look_at(projectile_ray_target, Vector3(0,10,0))
+		projectile_ray.global_rotation.x = 0
+		updateProjectileRay.rpc(projectile_ray.global_rotation)
 	executeAbilities()
 
 func _input(event):
@@ -245,13 +247,17 @@ func executeAbilities():
 			var p_forward = -projectile_ray.global_transform.basis.z.normalized()
 			var p_spawn_pos = projectile_spawn.global_position
 			var p_rotation = projectile_ray.rotation_degrees.y
-			executeRemote.rpc(key, p_spawn_pos, p_forward, p_rotation)
+			executeRemote.rpc(key)
 
 # RPC call for executing abilities			
 @rpc("call_local", "reliable")
-func executeRemote(key, p_spawn_pos, p_forward, p_rotation):
-	abilities[key].execute(p_spawn_pos, p_forward, p_rotation)
+func executeRemote(key):
+	abilities[key].execute()
 
+# RPC call for updating the projectile raycast on remote	
+@rpc
+func updateProjectileRay(rotation):
+	projectile_ray.global_rotation = rotation
 
 # ========== MULTIPLAYER ========== #
 

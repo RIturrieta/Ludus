@@ -100,7 +100,6 @@ collide_with_bodies = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ProjectileRay/SpawnPoint"]
-visible = false
 mesh = SubResource("CapsuleMesh_kvtkm")
 
 [node name="Abilities" type="Node" parent="."]
