@@ -26,19 +26,26 @@ func _ready():
 	p_spawn_pos = projectile_spawn.global_position
 	p_rotation = projectile_ray.rotation_degrees.y
 
-func execute():
+func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
 		Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
-		p_forward = -projectile_ray.global_transform.basis.z.normalized()
-		p_spawn_pos = projectile_spawn.global_position
-		p_rotation = projectile_ray.rotation_degrees.y
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
-		var p: RigidBody3D = projectile.instantiate()
-		p.forward_dir = p_forward
-		chara.add_sibling(p)
-		p.global_position = p_spawn_pos
+		execute()
+
+func execute():
+	p_forward = -projectile_ray.global_transform.basis.z.normalized()
+	p_spawn_pos = projectile_spawn.global_position
+	p_rotation = projectile_ray.rotation_degrees.y
+	var p: RigidBody3D = projectile.instantiate()
+	p.forward_dir = p_forward
+	chara.add_sibling(p)
+	p.global_position = p_spawn_pos
+
+func endExecution():
+	# [What happens after the execution of the ability]
+	pass
 
 func _on_cd_timeout():
 	on_cooldown = false

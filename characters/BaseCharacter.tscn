@@ -66,7 +66,7 @@ top_level = true
 remote_path = NodePath("../Arrows")
 
 [node name="Arrows" type="Sprite3D" parent="."]
-transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+transform = Transform3D(0.104167, 0, 0, 0, -3.77082e-07, -0.104167, 0, 0.104167, -3.77082e-07, 0, 0, 0)
 top_level = true
 texture = ExtResource("2_55k2c")
 

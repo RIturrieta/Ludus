@@ -32,6 +32,7 @@ var prev_velocity = 0.0
 var is_attacking = false
 var target_player: CharacterBody3D = null
 var can_move = true
+var can_rotate = true
 
 var camera_follow_speed = 0.6
 # var screen_size: Vector2
@@ -71,7 +72,7 @@ func _physics_process(delta):
 		prev_velocity = new_walk_vel
 		character_animations.set("parameters/IdleWalkBlend/blend_amount", new_walk_vel)
 		
-	if target:
+	if target and can_rotate:
 		if (Vector3(global_transform.origin.x, 0.0, global_transform.origin.z) \
 		- Vector3(target.x, 0.0, target.z)).length() > 0.5 and velocity.length() != 0:
 			var new_look = lerp(prev_lookat, (global_transform.origin + velocity), 0.3)
@@ -115,11 +116,13 @@ func _physics_process(delta):
 			sendData.rpc(global_position, velocity, target)
 		#if !agent.is_navigation_finished():
 		# if position.distance_to(target) > 0.5:
-		if !agent.is_navigation_finished():
+		if !agent.is_navigation_finished() and can_move: #!!!!!
 			var current_position = global_transform.origin
 			var target_position = agent.get_next_path_position()
 			var new_velocity = (target_position - current_position).normalized() * SPEED
 			velocity = new_velocity
+		elif !agent.is_navigation_finished() and !can_move: #!!!!
+			agent.target_position = global_transform.origin
 		else:
 			velocity = Vector3(0.0, 0.0, 0.0)
 			sendData.rpc(global_position, velocity, target)
@@ -157,7 +160,7 @@ func _physics_process(delta):
 		projectile_ray.look_at(projectile_ray_target, Vector3(0,10,0))
 		projectile_ray.global_rotation.x = 0
 		updateProjectileRay.rpc(projectile_ray.global_rotation)
-	executeAbilities()
+	beginAbilityExecutions()
 
 func _input(event):
 	if is_multiplayer_authority():
@@ -241,18 +244,23 @@ func addAbility(ability_name: String, key: String):
 	loadAbility(key)
 
 # Executes abilities based on the input
-func executeAbilities():
+func beginAbilityExecutions():
 	for key in abilities.keys():
 		if Input.is_action_just_pressed(key) and is_multiplayer_authority():
-			var p_forward = -projectile_ray.global_transform.basis.z.normalized()
-			var p_spawn_pos = projectile_spawn.global_position
-			var p_rotation = projectile_ray.rotation_degrees.y
-			executeRemote.rpc(key)
+			beginRemoteExecution.rpc(key)
 
-# RPC call for executing abilities			
-@rpc("call_local", "reliable")
-func executeRemote(key):
+# Executes an ability. Used for animations
+func executeAbility(key):
 	abilities[key].execute()
+
+# Marks the end of the execution of an ability. Used for animations
+func endAbilityExecution(key):
+	abilities[key].endExecution()
+
+# RPC call to begin the cast of an ability			
+@rpc("call_local", "reliable")
+func beginRemoteExecution(key):
+	abilities[key].beginExecution()
 
 # RPC call for updating the projectile raycast on remote	
 @rpc
