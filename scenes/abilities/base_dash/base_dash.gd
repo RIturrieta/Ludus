@@ -19,12 +19,11 @@ var p_forward: Vector3
 var p_spawn_pos: Vector3
 var p_rotation: float
 
-# Dash calculation raycasts
-@onready var r1: RayCast3D = $R1 # simulates the dash
-@onready var r2: RayCast3D = $R1/R2 # detects collisions
-@onready var r3: RayCast3D = $R1/R3 # backwards
-@onready var r4: RayCast3D = $R1/R4 # forward
-@onready var target = $R1/target
+# Dash calculation shapecasts
+@onready var s1: ShapeCast3D = $S1
+@onready var s2: ShapeCast3D = $S1/S2
+@onready var target: Node3D = $S1/target
+@onready var original_target: Node3D = $S1/original_target
 
 var dashing = false
 
@@ -33,45 +32,40 @@ func _ready():
 	cd_timer.wait_time = cooldown
 	p_ray = chara.projectile_ray
 	p_spawn = chara.projectile_spawn
-	p_forward = -p_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = p_spawn.global_position
-	p_rotation = p_ray.rotation_degrees.y
-	r1.target_position.z = -dash_distance
-	r2.position.z = r1.target_position.z
-	r3.position.z = r1.target_position.z - dash_distance
-	r4.position.z = r1.target_position.z + dash_distance
-	r3.target_position.z = dash_distance
-	r4.target_position.z = -dash_distance
-	target.position = r1.target_position
+	s1.target_position.z = -dash_distance
+	s2.position.z = s1.target_position.z - 2
+	target.position = s1.target_position
+	original_target.position = s1.target_position
 	
 
 func _physics_process(delta):
-	#if is_multiplayer_authority():
-		#Debug.sprint(target.position)
 	if not dashing:
-		r1.rotation = p_ray.rotation
+		s1.rotation = p_ray.rotation
 		if variable_dash_distance:
-			var xd: float = r1.global_position.distance_to(chara.screenPointToRay())
+			var xd: float = s1.global_position.distance_to(chara.screenPointToRay())
 			if xd <= dash_distance:
-				r1.target_position.z = -xd
+				s1.target_position.z = -xd
 			else:
-				r1.target_position.z = -dash_distance
-			r2.position.z = r1.target_position.z
-			r3.position.z = r1.target_position.z - dash_distance
-			r4.position.z = r1.target_position.z + dash_distance
-		
-		if r2.is_colliding():
-			var r2_p: Vector3 = r2.global_position
-			var r3_p: Vector3 = r3.get_collision_point()
-			var r4_p: Vector3 = r4.get_collision_point()
-			if r2_p.distance_to(r3_p) < r2_p.distance_to(r4_p):
-				target.global_position = r3_p
+				s1.target_position.z = -dash_distance
+			s2.position.z = s1.target_position.z - 2
+			original_target.position = s1.target_position
+			target.position = s1.target_position
+				
+		if s1.is_colliding() and s2.is_colliding():
+			var s2_unsafety = s2.get_closest_collision_unsafe_fraction()
+			var s1_pos: Vector3 = s1.get_collision_point(0) + s1.get_collision_normal(0)/2
+			if s2_unsafety != 1:
+				var s2_pos: Vector3 = s2.get_collision_point(0) + s2.get_collision_normal(0)/2
+				if s1_pos.distance_to(original_target.global_position) < s2_pos.distance_to(original_target.global_position):
+					target.global_position = s1_pos
+				else:
+					target.global_position = s2_pos
 			else:
-				target.global_position = r4_p
+				target.global_position = s1_pos
 		else:
-			target.position = r1.target_position
-		
+			target.position = s1.target_position
 	else:
+		# Could also be done with velocity
 		chara.global_position.x = target.global_position.x
 		chara.global_position.z = target.global_position.z
 		endExecution()
@@ -82,7 +76,7 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
-		# [Insert animation call]
+		chara.can_move = false
 		execute() # delete if there's an animation call
 
 func execute():
@@ -90,6 +84,7 @@ func execute():
 
 func endExecution():
 	dashing = false
+	chara.can_move = true
 
 func _on_cd_timeout():
 	on_cooldown = false
