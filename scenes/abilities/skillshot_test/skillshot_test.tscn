@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/abilities/skillshot_test/skillshot_test.gd" id="1_2uxhn"]
 
-[node name="skillshot_test" type="Node"]
+[node name="skillshot_test" type="Node3D"]
 script = ExtResource("1_2uxhn")
 
 [node name="cd_timer" type="Timer" parent="."]

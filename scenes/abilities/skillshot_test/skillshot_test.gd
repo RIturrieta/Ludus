@@ -9,22 +9,22 @@ extends Node
 @export var mana_cost: float = 20
 @export var cooldown: float = 6
 var on_cooldown: bool = false
-var projectile_ray: RayCast3D
-var projectile_spawn: Node3D
+var p_ray: RayCast3D
+var p_spawn: Node3D
 var p_forward: Vector3
 var p_spawn_pos: Vector3
 var p_rotation: float
 
-var projectile = load("res://scenes/abilities/skillshot_test/projectile.tscn")
+var p = load("res://scenes/abilities/skillshot_test/projectile.tscn")
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
 	cd_timer.wait_time = cooldown
-	projectile_ray = chara.projectile_ray
-	projectile_spawn = chara.projectile_spawn
-	p_forward = -projectile_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = projectile_spawn.global_position
-	p_rotation = projectile_ray.rotation_degrees.y
+	p_ray = chara.projectile_ray
+	p_spawn = chara.projectile_spawn
+	p_forward = -p_ray.global_transform.basis.z.normalized()
+	p_spawn_pos = p_spawn.global_position
+	p_rotation = p_ray.rotation_degrees.y
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -35,12 +35,12 @@ func beginExecution():
 		execute()
 
 func execute():
-	p_forward = -projectile_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = projectile_spawn.global_position
-	p_rotation = projectile_ray.rotation_degrees.y
-	var p: RigidBody3D = projectile.instantiate()
+	p_forward = -p_ray.global_transform.basis.z.normalized()
+	p_spawn_pos = p_spawn.global_position
+	p_rotation = p_ray.rotation_degrees.y
+	var p: RigidBody3D = p.instantiate()
 	p.forward_dir = p_forward
-	chara.add_sibling(p)
+	add_child(p)
 	p.global_position = p_spawn_pos
 
 func endExecution():

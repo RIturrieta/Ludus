@@ -1,9 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwapul6fqh6lf"]
+[gd_scene load_steps=5 format=3 uid="uid://dwapul6fqh6lf"]
 
 [ext_resource type="Script" path="res://scenes/abilities/garrotazo/garrotazo.gd" id="1_khasx"]
 
-[node name="garrotazo" type="Node"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb6hm"]
+size = Vector3(2, 2, 7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp1a0"]
+transparency = 1
+albedo_color = Color(0.305882, 0.776471, 1, 0.215686)
+disable_receive_shadows = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_pvj1e"]
+material = SubResource("StandardMaterial3D_dp1a0")
+size = Vector3(2, 0.025, 7)
+
+[node name="garrotazo" type="Node3D"]
 script = ExtResource("1_khasx")
 
 [node name="cd_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="dmg_area" type="Area3D" parent="."]
+disable_mode = 2
+collision_layer = 0
+collision_mask = 2
+
+[node name="dmg_collision" type="CollisionShape3D" parent="dmg_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+shape = SubResource("BoxShape3D_yb6hm")
+
+[node name="hitbox" type="MeshInstance3D" parent="dmg_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+mesh = SubResource("BoxMesh_pvj1e")
+
+[node name="delay" type="Timer" parent="dmg_area"]
+wait_time = 0.05
 one_shot = true

@@ -157,7 +157,7 @@ func _physics_process(delta):
 	
 	if is_multiplayer_authority():
 		var projectile_ray_target = screenPointToRay()
-		projectile_ray.look_at(projectile_ray_target, Vector3(0,10,0))
+		projectile_ray.look_at(projectile_ray_target, Vector3.UP)
 		projectile_ray.global_rotation.x = 0
 		updateProjectileRay.rpc(projectile_ray.global_rotation)
 	beginAbilityExecutions()
@@ -179,7 +179,7 @@ func screenPointToRay():
 	var mouse_position = get_viewport().get_mouse_position()
 	var ray_origin = camera_3d.project_ray_origin(mouse_position)
 	var ray_end = ray_origin + camera_3d.project_ray_normal(mouse_position) * 2000
-	var args = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	var args = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 0b00000001)
 	var ray_array = space_state.intersect_ray(args)
 	if ray_array.has("position"):
 		return ray_array["position"]
@@ -215,7 +215,7 @@ func moveCameraByCursor(position: Vector2):
 @export  var abilities: Dictionary = {
 	"Q": "garrotazo",
 	"W": "skillshot_test",
-	"E": "",
+	"E": "base_dash",
 	"R": "",
 	"1": "",
 	"2": "", 

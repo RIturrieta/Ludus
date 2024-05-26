@@ -1,7 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://c024t3lso8hfn"]
+[gd_scene load_steps=4 format=3 uid="uid://bf26mwlflxcpl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb6hm"]
 size = Vector3(2, 2, 7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp1a0"]
+transparency = 1
+albedo_color = Color(0.305882, 0.776471, 1, 0.215686)
+disable_receive_shadows = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_pvj1e"]
+material = SubResource("StandardMaterial3D_dp1a0")
+size = Vector3(2, 0.025, 7)
 
 [node name="dmg_area" type="Area3D"]
 disable_mode = 2
@@ -15,3 +24,7 @@ shape = SubResource("BoxShape3D_yb6hm")
 [node name="delay" type="Timer" parent="."]
 wait_time = 0.05
 one_shot = true
+
+[node name="hitbox" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+mesh = SubResource("BoxMesh_pvj1e")

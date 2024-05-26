@@ -9,8 +9,8 @@ extends Node
 @export var mana_cost: float = 20
 @export var cooldown: float = 6
 var on_cooldown: bool = false
-var projectile_ray: RayCast3D
-var projectile_spawn: Node3D
+var p_ray: RayCast3D
+var p_spawn: Node3D
 var p_forward: Vector3
 var p_spawn_pos: Vector3
 var p_rotation: float
@@ -18,27 +18,29 @@ var chara_animations: AnimationTree
 
 var players_on_area: Array
 var dmg_area: Area3D
+var hitbox: MeshInstance3D
 var delay: Timer
 var casting: bool = false
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
 	cd_timer.wait_time = cooldown
-	projectile_ray = chara.projectile_ray
-	projectile_spawn = chara.projectile_spawn
-	p_forward = -projectile_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = projectile_spawn.global_position
-	p_rotation = projectile_ray.rotation_degrees.y
+	p_ray = chara.projectile_ray
+	p_spawn = chara.projectile_spawn
+	p_forward = -p_ray.global_transform.basis.z.normalized()
+	p_spawn_pos = p_spawn.global_position
+	p_rotation = p_ray.rotation_degrees.y
 	chara_animations = chara.character_animations
-	dmg_area = load("res://scenes/abilities/garrotazo/dmg_area.tscn").instantiate()
-	delay = dmg_area.get_child(1)
-	get_parent().add_sibling(dmg_area)
+	dmg_area = $dmg_area
+	hitbox = $dmg_area/hitbox
+	hitbox.visible = false
+	delay = $dmg_area/delay
 	delay.timeout.connect(_on_delay_timeout)
 	dmg_area.monitoring = true
 
 func _physics_process(delta):
 	if not casting:
-		p_rotation = projectile_ray.rotation_degrees.y
+		p_rotation = p_ray.rotation_degrees.y
 		dmg_area.global_rotation_degrees.y = p_rotation
 
 func beginExecution():
@@ -47,8 +49,9 @@ func beginExecution():
 		casting = true
 		cd_timer.start()
 		chara.mana -= mana_cost
+		hitbox.visible = true
 		Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
-		p_rotation = projectile_ray.rotation_degrees.y
+		p_rotation = p_ray.rotation_degrees.y
 		chara.character_node.global_rotation_degrees.y = p_rotation
 		chara.can_move = false
 		chara.can_rotate = false
@@ -72,6 +75,7 @@ func endExecution():
 	players_on_area = []
 	chara.can_move = true
 	chara.can_rotate = true
+	hitbox.visible = false
 
 func _on_cd_timeout():
 	on_cooldown = false

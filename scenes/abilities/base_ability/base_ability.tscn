@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/abilities/base_ability/base_ability.gd" id="1_vql10"]
 
-[node name="base_ability" type="Node"]
+[node name="base_ability" type="Node3D"]
 script = ExtResource("1_vql10")
 
 [node name="cd_timer" type="Timer" parent="."]

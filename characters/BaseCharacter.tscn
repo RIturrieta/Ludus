@@ -66,7 +66,7 @@ top_level = true
 remote_path = NodePath("../Arrows")
 
 [node name="Arrows" type="Sprite3D" parent="."]
-transform = Transform3D(0.104167, 0, 0, 0, -3.77082e-07, -0.104167, 0, 0.104167, -3.77082e-07, 0, 0, 0)
+transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 top_level = true
 texture = ExtResource("2_55k2c")
 
@@ -94,12 +94,14 @@ text = "name"
 [node name="ProjectileRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 target_position = Vector3(0, 0, -1)
+collision_mask = 5
 collide_with_bodies = false
 
 [node name="SpawnPoint" type="Node3D" parent="ProjectileRay"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ProjectileRay/SpawnPoint"]
+visible = false
 mesh = SubResource("CapsuleMesh_kvtkm")
 
-[node name="Abilities" type="Node" parent="."]
+[node name="Abilities" type="Node3D" parent="."]
