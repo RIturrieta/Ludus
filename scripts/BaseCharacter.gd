@@ -33,6 +33,7 @@ var is_attacking = false
 var target_player: CharacterBody3D = null
 var can_move = true
 var can_rotate = true
+var is_dashing = false
 
 var camera_follow_speed = 0.6
 # var screen_size: Vector2
@@ -83,7 +84,7 @@ func _physics_process(delta):
 	#rotation.x = 0
 	#rotation.y = 0
 	if is_multiplayer_authority():
-		if Input.is_action_pressed("Move"):
+		if Input.is_action_pressed("Move") and not is_dashing:
 			target = screenPointToRay()
 			if Input.is_action_just_pressed("Move"):
 				target.y = 0.1
@@ -116,10 +117,10 @@ func _physics_process(delta):
 			sendData.rpc(global_position, velocity, target)
 		#if !agent.is_navigation_finished():
 		# if position.distance_to(target) > 0.5:
-		if !agent.is_navigation_finished() and can_move: #!!!!!
+		if !agent.is_navigation_finished() and (can_move or is_dashing): #!!!!!
 			var current_position = global_transform.origin
 			var target_position = agent.get_next_path_position()
-			var new_velocity = (target_position - current_position).normalized() * SPEED
+			var new_velocity = (target_position - current_position).normalized() * SPEED * move_speed/100
 			velocity = new_velocity
 		elif !agent.is_navigation_finished() and !can_move: #!!!!
 			agent.target_position = global_transform.origin
@@ -216,7 +217,7 @@ func moveCameraByCursor(position: Vector2):
 	"Q": "garrotazo",
 	"W": "skillshot_test",
 	"E": "base_dash",
-	"R": "",
+	"R": "shoulder_bash",
 	"1": "",
 	"2": "", 
 	"3": "",

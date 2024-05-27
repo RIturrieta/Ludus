@@ -2,17 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_3egp1"]
 [ext_resource type="PackedScene" uid="uid://scwsnp4fhldd" path="res://characters/Imported/char_1v_2.tscn" id="2_4csch"]
-[ext_resource type="Animation" uid="uid://wvues0cbllgf" path="res://animations/char1v2/atk1.res" id="3_e61yb"]
-[ext_resource type="Animation" uid="uid://cqyeji436wiyy" path="res://animations/char1v2/atk2.res" id="4_up4rg"]
-[ext_resource type="Animation" uid="uid://cdlu8cj5br7y3" path="res://animations/char1v2/channeling.res" id="5_6tedl"]
-[ext_resource type="Animation" uid="uid://dbvbta73wbwry" path="res://animations/char1v2/default.res" id="6_5ew3c"]
-[ext_resource type="Animation" uid="uid://di5l8remk4n4t" path="res://animations/char1v2/e.res" id="7_xmhr2"]
-[ext_resource type="Animation" uid="uid://bdd41eb6unowc" path="res://animations/char1v2/idle.res" id="8_p3k36"]
-[ext_resource type="Animation" uid="uid://dpirprdqfxppx" path="res://animations/char1v2/q.res" id="9_iybxm"]
-[ext_resource type="Animation" uid="uid://darjuowxe82i6" path="res://animations/char1v2/r1.res" id="10_wtgvj"]
-[ext_resource type="Animation" uid="uid://dlanchbj5r31q" path="res://animations/char1v2/r2.res" id="11_dl4f8"]
-[ext_resource type="Animation" uid="uid://d1iexkb6yea4j" path="res://animations/char1v2/w.res" id="12_s5bdc"]
-[ext_resource type="Animation" uid="uid://cxjk37b08b7dv" path="res://animations/char1v2/walk.res" id="13_ivjbw"]
+[ext_resource type="Animation" uid="uid://wvues0cbllgf" path="res://animations/char1v2/atk1.res" id="3_lxjpk"]
+[ext_resource type="Animation" uid="uid://cqyeji436wiyy" path="res://animations/char1v2/atk2.res" id="4_lfr16"]
+[ext_resource type="Animation" uid="uid://cdlu8cj5br7y3" path="res://animations/char1v2/channeling.res" id="5_fgyfk"]
+[ext_resource type="Animation" uid="uid://dbvbta73wbwry" path="res://animations/char1v2/default.res" id="6_vohup"]
+[ext_resource type="Animation" uid="uid://di5l8remk4n4t" path="res://animations/char1v2/e.res" id="7_05hr4"]
+[ext_resource type="Animation" uid="uid://bdd41eb6unowc" path="res://animations/char1v2/idle.res" id="8_3hw28"]
+[ext_resource type="Animation" uid="uid://dpirprdqfxppx" path="res://animations/char1v2/q.res" id="9_6m0hy"]
+[ext_resource type="Animation" uid="uid://darjuowxe82i6" path="res://animations/char1v2/r1.res" id="10_omsc4"]
+[ext_resource type="Animation" uid="uid://dlanchbj5r31q" path="res://animations/char1v2/r2.res" id="11_m4tmw"]
+[ext_resource type="Animation" uid="uid://d1iexkb6yea4j" path="res://animations/char1v2/w.res" id="12_bus8u"]
+[ext_resource type="Animation" uid="uid://cxjk37b08b7dv" path="res://animations/char1v2/walk.res" id="13_iyfu5"]
 
 [sub_resource type="Animation" id="Animation_mk41c"]
 resource_name = "Walk"
@@ -132,18 +132,18 @@ tracks/15/keys = PackedFloat32Array(0, 1, 0.0428388, -0.0111373, 0.0901664, 0.99
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b6jbf"]
 _data = {
-"BasicAttack1": ExtResource("3_e61yb"),
-"BasicAttack2": ExtResource("4_up4rg"),
-"Channeling": ExtResource("5_6tedl"),
-"DefaultPose": ExtResource("6_5ew3c"),
-"E": ExtResource("7_xmhr2"),
-"IdlePose": ExtResource("8_p3k36"),
-"Q": ExtResource("9_iybxm"),
-"R1": ExtResource("10_wtgvj"),
-"R2": ExtResource("11_dl4f8"),
-"W": ExtResource("12_s5bdc"),
+"BasicAttack1": ExtResource("3_lxjpk"),
+"BasicAttack2": ExtResource("4_lfr16"),
+"Channeling": ExtResource("5_fgyfk"),
+"DefaultPose": ExtResource("6_vohup"),
+"E": ExtResource("7_05hr4"),
+"IdlePose": ExtResource("8_3hw28"),
+"Q": ExtResource("9_6m0hy"),
+"R1": ExtResource("10_omsc4"),
+"R2": ExtResource("11_m4tmw"),
+"W": ExtResource("12_bus8u"),
 "Walk": SubResource("Animation_mk41c"),
-"WalkV2": ExtResource("13_ivjbw")
+"WalkV2": ExtResource("13_iyfu5")
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o7wtb"]
@@ -162,25 +162,25 @@ select_radius = 2.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(1.0647e-05, 1.30153, -0.00459739)
-bones/0/rotation = Quaternion(-0.0245133, 0.704395, -0.0201397, 0.709098)
-bones/1/rotation = Quaternion(2.95137e-05, -5.25601e-05, 0.132495, 0.991184)
+bones/0/position = Vector3(4.69813e-05, 1.30676, -0.0202866)
+bones/0/rotation = Quaternion(-0.0407465, 0.703749, -0.0363412, 0.708348)
+bones/1/rotation = Quaternion(9.09828e-05, -0.000161803, 0.148796, 0.988868)
 bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
 bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(0.03996, 0.352056, -0.463318)
-bones/4/rotation = Quaternion(-0.727268, -0.139334, -0.0098333, 0.67199)
-bones/5/rotation = Quaternion(0.000201913, -8.50518e-06, -0.308587, 0.951196)
+bones/4/position = Vector3(-0.0067415, 0.442736, -0.360493)
+bones/4/rotation = Quaternion(-0.686735, -0.142354, 0.000863007, 0.712832)
+bones/5/rotation = Quaternion(0.000448963, -0.000290698, -0.260394, 0.965502)
 bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
 bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
 bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.143706, 0.659955, 0.694839, 0.246997)
+bones/8/rotation = Quaternion(-0.0774391, 0.697365, 0.648115, 0.296028)
 bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
 bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
 bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.000860384, 0.0120064, 0.0241355, 0.0190772, -0.0167898, 0.00903226, 0.0190457, 0.0173599, -0.00795687, 0.526725, 2.38629, -0.10781)
+transform = Transform3D(-0.00419673, 0.00792334, 0.0254367, 0.018828, -0.0173367, 0.00850661, 0.0188497, 0.0190808, -0.00283358, 0.555709, 2.39217, -0.148724)
 
 [node name="AnimationTree" parent="BaseCharacter/char1v2" index="3"]
 libraries = {

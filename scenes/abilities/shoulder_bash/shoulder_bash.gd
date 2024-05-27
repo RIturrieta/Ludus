@@ -25,8 +25,6 @@ var p_rotation: float
 @onready var target: Node3D = $S1/target
 @onready var original_target: Node3D = $S1/original_target
 
-var dashing = false
-
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
 	cd_timer.wait_time = cooldown
@@ -39,7 +37,7 @@ func _ready():
 	
 
 func _physics_process(delta):
-	if not dashing:
+	if not chara.is_dashing:
 		s1.rotation = p_ray.rotation
 		if variable_dash_distance:
 			var xd: float = s1.global_position.distance_to(chara.screenPointToRay())
@@ -71,19 +69,20 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
-		chara.can_move = false
 		chara.agent.target_position = target.global_position
-		execute() # delete if there's an animation call
+		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		chara.is_dashing = true
+		chara.character_node.rotation.y = p_ray.rotation.y
+		chara.agent.navigation_layers = 0b00000010
 
 func execute():
-	dashing = true
-	chara.global_position.x = target.global_position.x
-	chara.global_position.z = target.global_position.z
-	endExecution()
+	chara.agent.target_position = target.global_position
+	chara.move_speed = 300
 
 func endExecution():
-	dashing = false
-	chara.can_move = true
+	chara.is_dashing = false
+	chara.move_speed = 100
+	chara.agent.navigation_layers = 0b00000001
 
 func _on_cd_timeout():
 	on_cooldown = false
