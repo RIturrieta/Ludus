@@ -89,7 +89,8 @@ func beginExecution():
 		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.agent.target_position = target.global_position
+	chara.target_player = null
+	chara.updateTargetLocation(target.global_position)
 	chara.move_speed = 350
 
 func endExecution():

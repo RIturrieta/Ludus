@@ -16,7 +16,8 @@ radius = 1.0
 [node name="shoulder_bash" type="Node3D"]
 script = ExtResource("1_f0s4o")
 damage = 80.0
-cooldown = 9.0
+mana_cost = 0.0
+cooldown = 2.0
 dash_distance = 5.5
 
 [node name="cd_timer" type="Timer" parent="."]
