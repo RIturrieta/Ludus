@@ -153,7 +153,8 @@ height = 0.5
 
 [node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_3egp1")]
 character_node = NodePath("char1v2")
-attack_range = 4.0
+attack_speed = 0.857
+attack_range = 3.0
 select_radius = 2.5
 
 [node name="char1v2" parent="BaseCharacter" instance=ExtResource("2_4csch")]
@@ -187,7 +188,7 @@ libraries = {
 "": SubResource("AnimationLibrary_b6jbf")
 }
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="BaseCharacter"]
+[node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CylinderShape3D_o7wtb")
 

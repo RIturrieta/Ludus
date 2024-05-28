@@ -1,8 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5hufqs7sbm01"]
+[gd_scene load_steps=8 format=3 uid="uid://b5hufqs7sbm01"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ysfbh"]
 [ext_resource type="PackedScene" uid="uid://875aj4ot3cg" path="res://characters/xd.tscn" id="2_lwen3"]
-[ext_resource type="PackedScene" uid="uid://db30omy8kaann" path="res://characters/Sword.tscn" id="3_1llaj"]
+[ext_resource type="PackedScene" uid="uid://dusubx1tn21bq" path="res://characters/Sword.tscn" id="3_1llaj"]
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="4_e5ss3"]
+
+[sub_resource type="Animation" id="Animation_cd0ul"]
+resource_name = "FadeOut"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%BlessingContainer:mouse_filter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_q4syj"]
+resource_name = "FadeOutSlow"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TopTextLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v1ok5"]
+_data = {
+"FadeOut": SubResource("Animation_cd0ul"),
+"FadeOutSlow": SubResource("Animation_q4syj")
+}
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ysfbh")
@@ -11,3 +62,80 @@ player_scene = Array[PackedScene]([ExtResource("2_lwen3"), ExtResource("3_1llaj"
 [node name="Players" type="Node3D" parent="."]
 
 [node name="Arenas" type="Node3D" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="HUDLayer" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUDLayer"]
+unique_name_in_owner = true
+root_node = NodePath("../MarginContainer/TopTextContainer")
+libraries = {
+"": SubResource("AnimationLibrary_v1ok5")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDLayer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUDLayer/MarginContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TopTextContainer" type="MarginContainer" parent="HUDLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="TopTextLabel" type="Label" parent="HUDLayer/MarginContainer/TopTextContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "Default Timer"
+horizontal_alignment = 1
+
+[node name="BlessingContainer" type="HBoxContainer" parent="HUDLayer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Blessing1" type="VBoxContainer" parent="HUDLayer/MarginContainer/BlessingContainer"]
+custom_minimum_size = Vector2(100, 112.685)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing1"]
+layout_mode = 2
+text = "xd"
+
+[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing1"]
+texture = ExtResource("4_e5ss3")
+
+[node name="Blessing2" type="VBoxContainer" parent="HUDLayer/MarginContainer/BlessingContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing2"]
+texture = ExtResource("4_e5ss3")
+
+[node name="Blessing3" type="VBoxContainer" parent="HUDLayer/MarginContainer/BlessingContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing3"]
+texture = ExtResource("4_e5ss3")
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_entered"]
+[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_exited"]
+[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingContainer/Blessing2" to="." method="_on_blessing_2_mouse_entered"]
+[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingContainer/Blessing2" to="." method="_on_blessing_2_mouse_exited"]
+[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingContainer/Blessing3" to="." method="_on_blessing_3_mouse_entered"]
+[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingContainer/Blessing3" to="." method="_on_blessing_3_mouse_exited"]

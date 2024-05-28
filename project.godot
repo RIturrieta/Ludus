@@ -20,6 +20,12 @@ config/icon="res://icon.svg"
 Debug="*res://scripts/debug.gd"
 Game="*res://scenes/game.tscn"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+
 [filesystem]
 
 import/fbx/enabled=false

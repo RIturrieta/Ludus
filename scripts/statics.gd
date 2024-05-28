@@ -23,6 +23,7 @@ class PlayerData:
 	var name: String
 	var role: Role
 	var character: Character
+	var ready: bool = false
 	
 	func _init(new_id: int, new_name: String, new_role: Role = Role.NONE, new_character: Character = Character.NONE) -> void:
 		id = new_id
