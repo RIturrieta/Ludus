@@ -24,6 +24,9 @@ var p_rotation: float
 @onready var s2: ShapeCast3D = $S1/S2
 @onready var target: Node3D = $S1/target
 @onready var original_target: Node3D = $S1/original_target
+@onready var impact_area: Area3D = $impact_area
+var players_on_area: Array[Node3D] = []
+var players_affected: Array[Node3D] = []
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
@@ -62,6 +65,16 @@ func _physics_process(delta):
 				target.global_position = s1_pos
 		else:
 			target.position = s1.target_position
+	else:
+		players_on_area = impact_area.get_overlapping_bodies()
+		for player in players_on_area:
+			
+			if not player in players_affected and player.get_parent() != chara.get_parent():
+				players_affected.append(player)
+				player.hp -= damage*chara.spell_power/100
+				Debug.sprint(player.get_parent().name + " recieved " + 
+				String.num(damage*chara.spell_power/100) + 
+				" and now has " + String.num(player.hp) + " hp")
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -70,20 +83,21 @@ func beginExecution():
 		cd_timer.start()
 		chara.mana -= mana_cost
 		chara.agent.target_position = target.global_position
-		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		chara.is_dashing = true
 		chara.character_node.rotation.y = p_ray.rotation.y
 		chara.agent.navigation_layers = 0b00000010
+		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
 	chara.agent.target_position = target.global_position
-	chara.move_speed = 300
+	chara.move_speed = 350
 
 func endExecution():
 	chara.is_dashing = false
 	chara.move_speed = 100
 	chara.agent.navigation_layers = 0b00000001
-
+	players_affected = []
+	players_on_area = []
 func _on_cd_timeout():
 	on_cooldown = false
 

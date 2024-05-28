@@ -46,7 +46,7 @@ var camera_follow_speed = 0.6
 @export var hp: float = 1000
 @export var mana: float = 100
 @export var attack_damage: float = 100
-@export var spell_power: float = 1
+@export var spell_power: float = 100
 @export var physical_armor: float = 100
 @export var spell_armor: float = 100
 @export var move_speed: float = 100
@@ -162,6 +162,7 @@ func _physics_process(delta):
 		projectile_ray.global_rotation.x = 0
 		updateProjectileRay.rpc(projectile_ray.global_rotation)
 	beginAbilityExecutions()
+	
 
 func _input(event):
 	if is_multiplayer_authority():
@@ -216,7 +217,7 @@ func moveCameraByCursor(position: Vector2):
 @export  var abilities: Dictionary = {
 	"Q": "garrotazo",
 	"W": "skillshot_test",
-	"E": "base_dash",
+	"E": "",
 	"R": "shoulder_bash",
 	"1": "",
 	"2": "", 

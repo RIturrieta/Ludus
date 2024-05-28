@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsovn23daqi30"]
+[gd_scene load_steps=5 format=3 uid="uid://bsovn23daqi30"]
 
 [ext_resource type="Script" path="res://scenes/abilities/shoulder_bash/shoulder_bash.gd" id="1_f0s4o"]
 
@@ -9,12 +9,15 @@ height = 0.5
 radius = 0.1
 height = 0.2
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hkabo"]
+height = 0.5
+radius = 1.0
+
 [node name="shoulder_bash" type="Node3D"]
 script = ExtResource("1_f0s4o")
 damage = 80.0
-mana_cost = 0.0
-cooldown = 2.0
-dash_distance = 3.0
+cooldown = 9.0
+dash_distance = 5.5
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true
@@ -45,3 +48,10 @@ mesh = SubResource("SphereMesh_kr5j8")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="S1/original_target"]
 visible = false
 mesh = SubResource("SphereMesh_kr5j8")
+
+[node name="impact_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="area_shape" type="CollisionShape3D" parent="impact_area"]
+shape = SubResource("CylinderShape3D_hkabo")
