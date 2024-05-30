@@ -43,18 +43,24 @@ func _ready() -> void:
 		if player.get_child(0).is_multiplayer_authority():
 			local_player_id = player.get_child(0).player_info.id
 		# round_start_timer()
-	start_blessing_choice()
+	if not Game.skip_start:
+		start_blessing_choice()
 
 func _physics_process(delta):
 	if !started:
-		var player_nodes = get_tree().get_nodes_in_group("players")
-		var total = player_nodes.size()
-		for player in player_nodes:
-			if player.player_info.ready == true:
-				total -= 1
-		if total == 0:
+		if Game.skip_start:
+			for player in players.get_children():
+				player.get_child(0).can_act = true
 			started = true
-			round_start_timer()
+		else:
+			var player_nodes = get_tree().get_nodes_in_group("players")
+			var total = player_nodes.size()
+			for player in player_nodes:
+				if player.player_info.ready == true:
+					total -= 1
+			if total == 0:
+				started = true
+				round_start_timer()
 
 func on_player_defeated(id: int):
 	# Improve this function for custom announcments on kills
@@ -109,6 +115,7 @@ func round_start_timer():
 
 func _on_start_timer_timeout():
 	if start_remaining_time == 0:
+		print("!!!!!!")
 		start_timer.stop()
 		top_text_label.text = "Fight!"
 		animation_player.play("FadeOutSlow")

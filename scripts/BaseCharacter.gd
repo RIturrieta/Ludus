@@ -2,7 +2,6 @@ class_name BaseCharacter
 extends CharacterBody3D
 
 const SPEED = 4.5
-const JUMP_VELOCITY = 4.5
 
 var player_info: Statics.PlayerData = null
 
@@ -28,20 +27,28 @@ var locked_camera = true
 
 @export var character_node: Node3D
 var character_animations: AnimationTree
+@onready var character_animation_player: AnimationPlayer = character_node.find_child("AnimationPlayer")
 var prev_lookat = global_transform.basis.z
 var prev_velocity = 0.0
 # variables para ataque
 var is_attacking = false
 var target_player: BaseCharacter = null
 var can_move = true
+
 var can_rotate = true
 var is_dashing = false
+
+# fixed movement variables
+var fixed_movement = false
+var fixed_direction: Vector3
+var fixed_speed: float = 0
 
 var camera_follow_speed = 0.6
 # var screen_size: Vector2
 
 @onready var projectile_ray: RayCast3D = $ProjectileRay
 @onready var projectile_spawn: Node3D = $ProjectileRay/SpawnPoint
+@onready var stun_timer: Timer = $StunTimer
 
 # ========== STATS ========== #
 @export_category("Stats")
@@ -71,16 +78,12 @@ signal defeated(character_id: int)
 func _ready():
 	label_3d.global_transform = character_node.get_node("HealthMarker").global_transform
 	character_animations = character_node.get_node("AnimationTree")
-	
+	stun_timer.timeout.connect(_onStunTimerTimeout)
 	for key in abilities.keys():
 		loadAbility(key)
 	
 func _physics_process(delta):
 	if can_act:
-		# Add the gravity.
-		#if not is_on_floor():
-		#	velocity.y -= gravity * delta
-			
 		if character_animations:
 			var blend_val = min(velocity.length(), 1)
 			var new_walk_vel = lerp(prev_velocity, float(blend_val), 0.5)
@@ -93,10 +96,7 @@ func _physics_process(delta):
 				var new_look = lerp(prev_lookat, (global_transform.origin + velocity), 0.3)
 				prev_lookat = new_look
 				character_node.look_at(new_look, Vector3.UP)
-			#rotation.x = 0
-			#rotation.y = 0
-		#rotation.x = 0
-		#rotation.y = 0
+				
 		if is_multiplayer_authority():
 			# Lower basic attack cooldown
 			attack_cooldown = max(0, attack_cooldown - delta)
@@ -156,14 +156,23 @@ func _physics_process(delta):
 			else:
 				velocity = Vector3(0.0, 0.0, 0.0)
 				sendData.rpc(global_position, velocity, target)
-		move_and_slide()
-		
-		if is_multiplayer_authority():
+			
 			var projectile_ray_target = screenPointToRay()
 			projectile_ray.look_at(projectile_ray_target, Vector3(0,10,0))
 			projectile_ray.global_rotation.x = 0
 			updateProjectileRay.rpc(projectile_ray.global_rotation)
+			
+		move_and_slide()
 		beginAbilityExecutions()
+		
+	if fixed_movement:
+		if global_position.distance_to(fixed_direction) <= 0.01:
+			fixed_movement = false
+		else:
+			global_position = global_position.move_toward(fixed_direction, delta*fixed_speed)
+			sendData.rpc(global_position, velocity, target)
+			move_and_slide()
+	
 	if Input.is_action_just_pressed("Release Camera"):
 		if locked_camera:
 			locked_camera = false
@@ -234,6 +243,33 @@ func moveCameraByCursor(position: Vector2):
 			dir += Vector2(0.0, -camera_follow_speed)
 		path_3d.global_position += Vector3(dir.x, 0.0, dir.y)
 
+func fixedMovementTowards(direction: Vector3, speed: float):
+	fixed_movement = true
+	fixed_direction = direction
+	fixed_direction.y = 0
+	fixed_speed = speed
+
+func takeAttackDamage(damage: float):
+	var total_damage = damage * (physical_armor/100)
+	hp -= total_damage
+	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
+
+func takeAbilityDamage(damage: float, attacker_spell_power: float):
+	var total_damage = (damage * (attacker_spell_power/100)) * (spell_armor/100)
+	hp -= total_damage
+	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
+
+func getStunned(time: float):
+	if stun_timer.is_stopped():
+		stun_timer.start(time)
+		can_act = false
+		character_animations.active = false
+	else:
+		print_rich("[wave][color=red][b]ALREADY STUNNED[/b][/color][/wave]")
+
+func _onStunTimerTimeout():
+	can_act = true
+	character_animations.active = true
 
 # ========== ABILITIES ========== #
 
@@ -340,17 +376,14 @@ func attack_hit():
 @rpc("call_local", "reliable")
 func attack_damage_remote(id: int):
 	var target_players = get_tree().get_nodes_in_group("players")
-	var target
+	var target: BaseCharacter
 	for player in target_players:
 		if player.player_info.id == id:
 			target = player
 			break
 	#for player in get_parent()
 	if target:
-		target.hp -= attack_damage * (target.physical_armor / 100)
-		Debug.sprint(target.get_parent().name + " recieved " + 
-		String.num(attack_damage * (target.physical_armor / 100)) + 
-		" and now has " + String.num(target.hp) + " hp")
+		target.takeAttackDamage(attack_damage)
 		if target.died():
 			if target_player:
 				target_player = null

@@ -1,6 +1,6 @@
 extends Node
 
-@onready var chara: CharacterBody3D = get_parent().get_parent()
+@onready var chara: BaseCharacter = get_parent().get_parent()
 @onready var cd_timer: Timer = $cd_timer
 @onready var is_passive_active: bool = false
 
