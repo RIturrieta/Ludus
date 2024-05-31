@@ -54,6 +54,8 @@ func beginExecution():
 		p_rotation = p_ray.rotation_degrees.y
 		chara.character_node.global_rotation_degrees.y = p_rotation
 		chara.can_act = false
+		chara.target = chara.global_position
+		chara.agent.target_position = chara.global_position
 		chara.character_node.global_rotation_degrees.y = p_rotation
 		chara_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 

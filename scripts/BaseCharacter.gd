@@ -90,12 +90,13 @@ func _physics_process(delta):
 			prev_velocity = new_walk_vel
 			character_animations.set("parameters/IdleWalkBlend/blend_amount", new_walk_vel)
 			
-		if target and can_rotate:
+		if target and can_rotate and is_multiplayer_authority():
 			if (Vector3(global_transform.origin.x, 0.0, global_transform.origin.z) \
 			- Vector3(target.x, 0.0, target.z)).length() > 0.5 and velocity.length() != 0:
 				var new_look = lerp(prev_lookat, (global_transform.origin + velocity), 0.3)
 				prev_lookat = new_look
 				character_node.look_at(new_look, Vector3.UP)
+				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 				
 		if is_multiplayer_authority():
 			# Lower basic attack cooldown
@@ -143,7 +144,7 @@ func _physics_process(delta):
 							stop_attack.rpc()
 				updateTargetLocation(target)
 			if velocity.length() > 0.0:
-				sendData.rpc(global_position, velocity, target)
+				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 			#if !agent.is_navigation_finished():
 			# if position.distance_to(target) > 0.5:
 			if !agent.is_navigation_finished() and (can_move or is_dashing): #!!!!!
@@ -155,7 +156,7 @@ func _physics_process(delta):
 				agent.target_position = global_transform.origin
 			else:
 				velocity = Vector3(0.0, 0.0, 0.0)
-				sendData.rpc(global_position, velocity, target)
+				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 			
 			var projectile_ray_target = screenPointToRay()
 			projectile_ray.look_at(projectile_ray_target, Vector3(0,10,0))
@@ -165,13 +166,18 @@ func _physics_process(delta):
 		move_and_slide()
 		beginAbilityExecutions()
 		
+	#if fixed_movement and is_multiplayer_authority():
 	if fixed_movement:
 		if global_position.distance_to(fixed_direction) <= 0.01:
+			global_position = fixed_direction
+			target = global_position
+			updateTargetLocation(target)
 			fixed_movement = false
+			sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 		else:
 			global_position = global_position.move_toward(fixed_direction, delta*fixed_speed)
-			sendData.rpc(global_position, velocity, target)
 			move_and_slide()
+			sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 	
 	if Input.is_action_just_pressed("Release Camera"):
 		if locked_camera:
@@ -243,8 +249,10 @@ func moveCameraByCursor(position: Vector2):
 			dir += Vector2(0.0, -camera_follow_speed)
 		path_3d.global_position += Vector3(dir.x, 0.0, dir.y)
 
+# Moves the character to a certain point without using the navigation agent
 func fixedMovementTowards(direction: Vector3, speed: float):
 	fixed_movement = true
+	target = global_position
 	fixed_direction = direction
 	fixed_direction.y = 0
 	fixed_speed = speed
@@ -258,6 +266,13 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (attacker_spell_power/100)) * (spell_armor/100)
 	hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
+	
+func heal(points: float):
+	#if hp + points <= hp_max:
+	#	hp += points
+	#else:
+	#	hp = hp_max
+	hp += points
 
 func getStunned(time: float):
 	if stun_timer.is_stopped():
@@ -280,9 +295,9 @@ func _onStunTimerTimeout():
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
 	"Q": "garrotazo",
-	"W": "skillshot_test",
-	"E": "",
-	"R": "shoulder_bash",
+	"W": "tank_w",
+	"E": "tatequieto",
+	"R": "garrotazo+15",
 	"1": "",
 	"2": "", 
 	"3": "",
@@ -313,8 +328,6 @@ func addAbility(ability_name: String, key: String):
 func beginAbilityExecutions():
 	for key in abilities.keys():
 		if Input.is_action_just_pressed(key) and is_multiplayer_authority():
-			print(can_move)
-			print(agent.target_position)
 			beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations
@@ -426,7 +439,8 @@ func setup(player_data: Statics.PlayerData):
 		camera_3d.current = true
 	
 @rpc
-func sendData(pos: Vector3, vel: Vector3, targ: Vector3):
+func sendData(pos: Vector3, vel: Vector3, targ: Vector3, rot_y: float):
 	global_position = lerp(global_position, pos, 0.75)
 	velocity = lerp(velocity, vel, 0.75)
 	target = targ
+	character_node.global_rotation.y = lerp_angle(character_node.global_rotation.y, rot_y, 0.75)
