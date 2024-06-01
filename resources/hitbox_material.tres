@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bs2alrgparspr"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.305882, 0.776471, 1, 0.215686)
+disable_receive_shadows = true

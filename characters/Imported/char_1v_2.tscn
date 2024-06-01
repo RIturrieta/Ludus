@@ -35,7 +35,7 @@ animation = &"WalkV2"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_yf8am"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wueyk"]
-graph_offset = Vector2(-371.663, 11.4264)
+graph_offset = Vector2(-184.263, 42.5264)
 nodes/Attack1/node = SubResource("AnimationNodeAnimation_jaiks")
 nodes/Attack1/position = Vector2(120, 280)
 nodes/Attack2/node = SubResource("AnimationNodeAnimation_lhmbi")
@@ -68,25 +68,25 @@ node_connections = [&"BasicAttack1", 0, &"IdleWalkBlend", &"BasicAttack1", 1, &"
 [node name="char1v2" instance=ExtResource("1_qttob")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(4.57887e-05, 1.30659, -0.0197716)
-bones/0/rotation = Quaternion(-0.0403518, 0.703769, -0.0359472, 0.70837)
-bones/1/rotation = Quaternion(0.000133458, -0.000237289, 0.16004, 0.98711)
+bones/0/position = Vector3(3.5935e-05, 1.30517, -0.0155168)
+bones/0/rotation = Quaternion(-0.0357398, 0.703988, -0.031344, 0.708619)
+bones/1/rotation = Quaternion(9.93612e-05, -0.000176693, 0.151015, 0.988531)
 bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
 bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(-0.00660525, 0.442472, -0.360793)
-bones/4/rotation = Quaternion(-0.687244, -0.14232, 0.000732465, 0.712348)
-bones/5/rotation = Quaternion(0.000306581, -0.000127994, -0.288276, 0.957547)
+bones/4/position = Vector3(0.0091511, 0.411878, -0.395484)
+bones/4/rotation = Quaternion(-0.700338, -0.141414, -0.00265744, 0.699659)
+bones/5/rotation = Quaternion(0.000232001, -4.28427e-05, -0.302765, 0.953065)
 bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
 bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
 bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.0871522, 0.692361, 0.655347, 0.289069)
+bones/8/rotation = Quaternion(-0.113332, 0.67806, 0.674189, 0.269927)
 bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
 bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
 bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00371164, 0.00853724, 0.0253132, 0.0184387, -0.0176738, 0.00866436, 0.0193302, 0.0184979, -0.00340431, 0.551539, 2.39324, -0.134722)
+transform = Transform3D(-0.00239437, 0.0101665, 0.0248662, 0.0187294, -0.0172652, 0.00886228, 0.0192586, 0.0180547, -0.0055272, 0.540197, 2.39082, -0.129514)
 
 [node name="HealthMarker" type="Marker3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.74876, 0)

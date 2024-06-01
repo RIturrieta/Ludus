@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://d02wl7umypceg"]
+
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_586ml"]
+
+[node name="Blessing" type="Control"]
+custom_minimum_size = Vector2(100, 112.685)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 426.0
+offset_bottom = 720.0
+size_flags_horizontal = 3
+
+[node name="BlessingVBox" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="BlessingVBox"]
+layout_mode = 2
+texture = ExtResource("1_586ml")
+stretch_mode = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="BlessingVBox"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="BlessingVBox/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="BlessingVBox/MarginContainer/Control"]
+layout_mode = 2
+offset_left = -86.75
+offset_right = 113.25
+offset_bottom = 5.0
+scale = Vector2(0.871878, 1)
+size_flags_stretch_ratio = 0.0
+tooltip_text = "sadasdasdad"
+
+[node name="Label" type="Label" parent="BlessingVBox"]
+custom_minimum_size = Vector2(10, 20)
+layout_mode = 2
+text = "PASSIVE: Whenever Garen kills an enemy, he generates a stack of Courage, stacking up to 150 times.
+
+COURAGE: For each stack, Garen gains Armor icon 0.2 bonus armor and Magic resistance icon 0.2 bonus magic resistance, up to a maximum of 30 bonus resistances each. After reaching maximum stacks, Garen gains 10% bonus armor and 10% bonus magic resistance.
+
+Courage
+ACTIVE: Garen reduces incoming damage by 30% for 4 seconds. For the first 0.75 seconds, Garen additionally grants himself a Hybrid resistances icon shield and 60% Tenacity icon tenacity."
+autowrap_mode = 1

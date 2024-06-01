@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ysfbh"]
 [ext_resource type="PackedScene" uid="uid://875aj4ot3cg" path="res://characters/xd.tscn" id="2_lwen3"]
 [ext_resource type="PackedScene" uid="uid://dusubx1tn21bq" path="res://characters/Sword.tscn" id="3_1llaj"]
-[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="4_e5ss3"]
+[ext_resource type="PackedScene" uid="uid://d02wl7umypceg" path="res://scenes/ui/blessing_panel_choice.tscn" id="4_l4cp8"]
 
 [sub_resource type="Animation" id="Animation_cd0ul"]
 resource_name = "FadeOut"
@@ -23,7 +23,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%BlessingContainer:mouse_filter")
+tracks/1/path = NodePath("../../BlessingControl/BlessingContainer:mouse_filter")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -70,7 +70,7 @@ unique_name_in_owner = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUDLayer"]
 unique_name_in_owner = true
-root_node = NodePath("../MarginContainer/TopTextContainer")
+root_node = NodePath("../MarginContainer/TopTextControl/TopTextContainer")
 libraries = {
 "": SubResource("AnimationLibrary_v1ok5")
 }
@@ -83,13 +83,44 @@ mouse_filter = 2
 [node name="PanelContainer" type="PanelContainer" parent="HUDLayer/MarginContainer"]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
-[node name="TopTextContainer" type="MarginContainer" parent="HUDLayer/MarginContainer"]
+[node name="BlessingControl" type="Control" parent="HUDLayer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="BlessingContainer" type="HBoxContainer" parent="HUDLayer/MarginContainer/BlessingControl"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 1240.0
+offset_bottom = 680.0
+mouse_filter = 2
+alignment = 1
+
+[node name="Blessing1" parent="HUDLayer/MarginContainer/BlessingControl/BlessingContainer" instance=ExtResource("4_l4cp8")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Blessing2" parent="HUDLayer/MarginContainer/BlessingControl/BlessingContainer" instance=ExtResource("4_l4cp8")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Blessing3" parent="HUDLayer/MarginContainer/BlessingControl/BlessingContainer" instance=ExtResource("4_l4cp8")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TopTextControl" type="Control" parent="HUDLayer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TopTextContainer" type="MarginContainer" parent="HUDLayer/MarginContainer/TopTextControl"]
+layout_mode = 2
+offset_right = 1240.0
+offset_bottom = 109.0
 size_flags_vertical = 0
 mouse_filter = 2
 
-[node name="TopTextLabel" type="Label" parent="HUDLayer/MarginContainer/TopTextContainer"]
+[node name="TopTextLabel" type="Label" parent="HUDLayer/MarginContainer/TopTextControl/TopTextContainer"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
@@ -99,43 +130,10 @@ theme_override_font_sizes/font_size = 50
 text = "Default Timer"
 horizontal_alignment = 1
 
-[node name="BlessingContainer" type="HBoxContainer" parent="HUDLayer/MarginContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Blessing1" type="VBoxContainer" parent="HUDLayer/MarginContainer/BlessingContainer"]
-custom_minimum_size = Vector2(100, 112.685)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Label" type="Label" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing1"]
-layout_mode = 2
-text = "xd"
-
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing1"]
-texture = ExtResource("4_e5ss3")
-
-[node name="Blessing2" type="VBoxContainer" parent="HUDLayer/MarginContainer/BlessingContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing2"]
-texture = ExtResource("4_e5ss3")
-
-[node name="Blessing3" type="VBoxContainer" parent="HUDLayer/MarginContainer/BlessingContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/MarginContainer/BlessingContainer/Blessing3"]
-texture = ExtResource("4_e5ss3")
-
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
-[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_entered"]
-[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_exited"]
-[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingContainer/Blessing2" to="." method="_on_blessing_2_mouse_entered"]
-[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingContainer/Blessing2" to="." method="_on_blessing_2_mouse_exited"]
-[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingContainer/Blessing3" to="." method="_on_blessing_3_mouse_entered"]
-[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingContainer/Blessing3" to="." method="_on_blessing_3_mouse_exited"]
+[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_entered"]
+[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_exited"]
+[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing2" to="." method="_on_blessing_2_mouse_entered"]
+[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing2" to="." method="_on_blessing_2_mouse_exited"]
+[connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing3" to="." method="_on_blessing_3_mouse_entered"]
+[connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing3" to="." method="_on_blessing_3_mouse_exited"]

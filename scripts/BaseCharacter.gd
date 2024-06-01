@@ -243,10 +243,10 @@ func moveCameraByCursor(position: Vector2):
 # node of the ability instead of its name.
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
-	"Q": "garrotazo",
+	"Q": "savage_cleave",
 	"W": "skillshot_test",
-	"E": "",
-	"R": "shoulder_bash",
+	"E": "raging_thrust",
+	"R": "titan_strike",
 	"1": "",
 	"2": "", 
 	"3": "",
@@ -277,8 +277,6 @@ func addAbility(ability_name: String, key: String):
 func beginAbilityExecutions():
 	for key in abilities.keys():
 		if Input.is_action_just_pressed(key) and is_multiplayer_authority():
-			print(can_move)
-			print(agent.target_position)
 			beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations

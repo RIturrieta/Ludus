@@ -1,17 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwapul6fqh6lf"]
 
 [ext_resource type="Script" path="res://scenes/abilities/garrotazo/garrotazo.gd" id="1_khasx"]
+[ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_db0un"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb6hm"]
 size = Vector3(2, 2, 7)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dp1a0"]
-transparency = 1
-albedo_color = Color(0.305882, 0.776471, 1, 0.215686)
-disable_receive_shadows = true
-
 [sub_resource type="BoxMesh" id="BoxMesh_pvj1e"]
-material = SubResource("StandardMaterial3D_dp1a0")
+material = ExtResource("2_db0un")
 size = Vector3(2, 0.025, 7)
 
 [node name="garrotazo" type="Node3D"]
