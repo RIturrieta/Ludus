@@ -22,13 +22,16 @@ var p_rotation: float
 # Dash calculation shapecasts
 @onready var s1: ShapeCast3D = $S1
 @onready var s2: ShapeCast3D = $S1/S2
+@onready var s3: ShapeCast3D = $S3
 @onready var target: Node3D = $S1/target
 @onready var original_target: Node3D = $S1/original_target
-
-var dashing = false
+@onready var dmg_timer = $dmg_timer
+var players_on_area: Array[Node3D] = []
+var players_affected: Array[Node3D] = []
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
+	dmg_timer.timeout.connect(dealDamage)
 	cd_timer.wait_time = cooldown
 	p_ray = chara.projectile_ray
 	p_spawn = chara.projectile_spawn
@@ -39,7 +42,7 @@ func _ready():
 	
 
 func _physics_process(delta):
-	if not dashing:
+	if not chara.is_dashing:
 		s1.rotation = p_ray.rotation
 		if variable_dash_distance:
 			var xd: float = s1.global_position.distance_to(chara.screenPointToRay())
@@ -64,6 +67,8 @@ func _physics_process(delta):
 				target.global_position = s1_pos
 		else:
 			target.position = s1.target_position
+	else:
+		pass
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -71,20 +76,39 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
-		chara.can_move = false
-		chara.agent.target_position = target.global_position
-		execute() # delete if there's an animation call
+		chara.target_player = null
+		chara.target = chara.global_position
+		chara.agent.target_position = chara.global_position
+		chara.is_dashing = true
+		chara.character_node.rotation.y = p_ray.rotation.y
+		chara.agent.navigation_layers = 0b00000010
+		chara.character_animations.set("parameters/R2Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	dashing = true
-	chara.global_position.x = target.global_position.x
-	chara.global_position.z = target.global_position.z
-	endExecution()
+	chara.agent.target_position = target.global_position
+	chara.target_player = null
+	chara.updateTargetLocation(target.global_position)
+	chara.move_speed = 250
+	dmg_timer.start()
+
+func dealDamage():
+	for i in range(s3.get_collision_count()):
+		var player = s3.get_collider(i)
+		if player != chara and not player in players_affected:
+			players_affected.append(player)
+			player.getStunned(3)
+			player.takeAbilityDamage(damage, chara.spell_power)
+			if player.died():
+				if chara.target_player:
+					chara.target_player = null
 
 func endExecution():
-	dashing = false
-	chara.can_move = true
-
+	chara.is_dashing = false
+	chara.move_speed = 100
+	chara.agent.navigation_layers = 0b00000001
+	players_affected = []
+	players_on_area = []
+	
 func _on_cd_timeout():
 	on_cooldown = false
 

@@ -8,6 +8,13 @@ extends Node
 @export var damage: float = 150
 @export var mana_cost: float = 20
 @export var cooldown: float = 6
+@export var range: float = 3
+
+@onready var area: Area3D = $area
+@onready var collision: CollisionShape3D = $area/shape
+var players_on_area: int = 0
+var og_spell_armor: float
+var og_physical_armor: float
 
 var on_cooldown: bool = false
 
@@ -22,9 +29,7 @@ func _ready():
 	cd_timer.wait_time = cooldown
 	p_ray = chara.projectile_ray
 	p_spawn = chara.projectile_spawn
-	p_forward = -p_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = p_spawn.global_position
-	p_rotation = p_ray.rotation_degrees.y
+	collision.shape.radius = range
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -32,16 +37,18 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
+		chara.character_animations.set("parameters/WShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	p_forward = -p_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = p_spawn.global_position
-	p_rotation = p_ray.rotation_degrees.y
-	# [Insert the ability here]
+	players_on_area = len(area.get_overlapping_bodies())
+	chara.spell_armor += 5 * players_on_area
+	chara.physical_armor += 5 * players_on_area
+	chara.heal(5 * players_on_area)
+	Debug.sprint("players: " + str(players_on_area) + " sp: " + str(chara.spell_armor) + " ph: " + str(chara.physical_armor) )
 
 func endExecution():
-	# [What happens after the execution of the ability]
-	pass
+	chara.spell_armor = og_spell_armor
+	chara.physical_armor = og_physical_armor
 
 func _on_cd_timeout():
 	on_cooldown = false

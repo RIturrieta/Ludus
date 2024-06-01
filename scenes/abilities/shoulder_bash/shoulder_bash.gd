@@ -1,6 +1,6 @@
 extends Node
 
-@onready var chara: CharacterBody3D = get_parent().get_parent()
+@onready var chara: BaseCharacter = get_parent().get_parent()
 @onready var cd_timer: Timer = $cd_timer
 @onready var is_passive_active: bool = false
 
@@ -22,9 +22,9 @@ var p_rotation: float
 # Dash calculation shapecasts
 @onready var s1: ShapeCast3D = $S1
 @onready var s2: ShapeCast3D = $S1/S2
+@onready var s3: ShapeCast3D = $S3
 @onready var target: Node3D = $S1/target
 @onready var original_target: Node3D = $S1/original_target
-@onready var impact_area: Area3D = $impact_area
 var players_on_area: Array[Node3D] = []
 var players_affected: Array[Node3D] = []
 
@@ -66,15 +66,19 @@ func _physics_process(delta):
 		else:
 			target.position = s1.target_position
 	else:
-		players_on_area = impact_area.get_overlapping_bodies()
-		for player in players_on_area:
-			
-			if not player in players_affected and player.get_parent() != chara.get_parent():
+		for i in range(s3.get_collision_count()):
+			var player = s3.get_collider(i)
+			var dash_left = chara.global_position.distance_to(chara.agent.target_position)
+			var normal = s3.get_collision_point(i) - s3.get_collision_normal(i) * (dash_left + 1.5)
+			normal.y = 0
+			if player != chara and not player in players_affected:
 				players_affected.append(player)
-				player.hp -= damage*chara.spell_power/100
-				Debug.sprint(player.get_parent().name + " recieved " + 
-				String.num(damage*chara.spell_power/100) + 
-				" and now has " + String.num(player.hp) + " hp")
+				player.getStunned(0.5)
+				player.takeAbilityDamage(damage, chara.spell_power)
+				player.fixedMovementTowards(normal, 20)
+				if player.died():
+					if chara.target_player:
+						chara.target_player = null
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -82,6 +86,7 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
+		chara.target_player = null
 		chara.agent.target_position = target.global_position
 		chara.is_dashing = true
 		chara.character_node.rotation.y = p_ray.rotation.y
@@ -99,6 +104,7 @@ func endExecution():
 	chara.agent.navigation_layers = 0b00000001
 	players_affected = []
 	players_on_area = []
+	
 func _on_cd_timeout():
 	on_cooldown = false
 

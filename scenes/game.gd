@@ -4,6 +4,7 @@ signal players_updated
 signal player_updated(id)
 
 @export var multiplayer_test = false
+@export var skip_start = false
 
 # [ {id: int, name: string, rol: Rol} ]
 var players: Array[Statics.PlayerData] = []

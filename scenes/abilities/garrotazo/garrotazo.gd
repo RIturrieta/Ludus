@@ -1,6 +1,6 @@
 extends Node
 
-@onready var chara: CharacterBody3D = get_parent().get_parent()
+@onready var chara: BaseCharacter = get_parent().get_parent()
 @onready var cd_timer: Timer = $cd_timer
 @onready var is_passive_active: bool = false
 
@@ -53,8 +53,9 @@ func beginExecution():
 		Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 		p_rotation = p_ray.rotation_degrees.y
 		chara.character_node.global_rotation_degrees.y = p_rotation
-		chara.can_move = false
-		chara.can_rotate = false
+		chara.can_act = false
+		chara.target = chara.global_position
+		chara.agent.target_position = chara.global_position
 		chara.character_node.global_rotation_degrees.y = p_rotation
 		chara_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
@@ -63,12 +64,9 @@ func execute():
 	
 func _on_delay_timeout():
 	players_on_area = dmg_area.get_overlapping_bodies()
-	for player in players_on_area:
+	for player: BaseCharacter in players_on_area:
 		if player.get_parent() != chara.get_parent():
-			player.hp -= (damage* (chara.spell_power / 100)) * (player.spell_armor / 100)
-			Debug.sprint(player.get_parent().name + " recieved " + 
-			String.num((damage*(chara.spell_power / 100)) * (player.spell_armor / 100)) + 
-			" and now has " + String.num(player.hp) + " hp")
+			player.takeAbilityDamage(damage, chara.spell_power)
 			if player.died():
 				if chara.target_player:
 					chara.target_player = null
@@ -76,8 +74,7 @@ func _on_delay_timeout():
 func endExecution():
 	casting = false
 	players_on_area = []
-	chara.can_move = true
-	chara.can_rotate = true
+	chara.can_act = true
 	hitbox.visible = false
 
 func _on_cd_timeout():

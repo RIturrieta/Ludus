@@ -8,6 +8,14 @@ extends Node
 @export var damage: float = 150
 @export var mana_cost: float = 20
 @export var cooldown: float = 6
+@export var range: float = 1
+
+@onready var area_range: Area3D = $area_range
+@onready var area_mouse: Area3D = $area_mouse
+@onready var collision: CollisionShape3D = $area_range/collision
+var chara_animations: AnimationTree
+var cursor_pos: Vector3
+var affected_player: BaseCharacter
 
 var on_cooldown: bool = false
 
@@ -22,9 +30,13 @@ func _ready():
 	cd_timer.wait_time = cooldown
 	p_ray = chara.projectile_ray
 	p_spawn = chara.projectile_spawn
-	p_forward = -p_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = p_spawn.global_position
-	p_rotation = p_ray.rotation_degrees.y
+	collision.shape.radius = range
+	chara_animations = chara.character_animations
+	
+func _physics_process(delta):
+	cursor_pos = chara.screenPointToRay()
+	cursor_pos.y = 0
+	area_mouse.global_position = cursor_pos
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -32,16 +44,29 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
+		if area_mouse.has_overlapping_bodies():
+			var min_distance: float = 999999
+			var distance: float = 0
+			for player in area_mouse.get_overlapping_bodies():
+				if player != chara and player in area_range.get_overlapping_bodies():
+					distance = player.global_position.distance_to(chara.global_position)
+					if distance <= min_distance:
+						min_distance = distance
+						affected_player = player
+		else:
+			affected_player = null
+		chara_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+			
 
 func execute():
-	p_forward = -p_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = p_spawn.global_position
-	p_rotation = p_ray.rotation_degrees.y
-	# [Insert the ability here]
+	if affected_player == null:
+		Debug.sprint("no players affected")
+	else:
+		Debug.sprint("Affected player: " + affected_player.get_parent().name)
+		affected_player.getStunned(3)
 
 func endExecution():
-	# [What happens after the execution of the ability]
-	pass
+	affected_player = null
 
 func _on_cd_timeout():
 	on_cooldown = false
