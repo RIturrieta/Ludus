@@ -314,7 +314,7 @@ func loadAbility(key: String):
 			var sceneNode = scene.instantiate()
 			abilities[key] = sceneNode
 			$Abilities.add_child(sceneNode, true)
-			print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
+			# print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
 		
 # Adds a new ability to the character and loads it
 func addAbility(ability_name: String, key: String):
@@ -348,6 +348,50 @@ func updateMousePos(pos: Vector3):
 	mouse_pos = pos
 	projectile_ray.look_at(mouse_pos, Vector3.UP)
 	projectile_ray.global_rotation.x = 0
+
+# ========== EFFECTS ========== #
+
+func slow(duration: float, multiplier: float):
+	var slow = SlowEffect.create(duration, multiplier)
+	$Effects.add_child(slow)
+
+func stun(duration: float):
+	var stun = StunEffect.create(duration)
+	$Effects.add_child(stun)
+
+func root(duration: float):
+	var root = RootEffect.create(duration)
+	$Effects.add_child(root)
+
+func silence(duration: float):
+	var silence = SilenceEffect.create(duration)
+	$Effects.add_child(silence)
+
+func modifyStats(duration_: float, 
+				attack_damage: float = 0, 
+				spell_power: float = 0, 
+				physical_armor: float = 0, 
+				spell_armor: float = 0, 
+				attack_speed: float = 0,
+				attack_range: float = 0,
+				cdr: float = 0,
+				select_radius: float = 0):
+	var modifier = StatsModifierEffect.create(attack_damage,
+											  spell_power,
+											  physical_armor,
+											  spell_armor,
+											  attack_speed,
+											  attack_range,
+											  cdr,
+											  select_radius)
+	$Effects.add_child(modifier)
+	
+# ========== MODIFIERS ========== #
+
+func addModifier(name: String):
+	var modifier_scene: Resource = load("res://scenes/effects/" + name + "/" + name + ".tscn")
+	var modifier_node: Effect = modifier_scene.instantiate()
+	$Effects.add_child(modifier_node, true)
 
 # ========== MULTIPLAYER ========== #
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr6dw35tf86n3"]
+
+[ext_resource type="Script" path="res://scenes/effects/root/root.gd" id="1_uq0wy"]
+
+[node name="root" type="Node3D"]
+script = ExtResource("1_uq0wy")
+
+[node name="timer" type="Timer" parent="."]

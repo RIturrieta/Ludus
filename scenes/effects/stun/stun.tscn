@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c285s5laubjb0"]
+
+[ext_resource type="Script" path="res://scenes/effects/stun/stun.gd" id="1_7e4s5"]
+
+[node name="stun" type="Node3D"]
+script = ExtResource("1_7e4s5")
+
+[node name="timer" type="Timer" parent="."]

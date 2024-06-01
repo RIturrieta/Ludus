@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://capyeots3rc21"]
+
+[ext_resource type="Script" path="res://scenes/effects/silence/silence.gd" id="1_on3hc"]
+
+[node name="silence" type="Node3D"]
+script = ExtResource("1_on3hc")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true

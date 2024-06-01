@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3y26t5pfeb1o"]
+
+[ext_resource type="Script" path="res://scenes/effects/stats_modifier/stats_modifier.gd" id="1_g5d4q"]
+
+[node name="stats_modifier" type="Node3D"]
+script = ExtResource("1_g5d4q")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true
