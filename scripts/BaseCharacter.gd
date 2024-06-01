@@ -46,6 +46,7 @@ var fixed_speed: float = 0
 var camera_follow_speed = 0.6
 # var screen_size: Vector2
 
+var mouse_pos: Vector3
 @onready var projectile_ray: RayCast3D = $ProjectileRay
 @onready var projectile_spawn: Node3D = $ProjectileRay/SpawnPoint
 @onready var stun_timer: Timer = $StunTimer
@@ -158,11 +159,9 @@ func _physics_process(delta):
 				velocity = Vector3(0.0, 0.0, 0.0)
 				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 			
-			var projectile_ray_target = screenPointToRay()
-			projectile_ray.look_at(projectile_ray_target, Vector3(0,10,0))
-			projectile_ray.global_rotation.x = 0
-			updateProjectileRay.rpc(projectile_ray.global_rotation)
-			
+			mouse_pos = screenPointToRay()
+			updateMousePos.rpc(mouse_pos)
+		
 		move_and_slide()
 		beginAbilityExecutions()
 		
@@ -315,7 +314,7 @@ func loadAbility(key: String):
 			var sceneNode = scene.instantiate()
 			abilities[key] = sceneNode
 			$Abilities.add_child(sceneNode, true)
-			# print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
+			print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
 		
 # Adds a new ability to the character and loads it
 func addAbility(ability_name: String, key: String):
@@ -343,10 +342,12 @@ func endAbilityExecution(key):
 func beginRemoteExecution(key):
 	abilities[key].beginExecution()
 
-# RPC call for updating the projectile raycast on remote	
-@rpc
-func updateProjectileRay(rotation):
-	projectile_ray.global_rotation = rotation
+# RPC call for updating the mouse position and the projectile raycast on remote
+@rpc("call_local")
+func updateMousePos(pos: Vector3):
+	mouse_pos = pos
+	projectile_ray.look_at(mouse_pos, Vector3.UP)
+	projectile_ray.global_rotation.x = 0
 
 # ========== MULTIPLAYER ========== #
 

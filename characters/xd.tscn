@@ -163,33 +163,30 @@ select_radius = 2.5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(3.91524e-06, 1.30395, -0.00169086)
-bones/0/rotation = Quaternion(-0.0189454, 0.702623, -0.0148957, 0.711154)
-bones/1/rotation = Quaternion(5.99529e-05, -0.00111416, 0.125964, 0.992034)
-bones/2/rotation = Quaternion(-0.70478, 0.151204, -0.145017, 0.677785)
+bones/0/position = Vector3(3.7362e-06, 1.30054, -0.00161329)
+bones/0/rotation = Quaternion(-0.0213913, 0.704477, -0.017024, 0.7092)
+bones/1/rotation = Quaternion(1.95246e-06, -3.57839e-06, 0.125174, 0.992135)
+bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
 bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(0.0665454, 0.330714, -0.492068)
-bones/4/rotation = Quaternion(-0.73192, -0.151426, -0.0359562, 0.663378)
-bones/5/rotation = Quaternion(0.000206515, 0.000577079, -0.309346, 0.950949)
-bones/6/rotation = Quaternion(0.144566, 0.673756, 0.708633, 0.151636)
+bones/4/position = Vector3(0.0485178, 0.33544, -0.482161)
+bones/4/rotation = Quaternion(-0.734547, -0.138718, -0.0118233, 0.664122)
+bones/5/rotation = Quaternion(0.000219523, -2.86009e-05, -0.305181, 0.952294)
+bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
 bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
 bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.151992, 0.653994, 0.700496, 0.24186)
+bones/8/rotation = Quaternion(-0.148978, 0.656644, 0.698288, 0.242937)
 bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
 bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
 bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.000550085, 0.0122825, 0.0240053, 0.0191515, -0.0167245, 0.00899611, 0.0189826, 0.0172293, -0.00838052, 0.523362, 2.38527, -0.0934038)
+transform = Transform3D(-0.000593992, 0.0123191, 0.0239855, 0.0192331, -0.0166213, 0.00901308, 0.0188985, 0.0173029, -0.00841882, 0.524363, 2.38479, -0.104065)
 
 [node name="AnimationTree" parent="BaseCharacter/char1v2" index="3"]
 libraries = {
 "": SubResource("AnimationLibrary_b6jbf")
 }
-parameters/WShot/active = false
-parameters/WShot/internal_active = false
-parameters/WShot/request = 0
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

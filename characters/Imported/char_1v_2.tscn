@@ -252,7 +252,7 @@ bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00395076, 0.00823631, 0.0253766, 0.018448, -0.017689, 0.00861326, 0.0192738, 0.0186194, -0.00304251, 0.55358, 2.39337, -0.135885)
+transform = Transform3D(-0.00395076, 0.00823628, 0.0253766, 0.018448, -0.017689, 0.00861324, 0.0192738, 0.0186194, -0.00304248, 0.553581, 2.39337, -0.135884)
 
 [node name="HealthMarker" type="Marker3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.74876, 0)

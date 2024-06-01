@@ -34,9 +34,7 @@ func _ready():
 	chara_animations = chara.character_animations
 	
 func _physics_process(delta):
-	cursor_pos = chara.screenPointToRay()
-	cursor_pos.y = 0
-	area_mouse.global_position = cursor_pos
+	area_mouse.global_position = chara.mouse_pos
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
