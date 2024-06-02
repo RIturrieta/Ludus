@@ -1,6 +1,6 @@
 extends Node
 
-@onready var chara: CharacterBody3D = get_parent().get_parent()
+@onready var chara: BaseCharacter = get_parent().get_parent()
 @onready var cd_timer: Timer = $cd_timer
 @onready var is_passive_active: bool = false
 
@@ -49,6 +49,8 @@ func beginExecution():
 		chara_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
+	chara.clearRoots()
+	chara.clearSlows()
 	players_on_area = dmg_area.get_overlapping_bodies()
 	for player in players_on_area:
 		if player.get_parent() != chara.get_parent():

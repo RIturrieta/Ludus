@@ -40,7 +40,7 @@ static func create( duration_: float,
 	return modifier
 
 func _ready():
-	timer.timeout.connect(onEffectTimeout)
+	timer.timeout.connect(onTimeout)
 	chara.attack_damage *= attack_damage
 	chara.spell_power *= spell_power
 	chara.physical_armor *= physical_armor
@@ -51,8 +51,7 @@ func _ready():
 	chara.select_radius *= select_radius
 	timer.start(duration)
 
-func onEffectTimeout():
-	# this is incorrect lol
+func onTimeout():
 	chara.attack_damage /= attack_damage
 	chara.spell_power /= spell_power
 	chara.physical_armor /= physical_armor
@@ -61,4 +60,4 @@ func onEffectTimeout():
 	chara.attack_range /= attack_range
 	chara.cdr /= cdr
 	chara.select_radius /= select_radius
-	chara.remove_child(self)
+	queue_free()

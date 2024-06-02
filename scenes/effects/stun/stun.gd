@@ -10,11 +10,10 @@ static func create(duration_: float) -> StunEffect:
 	return stun
 
 func _ready():
-	timer.timeout.connect(onEffectTimeout)
-	timer.start()
+	timer.timeout.connect(onTimeout)
+	timer.start(duration)
 	chara.can_act = false
 
-func onEffectTimeout():
-	# this is incorrect lol
+func onTimeout():
 	chara.can_act = true
-	chara.remove_child(self)
+	queue_free()

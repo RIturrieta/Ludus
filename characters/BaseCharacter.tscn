@@ -106,7 +106,4 @@ mesh = SubResource("CapsuleMesh_kvtkm")
 
 [node name="Abilities" type="Node3D" parent="."]
 
-[node name="StunTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="Effects" type="Node3D" parent="."]

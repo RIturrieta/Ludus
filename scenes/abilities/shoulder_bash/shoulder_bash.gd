@@ -73,7 +73,7 @@ func _physics_process(delta):
 			normal.y = 0
 			if player != chara and not player in players_affected:
 				players_affected.append(player)
-				player.getStunned(0.5)
+				player.stun(0.5)
 				player.takeAbilityDamage(damage, chara.spell_power)
 				player.fixedMovementTowards(normal, 20)
 				if player.died():

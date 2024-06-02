@@ -37,6 +37,7 @@ var can_move = true
 
 var can_rotate = true
 var is_dashing = false
+var is_silenced = false
 
 # fixed movement variables
 var fixed_movement = false
@@ -49,7 +50,6 @@ var camera_follow_speed = 0.6
 var mouse_pos: Vector3
 @onready var projectile_ray: RayCast3D = $ProjectileRay
 @onready var projectile_spawn: Node3D = $ProjectileRay/SpawnPoint
-@onready var stun_timer: Timer = $StunTimer
 
 # ========== STATS ========== #
 @export_category("Stats")
@@ -79,7 +79,6 @@ signal defeated(character_id: int)
 func _ready():
 	label_3d.global_transform = character_node.get_node("HealthMarker").global_transform
 	character_animations = character_node.get_node("AnimationTree")
-	stun_timer.timeout.connect(_onStunTimerTimeout)
 	for key in abilities.keys():
 		loadAbility(key)
 	
@@ -163,7 +162,9 @@ func _physics_process(delta):
 			updateMousePos.rpc(mouse_pos)
 		
 		move_and_slide()
-		beginAbilityExecutions()
+		manageSlows()
+		if not is_silenced:
+			beginAbilityExecutions()
 		
 	#if fixed_movement and is_multiplayer_authority():
 	if fixed_movement:
@@ -273,14 +274,6 @@ func heal(points: float):
 	#	hp = hp_max
 	hp += points
 
-func getStunned(time: float):
-	if stun_timer.is_stopped():
-		stun_timer.start(time)
-		can_act = false
-		character_animations.active = false
-	else:
-		print_rich("[wave][color=red][b]ALREADY STUNNED[/b][/color][/wave]")
-
 func _onStunTimerTimeout():
 	can_act = true
 	character_animations.active = true
@@ -296,7 +289,7 @@ func _onStunTimerTimeout():
 	"Q": "garrotazo",
 	"W": "tank_w",
 	"E": "tatequieto",
-	"R": "garrotazo+15",
+	"R": "shoulder_bash",
 	"1": "",
 	"2": "", 
 	"3": "",
@@ -318,7 +311,7 @@ func loadAbility(key: String):
 		
 # Adds a new ability to the character and loads it
 func addAbility(ability_name: String, key: String):
-	if type_string(typeof((abilities[key]))) != "String":
+	if not abilities[key] is String:
 		abilities[key].queue_free()
 	abilities[key] = ability_name
 	loadAbility(key)
@@ -355,43 +348,100 @@ func slow(duration: float, multiplier: float):
 	var slow = SlowEffect.create(duration, multiplier)
 	$Effects.add_child(slow)
 
+func manageSlows():
+	var actual_slow: SlowEffect = null
+	for effect in $Effects.get_children():
+		if effect is SlowEffect:
+			if actual_slow == null:
+				actual_slow = effect
+			elif effect.multiplier < actual_slow.multiplier:
+				if actual_slow.is_applied:
+					actual_slow.unapply()
+				actual_slow = effect
+	if actual_slow != null and not actual_slow.is_applied:
+		actual_slow.apply()
+	#if is_multiplayer_authority() and actual_slow != null:
+		#Debug.sprint(actual_slow.multiplier)
+
 func stun(duration: float):
-	var stun = StunEffect.create(duration)
-	$Effects.add_child(stun)
+	if $Effects.get_children().any(func (x): x is StunEffect):
+		for effect in $Effects.get_children():
+			if effect is StunEffect:
+				if duration > effect.timer.time_left:
+					effect.timer.stop()
+					var stun = StunEffect.create(duration)
+					$Effects.add_child(stun)
+					break
+	else:
+		var stun = StunEffect.create(duration)
+		$Effects.add_child(stun)
 
 func root(duration: float):
-	var root = RootEffect.create(duration)
-	$Effects.add_child(root)
+	if $Effects.get_children().any(func (x): x is RootEffect):
+		for effect in $Effects.get_children():
+			if effect is RootEffect:
+				if duration > effect.timer.time_left:
+					effect.timer.stop()
+					var root = RootEffect.create(duration)
+					$Effects.add_child(root)
+					break
+	else:
+		var root = RootEffect.create(duration)
+		$Effects.add_child(root)
 
 func silence(duration: float):
-	var silence = SilenceEffect.create(duration)
-	$Effects.add_child(silence)
+	if $Effects.get_children().any(func (x): x is SilenceEffect):
+		for effect in $Effects.get_children():
+			if effect is SilenceEffect:
+				if duration > effect.timer.time_left:
+					effect.timer.stop()
+					var silence = SilenceEffect.create(duration)
+					$Effects.add_child(silence)
+					break
+	else:
+		var silence = SilenceEffect.create(duration)
+		$Effects.add_child(silence)
 
-func modifyStats(duration_: float, 
-				attack_damage: float = 0, 
-				spell_power: float = 0, 
-				physical_armor: float = 0, 
-				spell_armor: float = 0, 
-				attack_speed: float = 0,
-				attack_range: float = 0,
-				cdr: float = 0,
-				select_radius: float = 0):
-	var modifier = StatsModifierEffect.create(attack_damage,
-											  spell_power,
-											  physical_armor,
-											  spell_armor,
-											  attack_speed,
-											  attack_range,
-											  cdr,
-											  select_radius)
+func modifyStats(duration_: float, attack_damage: float = 1, spell_power: float = 1, 
+								   physical_armor: float = 1, spell_armor: float = 1, 
+								   attack_speed: float = 1, attack_range: float = 1,
+								   cdr: float = 1, select_radius: float = 1):
+									
+	var modifier = StatsModifierEffect.create(attack_damage, spell_power, 
+											  physical_armor, spell_armor, 
+											  attack_speed, attack_range, 
+											  cdr, select_radius)
 	$Effects.add_child(modifier)
-	
-# ========== MODIFIERS ========== #
 
-func addModifier(name: String):
-	var modifier_scene: Resource = load("res://scenes/effects/" + name + "/" + name + ".tscn")
-	var modifier_node: Effect = modifier_scene.instantiate()
-	$Effects.add_child(modifier_node, true)
+# Clear effects
+func clearStuns():
+	for effect in $Effects.get_children():
+		if effect is StunEffect:
+			effect.timer.stop()
+			break
+
+func clearRoots():
+	for effect in $Effects.get_children():
+		if effect is RootEffect:
+			effect.timer.stop()
+			break
+
+func clearSilences():
+	for effect in $Effects.get_children():
+		if effect is SilenceEffect:
+			effect.timer.stop()
+			break
+
+func clearSlows():
+	for effect in $Effects.get_children():
+		if effect is SlowEffect:
+			effect.timer.stop()
+
+func clearStatsModifiers():
+	for effect in $Effects.get_children():
+		if effect is StatsModifierEffect:
+			effect.timer.stop()
+
 
 # ========== MULTIPLAYER ========== #
 

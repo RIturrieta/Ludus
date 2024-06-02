@@ -10,9 +10,10 @@ static func create(duration_: float) -> SilenceEffect:
 	return silence
 
 func _ready():
-	timer.timeout.connect(onEffectTimeout)
+	timer.timeout.connect(onTimeout)
 	timer.start(duration)
+	chara.is_silenced = true
 
-func onEffectTimeout():
-	# this is incorrect lol
-	chara.remove_child(self)
+func onTimeout():
+	chara.is_silenced = false
+	queue_free()
