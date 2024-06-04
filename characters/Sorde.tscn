@@ -15,37 +15,47 @@ attack_damage = 150.0
 attack_speed = 1.166
 attack_range = 2.5
 select_radius = 2.5
+abilities = {
+"1": "",
+"2": "",
+"3": "",
+"4": "",
+"E": "raging_thrust",
+"Q": "savage_cleave",
+"R": "modo_diablo",
+"W": ""
+}
 
 [node name="char3" parent="BaseCharacter" instance=ExtResource("2_dme4m")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char3/Armature" index="0"]
-bones/0/position = Vector3(2.35962e-24, -0.497746, 0.000643994)
-bones/0/rotation = Quaternion(-0.0890733, 0, 1.98738e-17, 0.996025)
-bones/4/rotation = Quaternion(0.0400966, 3.85862e-26, -8.98755e-18, 0.999196)
-bones/7/rotation = Quaternion(-0.500876, -0.209514, 0.639454, 0.544358)
-bones/8/rotation = Quaternion(-0.0287589, -0.265953, 0.113383, 0.956863)
-bones/11/rotation = Quaternion(0.104128, -0.0953087, -0.646509, 0.749733)
-bones/12/rotation = Quaternion(-0.787062, 0.0633978, -0.233448, 0.567464)
+bones/0/position = Vector3(7.6268e-17, -0.438641, 0.0175311)
+bones/0/rotation = Quaternion(-0.0853135, 0, 1.46623e-17, 0.996354)
+bones/4/rotation = Quaternion(0.0367623, 1.14332e-19, -8.98822e-18, 0.999324)
+bones/7/rotation = Quaternion(-0.518361, -0.207688, 0.62175, 0.549177)
+bones/8/rotation = Quaternion(-0.02522, -0.259789, 0.108607, 0.959207)
+bones/11/rotation = Quaternion(0.0885196, -0.0827545, -0.647567, 0.752311)
+bones/12/rotation = Quaternion(-0.78404, 0.0649429, -0.233152, 0.57158)
 
 [node name="Head" parent="BaseCharacter/char3/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -6.98104e-18, -1.04779e-19, 6.9809e-18, 0.999509, 0.0313394, -1.14053e-19, -0.0313394, 0.999509, -1.88251e-16, 4.63132, -0.842704)
+transform = Transform3D(1, 3.44268e-18, -4.05474e-19, -3.42873e-18, 0.999536, 0.0304649, 5.10166e-19, -0.0304649, 0.999536, -5.79942e-17, 4.69665, -0.787076)
 
 [node name="Band1" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="0"]
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
-attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
-attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
-attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
+attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933972)
+attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
+attachments/2/offset = Vector3(0.0340999, 2.17342, 0.934217)
+attachments/3/offset = Vector3(0.357379, 2.16943, 0.888215)
 
 [node name="Band2" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="1"]
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
-attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
-attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
-attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
+attachments/0/offset = Vector3(-0.265674, 2.33403, 0.938863)
+attachments/1/offset = Vector3(0.0575712, 2.32993, 0.985094)
+attachments/2/offset = Vector3(-0.266572, 2.26296, 0.938829)
+attachments/3/offset = Vector3(0.0566726, 2.25885, 0.985061)
 
 [node name="BoneAttachment3D" parent="BaseCharacter/char3/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -2.49108e-17, -1.38456e-18, 2.49101e-17, 0.993784, 0.111328, -1.39731e-18, -0.111328, 0.993784, -1.58358e-16, 3.43878, -0.70911)
+transform = Transform3D(1, -1.44927e-17, -1.04079e-18, 1.45225e-17, 0.994596, 0.103823, -4.69515e-19, -0.103823, 0.994596, -4.06029e-17, 3.50313, -0.662488)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

@@ -52,12 +52,8 @@ func _ready():
 	chara.select_radius *= select_radius
 	timer.wait_time = duration
 	timer.start()
-	print("a")
-	print(duration)
-	print(physical_armor)
 
 func onTimeout():
-	print("asdsdf")
 	chara.attack_damage /= attack_damage
 	chara.spell_power -= spell_power
 	chara.physical_armor -= physical_armor

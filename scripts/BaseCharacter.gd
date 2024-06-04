@@ -65,6 +65,8 @@ var mouse_pos: Vector3
 @export var cdr: float = 0
 @export var select_radius: float = 3.0
 
+var initial_attack_speed = attack_speed
+
 # ========== HIDDEN STATS ========== #
 var can_act: bool = false
 var attack_cooldown: float = 0
@@ -83,6 +85,10 @@ func _ready():
 		loadAbility(key)
 	
 func _physics_process(delta):
+	
+	# This should be changed later, for a more efficient aproach
+	character_animations.set("parameters/AttackMul/scale", attack_speed/initial_attack_speed)
+	
 	if can_act:
 		if character_animations:
 			var blend_val = min(velocity.length(), 1)

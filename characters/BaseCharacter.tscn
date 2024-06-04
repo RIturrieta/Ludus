@@ -86,6 +86,7 @@ transform = Transform3D(1, 0, 0, 0, 0.500008, 0.866039, 0, -0.866039, 0.500008, 
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72297, 0)
+visible = false
 pixel_size = 0.001
 billboard = 1
 fixed_size = true

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://didnwyqj41xmt"]
+
+[ext_resource type="Script" path="res://scenes/abilities/modo_diablo/modo_diablo.gd" id="1_agxga"]
+
+[node name="modo_diablo" type="Node3D"]
+script = ExtResource("1_agxga")
+damage = 0.0
+cooldown = 60.0
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="duration" type="Timer" parent="."]
+wait_time = 8.0
+
+[connection signal="timeout" from="duration" to="." method="_on_duration_timeout"]
