@@ -96,11 +96,13 @@ func beginExecution():
 func execute():
 	chara.target_player = null
 	chara.updateTargetLocation(target.global_position)
-	chara.move_speed = 350
+	# chara.move_speed = 350
+	chara.dash(350)
 
 func endExecution():
 	chara.is_dashing = false
-	chara.move_speed = 100
+	# chara.move_speed = 100
+	chara.clearDash()
 	chara.agent.navigation_layers = 0b00000001
 	players_affected = []
 	players_on_area = []

@@ -14,6 +14,8 @@ height = 0.025
 
 [node name="savage_cleave" type="Node3D"]
 script = ExtResource("1_4g0a8")
+damage = 325.0
+cooldown = 14.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true

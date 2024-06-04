@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dwapul6fqh6lf"]
 
-[ext_resource type="Script" path="res://scenes/abilities/garrotazo/garrotazo.gd" id="1_khasx"]
+[ext_resource type="Script" path="res://scenes/abilities/sovereign_smash/sovereign_smash.gd" id="1_khasx"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_db0un"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb6hm"]
@@ -10,8 +10,9 @@ size = Vector3(2, 2, 7)
 material = ExtResource("2_db0un")
 size = Vector3(2, 0.025, 7)
 
-[node name="garrotazo" type="Node3D"]
+[node name="sovereign_smash" type="Node3D"]
 script = ExtResource("1_khasx")
+damage = 600.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true

@@ -126,13 +126,13 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Tank"
+text = "Lord Valthor"
 
 [node name="Char3" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Melee DPS"
+text = "Sorde"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2

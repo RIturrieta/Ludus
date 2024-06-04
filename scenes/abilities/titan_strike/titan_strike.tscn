@@ -5,9 +5,8 @@
 [node name="titan_strike" type="Node3D"]
 process_priority = 1
 script = ExtResource("1_262hg")
+damage = 300.0
+cooldown = 14.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true
-
-[node name="castime" type="Timer" parent="."]
-wait_time = 0.257

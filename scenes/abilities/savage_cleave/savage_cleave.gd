@@ -54,10 +54,7 @@ func execute():
 	players_on_area = dmg_area.get_overlapping_bodies()
 	for player in players_on_area:
 		if player.get_parent() != chara.get_parent():
-			player.hp -= (damage* (chara.spell_power / 100)) * (player.spell_armor / 100)
-			Debug.sprint(player.get_parent().name + " recieved " + 
-			String.num((damage*(chara.spell_power / 100)) * (player.spell_armor / 100)) + 
-			" and now has " + String.num(player.hp) + " hp")
+			player.takeAbilityDamage(damage, chara.spell_power)
 			if player.died():
 				if chara.target_player:
 					chara.target_player = null

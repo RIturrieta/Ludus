@@ -19,10 +19,9 @@ var p_forward: Vector3
 var p_spawn_pos: Vector3
 var p_rotation: float
 
-var target_player
+var target_player: BaseCharacter
 
 var jumping: bool = false
-@onready var castime: Timer = $castime
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
@@ -35,17 +34,6 @@ func _ready():
 
 func _physics_process(delta):
 	if jumping:
-		print(castime.time_left)
-		var speed = chara.global_position.distance_to(target_player.global_position)/(castime.time_left + 0.1)
-		print(speed)
-		# var current_position = chara.global_position
-		# var target_position = chara.agent.get_next_path_position()
-		# var new_velocity = (target_position - current_position).normalized() * speed * 1000
-		speed = speed * 15000 / (chara.SPEED * chara.move_speed)
-		# print(new_velocity)
-		print(chara.is_dashing)
-		# chara.velocity = new_velocity
-		chara.move_speed = speed
 		chara.updateTargetLocation(target_player.global_position)
 
 func beginExecution():
@@ -81,23 +69,20 @@ func execute():
 	var hitbox = chara.get_node("HitBox")
 	if hitbox:
 		hitbox.disabled = true
-	print("xd")
 	jumping = true
-	castime.start()
+	chara.dash(18 * 33.333)
 	chara.updateTargetLocation(target_player.global_position)
 
 func endExecution():
 	jumping = false
 	chara.is_dashing = false
-	chara.move_speed = 100
+	chara.clearDash()
 	var hitbox = chara.get_node("HitBox")
 	if hitbox:
 		hitbox.disabled = false
 	chara.agent.navigation_layers = 0b00000001
-	target_player.hp -= (damage* (chara.spell_power / 100)) * (target_player.spell_armor / 100)
-	Debug.sprint(target_player.get_parent().name + " recieved " + 
-	String.num((damage*(chara.spell_power / 100)) * (target_player.spell_armor / 100)) + 
-	" and now has " + String.num(target_player.hp) + " hp")
+	target_player.takeAbilityDamage(damage, chara.spell_power)
+	target_player.modifyStats(4, 1, 0, -25, 0, 1, 1, 0, 1)
 	target_player = null
 
 func _on_cd_timeout():

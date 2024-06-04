@@ -8,14 +8,13 @@ extends Node
 @export var damage: float = 150
 @export var mana_cost: float = 20
 @export var cooldown: float = 6
-@export var range: float = 1
+@export var range: float = 3
 
-@onready var area_range: Area3D = $area_range
-@onready var area_mouse: Area3D = $area_mouse
-@onready var collision: CollisionShape3D = $area_range/collision
-var chara_animations: AnimationTree
-var cursor_pos: Vector3
-var affected_player: BaseCharacter
+@onready var area: Area3D = $area
+@onready var collision: CollisionShape3D = $area/shape
+var players_on_area: int = 0
+var og_spell_armor: float
+var og_physical_armor: float
 
 var on_cooldown: bool = false
 
@@ -31,10 +30,6 @@ func _ready():
 	p_ray = chara.projectile_ray
 	p_spawn = chara.projectile_spawn
 	collision.shape.radius = range
-	chara_animations = chara.character_animations
-	
-func _physics_process(delta):
-	area_mouse.global_position = chara.mouse_pos
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -42,29 +37,18 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
-		if area_mouse.has_overlapping_bodies():
-			var min_distance: float = 999999
-			var distance: float = 0
-			for player in area_mouse.get_overlapping_bodies():
-				if player != chara and player in area_range.get_overlapping_bodies():
-					distance = player.global_position.distance_to(chara.global_position)
-					if distance <= min_distance:
-						min_distance = distance
-						affected_player = player
-		else:
-			affected_player = null
-		chara_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-			
+		chara.character_animations.set("parameters/WShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	if affected_player == null:
-		Debug.sprint("no players affected")
-	else:
-		Debug.sprint("Affected player: " + affected_player.get_parent().name)
-		affected_player.getStunned(3)
+	players_on_area = len(area.get_overlapping_bodies())
+	# chara.spell_armor += 5 * players_on_area
+	# chara.physical_armor += 5 * players_on_area
+	chara.modifyStats(3, 1, 0, 5 * players_on_area, 5 * players_on_area, 1, 1, 0, 1)
+	chara.heal(5 * players_on_area)
+	Debug.sprint("players: " + str(players_on_area) + " sp: " + str(chara.spell_armor) + " ph: " + str(chara.physical_armor) )
 
 func endExecution():
-	affected_player = null
+	pass
 
 func _on_cd_timeout():
 	on_cooldown = false

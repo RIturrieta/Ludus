@@ -96,7 +96,7 @@ func dealDamage():
 		var player = s3.get_collider(i)
 		if player != chara and not player in players_affected:
 			players_affected.append(player)
-			player.getStunned(3)
+			player.stun(3)
 			player.takeAbilityDamage(damage, chara.spell_power)
 			if player.died():
 				if chara.target_player:

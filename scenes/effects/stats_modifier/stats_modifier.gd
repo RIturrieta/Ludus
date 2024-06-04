@@ -19,12 +19,12 @@ var select_radius: float
 
 static func create( duration_: float, 
 					attack_damage_: float = 1, 
-					spell_power_: float = 1, 
-					physical_armor_: float = 1, 
-					spell_armor_: float = 1, 
+					spell_power_: float = 0, 
+					physical_armor_: float = 0, 
+					spell_armor_: float = 0, 
 					attack_speed_: float = 1,
 					attack_range_: float = 1,
-					cdr_: float = 1,
+					cdr_: float = 0,
 					select_radius_: float = 1) -> StatsModifierEffect:
 	var scene = load("res://scenes/effects/stats_modifier/stats_modifier.tscn")
 	var modifier: StatsModifierEffect = scene.instantiate()
@@ -40,24 +40,30 @@ static func create( duration_: float,
 	return modifier
 
 func _ready():
-	timer.timeout.connect(onTimeout)
+	if (duration > 0):
+		timer.timeout.connect(onTimeout)
 	chara.attack_damage *= attack_damage
-	chara.spell_power *= spell_power
-	chara.physical_armor *= physical_armor
-	chara.spell_armor *= spell_armor
+	chara.spell_power += spell_power
+	chara.physical_armor += physical_armor
+	chara.spell_armor += spell_armor
 	chara.attack_speed *= attack_speed
 	chara.attack_range *= attack_range
-	chara.cdr *= cdr
+	chara.cdr += cdr
 	chara.select_radius *= select_radius
-	timer.start(duration)
+	timer.wait_time = duration
+	timer.start()
+	print("a")
+	print(duration)
+	print(physical_armor)
 
 func onTimeout():
+	print("asdsdf")
 	chara.attack_damage /= attack_damage
-	chara.spell_power /= spell_power
-	chara.physical_armor /= physical_armor
-	chara.spell_armor /= spell_armor
+	chara.spell_power -= spell_power
+	chara.physical_armor -= physical_armor
+	chara.spell_armor -= spell_armor
 	chara.attack_speed /= attack_speed
 	chara.attack_range /= attack_range
-	chara.cdr /= cdr
+	chara.cdr -= cdr
 	chara.select_radius /= select_radius
 	queue_free()

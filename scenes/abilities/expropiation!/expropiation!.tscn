@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://rt0jfvhjtq4t"]
 
-[ext_resource type="Script" path="res://scenes/abilities/tank_w/tank_w.gd" id="1_on71n"]
+[ext_resource type="Script" path="res://scenes/abilities/expropiation!/expropiation!.gd" id="1_on71n"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w0bq1"]
 height = 0.5
 
-[node name="tank_w" type="Node3D"]
+[node name="expropiation!" type="Node3D"]
 script = ExtResource("1_on71n")
 damage = 100.0
 cooldown = 16.0

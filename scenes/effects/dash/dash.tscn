@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://buin8rru3inlc"]
+
+[ext_resource type="Script" path="res://scenes/effects/dash/dash.gd" id="1_3l2ds"]
+
+[node name="Dash" type="Node3D"]
+script = ExtResource("1_3l2ds")
+
+[node name="timer" type="Timer" parent="."]

@@ -1,8 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://d15hwn8teia0u"]
+[gd_scene load_steps=21 format=3 uid="uid://d15hwn8teia0u"]
 
 [ext_resource type="PackedScene" uid="uid://5jtb6yq7i3tv" path="res://resources/meshes/char3.glb" id="1_lb223"]
 [ext_resource type="ArrayMesh" uid="uid://k782yhd5s0bv" path="res://resources/meshes/band.tres" id="2_x24it"]
 [ext_resource type="ArrayMesh" uid="uid://bf83jmo3hyp8v" path="res://resources/meshes/char3.obj" id="3_xc21j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_heh3e"]
+size = Vector3(1.82, 2.285, 0.7)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m141q"]
 animation = &"BasicAttack1"
@@ -42,7 +45,7 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_48ckk"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ed1i"]
-graph_offset = Vector2(-24.3543, 14.7388)
+graph_offset = Vector2(135.705, 18.7642)
 nodes/Attack1/node = SubResource("AnimationNodeAnimation_m141q")
 nodes/Attack1/position = Vector2(120, 360)
 nodes/Attack2/node = SubResource("AnimationNodeAnimation_d4mbu")
@@ -79,67 +82,84 @@ node_connections = [&"AttackMul", 0, &"BasicAttack2", &"BasicAttack1", 0, &"Idle
 [node name="char3" instance=ExtResource("1_lb223")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(2.35962e-24, -0.165176, 0.095664)
-bones/0/rotation = Quaternion(-0.0667444, 0, 1.98738e-17, 0.99777)
+bones/0/position = Vector3(7.6268e-17, -0.43401, 0.0188544)
+bones/0/rotation = Quaternion(-0.0849971, 0, 1.46623e-17, 0.996381)
 bones/3/rotation = Quaternion(0.0334057, -7.75915e-26, -7.41755e-18, 0.999442)
-bones/4/rotation = Quaternion(0.0203697, 2.20244e-21, -8.98758e-18, 0.999793)
+bones/4/rotation = Quaternion(0.0364972, 1.14332e-19, -8.98824e-18, 0.999334)
 bones/5/rotation = Quaternion(-0.0559237, -0.00774747, 0.817648, 0.572944)
 bones/6/rotation = Quaternion(-0.322284, 0.0325463, -0.0748588, 0.943117)
-bones/7/rotation = Quaternion(-0.594903, -0.197487, 0.534582, 0.566843)
-bones/8/rotation = Quaternion(-0.00881998, -0.231004, 0.0863938, 0.969069)
+bones/7/rotation = Quaternion(-0.519719, -0.207539, 0.620344, 0.54954)
+bones/8/rotation = Quaternion(-0.0249426, -0.259305, 0.108232, 0.959388)
 bones/9/rotation = Quaternion(0.0784404, -0.0848469, -0.826228, 0.551358)
 bones/10/rotation = Quaternion(-0.135111, 0.000375008, 0.101722, 0.985595)
-bones/11/rotation = Quaternion(0.0158212, -0.0242215, -0.649008, 0.760231)
-bones/12/rotation = Quaternion(-0.769301, 0.0722946, -0.231645, 0.591008)
+bones/11/rotation = Quaternion(0.0872939, -0.0817685, -0.647639, 0.752501)
+bones/12/rotation = Quaternion(-0.783794, 0.0650683, -0.233127, 0.571914)
 bones/13/rotation = Quaternion(-0.855007, -0.203261, -0.153497, 0.451761)
 bones/14/position = Vector3(-1.7, -5.3783, -1.88881)
 bones/15/position = Vector3(1.7, -5.3783, 3.11119)
 bones/15/rotation = Quaternion(-0.665574, -0.23877, -0.23877, 0.665574)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -6.94873e-18, 1.59319e-19, 6.94223e-18, 0.999661, 0.0260192, -3.40065e-19, -0.0260192, 0.999661, -1.88541e-16, 4.99651, -0.517158)
+transform = Transform3D(1, 3.44325e-18, -3.99116e-19, -3.42954e-18, 0.999539, 0.0303605, 5.0347e-19, -0.0303605, 0.999539, -5.79979e-17, 4.70179, -0.782492)
 bone_name = "Bone.004"
 bone_idx = 4
 
 [node name="Band1" type="SoftBody3D" parent="Armature/Skeleton3D/Head" index="0"]
 transform = Transform3D(4.94976, 0.0592462, 0.704506, -0.0610849, 4.99963, 0.00872669, -0.704348, -0.0172459, 4.95012, -0.113, -10.794, -0.134)
 mesh = ExtResource("3_xc21j")
+collision_layer = 129
+collision_mask = 129
 total_mass = 10.01
 linear_stiffness = 1.0
 damping_coefficient = 0.07
 pinned_points = [2, 6, 3, 7]
 attachments/0/point_index = 2
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
+attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933972)
 attachments/1/point_index = 6
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
+attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
 attachments/2/point_index = 3
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
+attachments/2/offset = Vector3(0.0340999, 2.17342, 0.934217)
 attachments/3/point_index = 7
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
+attachments/3/offset = Vector3(0.357379, 2.16943, 0.888214)
 
 [node name="Band2" type="SoftBody3D" parent="Armature/Skeleton3D/Head" index="1"]
 transform = Transform3D(4.94924, 0.0632116, -0.707823, -0.0629089, 4.99961, 0.00661412, 0.70785, 0.00235882, 4.94965, -0.113, -10.704, -0.134)
 mesh = ExtResource("3_xc21j")
+collision_layer = 129
+collision_mask = 129
 total_mass = 10.01
 linear_stiffness = 1.0
 damping_coefficient = 0.07
 pinned_points = [2, 6, 3, 7]
 attachments/0/point_index = 2
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
+attachments/0/offset = Vector3(-0.265674, 2.33403, 0.938863)
 attachments/1/point_index = 6
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
+attachments/1/offset = Vector3(0.0575712, 2.32992, 0.985094)
 attachments/2/point_index = 3
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
+attachments/2/offset = Vector3(-0.266572, 2.26296, 0.938829)
 attachments/3/point_index = 7
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
+attachments/3/offset = Vector3(0.0566726, 2.25885, 0.98506)
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, -1.4493e-17, -1.03149e-18, 1.4522e-17, 0.994662, 0.103192, -4.69577e-19, -0.103192, 0.994662, -4.06064e-17, 3.5082, -0.658662)
+bone_name = "Bone.003"
+bone_idx = 3
+
+[node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D" index="0"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D/Area3D" index="0"]
+transform = Transform3D(1, 2.50218e-20, -2.0713e-19, -3.34786e-20, 0.999162, -0.0409214, 2.05931e-19, 0.0409214, 0.999162, 6.87764e-18, 0.247159, 0.740911)
+shape = SubResource("BoxShape3D_heh3e")
 
 [node name="Band" parent="." index="1"]
 visible = false

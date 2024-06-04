@@ -28,6 +28,8 @@ var p_rotation: float
 var players_on_area: Array[Node3D] = []
 var players_affected: Array[Node3D] = []
 
+var casting = false
+
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
 	cd_timer.wait_time = cooldown
@@ -66,14 +68,12 @@ func _physics_process(delta):
 		else:
 			target.position = s1.target_position
 	else:
-		players_on_area = impact_area.get_overlapping_bodies()
-		for player in players_on_area:
-			if not player in players_affected and player.get_parent() != chara.get_parent():
-				players_affected.append(player)
-				player.hp -= damage*chara.spell_power/100
-				Debug.sprint(player.get_parent().name + " recieved " + 
-				String.num(damage*chara.spell_power/100) + 
-				" and now has " + String.num(player.hp) + " hp")
+		if casting:
+			players_on_area = impact_area.get_overlapping_bodies()
+			for player in players_on_area:
+				if not player in players_affected and player.get_parent() != chara.get_parent():
+					players_affected.append(player)
+					player.takeAbilityDamage(damage, chara.spell_power)
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -93,11 +93,14 @@ func execute():
 	if hitbox:
 		hitbox.disabled = true
 	chara.updateTargetLocation(target.global_position)
-	chara.move_speed = 800
+	# chara.move_speed = 800
+	chara.dash(800)
+	casting = true
 
 func endExecution():
 	chara.is_dashing = false
-	chara.move_speed = 100
+	casting = false
+	chara.clearDash()
 	var hitbox = chara.get_node("HitBox")
 	if hitbox:
 		hitbox.disabled = false

@@ -15,8 +15,8 @@ radius = 1.0
 
 [node name="raging_thrust" type="Node3D"]
 script = ExtResource("1_6hcqr")
-mana_cost = 0.0
-cooldown = 1.0
+damage = 270.0
+cooldown = 14.0
 dash_distance = 12.0
 
 [node name="cd_timer" type="Timer" parent="."]

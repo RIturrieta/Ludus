@@ -17,7 +17,7 @@ var target: Vector3
 
 var camera_target_pos = 0.0
 @onready var animation_player = $AllAnimationPlayer
-@onready var arrows = $PathArrows
+# @onready var arrows = $PathArrows
 @onready var arrows_transform = $ArrowsTransform
 
 var locked_camera = true
@@ -28,7 +28,7 @@ var locked_camera = true
 @export var character_node: Node3D
 var character_animations: AnimationTree
 @onready var character_animation_player: AnimationPlayer = character_node.find_child("AnimationPlayer")
-var prev_lookat = global_transform.basis.z
+@onready var prev_lookat = global_transform.basis.z
 var prev_velocity = 0.0
 # variables para ataque
 var is_attacking = false
@@ -56,9 +56,9 @@ var mouse_pos: Vector3
 @export var hp: float = 1000
 @export var mana: float = 100
 @export var attack_damage: float = 100
-@export var spell_power: float = 100
-@export var physical_armor: float = 100
-@export var spell_armor: float = 100
+@export var spell_power: float = 0
+@export var physical_armor: float = 0
+@export var spell_armor: float = 0
 @export var move_speed: float = 100
 @export var attack_speed: float = 1
 @export var attack_range: float = 1
@@ -163,7 +163,7 @@ func _physics_process(delta):
 		
 		move_and_slide()
 		manageSlows()
-		if not is_silenced:
+		if not is_silenced and !is_dashing:
 			beginAbilityExecutions()
 		
 	#if fixed_movement and is_multiplayer_authority():
@@ -258,12 +258,12 @@ func fixedMovementTowards(direction: Vector3, speed: float):
 	fixed_speed = speed
 
 func takeAttackDamage(damage: float):
-	var total_damage = damage * (physical_armor/100)
+	var total_damage = damage * (1 - physical_armor/100)
 	hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 
 func takeAbilityDamage(damage: float, attacker_spell_power: float):
-	var total_damage = (damage * (attacker_spell_power/100)) * (spell_armor/100)
+	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
 	hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 	
@@ -286,10 +286,10 @@ func _onStunTimerTimeout():
 # node of the ability instead of its name.
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
-	"Q": "garrotazo",
-	"W": "tank_w",
-	"E": "tatequieto",
-	"R": "shoulder_bash",
+	"Q": "savage_cleave",
+	"W": "",
+	"E": "raging_thrust",
+	"R": "titan_strike",
 	"1": "",
 	"2": "", 
 	"3": "",
@@ -333,6 +333,7 @@ func endAbilityExecution(key):
 # RPC call to begin the cast of an ability
 @rpc("call_local", "reliable")
 func beginRemoteExecution(key):
+	abort_oneshots()
 	abilities[key].beginExecution()
 
 # RPC call for updating the mouse position and the projectile raycast on remote
@@ -344,11 +345,20 @@ func updateMousePos(pos: Vector3):
 
 # ========== EFFECTS ========== #
 
+func dash(amount: float):
+	var dash = DashEffect.create(amount)
+	$Effects.add_child(dash)
+
 func slow(duration: float, multiplier: float):
 	var slow = SlowEffect.create(duration, multiplier)
 	$Effects.add_child(slow)
 
 func manageSlows():
+	var dash: DashEffect = null
+	for effect in $Effects.get_children():
+		if effect is DashEffect:
+			dash = effect
+			break
 	var actual_slow: SlowEffect = null
 	for effect in $Effects.get_children():
 		if effect is SlowEffect:
@@ -358,8 +368,12 @@ func manageSlows():
 				if actual_slow.is_applied:
 					actual_slow.unapply()
 				actual_slow = effect
-	if actual_slow != null and not actual_slow.is_applied:
+	if actual_slow != null and actual_slow.is_applied and dash != null:
+		actual_slow.unapply()
+	elif actual_slow != null and not actual_slow.is_applied:
 		actual_slow.apply()
+	if dash != null:
+		dash.apply()
 	#if is_multiplayer_authority() and actual_slow != null:
 		#Debug.sprint(actual_slow.multiplier)
 
@@ -402,18 +416,25 @@ func silence(duration: float):
 		var silence = SilenceEffect.create(duration)
 		$Effects.add_child(silence)
 
-func modifyStats(duration_: float, attack_damage: float = 1, spell_power: float = 1, 
-								   physical_armor: float = 1, spell_armor: float = 1, 
+func modifyStats(duration_: float, attack_damage: float = 1, spell_power: float = 0, 
+								   physical_armor: float = 0, spell_armor: float = 0, 
 								   attack_speed: float = 1, attack_range: float = 1,
-								   cdr: float = 1, select_radius: float = 1):
+								   cdr: float = 0, select_radius: float = 1):
 									
-	var modifier = StatsModifierEffect.create(attack_damage, spell_power, 
+	var modifier = StatsModifierEffect.create(duration_, attack_damage, spell_power, 
 											  physical_armor, spell_armor, 
 											  attack_speed, attack_range, 
 											  cdr, select_radius)
 	$Effects.add_child(modifier)
 
 # Clear effects
+func clearDash():
+	for effect in $Effects.get_children():
+		if effect is DashEffect:
+			effect.unapply()
+			effect.queue_free()
+			break
+
 func clearStuns():
 	for effect in $Effects.get_children():
 		if effect is StunEffect:
@@ -514,6 +535,13 @@ func start_attack_remote(index: int):
 func stop_attack():
 	is_attacking = false 
 
+func abort_oneshots():
+	character_animations.set(str("parameters/QShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	character_animations.set(str("parameters/WShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	character_animations.set(str("parameters/EShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	character_animations.set(str("parameters/R1Shot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	character_animations.set(str("parameters/R2Shot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+
 func died():
 	if hp <= 0:
 		visible = false
@@ -528,7 +556,7 @@ func died():
 func setup(player_data: Statics.PlayerData):
 	player_info = player_data
 	name = str(player_info.id)
-	label_3d.text = str(player_info.name) + "\nTeam" +str(player_info.role)
+	label_3d.text = str(player_info.name) + "\n" +str(get_parent().name)
 	set_multiplayer_authority(player_info.id)
 	if is_multiplayer_authority():
 		camera_3d.current = true
