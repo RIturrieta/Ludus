@@ -13,6 +13,10 @@ func _ready():
 	timer.timeout.connect(onTimeout)
 	timer.start(duration)
 	chara.is_silenced = true
+	
+func stop():
+	timer.stop()
+	queue_free()
 
 func onTimeout():
 	chara.is_silenced = false

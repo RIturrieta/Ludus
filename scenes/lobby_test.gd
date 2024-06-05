@@ -54,7 +54,7 @@ func _on_peer_connected(id: int) -> void:
 
 
 @rpc("reliable")
-func send_player_data_id(playerDeindex, id):
+func send_player_data_id(_playerDeindex, id):
 	Game.players[player_index].id = id
 
 

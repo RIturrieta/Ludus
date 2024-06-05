@@ -46,7 +46,7 @@ func _ready() -> void:
 	if not Game.skip_start:
 		start_blessing_choice()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !started:
 		if Game.skip_start:
 			for player in players.get_children():

@@ -236,22 +236,22 @@ func screenPointToRay():
 		return ray_array["position"]
 	return Vector3()
 	
-func updateTargetLocation(target):
-	agent.target_position = target
+func updateTargetLocation(_target):
+	agent.target_position = _target
 	
-func moveCameraByCursor(position: Vector2):
+func moveCameraByCursor(_position: Vector2):
 	if !locked_camera:
 		var screen_size = get_viewport().get_visible_rect().size
 		var screenX = screen_size.x
 		var screenY = screen_size.y
 		var dir = Vector2(0.0, 0.0)
-		if screenX - position.x < 11:
+		if screenX - _position.x < 11:
 			dir += Vector2(camera_follow_speed, 0.0)
-		elif position.x < 11:
+		elif _position.x < 11:
 			dir += Vector2(-camera_follow_speed, 0.0)
-		elif screenY - position.y < 11:
+		elif screenY - _position.y < 11:
 			dir += Vector2(0.0, camera_follow_speed)
-		elif position.y < 11:
+		elif _position.y < 11:
 			dir += Vector2(0.0, -camera_follow_speed)
 		path_3d.global_position += Vector3(dir.x, 0.0, dir.y)
 
@@ -280,10 +280,6 @@ func heal(points: float):
 	#	hp = hp_max
 	hp += points
 
-func _onStunTimerTimeout():
-	can_act = true
-	character_animations.active = true
-
 # ========== ABILITIES ========== #
 
 # Key: String | Value: Node or String
@@ -306,11 +302,13 @@ func _onStunTimerTimeout():
 # adds the node to the dictionary
 func loadAbility(key: String):
 	if abilities.has(key):
-		if type_string(typeof((abilities[key]))) == "String": 
-			if abilities[key] == "":
-				abilities[key] = "base_ability"
-			var scene = load("res://scenes/abilities/" + abilities[key] + "/" + abilities[key] + ".tscn")
-			var sceneNode = scene.instantiate()
+		if type_string(typeof((abilities[key]))) == "String":
+			var path = "res://scenes/abilities/" + get_parent().name + "/" + abilities[key] + "/" + abilities[key] + ".tscn"
+			if !ResourceLoader.exists(path):
+				path = "res://scenes/abilities/" + "No Character" + "/" + abilities[key] + "/" + abilities[key] + ".tscn"
+				if !ResourceLoader.exists(path):
+					path = "res://scenes/abilities/No Character/base_ability/base_ability.tscn"
+			var sceneNode = load(path).instantiate()
 			abilities[key] = sceneNode
 			$Abilities.add_child(sceneNode, true)
 			# print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
@@ -325,8 +323,15 @@ func addAbility(ability_name: String, key: String):
 # Executes abilities based on the input
 func beginAbilityExecutions():
 	for key in abilities.keys():
-		if Input.is_action_just_pressed(key) and is_multiplayer_authority():
-			beginRemoteExecution.rpc(key)
+		if Input.is_action_pressed("Shift") and is_multiplayer_authority():
+			if Input.is_action_just_pressed(key):
+				abilities[key].preview.visible = true
+			if Input.is_action_just_released(key):
+				abilities[key].preview.visible = false
+				beginRemoteExecution.rpc(key)
+		else:
+			if Input.is_action_just_pressed(key) and is_multiplayer_authority():
+				beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations
 func executeAbility(key):
@@ -335,6 +340,10 @@ func executeAbility(key):
 # Marks the end of the execution of an ability. Used for animations
 func endAbilityExecution(key):
 	abilities[key].endExecution()
+
+
+func showAbilityPreview(key):
+	abilities[key].preview()
 
 # RPC call to begin the cast of an ability
 @rpc("call_local", "reliable")
@@ -352,18 +361,18 @@ func updateMousePos(pos: Vector3):
 # ========== EFFECTS ========== #
 
 func dash(amount: float):
-	var dash = DashEffect.create(amount)
-	$Effects.add_child(dash)
+	var _dash = DashEffect.create(amount)
+	$Effects.add_child(_dash)
 
 func slow(duration: float, multiplier: float):
-	var slow = SlowEffect.create(duration, multiplier)
-	$Effects.add_child(slow)
+	var _slow = SlowEffect.create(duration, multiplier)
+	$Effects.add_child(_slow)
 
 func manageSlows():
-	var dash: DashEffect = null
+	var _dash: DashEffect = null
 	for effect in $Effects.get_children():
 		if effect is DashEffect:
-			dash = effect
+			_dash = effect
 			break
 	var actual_slow: SlowEffect = null
 	for effect in $Effects.get_children():
@@ -374,63 +383,64 @@ func manageSlows():
 				if actual_slow.is_applied:
 					actual_slow.unapply()
 				actual_slow = effect
-	if actual_slow != null and actual_slow.is_applied and dash != null:
+	if actual_slow != null and actual_slow.is_applied and _dash != null:
 		actual_slow.unapply()
 	elif actual_slow != null and not actual_slow.is_applied:
 		actual_slow.apply()
-	if dash != null:
-		dash.apply()
+	if _dash != null:
+		_dash.apply()
 	#if is_multiplayer_authority() and actual_slow != null:
 		#Debug.sprint(actual_slow.multiplier)
 
 func stun(duration: float):
-	if $Effects.get_children().any(func (x): x is StunEffect):
+	if $Effects.get_children().any(func (x): return x is StunEffect):
 		for effect in $Effects.get_children():
 			if effect is StunEffect:
 				if duration > effect.timer.time_left:
-					effect.timer.stop()
-					var stun = StunEffect.create(duration)
-					$Effects.add_child(stun)
+					print("aaaaaaaaaaa")
+					effect.stop()
+					var _stun = StunEffect.create(duration)
+					$Effects.add_child(_stun)
 					break
 	else:
-		var stun = StunEffect.create(duration)
-		$Effects.add_child(stun)
+		var _stun = StunEffect.create(duration)
+		$Effects.add_child(_stun)
 
 func root(duration: float):
-	if $Effects.get_children().any(func (x): x is RootEffect):
+	if $Effects.get_children().any(func (x): return x is RootEffect):
 		for effect in $Effects.get_children():
 			if effect is RootEffect:
 				if duration > effect.timer.time_left:
-					effect.timer.stop()
-					var root = RootEffect.create(duration)
-					$Effects.add_child(root)
+					effect.stop()
+					var _root = RootEffect.create(duration)
+					$Effects.add_child(_root)
 					break
 	else:
-		var root = RootEffect.create(duration)
-		$Effects.add_child(root)
+		var _root = RootEffect.create(duration)
+		$Effects.add_child(_root)
 
 func silence(duration: float):
-	if $Effects.get_children().any(func (x): x is SilenceEffect):
+	if $Effects.get_children().any(func (x): return x is SilenceEffect):
 		for effect in $Effects.get_children():
 			if effect is SilenceEffect:
 				if duration > effect.timer.time_left:
-					effect.timer.stop()
-					var silence = SilenceEffect.create(duration)
-					$Effects.add_child(silence)
+					effect.stop()
+					var _silence = SilenceEffect.create(duration)
+					$Effects.add_child(_silence)
 					break
 	else:
-		var silence = SilenceEffect.create(duration)
-		$Effects.add_child(silence)
+		var _silence = SilenceEffect.create(duration)
+		$Effects.add_child(_silence)
 
-func modifyStats(duration_: float, attack_damage: float = 1, spell_power: float = 0, 
-								   physical_armor: float = 0, spell_armor: float = 0, 
-								   attack_speed: float = 1, attack_range: float = 1,
-								   cdr: float = 0, select_radius: float = 1):
+func modifyStats(_duration: float, _attack_damage: float = 1, _spell_power: float = 0, 
+								   _physical_armor: float = 0, _spell_armor: float = 0, 
+								   _attack_speed: float = 1, _attack_range: float = 1,
+								   _cdr: float = 0, _select_radius: float = 1):
 									
-	var modifier = StatsModifierEffect.create(duration_, attack_damage, spell_power, 
-											  physical_armor, spell_armor, 
-											  attack_speed, attack_range, 
-											  cdr, select_radius)
+	var modifier = StatsModifierEffect.create(_duration, _attack_damage, _spell_power, 
+											  _physical_armor, _spell_armor, 
+											  _attack_speed, _attack_range, 
+											  _cdr, _select_radius)
 	$Effects.add_child(modifier)
 
 # Clear effects
@@ -473,20 +483,20 @@ func clearStatsModifiers():
 # ========== MULTIPLAYER ========== #
 
 #funciones ataque
-func is_target_player(position: Vector3) -> bool:
+func is_target_player(_position: Vector3) -> bool:
 	var target_players = get_tree().get_nodes_in_group("players")
 	for player in target_players:
-		var distance = position.distance_to(player.global_transform.origin)
+		var distance = _position.distance_to(player.global_transform.origin)
 		if distance < player.select_radius && player.hp > 0:
 			return true
 	return false
 
 # Returns character closest to mouse cursor
-func get_target_player(position: Vector3) -> CharacterBody3D:
+func get_target_player(_position: Vector3) -> CharacterBody3D:
 	var target_players = get_tree().get_nodes_in_group("players")
 	var players_in_range = []
 	for player in target_players:
-		var distance = position.distance_to(player.global_transform.origin)
+		var distance = _position.distance_to(player.global_transform.origin)
 		if distance < player.select_radius && player.hp > 0:
 			players_in_range.append([player, distance])
 	var closest_player = null
@@ -511,15 +521,15 @@ func attack_hit():
 @rpc("call_local", "reliable")
 func attack_damage_remote(id: int):
 	var target_players = get_tree().get_nodes_in_group("players")
-	var target: BaseCharacter
+	var _target_player: BaseCharacter
 	for player in target_players:
 		if player.player_info.id == id:
-			target = player
+			_target_player = player
 			break
 	#for player in get_parent()
-	if target:
-		target.takeAttackDamage(attack_damage)
-		if target.died():
+	if _target_player:
+		_target_player.takeAttackDamage(attack_damage)
+		if _target_player.died():
 			if target_player:
 				target_player = null
 

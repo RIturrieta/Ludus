@@ -14,6 +14,10 @@ func _ready():
 	timer.start(duration)
 	chara.can_move = false
 
+func stop():
+	timer.stop()
+	queue_free()
+
 func onTimeout():
 	chara.can_move = true
 	queue_free()

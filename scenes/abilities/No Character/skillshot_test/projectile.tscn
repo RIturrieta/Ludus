@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cneokfu3wd77u"]
+
+[ext_resource type="Script" path="res://scenes/abilities/No Character/skillshot_test/projectile.gd" id="1_jk7ih"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lyehu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xkkcc"]
+
+[node name="Projectile" type="RigidBody3D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_jk7ih")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_lyehu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xkkcc")
+skeleton = NodePath("")

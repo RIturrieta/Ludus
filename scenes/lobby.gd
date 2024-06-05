@@ -54,7 +54,7 @@ func _ready():
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
-	Game.player_updated.connect(func(id) : _check_ready())
+	Game.player_updated.connect(func(_id) : _check_ready())
 	Game.players_updated.connect(_check_ready)
 	
 	host.pressed.connect(_on_host_pressed)
@@ -86,14 +86,14 @@ func _ready():
 	Game.upnp_completed.connect(_on_upnp_completed, 1)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !start_timer.is_stopped():
 		time.text = str(ceil(start_timer.time_left))
 
 
-func _on_upnp_completed(status) -> void:
-	print(status)
-	if status == OK:
+func _on_upnp_completed(_status) -> void:
+	print(_status)
+	if _status == OK:
 		Debug.sprint("Port Opened", 5)
 	else:
 		Debug.sprint("Port Error", 5)
@@ -146,7 +146,7 @@ func _on_peer_connected(id: int) -> void:
 	Debug.sprint("peer_connected %d" % id)
 	
 	send_info.rpc_id(id, Game.get_current_player().to_dict())
-	var local_id = multiplayer.get_unique_id()
+	var _local_id = multiplayer.get_unique_id()
 	if multiplayer.is_server():
 		for player_id in status:
 			set_player_ready.rpc_id(id, player_id, status[player_id])
