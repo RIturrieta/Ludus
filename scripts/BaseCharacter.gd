@@ -86,9 +86,6 @@ func _ready():
 	
 func _physics_process(delta):
 	
-	# This should be changed later, for a more efficient aproach
-	character_animations.set("parameters/AttackMul/scale", attack_speed/initial_attack_speed)
-	
 	if can_act:
 		if character_animations:
 			var blend_val = min(velocity.length(), 1)

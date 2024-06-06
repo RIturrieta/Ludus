@@ -25,7 +25,7 @@ func beginExecution():
 		chara.character_animations.set("parameters/R2Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.modifyStats(8, 1.2, 20, -20, -20, 1.2, 1, 0, 1)
+	chara.modifyStats(8, 1.2, 20, -20, -20, 1.25, 1, 0, 1)
 	chara.slow(8, 1.1)
 	$duration.start()
 	# [Insert the ability here]
