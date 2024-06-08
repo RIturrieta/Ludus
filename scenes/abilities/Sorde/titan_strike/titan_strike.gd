@@ -58,7 +58,6 @@ func beginExecutionRemote(id: int):
 			break
 	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 	chara.agent.navigation_layers = 0b00000010
-	chara.is_dashing = true
 	on_cooldown = true
 	cd_timer.start()
 	chara.mana -= mana_cost
@@ -75,7 +74,6 @@ func execute():
 
 func endExecution():
 	jumping = false
-	chara.is_dashing = false
 	chara.clearDash()
 	var hitbox = chara.get_node("HitBox")
 	if hitbox:

@@ -1,6 +1,6 @@
 extends Node
 
-@onready var chara: CharacterBody3D = get_parent().get_parent()
+@onready var chara: BaseCharacter = get_parent().get_parent()
 @onready var cd_timer: Timer = $cd_timer
 @onready var preview: MeshInstance3D = $preview
 
@@ -45,7 +45,7 @@ func _physics_process(_delta):
 	if not chara.is_dashing:
 		s1.rotation = p_ray.rotation
 		if variable_dash_distance:
-			var xd: float = s1.global_position.distance_to(chara.screenPointToRay())
+			var xd: float = s1.global_position.distance_to(chara.mouse_pos)
 			if xd <= dash_distance:
 				s1.target_position.z = -xd
 			else:
@@ -67,6 +67,7 @@ func _physics_process(_delta):
 				target.global_position = s1_pos
 		else:
 			target.position = s1.target_position
+		target.global_position.y = 0
 	else:
 		if casting:
 			players_on_area = impact_area.get_overlapping_bodies()
@@ -81,8 +82,6 @@ func beginExecution():
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
-		chara.agent.target_position = target.global_position
-		chara.is_dashing = true
 		chara.character_node.rotation.y = p_ray.rotation.y
 		chara.agent.navigation_layers = 0b00000010
 		chara.character_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
@@ -93,12 +92,10 @@ func execute():
 	if hitbox:
 		hitbox.disabled = true
 	chara.updateTargetLocation(target.global_position)
-	# chara.move_speed = 800
 	chara.dash(800)
 	casting = true
 
 func endExecution():
-	chara.is_dashing = false
 	casting = false
 	chara.clearDash()
 	var hitbox = chara.get_node("HitBox")

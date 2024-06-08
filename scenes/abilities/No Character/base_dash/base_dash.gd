@@ -2,7 +2,8 @@ extends Node
 
 @onready var chara: BaseCharacter = get_parent().get_parent()
 @onready var cd_timer: Timer = $cd_timer
-@onready var preview: MeshInstance3D = $preview
+@onready var preview: MeshInstance3D = $S1/preview
+@onready var final_pos: MeshInstance3D = $S1/preview/final_pos
 
 @export_category("Stats")
 @export var damage: float = 150
@@ -25,8 +26,6 @@ var p_rotation: float
 @onready var target: Node3D = $S1/target
 @onready var original_target: Node3D = $S1/original_target
 
-var dashing = false
-
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
 	cd_timer.wait_time = cooldown
@@ -39,10 +38,13 @@ func _ready():
 	
 
 func _physics_process(delta):
-	if not dashing:
+	if not chara.is_dashing:
 		s1.rotation = p_ray.rotation
+		preview.mesh.size.z = abs(target.position.z)
+		preview.position.z = target.position.z/2
+		final_pos.global_position = target.global_position
 		if variable_dash_distance:
-			var xd: float = s1.global_position.distance_to(chara.screenPointToRay())
+			var xd: float = s1.global_position.distance_to(chara.mouse_pos)
 			if xd <= dash_distance:
 				s1.target_position.z = -xd
 			else:
@@ -64,26 +66,26 @@ func _physics_process(delta):
 				target.global_position = s1_pos
 		else:
 			target.position = s1.target_position
+		target.global_position.y = 0
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if (not on_cooldown or cooldown <= 0.05) and chara.mana >= mana_cost:
 		Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
-		chara.can_move = false
-		chara.agent.target_position = target.global_position
+		chara.target_player = null
+		chara.agent.navigation_layers = 0b00000010
 		execute() # delete if there's an animation call
 
 func execute():
-	dashing = true
-	chara.global_position.x = target.global_position.x
+	chara.updateTargetLocation(target.global_position)
+	chara.global_position.x = target.global_position.x # use chara.dash() if the dash isn't instant
 	chara.global_position.z = target.global_position.z
-	endExecution()
+	endExecution() # delete if there's an animation call
 
 func endExecution():
-	dashing = false
-	chara.can_move = true
+	chara.agent.navigation_layers = 0b00000001
 
 func _on_cd_timeout():
 	on_cooldown = false

@@ -169,8 +169,8 @@ func _physics_process(delta):
 		if not is_silenced and !is_dashing:
 			beginAbilityExecutions()
 		
-	#if fixed_movement and is_multiplayer_authority():
-	if fixed_movement:
+	if fixed_movement and is_multiplayer_authority():
+	#if fixed_movement:
 		if global_position.distance_to(fixed_direction) <= 0.01:
 			global_position = fixed_direction
 			target = global_position
@@ -182,6 +182,9 @@ func _physics_process(delta):
 			move_and_slide()
 			sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 	
+	if !agent.is_navigation_finished() and is_multiplayer_authority():
+		sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
+		
 	if Input.is_action_just_pressed("Release Camera"):
 		if locked_camera:
 			locked_camera = false
@@ -327,6 +330,7 @@ func beginAbilityExecutions():
 				abilities[key].preview.visible = false
 				beginRemoteExecution.rpc(key)
 		else:
+			abilities[key].preview.visible = false
 			if Input.is_action_just_pressed(key) and is_multiplayer_authority():
 				beginRemoteExecution.rpc(key)
 
@@ -358,6 +362,7 @@ func updateMousePos(pos: Vector3):
 # ========== EFFECTS ========== #
 
 func dash(amount: float):
+	is_dashing = true
 	var _dash = DashEffect.create(amount)
 	$Effects.add_child(_dash)
 
@@ -446,6 +451,7 @@ func clearDash():
 		if effect is DashEffect:
 			effect.unapply()
 			effect.queue_free()
+			is_dashing = false
 			break
 
 func clearStuns():

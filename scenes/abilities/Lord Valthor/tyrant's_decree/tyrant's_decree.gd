@@ -62,8 +62,7 @@ func execute():
 		Debug.sprint("no players affected")
 	else:
 		Debug.sprint("Affected player: " + affected_player.get_parent().name)
-		#affected_player.stun(1.25)
-		affected_player.stun(25)
+		affected_player.stun(1.25)
 
 func endExecution():
 	affected_player = null

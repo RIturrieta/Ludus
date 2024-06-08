@@ -2,7 +2,8 @@ extends Node
 
 @onready var chara: BaseCharacter = get_parent().get_parent()
 @onready var cd_timer: Timer = $cd_timer
-@onready var preview: MeshInstance3D = $preview
+@onready var preview: MeshInstance3D = $S1/preview
+@onready var final_pos: MeshInstance3D = $S1/preview/final_pos
 
 @export_category("Stats")
 @export var damage: float = 150
@@ -42,8 +43,11 @@ func _ready():
 func _physics_process(_delta):
 	if not chara.is_dashing:
 		s1.rotation = p_ray.rotation
+		preview.mesh.size.z = abs(target.position.z)
+		preview.position.z = target.position.z/2
+		final_pos.global_position = target.global_position
 		if variable_dash_distance:
-			var xd: float = s1.global_position.distance_to(chara.screenPointToRay())
+			var xd: float = s1.global_position.distance_to(chara.mouse_pos)
 			if xd <= dash_distance:
 				s1.target_position.z = -xd
 			else:
@@ -65,6 +69,7 @@ func _physics_process(_delta):
 				target.global_position = s1_pos
 		else:
 			target.position = s1.target_position
+		target.global_position.y = 0
 	else:
 		for i in range(s3.get_collision_count()):
 			var player = s3.get_collider(i)
@@ -73,8 +78,7 @@ func _physics_process(_delta):
 			normal.y = 0
 			if player != chara and not player in players_affected:
 				players_affected.append(player)
-				#player.stun(0.5)
-				player.stun(30)
+				player.stun(0.5)
 				player.takeAbilityDamage(damage, chara.spell_power)
 				player.fixedMovementTowards(normal, 20)
 				if player.died():
@@ -88,14 +92,12 @@ func beginExecution():
 		cd_timer.start()
 		chara.mana -= mana_cost
 		chara.target_player = null
-		chara.agent.target_position = target.global_position
 		chara.is_dashing = true
 		chara.character_node.rotation.y = p_ray.rotation.y
 		chara.agent.navigation_layers = 0b00000010
 		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.target_player = null
 	chara.updateTargetLocation(target.global_position)
 	chara.dash(350)
 
