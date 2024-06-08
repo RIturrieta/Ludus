@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0l8fm08eva0p"]
+
+[ext_resource type="Script" path="res://scenes/effects/speed_modifier/speed_modifier.gd" id="1_lpi0f"]
+
+[node name="speed_modifier" type="Node3D"]
+script = ExtResource("1_lpi0f")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true

@@ -26,9 +26,8 @@ func beginExecution():
 
 func execute():
 	chara.modifyStats(8, 1.2, 20, -20, -20, 1.25, 1, 0, 1)
-	chara.slow(8, 1.1)
+	chara.modifySpeed(8, 10)
 	$duration.start()
-	# [Insert the ability here]
 
 func endExecution():
 	chara.can_act = true

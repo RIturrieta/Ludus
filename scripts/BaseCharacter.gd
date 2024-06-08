@@ -165,9 +165,11 @@ func _physics_process(delta):
 			updateMousePos.rpc(mouse_pos)
 		
 		move_and_slide()
-		manageSlows()
+		manageSpeedModifiers()
 		if not is_silenced and !is_dashing:
 			beginAbilityExecutions()
+		if is_multiplayer_authority():
+			Debug.sprint(get_parent().name + ": " + str(move_speed))
 		
 	if fixed_movement and is_multiplayer_authority():
 	#if fixed_movement:
@@ -366,29 +368,37 @@ func dash(amount: float):
 	var _dash = DashEffect.create(amount)
 	$Effects.add_child(_dash)
 
-func slow(duration: float, multiplier: float):
-	var _slow = SlowEffect.create(duration, multiplier)
-	$Effects.add_child(_slow)
+func modifySpeed(duration: float, percentage: float):
+	var _modifier = SpeedModifierEffect.create(duration, percentage)
+	$Effects.add_child(_modifier)
 
-func manageSlows():
+func manageSpeedModifiers():
 	var _dash: DashEffect = null
 	for effect in $Effects.get_children():
 		if effect is DashEffect:
 			_dash = effect
 			break
-	var actual_slow: SlowEffect = null
+	var actual_slow: SpeedModifierEffect = null
 	for effect in $Effects.get_children():
-		if effect is SlowEffect:
-			if actual_slow == null:
-				actual_slow = effect
-			elif effect.multiplier < actual_slow.multiplier:
-				if actual_slow.is_applied:
-					actual_slow.unapply()
-				actual_slow = effect
-	if actual_slow != null and actual_slow.is_applied and _dash != null:
-		actual_slow.unapply()
-	elif actual_slow != null and not actual_slow.is_applied:
-		actual_slow.apply()
+		if effect is SpeedModifierEffect:
+			if effect.percentage < 0:     # slow
+				if actual_slow == null:
+					actual_slow = effect
+				elif effect.percentage < actual_slow.percentage:
+					if actual_slow.is_applied:
+						actual_slow.unapply()
+					actual_slow = effect
+			else:                          # speed boost
+				if _dash == null:
+					if !effect.is_applied:
+						effect.apply()
+				elif effect.is_applied:
+					effect.unapply()
+	if actual_slow != null:
+		if actual_slow.is_applied and _dash != null:
+			actual_slow.unapply()
+		elif !actual_slow.is_applied:
+			actual_slow.apply()
 	if _dash != null:
 		_dash.apply()
 	#if is_multiplayer_authority() and actual_slow != null:
@@ -474,7 +484,7 @@ func clearSilences():
 
 func clearSlows():
 	for effect in $Effects.get_children():
-		if effect is SlowEffect:
+		if effect is SpeedModifierEffect:
 			effect.timer.stop()
 
 func clearStatsModifiers():

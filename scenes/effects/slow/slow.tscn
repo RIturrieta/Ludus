@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0l8fm08eva0p"]
-
-[ext_resource type="Script" path="res://scenes/effects/slow/slow.gd" id="1_ijdq8"]
-
-[node name="slow" type="Node3D"]
-script = ExtResource("1_ijdq8")
-
-[node name="timer" type="Timer" parent="."]
-one_shot = true

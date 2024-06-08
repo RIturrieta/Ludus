@@ -43,9 +43,9 @@ func _ready():
 	if (duration > 0):
 		timer.timeout.connect(onTimeout)
 	chara.attack_damage *= attack_damage
-	chara.spell_power += spell_power
-	chara.physical_armor += physical_armor
-	chara.spell_armor += spell_armor
+	chara.spell_power *= (1 + spell_power/100)
+	chara.physical_armor *= (1 + physical_armor/100)
+	chara.spell_armor *= (1 + spell_armor/100)
 	chara.character_animations.set("parameters/AttackMul/scale", attack_speed/chara.attack_speed)
 	chara.attack_speed *= attack_speed
 	chara.attack_range *= attack_range
@@ -56,9 +56,9 @@ func _ready():
 
 func onTimeout():
 	chara.attack_damage /= attack_damage
-	chara.spell_power -= spell_power
-	chara.physical_armor -= physical_armor
-	chara.spell_armor -= spell_armor
+	chara.spell_power /= (1 + spell_power/100)
+	chara.physical_armor /= (1 + physical_armor/100)
+	chara.spell_armor /= (1 + spell_armor/100)
 	chara.character_animations.set("parameters/AttackMul/scale", chara.initial_attack_speed/attack_speed)
 	chara.attack_speed /= attack_speed
 	chara.attack_range /= attack_range
