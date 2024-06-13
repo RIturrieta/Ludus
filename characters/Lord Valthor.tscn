@@ -175,25 +175,16 @@ abilities = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(4.4717e-05, 1.30644, -0.0193088)
-bones/0/rotation = Quaternion(-0.0396611, 0.703804, -0.0352578, 0.70841)
-bones/1/rotation = Quaternion(3.07649e-05, -5.47839e-05, 0.132827, 0.991139)
-bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
-bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(-0.0015854, 0.432724, -0.371845)
-bones/4/rotation = Quaternion(-0.690701, -0.142087, -0.000156389, 0.709045)
-bones/5/rotation = Quaternion(0.000463332, -0.000307129, -0.257564, 0.966261)
-bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
-bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
-bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.0832118, 0.694411, 0.652429, 0.291902)
-bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
-bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
-bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
-bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
+bones/0/position = Vector3(4.58394e-05, 1.3066, -0.0197935)
+bones/0/rotation = Quaternion(-0.0403686, 0.703768, -0.035964, 0.70837)
+bones/1/rotation = Quaternion(0.000133742, -0.000237794, 0.160116, 0.987098)
+bones/4/position = Vector3(-0.00661103, 0.442483, -0.36078)
+bones/4/rotation = Quaternion(-0.687223, -0.142321, 0.000738003, 0.712369)
+bones/5/rotation = Quaternion(0.000309483, -0.000131308, -0.287711, 0.957717)
+bones/8/rotation = Quaternion(-0.0865754, 0.692663, 0.654921, 0.289485)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00390672, 0.00828697, 0.0253669, 0.0194107, -0.0167111, 0.00844866, 0.0183134, 0.0194803, -0.00354348, 0.55329, 2.38926, -0.164036)
+transform = Transform3D(-0.00374057, 0.00850094, 0.0253211, 0.0184326, -0.0176825, 0.00865942, 0.0193304, 0.0185062, -0.00335741, 0.551786, 2.39328, -0.134641)
 
 [node name="AnimationTree" parent="BaseCharacter/char1v2" index="3"]
 libraries = {

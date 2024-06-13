@@ -11,7 +11,7 @@ height = 0.5
 [node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_3ek4m")]
 character_node = NodePath("char3")
 hp = 1800.0
-attack_damage = 150.0
+attack_damage = 1.0
 attack_speed = 1.166
 attack_range = 2.5
 select_radius = 2.5
@@ -23,31 +23,22 @@ abilities = {
 "E": "raging_thrust",
 "Q": "savage_cleave",
 "R": "modo_diablo",
-"W": "skillshot_test"
+"W": "relentless_chase"
 }
 
 [node name="char3" parent="BaseCharacter" instance=ExtResource("2_dme4m")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char3/Armature" index="0"]
-bones/0/position = Vector3(7.6268e-17, -0.308456, 0.0547268)
-bones/0/rotation = Quaternion(-0.0764349, -2.53259e-26, 1.46627e-17, 0.997075)
-bones/3/rotation = Quaternion(0.0334057, -7.75915e-26, -7.41755e-18, 0.999442)
-bones/4/rotation = Quaternion(0.0289289, 1.14334e-19, -8.98842e-18, 0.999581)
-bones/5/rotation = Quaternion(-0.0559237, -0.00774747, 0.817648, 0.572944)
-bones/6/rotation = Quaternion(-0.322284, 0.0325463, -0.0748588, 0.943117)
-bones/7/rotation = Quaternion(-0.555787, -0.20318, 0.581231, 0.55856)
-bones/8/rotation = Quaternion(-0.0174157, -0.246136, 0.0980518, 0.964106)
-bones/9/rotation = Quaternion(0.0784404, -0.0848469, -0.826228, 0.551358)
-bones/10/rotation = Quaternion(-0.135111, 0.000375008, 0.101722, 0.985595)
-bones/11/rotation = Quaternion(0.053955, -0.0549375, -0.648964, 0.756912)
-bones/12/rotation = Quaternion(-0.777068, 0.0684575, -0.232451, 0.5809)
-bones/13/rotation = Quaternion(-0.855007, -0.203261, -0.153497, 0.451761)
-bones/14/position = Vector3(-1.7, -5.3783, -1.88881)
-bones/15/position = Vector3(1.7, -5.3783, 3.11119)
-bones/15/rotation = Quaternion(-0.665574, -0.23877, -0.23877, 0.665574)
+bones/0/position = Vector3(7.6268e-17, -0.466115, 0.00968158)
+bones/0/rotation = Quaternion(-0.0871323, 0, 1.46621e-17, 0.996197)
+bones/4/rotation = Quaternion(0.0384229, 1.1433e-19, -8.98811e-18, 0.999262)
+bones/7/rotation = Quaternion(-0.510268, -0.208554, 0.630037, 0.546979)
+bones/8/rotation = Quaternion(-0.0268654, -0.262657, 0.110828, 0.958127)
+bones/11/rotation = Quaternion(0.0957836, -0.0885975, -0.647108, 0.751151)
+bones/12/rotation = Quaternion(-0.7855, 0.0641984, -0.233295, 0.569598)
 
 [node name="Head" parent="BaseCharacter/char3/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 3.45788e-18, -2.31356e-19, -3.44994e-18, 0.999599, 0.0283256, 3.2921e-19, -0.0283256, 0.999599, -5.80873e-17, 4.84035, -0.65827)
+transform = Transform3D(1, 3.43927e-18, -4.40516e-19, -3.42407e-18, 0.999526, 0.0307924, 5.4621e-19, -0.0307924, 0.999526, -5.79721e-17, 4.6662, -0.813671)
 
 [node name="Band1" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="0"]
 parent_collision_ignore = NodePath("../../../../..")
@@ -64,7 +55,7 @@ attachments/2/offset = Vector3(-0.266572, 2.26296, 0.938829)
 attachments/3/offset = Vector3(0.0566726, 2.25885, 0.98506)
 
 [node name="BoneAttachment3D" parent="BaseCharacter/char3/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -1.44972e-17, -7.79611e-19, 1.45105e-17, 0.996288, 0.0860886, -4.71329e-19, -0.0860886, 0.996288, -4.06907e-17, 3.64481, -0.554964)
+transform = Transform3D(1, -1.44912e-17, -1.09431e-18, 1.45249e-17, 0.99421, 0.107454, -4.6917e-19, -0.107454, 0.99421, -4.05827e-17, 3.47315, -0.684726)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

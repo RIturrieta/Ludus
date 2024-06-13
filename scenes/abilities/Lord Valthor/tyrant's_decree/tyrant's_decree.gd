@@ -14,7 +14,6 @@ extends Node
 @onready var area_mouse: Area3D = $area_mouse
 @onready var collision: CollisionShape3D = $area_range/collision
 var chara_animations: AnimationTree
-var cursor_pos: Vector3
 var affected_player: BaseCharacter
 
 var on_cooldown: bool = false

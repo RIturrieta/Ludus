@@ -85,7 +85,6 @@ func _ready():
 		loadAbility(key)
 	
 func _physics_process(delta):
-	
 	if can_act:
 		if character_animations:
 			var blend_val = min(velocity.length(), 1)
@@ -168,8 +167,6 @@ func _physics_process(delta):
 		manageSpeedModifiers()
 		if not is_silenced and !is_dashing:
 			beginAbilityExecutions()
-		if is_multiplayer_authority():
-			Debug.sprint(get_parent().name + ": " + str(move_speed))
 		
 	if fixed_movement and is_multiplayer_authority():
 	#if fixed_movement:
@@ -284,10 +281,10 @@ func heal(points: float):
 
 # ========== ABILITIES ========== #
 
-# Key: String | Value: Node or String
+# Key: String | Value: String or Array[String, Node]
 # An ability can be added by changing a null value for the name of the ability.
-# When the ability is loaded, its value in the dictionary will change to the 
-# node of the ability instead of its name.
+# When the ability is loaded, its value in the dictionary will change to an  
+# array containing the name of the ability on [0] and it's node on [1].
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
 	"Q": "savage_cleave",
@@ -300,59 +297,64 @@ func heal(points: float):
 	"4": "",
 }
 
-# Adds the ability assigned to a certain key as a child of the character and
-# adds the node to the dictionary
+# Adds the ability assigned to a certain key as a child of the character and puts
+# it into the dictionary as an array that contains both the name and the node
 func loadAbility(key: String):
 	if abilities.has(key):
-		if type_string(typeof((abilities[key]))) == "String":
+		if abilities[key] is String:
+			var no_ability = false
 			var path = "res://scenes/abilities/" + get_parent().name + "/" + abilities[key] + "/" + abilities[key] + ".tscn"
 			if !ResourceLoader.exists(path):
 				path = "res://scenes/abilities/" + "No Character" + "/" + abilities[key] + "/" + abilities[key] + ".tscn"
 				if !ResourceLoader.exists(path):
 					path = "res://scenes/abilities/No Character/base_ability/base_ability.tscn"
 			var sceneNode = load(path).instantiate()
-			abilities[key] = sceneNode
+			if no_ability:
+				abilities[key] = ["base_ability", sceneNode]
+			else:
+				abilities[key] = [abilities[key], sceneNode]
 			$Abilities.add_child(sceneNode, true)
-			# print(Game.get_current_player().name + " " + get_parent().name + ": " + key)
 		
 # Adds a new ability to the character and loads it
 func addAbility(ability_name: String, key: String):
-	if not abilities[key] is String:
-		abilities[key].queue_free()
-	abilities[key] = ability_name
-	loadAbility(key)
+	if abilities[key] is Array:
+		abilities[key][1].queue_free()
+		abilities[key] = ability_name
+		loadAbility(key)
 
 # Executes abilities based on the input
 func beginAbilityExecutions():
 	for key in abilities.keys():
 		if Input.is_action_pressed("Shift") and is_multiplayer_authority():
 			if Input.is_action_just_pressed(key):
-				abilities[key].preview.visible = true
+				abilities[key][1].preview.visible = true
 			if Input.is_action_just_released(key):
-				abilities[key].preview.visible = false
+				abilities[key][1].preview.visible = false
 				beginRemoteExecution.rpc(key)
 		else:
-			abilities[key].preview.visible = false
+			abilities[key][1].preview.visible = false
 			if Input.is_action_just_pressed(key) and is_multiplayer_authority():
 				beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations
-func executeAbility(key):
-	abilities[key].execute()
+func executeAbility(_name):
+	for array: Array in abilities.values():
+		if array.has(_name):
+			array[1].execute()
+			break
 
 # Marks the end of the execution of an ability. Used for animations
-func endAbilityExecution(key):
-	abilities[key].endExecution()
-
-
-func showAbilityPreview(key):
-	abilities[key].preview()
+func endAbilityExecution(_name):
+	for array: Array in abilities.values():
+		if array.has(_name):
+			array[1].endExecution()
+			break
 
 # RPC call to begin the cast of an ability
 @rpc("call_local", "reliable")
 func beginRemoteExecution(key):
 	abort_oneshots()
-	abilities[key].beginExecution()
+	abilities[key][1].beginExecution()
 
 # RPC call for updating the mouse position and the projectile raycast on remote
 @rpc("call_local")
@@ -409,7 +411,6 @@ func stun(duration: float):
 		for effect in $Effects.get_children():
 			if effect is StunEffect:
 				if duration > effect.timer.time_left:
-					print("aaaaaaaaaaa")
 					effect.stop()
 					var _stun = StunEffect.create(duration)
 					$Effects.add_child(_stun)
@@ -467,30 +468,53 @@ func clearDash():
 func clearStuns():
 	for effect in $Effects.get_children():
 		if effect is StunEffect:
-			effect.timer.stop()
+			effect.stop()
 			break
 
 func clearRoots():
 	for effect in $Effects.get_children():
 		if effect is RootEffect:
-			effect.timer.stop()
+			effect.stop()
 			break
 
 func clearSilences():
 	for effect in $Effects.get_children():
 		if effect is SilenceEffect:
-			effect.timer.stop()
+			effect.stop()
 			break
+
+func clearSpeedModifier(duration: float, percentage: float):
+	for effect in $Effects.get_children():
+		if effect is SpeedModifierEffect:
+			if effect.duration == duration and effect.percentage == percentage:
+				effect.stop()
+				break
 
 func clearSlows():
 	for effect in $Effects.get_children():
 		if effect is SpeedModifierEffect:
-			effect.timer.stop()
+			if effect.percentage < 0:
+				effect.stop()
+				break
+
+func clearStatsModifier(_duration: float, _attack_damage: float = 1, _spell_power: float = 0, 
+										  _physical_armor: float = 0, _spell_armor: float = 0, 
+										  _attack_speed: float = 1, _attack_range: float = 1,
+										  _cdr: float = 0, _select_radius: float = 1):
+	for effect in $Effects.get_children():
+		if effect is StatsModifierEffect:
+			if (effect.duration == _duration and 
+				effect.attack_damage == _attack_damage and effect.spell_power == _spell_power and
+				effect.physical_armor == _physical_armor and effect.spell_armor == _spell_armor and
+				effect.attack_speed == _attack_speed and effect.attack_range == _attack_range and
+				effect.cdr == _cdr and effect.select_radius == _select_radius):
+				effect.stop()
+				break
 
 func clearStatsModifiers():
 	for effect in $Effects.get_children():
 		if effect is StatsModifierEffect:
-			effect.timer.stop()
+			effect.stop()
 
 
 # ========== MULTIPLAYER ========== #
@@ -507,6 +531,7 @@ func is_target_player(_position: Vector3) -> bool:
 # Returns character closest to mouse cursor
 func get_target_player(_position: Vector3) -> CharacterBody3D:
 	var target_players = get_tree().get_nodes_in_group("players")
+	target_players.erase(self)
 	var players_in_range = []
 	for player in target_players:
 		var distance = _position.distance_to(player.global_transform.origin)
@@ -565,6 +590,8 @@ func stop_attack():
 	is_attacking = false 
 
 func abort_oneshots():
+	character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	character_animations.set(str("parameters/QShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_animations.set(str("parameters/QShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_animations.set(str("parameters/WShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_animations.set(str("parameters/EShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
@@ -591,8 +618,8 @@ func setup(player_data: Statics.PlayerData):
 		camera_3d.current = true
 	
 @rpc
-func sendData(pos: Vector3, vel: Vector3, targ: Vector3, rot_y: float):
+func sendData(pos: Vector3, vel: Vector3, _target: Vector3, rot_y: float):
 	global_position = lerp(global_position, pos, 0.75)
 	velocity = lerp(velocity, vel, 0.75)
-	target = targ
+	target = _target
 	character_node.global_rotation.y = lerp_angle(character_node.global_rotation.y, rot_y, 0.75)

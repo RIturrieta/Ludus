@@ -13,7 +13,7 @@ static func create(duration_: float, percentage_: float) -> SpeedModifierEffect:
 	return modifier
 
 func _ready():
-	timer.timeout.connect(onTimeout)
+	timer.timeout.connect(stop)
 	timer.start(duration)
 
 func apply():
@@ -24,7 +24,7 @@ func unapply():
 	is_applied = false
 	chara.move_speed /= (1 + percentage/100)
 
-func onTimeout():
+func stop():
 	if is_applied:
 		unapply()
 	queue_free()

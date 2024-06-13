@@ -41,7 +41,7 @@ static func create( duration_: float,
 
 func _ready():
 	if (duration > 0):
-		timer.timeout.connect(onTimeout)
+		timer.timeout.connect(stop)
 	chara.attack_damage *= attack_damage
 	chara.spell_power *= (1 + spell_power/100)
 	chara.physical_armor *= (1 + physical_armor/100)
@@ -54,7 +54,7 @@ func _ready():
 	timer.wait_time = duration
 	timer.start()
 
-func onTimeout():
+func stop():
 	chara.attack_damage /= attack_damage
 	chara.spell_power /= (1 + spell_power/100)
 	chara.physical_armor /= (1 + physical_armor/100)
