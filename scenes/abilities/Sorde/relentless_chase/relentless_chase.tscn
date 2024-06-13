@@ -1,20 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxmueruwbr4o0"]
+[gd_scene load_steps=2 format=3 uid="uid://cxmueruwbr4o0"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Sorde/relentless_chase/relentless_chase.gd" id="1_ghpu2"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_kap3n"]
-height = 0.5
-radius = 1.0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_c5mvi"]
-height = 0.5
-radius = 1.0
-
 [node name="relentless_chase" type="Node3D"]
 script = ExtResource("1_ghpu2")
-mana_cost = 0.0
-cooldown = 0.0
-radius = 10.0
+mana_cost = 15.0
+cooldown = 8.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true
@@ -22,19 +13,5 @@ one_shot = true
 [node name="duration" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-
-[node name="area_range" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="collision" type="CollisionShape3D" parent="area_range"]
-shape = SubResource("CylinderShape3D_kap3n")
-
-[node name="area_mouse" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="collision" type="CollisionShape3D" parent="area_mouse"]
-shape = SubResource("CylinderShape3D_c5mvi")
 
 [node name="preview" type="MeshInstance3D" parent="."]

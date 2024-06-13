@@ -591,6 +591,8 @@ func stop_attack():
 
 func abort_oneshots():
 	character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	attack_cooldown_offset = 0
+	attack_cooldown = 0
 	character_animations.set(str("parameters/QShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_animations.set(str("parameters/QShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_animations.set(str("parameters/WShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)

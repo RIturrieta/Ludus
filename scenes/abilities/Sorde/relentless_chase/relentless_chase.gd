@@ -7,12 +7,7 @@ extends Node
 @export_category("Stats")
 @export var mana_cost: float = 20
 @export var cooldown: float = 6
-@export var radius: float = 1
 @export var duration: float = 3
-
-@onready var area_range: Area3D = $area_range
-@onready var area_mouse: Area3D = $area_mouse
-@onready var collision: CollisionShape3D = $area_range/collision
 @onready var duration_timer: Timer = $duration
 var chara_animations: AnimationTree
 var chasing: bool = false
@@ -25,7 +20,6 @@ func _ready():
 	cd_timer.wait_time = cooldown
 	duration_timer.timeout.connect(_on_duration_timeout)
 	duration_timer.wait_time = duration
-	collision.shape.radius = radius
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
@@ -41,9 +35,6 @@ func beginExecution():
 		chara.modifyStats(duration, 1.75)
 		duration_timer.start()
 		chasing = true
-
-func _physics_process(delta):
-	area_mouse.global_position = chara.mouse_pos
 
 func execute():
 	chasing = false

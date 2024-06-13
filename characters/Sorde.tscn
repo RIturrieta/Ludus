@@ -11,7 +11,7 @@ height = 0.5
 [node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_3ek4m")]
 character_node = NodePath("char3")
 hp = 1800.0
-attack_damage = 1.0
+attack_damage = 150.0
 attack_speed = 1.166
 attack_range = 2.5
 select_radius = 2.5
@@ -29,20 +29,20 @@ abilities = {
 [node name="char3" parent="BaseCharacter" instance=ExtResource("2_dme4m")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char3/Armature" index="0"]
-bones/0/position = Vector3(7.6268e-17, -0.466115, 0.00968158)
-bones/0/rotation = Quaternion(-0.0871323, 0, 1.46621e-17, 0.996197)
-bones/4/rotation = Quaternion(0.0384229, 1.1433e-19, -8.98811e-18, 0.999262)
-bones/7/rotation = Quaternion(-0.510268, -0.208554, 0.630037, 0.546979)
-bones/8/rotation = Quaternion(-0.0268654, -0.262657, 0.110828, 0.958127)
-bones/11/rotation = Quaternion(0.0957836, -0.0885975, -0.647108, 0.751151)
-bones/12/rotation = Quaternion(-0.7855, 0.0641984, -0.233295, 0.569598)
+bones/0/position = Vector3(7.6268e-17, -0.157512, 0.0978537)
+bones/0/rotation = Quaternion(-0.0666674, 0, 1.81867e-17, 0.997775)
+bones/4/rotation = Quaternion(0.0209285, 4.27678e-20, -8.98778e-18, 0.999781)
+bones/7/rotation = Quaternion(-0.596926, -0.197162, 0.532036, 0.567224)
+bones/8/rotation = Quaternion(-0.00857155, -0.230565, 0.0860563, 0.969206)
+bones/11/rotation = Quaternion(0.0139914, -0.022747, -0.648971, 0.760344)
+bones/12/rotation = Quaternion(-0.769619, 0.0721392, -0.231678, 0.5906)
 
 [node name="Head" parent="BaseCharacter/char3/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 3.43927e-18, -4.40516e-19, -3.42407e-18, 0.999526, 0.0307924, 5.4621e-19, -0.0307924, 0.999526, -5.79721e-17, 4.6662, -0.813671)
+transform = Transform3D(1, -3.57482e-18, 1.19735e-19, 3.57076e-18, 0.999694, 0.0247473, -2.08165e-19, -0.0247473, 0.999694, -9.47577e-17, 5.00427, -0.514172)
 
 [node name="Band1" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="0"]
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933972)
+attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933971)
 attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
 attachments/2/offset = Vector3(0.0340999, 2.17342, 0.934217)
 attachments/3/offset = Vector3(0.357379, 2.16943, 0.888214)
@@ -55,7 +55,7 @@ attachments/2/offset = Vector3(-0.266572, 2.26296, 0.938829)
 attachments/3/offset = Vector3(0.0566726, 2.25885, 0.98506)
 
 [node name="BoneAttachment3D" parent="BaseCharacter/char3/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -1.44912e-17, -1.09431e-18, 1.45249e-17, 0.99421, 0.107454, -4.6917e-19, -0.107454, 0.99421, -4.05827e-17, 3.47315, -0.684726)
+transform = Transform3D(1, -2.15465e-17, -4.91686e-19, 2.15315e-17, 0.997782, 0.0665606, -9.43555e-19, -0.0665606, 0.997782, -6.89019e-17, 3.80693, -0.434299)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
