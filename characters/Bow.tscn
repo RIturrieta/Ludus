@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct16wr3phrsg1"]
+
+[ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_jh2bu"]
+[ext_resource type="PackedScene" uid="uid://31ralsek04o4" path="res://characters/Imported/char_2.tscn" id="2_3ny37"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_aatfw"]
+height = 0.5
+radius = 0.292841
+
+[node name="Bow" type="Node3D"]
+
+[node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_jh2bu")]
+character_node = NodePath("char2")
+
+[node name="char2" parent="BaseCharacter" instance=ExtResource("2_3ny37")]
+
+[node name="Skeleton3D" parent="BaseCharacter/char2/Armature" index="0"]
+bones/1/rotation = Quaternion(-0.000160677, -6.53827e-05, -0.000236659, 1)
+bones/4/rotation = Quaternion(0.0262577, 0.00118807, 0.0351749, 0.999035)
+bones/7/rotation = Quaternion(-0.466612, -0.0878985, -0.312927, 0.822572)
+bones/8/rotation = Quaternion(-0.26888, 0.136222, -0.0262103, 0.953132)
+bones/11/rotation = Quaternion(-0.188227, -0.1206, -0.0393342, 0.973899)
+bones/12/rotation = Quaternion(-0.412694, 0.0365003, 0.627044, 0.659672)
+
+[node name="Head" parent="BaseCharacter/char2/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.7959, 0.0972596, -0.597565, -0.0940806, 0.994891, 0.0366218, 0.598073, 0.027072, 0.800984, 0.837497, 3.37994, 0.119016)
+
+[node name="Cloak" parent="BaseCharacter/char2/Armature/Skeleton3D/Head" index="0"]
+parent_collision_ignore = NodePath("../../../../..")
+attachments/0/offset = Vector3(0.194937, 0.172761, 0.46426)
+attachments/1/offset = Vector3(0.195108, 0.0840826, 0.172852)
+attachments/2/offset = Vector3(0.19521, 0.0840826, 0.000189337)
+attachments/3/offset = Vector3(0.195311, 0.0840826, -0.172473)
+attachments/4/offset = Vector3(0.195482, 0.172761, -0.463882)
+attachments/5/offset = Vector3(-0.192245, 0.190126, 0.459639)
+attachments/6/offset = Vector3(-0.19207, 0.0994196, 0.161565)
+attachments/7/offset = Vector3(-0.191975, 0.0994196, -3.81066e-05)
+attachments/8/offset = Vector3(-0.19188, 0.0994196, -0.161642)
+attachments/9/offset = Vector3(-0.191705, 0.190126, -0.459715)
+attachments/10/offset = Vector3(-0.574689, 0.231524, 0.47414)
+attachments/11/offset = Vector3(-0.574531, 0.149818, 0.205639)
+attachments/12/offset = Vector3(-0.57441, 0.149818, -0.000262759)
+attachments/13/offset = Vector3(-0.574289, 0.149818, -0.206165)
+attachments/14/offset = Vector3(-0.574131, 0.231524, -0.474665)
+attachments/15/offset = Vector3(-0.192054, 2.36343, 0.133746)
+attachments/16/offset = Vector3(-0.191976, 2.39832, -3.81213e-05)
+attachments/17/offset = Vector3(-0.191897, 2.36343, -0.133822)
+attachments/18/offset = Vector3(-0.19212, 2.4805, 0.245149)
+attachments/19/offset = Vector3(-0.191976, 2.62542, -3.81227e-05)
+attachments/20/offset = Vector3(-0.191832, 2.4805, -0.245225)
+
+[node name="Back" parent="BaseCharacter/char2/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.784576, 0.184173, -0.592047, -0.163554, 0.98252, 0.0889006, 0.598072, 0.0270822, 0.800985, 0.629039, 2.26787, 0.0883631)
+
+[node name="Cape" parent="BaseCharacter/char2/Armature/Skeleton3D/Back" index="0"]
+parent_collision_ignore = NodePath("../../../../..")
+attachments/0/offset = Vector3(-0.832998, 1.23343, -0.0579552)
+attachments/1/offset = Vector3(-0.838997, 1.17871, -0.396283)
+attachments/2/offset = Vector3(-0.84501, 1.12413, -0.734611)
+attachments/3/offset = Vector3(-0.851022, 1.06941, -1.07294)
+attachments/4/offset = Vector3(-0.857034, 1.01483, -1.41127)
+attachments/5/offset = Vector3(-0.675327, 1.12023, -0.0444712)
+attachments/6/offset = Vector3(-0.683543, 1.06716, -0.382993)
+attachments/7/offset = Vector3(-0.691759, 1.01408, -0.721515)
+attachments/8/offset = Vector3(-0.699962, 0.961002, -1.06004)
+attachments/9/offset = Vector3(-0.708178, 0.907926, -1.39856)
+
+[node name="LHand" parent="BaseCharacter/char2/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.429336, -0.150139, 0.890577, 0.591037, -0.6989, -0.402757, 0.682894, 0.699283, -0.211325, 2.1951, 0.347688, -0.167781)
+
+[node name="bow" parent="BaseCharacter/char2/Armature/Skeleton3D/LHand" index="0"]
+transform = Transform3D(5.76265, -0.511733, -2.46384, 2.34515, 3.32462, 4.79455, 0.912482, -5.31277, 3.23765, -0.0368111, 2.66266, -0.132379)
+
+[node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_aatfw")
+
+[editable path="BaseCharacter"]
+[editable path="BaseCharacter/char2"]
+[editable path="BaseCharacter/char2/Armature/Skeleton3D/LHand/bow"]
