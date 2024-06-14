@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb5svey4i6jok"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Robin/boosteito/boosteito.gd" id="1_0hffu"]
+
+[node name="boosteito" type="Node3D"]
+script = ExtResource("1_0hffu")
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="preview" type="MeshInstance3D" parent="."]

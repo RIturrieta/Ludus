@@ -1,24 +1,8 @@
-extends Node
+extends Ability
 
-@onready var chara: BaseCharacter = get_parent().get_parent()
-@onready var cd_timer: Timer = $cd_timer
-
-@export_category("Stats")
-@export var damage: float = 150
-@export var mana_cost: float = 20
-@export var cooldown: float = 6
-var on_cooldown: bool = false
-var p_ray: RayCast3D
-var p_spawn: Node3D
-var p_forward: Vector3
-var p_spawn_pos: Vector3
-var p_rotation: float
-var chara_animations: AnimationTree
-
+@onready var dmg_area: Area3D = $dmg_area
+@onready var delay: Timer = $dmg_area/delay
 var players_on_area: Array
-var dmg_area: Area3D
-var preview: MeshInstance3D
-var delay: Timer
 var casting: bool = false
 
 func _ready():
@@ -29,11 +13,8 @@ func _ready():
 	p_forward = -p_ray.global_transform.basis.z.normalized()
 	p_spawn_pos = p_spawn.global_position
 	p_rotation = p_ray.rotation_degrees.y
-	chara_animations = chara.character_animations
-	dmg_area = $dmg_area
 	preview = $dmg_area/preview
 	preview.visible = false
-	delay = $dmg_area/delay
 	delay.timeout.connect(_on_delay_timeout)
 	dmg_area.monitoring = true
 
@@ -44,19 +25,13 @@ func _physics_process(_delta):
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
+		executionInit()
 		preview.visible = true
-		on_cooldown = true
 		casting = true
-		cd_timer.start()
-		chara.mana -= mana_cost
-		Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
+		chara.can_act = false
 		p_rotation = p_ray.rotation_degrees.y
 		chara.character_node.global_rotation_degrees.y = p_rotation
-		chara.can_act = false
-		chara.target = chara.global_position
-		chara.agent.target_position = chara.global_position
-		chara.character_node.global_rotation_degrees.y = p_rotation
-		chara_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+		chara.character_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
 	delay.start()

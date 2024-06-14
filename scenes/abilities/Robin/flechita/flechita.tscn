@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjny03d6ry4bq"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Robin/flechita/flechita.gd" id="1_wus66"]
+
+[node name="flechita" type="Node3D"]
+script = ExtResource("1_wus66")
+mana_cost = 0.0
+cooldown = 0.0
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="raycast" type="RayCast3D" parent="."]
+
+[node name="limit_mark" type="Marker3D" parent="raycast"]
+
+[node name="projectiles" type="Node3D" parent="."]

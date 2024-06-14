@@ -69,6 +69,7 @@ var initial_attack_speed = attack_speed
 
 # ========== HIDDEN STATS ========== #
 var can_act: bool = false
+var can_cast: bool = true
 var attack_cooldown: float = 0
 var attack_cooldown_offset: float = 0
 var total_attack_animations: int = 2
@@ -123,6 +124,7 @@ func _physics_process(delta):
 					if target_player == self:
 						#target_player = null
 						attack_cooldown_offset = 0
+						#character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 						# allow_movement()
 					#start_attack(target_player)
 					#if is_attacking:
@@ -131,6 +133,7 @@ func _physics_process(delta):
 							#stop_attack()
 				else:
 					#stop_attack()
+					#character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 					target_player = null
 					attack_cooldown_offset = 0
 					# allow_movement()
@@ -165,24 +168,23 @@ func _physics_process(delta):
 		
 		move_and_slide()
 		manageSpeedModifiers()
-		if not is_silenced and !is_dashing:
-			beginAbilityExecutions()
 		
-	if fixed_movement and is_multiplayer_authority():
-	#if fixed_movement:
-		if global_position.distance_to(fixed_direction) <= 0.01:
-			global_position = fixed_direction
-			target = global_position
-			updateTargetLocation(target)
-			fixed_movement = false
+	if is_multiplayer_authority():
+		if can_cast and !is_silenced and !is_dashing:
+			beginAbilityExecutions()
+		if fixed_movement:
+			if global_position.distance_to(fixed_direction) <= 0.01:
+				global_position = fixed_direction
+				target = global_position
+				updateTargetLocation(target)
+				fixed_movement = false
+				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
+			else:
+				global_position = global_position.move_toward(fixed_direction, delta*fixed_speed)
+				move_and_slide()
+				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
+		if !agent.is_navigation_finished():
 			sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
-		else:
-			global_position = global_position.move_toward(fixed_direction, delta*fixed_speed)
-			move_and_slide()
-			sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
-	
-	if !agent.is_navigation_finished() and is_multiplayer_authority():
-		sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 		
 	if Input.is_action_just_pressed("Release Camera"):
 		if locked_camera:
@@ -236,6 +238,7 @@ func screenPointToRay():
 	return Vector3()
 	
 func updateTargetLocation(_target):
+	target = _target
 	agent.target_position = _target
 	
 func moveCameraByCursor(_position: Vector2):
@@ -353,7 +356,6 @@ func endAbilityExecution(_name):
 # RPC call to begin the cast of an ability
 @rpc("call_local", "reliable")
 func beginRemoteExecution(key):
-	abort_oneshots()
 	abilities[key][1].beginExecution()
 
 # RPC call for updating the mouse position and the projectile raycast on remote
@@ -587,7 +589,7 @@ func start_attack_remote(index: int):
 
 @rpc("call_local", "reliable")
 func stop_attack():
-	is_attacking = false 
+	is_attacking = false
 
 func abort_oneshots():
 	character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)

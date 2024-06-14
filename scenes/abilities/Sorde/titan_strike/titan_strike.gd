@@ -57,6 +57,7 @@ func beginExecutionRemote(id: int):
 			target_player = player
 			break
 	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
+	chara.abort_oneshots()
 	chara.agent.navigation_layers = 0b00000010
 	on_cooldown = true
 	cd_timer.start()

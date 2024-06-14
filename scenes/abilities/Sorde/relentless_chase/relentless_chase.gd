@@ -24,6 +24,7 @@ func _ready():
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
 		Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
+		chara.abort_oneshots()
 		on_cooldown = true
 		cd_timer.start()
 		chara.mana -= mana_cost
