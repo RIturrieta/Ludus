@@ -9,7 +9,7 @@ var player_info: Statics.PlayerData = null
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var agent = $NavigationAgent3D
-var target: Vector3
+@onready var target: Vector3 = global_position
 
 @onready var camera_3d = $Path3D/PathFollow3D/Camera3D
 @onready var path_follow_3d = $Path3D/PathFollow3D
@@ -50,6 +50,8 @@ var camera_follow_speed = 0.6
 var mouse_pos: Vector3
 @onready var projectile_ray: RayCast3D = $ProjectileRay
 @onready var projectile_spawn: Node3D = $ProjectileRay/SpawnPoint
+@onready var projectile_spawn_pos: Vector3 = projectile_spawn.global_position
+@onready var projectile_forward: Vector3 = -projectile_ray.global_transform.basis.z.normalized()
 
 # ========== STATS ========== #
 @export_category("Stats")
@@ -80,6 +82,7 @@ signal defeated(character_id: int)
 
 
 func _ready():
+	updateTargetLocation(global_position)
 	label_3d.global_transform = character_node.get_node("HealthMarker").global_transform
 	character_animations = character_node.get_node("AnimationTree")
 	for key in abilities.keys():
@@ -116,7 +119,7 @@ func _physics_process(delta):
 					target.y = 0.1
 					arrows_transform.global_position = target
 					animation_player.play("move_arrows")
-				target.y = -0.5
+				target.y = 0
 				if can_move:
 					updateTargetLocation(target)
 				if is_target_player(target):
@@ -159,6 +162,10 @@ func _physics_process(delta):
 				velocity = new_velocity
 			elif !agent.is_navigation_finished() and !can_move: #!!!!
 				agent.target_position = global_transform.origin
+			elif agent.is_navigation_finished():
+				velocity = Vector3(0.0, 0.0, 0.0)
+				global_position = lerp(global_position, agent.get_final_position(), 0.3)
+				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 			else:
 				velocity = Vector3(0.0, 0.0, 0.0)
 				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
@@ -168,23 +175,22 @@ func _physics_process(delta):
 		
 		move_and_slide()
 		manageSpeedModifiers()
-		
+	
 	if is_multiplayer_authority():
 		if can_cast and !is_silenced and !is_dashing:
 			beginAbilityExecutions()
 		if fixed_movement:
-			if global_position.distance_to(fixed_direction) <= 0.01:
-				global_position = fixed_direction
-				target = global_position
+			velocity = Vector3(0,0,0)
+			updateTargetLocation(global_position)
+			if global_position.distance_to(fixed_direction) <= 1.5:
+				global_position = lerp(global_position, fixed_direction, 0.3)
 				updateTargetLocation(target)
 				fixed_movement = false
-				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
+				fixedMovement.rpc(fixed_direction, fixed_speed, fixed_movement)
 			else:
 				global_position = global_position.move_toward(fixed_direction, delta*fixed_speed)
 				move_and_slide()
-				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
-		if !agent.is_navigation_finished():
-			sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
+		sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 		
 	if Input.is_action_just_pressed("Release Camera"):
 		if locked_camera:
@@ -238,8 +244,8 @@ func screenPointToRay():
 	return Vector3()
 	
 func updateTargetLocation(_target):
-	target = _target
 	agent.target_position = _target
+	target = agent.get_final_position()
 	
 func moveCameraByCursor(_position: Vector2):
 	if !locked_camera:
@@ -258,21 +264,29 @@ func moveCameraByCursor(_position: Vector2):
 		path_3d.global_position += Vector3(dir.x, 0.0, dir.y)
 
 # Moves the character to a certain point without using the navigation agent
-func fixedMovementTowards(direction: Vector3, speed: float):
-	fixed_movement = true
-	target = global_position
+@rpc("any_peer", "call_local")
+func fixedMovement(direction: Vector3, speed: float, fixing: bool = true):
+	updateTargetLocation(global_position)
+	target_player = null
 	fixed_direction = direction
 	fixed_direction.y = 0
 	fixed_speed = speed
+	fixed_movement = fixing
 
 func takeAttackDamage(damage: float):
 	var total_damage = damage * (1 - physical_armor/100)
-	hp -= total_damage
+	if hp - total_damage <= 0:
+		hp = 0
+	else:
+		hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 
 func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
-	hp -= total_damage
+	if hp - total_damage <= 0:
+		hp = 0
+	else:
+		hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 	
 func heal(points: float):
@@ -364,6 +378,8 @@ func updateMousePos(pos: Vector3):
 	mouse_pos = pos
 	projectile_ray.look_at(mouse_pos, Vector3.UP)
 	projectile_ray.global_rotation.x = 0
+	projectile_spawn_pos = projectile_spawn.global_position
+	projectile_forward = -projectile_ray.global_transform.basis.z.normalized()
 
 # ========== EFFECTS ========== #
 
@@ -554,6 +570,7 @@ func attack_hit():
 	if is_multiplayer_authority():
 		if target_player:
 			can_move = false
+			character_node.look_at(target_player.global_position, Vector3.UP)
 			attack_cooldown = attack_cooldown_offset
 			attack_animation_index = (attack_animation_index + 1) % total_attack_animations
 			attack_damage_remote.rpc(target_player.player_info.id)

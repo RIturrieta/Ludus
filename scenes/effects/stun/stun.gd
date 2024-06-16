@@ -13,6 +13,7 @@ func _ready():
 	timer.timeout.connect(onTimeout)
 	timer.start(duration)
 	chara.can_act = false
+	chara.updateTargetLocation(chara.global_position)
 
 func stop():
 	timer.stop()

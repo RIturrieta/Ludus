@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp2n5w6y0af03"]
+[gd_scene load_steps=2 format=3 uid="uid://cteih8an7io2y"]
 
-[ext_resource type="Script" path="res://scenes/abilities/No Character/base_ability/base_ability.gd" id="1_vql10"]
+[ext_resource type="Script" path="res://scenes/abilities/No Character/base_ability/base_ability.gd" id="1_43v5d"]
 
 [node name="base_ability" type="Node3D"]
-script = ExtResource("1_vql10")
+script = ExtResource("1_43v5d")
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true

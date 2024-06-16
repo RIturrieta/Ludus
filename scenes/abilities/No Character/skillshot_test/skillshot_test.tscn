@@ -9,3 +9,5 @@ script = ExtResource("1_2uxhn")
 one_shot = true
 
 [node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="projectiles" type="Node3D" parent="."]

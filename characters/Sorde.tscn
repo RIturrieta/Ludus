@@ -1,7 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://dusubx1tn21bq"]
+[gd_scene load_steps=17 format=3 uid="uid://dusubx1tn21bq"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_3ek4m"]
 [ext_resource type="PackedScene" uid="uid://d15hwn8teia0u" path="res://characters/Imported/char_3.tscn" id="2_dme4m"]
+[ext_resource type="Animation" uid="uid://cf126gjd71o47" path="res://animations/char3/default.res" id="3_fu338"]
+[ext_resource type="Animation" uid="uid://ckhgbyt15g0h1" path="res://animations/char3/atk1.res" id="4_aok28"]
+[ext_resource type="Animation" uid="uid://2nsymjh4mfxa" path="res://animations/char3/atk2.res" id="5_sqbar"]
+[ext_resource type="Animation" uid="uid://5hx0n53844ni" path="res://animations/char3/channeling.res" id="6_0mh2j"]
+[ext_resource type="Animation" uid="uid://bkgrwlpdq6pjw" path="res://animations/char3/e.res" id="7_x7xi4"]
+[ext_resource type="Animation" uid="uid://b6gpemu0tysnx" path="res://animations/char3/idle.res" id="8_j542x"]
+[ext_resource type="Animation" uid="uid://ijk178mqsn0d" path="res://animations/char3/q.res" id="9_44m3r"]
+[ext_resource type="Animation" uid="uid://dolxvorkximrv" path="res://animations/char3/r1.res" id="10_luktd"]
+[ext_resource type="Animation" uid="uid://48qg1yehfpdr" path="res://animations/char3/r2.res" id="11_6tcuy"]
+[ext_resource type="Animation" uid="uid://dc6vsmgwwslv6" path="res://animations/char3/w1.res" id="12_orxyp"]
+[ext_resource type="Animation" uid="uid://ce2o412y2ubcc" path="res://animations/char3/w2.res" id="13_u35jo"]
+[ext_resource type="Animation" uid="uid://dccnw72t6qp8q" path="res://animations/char3/walk.res" id="14_v4tby"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tib7k"]
+_data = {
+"APose": ExtResource("3_fu338"),
+"BasicAttack1": ExtResource("4_aok28"),
+"BasicAttack2": ExtResource("5_sqbar"),
+"Channeling": ExtResource("6_0mh2j"),
+"E": ExtResource("7_x7xi4"),
+"Idle": ExtResource("8_j542x"),
+"Q": ExtResource("9_44m3r"),
+"R1": ExtResource("10_luktd"),
+"R2": ExtResource("11_6tcuy"),
+"W1": ExtResource("12_orxyp"),
+"W2": ExtResource("13_u35jo"),
+"Walk": ExtResource("14_v4tby")
+}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jw44a"]
 height = 0.5
@@ -16,7 +44,7 @@ attack_speed = 1.166
 attack_range = 2.5
 select_radius = 2.5
 abilities = {
-"1": "",
+"1": "titan_strike",
 "2": "",
 "3": "",
 "4": "",
@@ -29,20 +57,29 @@ abilities = {
 [node name="char3" parent="BaseCharacter" instance=ExtResource("2_dme4m")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char3/Armature" index="0"]
-bones/0/position = Vector3(2.35962e-24, -0.287821, 0.0606226)
-bones/0/rotation = Quaternion(-0.0750155, -1.85947e-25, 1.9875e-17, 0.997182)
-bones/4/rotation = Quaternion(0.0276865, 4.86192e-26, -8.98797e-18, 0.999617)
-bones/7/rotation = Quaternion(-0.561564, -0.202406, 0.574634, 0.559887)
-bones/8/rotation = Quaternion(-0.0161779, -0.243963, 0.0963751, 0.964848)
-bones/11/rotation = Quaternion(0.048463, -0.0505155, -0.649067, 0.757504)
-bones/12/rotation = Quaternion(-0.775935, 0.0690221, -0.232335, 0.582392)
+bones/0/position = Vector3(7.6268e-17, -0.334149, 0.0473859)
+bones/0/rotation = Quaternion(-0.0781796, -3.67804e-27, 1.46627e-17, 0.996939)
+bones/3/rotation = Quaternion(0.0334057, -7.75915e-26, -7.41755e-18, 0.999442)
+bones/4/rotation = Quaternion(0.0304761, 1.14334e-19, -8.98842e-18, 0.999536)
+bones/5/rotation = Quaternion(-0.0559237, -0.00774747, 0.817648, 0.572944)
+bones/6/rotation = Quaternion(-0.322284, 0.0325463, -0.0748588, 0.943117)
+bones/7/rotation = Quaternion(-0.548531, -0.204121, 0.589382, 0.556845)
+bones/8/rotation = Quaternion(-0.0189567, -0.248838, 0.100138, 0.963168)
+bones/9/rotation = Quaternion(0.0784404, -0.0848469, -0.826228, 0.551358)
+bones/10/rotation = Quaternion(-0.135111, 0.000375008, 0.101722, 0.985595)
+bones/11/rotation = Quaternion(0.0607899, -0.0604399, -0.648791, 0.756123)
+bones/12/rotation = Quaternion(-0.778449, 0.0677669, -0.232592, 0.579074)
+bones/13/rotation = Quaternion(-0.855007, -0.203261, -0.153497, 0.451761)
+bones/14/position = Vector3(-1.7, -5.3783, -1.88881)
+bones/15/position = Vector3(1.7, -5.3783, 3.11119)
+bones/15/rotation = Quaternion(-0.665574, -0.23877, -0.23877, 0.665574)
 
 [node name="Head" parent="BaseCharacter/char3/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -6.96012e-18, 5.90383e-20, 6.95575e-18, 0.999609, 0.0279646, -2.53652e-19, -0.0279646, 0.999609, -1.88458e-16, 4.863, -0.637713)
+transform = Transform3D(1, 3.45506e-18, -2.65488e-19, -3.44601e-18, 0.999587, 0.0287296, 3.64641e-19, -0.0287296, 0.999587, -5.8071e-17, 4.81213, -0.683627)
 
 [node name="Band1" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="0"]
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933971)
+attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933972)
 attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
 attachments/2/offset = Vector3(0.0340999, 2.17342, 0.934217)
 attachments/3/offset = Vector3(0.357379, 2.16943, 0.888214)
@@ -55,7 +92,12 @@ attachments/2/offset = Vector3(-0.266572, 2.26296, 0.938829)
 attachments/3/offset = Vector3(0.0566726, 2.25885, 0.98506)
 
 [node name="BoneAttachment3D" parent="BaseCharacter/char3/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -2.49218e-17, -8.23997e-19, 2.49039e-17, 0.996529, 0.0832518, -1.25365e-18, -0.0832518, 0.996529, -1.58552e-16, 3.66716, -0.537811)
+transform = Transform3D(1, -1.44967e-17, -8.30926e-19, 1.45129e-17, 0.99598, 0.0895749, -4.70956e-19, -0.0895749, 0.99598, -4.06749e-17, 3.61696, -0.576137)
+
+[node name="AnimationTree" parent="BaseCharacter/char3" index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_tib7k")
+}
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

@@ -1,27 +1,11 @@
-extends Node
-
-@onready var chara: BaseCharacter = get_parent().get_parent()
-@onready var cd_timer: Timer = $cd_timer
-@onready var preview: MeshInstance3D = $preview
-
-@export_category("Stats")
-@export var damage: float = 150
-@export var mana_cost: float = 20
-@export var cooldown: float = 6
-
-var on_cooldown: bool = false
+extends Ability
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
-	cd_timer.wait_time = cooldown
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
-		Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
-		chara.abort_oneshots()
-		on_cooldown = true
-		cd_timer.start()
-		chara.mana -= mana_cost
+		baseExecutionBegining()
 		chara.can_act = false
 		chara.character_animations.set("parameters/R2Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 

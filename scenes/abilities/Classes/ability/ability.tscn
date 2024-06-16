@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp2n5w6y0af03"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Classes/ability/ability.gd" id="1_vql10"]
+
+[node name="ability" type="Node3D"]
+script = ExtResource("1_vql10")
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="preview" type="MeshInstance3D" parent="."]

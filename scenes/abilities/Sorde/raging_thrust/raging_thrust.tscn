@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cccahmp71328d"]
+[gd_scene load_steps=8 format=3 uid="uid://cccahmp71328d"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Sorde/raging_thrust/raging_thrust.gd" id="1_6hcqr"]
+[ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_fa0pj"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i70eq"]
 height = 0.5
@@ -9,15 +10,23 @@ height = 0.5
 radius = 0.1
 height = 0.2
 
+[sub_resource type="BoxMesh" id="BoxMesh_7rjek"]
+material = ExtResource("2_fa0pj")
+size = Vector3(1, 0.01, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_cgcc4"]
+material = ExtResource("2_fa0pj")
+height = 0.01
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a1ehk"]
 height = 0.5
 radius = 1.0
 
 [node name="raging_thrust" type="Node3D"]
 script = ExtResource("1_6hcqr")
+dash_distance = 12.0
 damage = 270.0
 cooldown = 14.0
-dash_distance = 12.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true
@@ -49,11 +58,17 @@ mesh = SubResource("SphereMesh_kr5j8")
 visible = false
 mesh = SubResource("SphereMesh_kr5j8")
 
+[node name="preview" type="MeshInstance3D" parent="S1"]
+mesh = SubResource("BoxMesh_7rjek")
+skeleton = NodePath("../..")
+
+[node name="final_pos" type="MeshInstance3D" parent="S1/preview"]
+top_level = true
+mesh = SubResource("CylinderMesh_cgcc4")
+
 [node name="impact_area" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
 [node name="area_shape" type="CollisionShape3D" parent="impact_area"]
 shape = SubResource("CylinderShape3D_a1ehk")
-
-[node name="preview" type="MeshInstance3D" parent="."]

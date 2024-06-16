@@ -7,30 +7,23 @@ var casting: bool = false
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
-	cd_timer.wait_time = cooldown
-	p_ray = chara.projectile_ray
-	p_spawn = chara.projectile_spawn
-	p_forward = -p_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = p_spawn.global_position
-	p_rotation = p_ray.rotation_degrees.y
+	delay.timeout.connect(_on_delay_timeout)
 	preview = $dmg_area/preview
 	preview.visible = false
-	delay.timeout.connect(_on_delay_timeout)
 	dmg_area.monitoring = true
 
 func _physics_process(_delta):
 	if not casting:
-		p_rotation = p_ray.rotation_degrees.y
-		dmg_area.global_rotation_degrees.y = p_rotation
+		dmg_area.global_rotation.y = chara.projectile_ray.global_rotation.y
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
-		executionInit()
+		baseExecutionBegining()
+		chara.target_player = null
 		preview.visible = true
 		casting = true
 		chara.can_act = false
-		p_rotation = p_ray.rotation_degrees.y
-		chara.character_node.global_rotation_degrees.y = p_rotation
+		chara.character_node.global_rotation.y = chara.projectile_ray.global_rotation.y
 		chara.character_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():

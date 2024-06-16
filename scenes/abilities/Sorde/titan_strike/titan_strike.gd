@@ -1,23 +1,6 @@
-extends Node
-
-@onready var chara: CharacterBody3D = get_parent().get_parent()
-@onready var cd_timer: Timer = $cd_timer
-@onready var preview: MeshInstance3D = $preview
-
-@export_category("Stats")
-@export var damage: float = 150
-@export var mana_cost: float = 20
-@export var cooldown: float = 6
+extends Ability
 
 var range: float = 8
-
-var on_cooldown: bool = false
-
-var p_ray: RayCast3D
-var p_spawn: Node3D
-var p_forward: Vector3
-var p_spawn_pos: Vector3
-var p_rotation: float
 
 var target_player: BaseCharacter
 
@@ -25,12 +8,6 @@ var jumping: bool = false
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
-	cd_timer.wait_time = cooldown
-	p_ray = chara.projectile_ray
-	p_spawn = chara.projectile_spawn
-	p_forward = -p_ray.global_transform.basis.z.normalized()
-	p_spawn_pos = p_spawn.global_position
-	p_rotation = p_ray.rotation_degrees.y
 
 func _physics_process(delta):
 	if jumping:
@@ -38,9 +15,8 @@ func _physics_process(delta):
 
 func beginExecution():
 	if chara.is_multiplayer_authority():
-		var mouse_pos = chara.screenPointToRay()
-		if chara.is_target_player(mouse_pos):
-			target_player = chara.get_target_player(mouse_pos)
+		if chara.is_target_player(chara.mouse_pos):
+			target_player = chara.get_target_player(chara.mouse_pos)
 			if chara.global_position.distance_to(target_player.global_position) < range:
 				if target_player != chara and not on_cooldown and chara.mana >= mana_cost:
 					#Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
@@ -56,12 +32,8 @@ func beginExecutionRemote(id: int):
 		if player.player_info.id == id:
 			target_player = player
 			break
-	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
-	chara.abort_oneshots()
+	baseExecutionBegining()
 	chara.agent.navigation_layers = 0b00000010
-	on_cooldown = true
-	cd_timer.start()
-	chara.mana -= mana_cost
 	chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():

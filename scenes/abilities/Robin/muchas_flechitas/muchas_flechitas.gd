@@ -1,36 +1,15 @@
-extends Node
+extends Ability
 
-@onready var chara: BaseCharacter = get_parent().get_parent()
-@onready var cd_timer: Timer = $cd_timer
-@onready var preview: MeshInstance3D = $preview
-
-@export_category("Stats")
-@export var damage: float = 150
-@export var mana_cost: float = 20
-@export var cooldown: float = 6
 @export var radius: float = 1
 
 @onready var area_range: Area3D = $area_range
 @onready var area_mouse: Area3D = $area_mouse
 @onready var collision: CollisionShape3D = $area_range/collision
-var chara_animations: AnimationTree
 var affected_player: BaseCharacter
-
-var on_cooldown: bool = false
-
-var p_ray: RayCast3D
-var p_spawn: Node3D
-var p_forward: Vector3
-var p_spawn_pos: Vector3
-var p_rotation: float
 
 func _ready():
 	cd_timer.timeout.connect(_on_cd_timeout)
-	cd_timer.wait_time = cooldown
-	p_ray = chara.projectile_ray
-	p_spawn = chara.projectile_spawn
 	collision.shape.radius = radius
-	chara_animations = chara.character_animations
 	
 func _physics_process(_delta):
 	area_mouse.global_position = chara.mouse_pos
@@ -47,12 +26,8 @@ func beginExecution():
 						min_distance = distance
 						affected_player = player
 			if affected_player != chara and affected_player != null:
-				Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
-				chara.abort_oneshots()
-				on_cooldown = true
-				cd_timer.start()
-				chara.mana -= mana_cost
-				chara_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+				baseExecutionBegining()
+				chara.character_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		else:
 			affected_player = null
 			

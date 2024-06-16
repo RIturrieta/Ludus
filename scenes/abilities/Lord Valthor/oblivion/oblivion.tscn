@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsovn23daqi30"]
+[gd_scene load_steps=11 format=3 uid="uid://bsovn23daqi30"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Lord Valthor/oblivion/oblivion.gd" id="1_f0s4o"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_8dru8"]
@@ -21,14 +21,28 @@ height = 0.01
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yxwpt"]
 resource_local_to_scene = true
-height = 0.5
+height = 4.0
 radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hdc0s"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5a4ft"]
+material = SubResource("StandardMaterial3D_hdc0s")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_i1pb2"]
+material = SubResource("StandardMaterial3D_hdc0s")
+radius = 0.1
+height = 0.2
 
 [node name="oblivion" type="Node3D"]
 script = ExtResource("1_f0s4o")
-damage = 270.0
-cooldown = 8.0
 dash_distance = 5.5
+damage = 270.0
+mana_cost = 15.0
+cooldown = 9.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true
@@ -71,5 +85,14 @@ mesh = SubResource("CylinderMesh_ahe7l")
 [node name="S3" type="ShapeCast3D" parent="."]
 shape = SubResource("CylinderShape3D_yxwpt")
 target_position = Vector3(0, 0, 0)
+max_results = 3
 collision_mask = 2
 debug_shape_custom_color = Color(1, 0.486275, 1, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+top_level = true
+mesh = SubResource("SphereMesh_5a4ft")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+top_level = true
+mesh = SubResource("SphereMesh_i1pb2")
