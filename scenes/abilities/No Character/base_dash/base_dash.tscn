@@ -20,6 +20,8 @@ height = 0.01
 
 [node name="base_dash" type="Node3D"]
 script = ExtResource("1_xc74s")
+dash_distance = 3.0
+preview_path = NodePath("S1/preview")
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true

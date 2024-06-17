@@ -8,7 +8,7 @@ var chasing: bool = false
 var index
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 	duration_timer.timeout.connect(_on_duration_timeout)
 	duration_timer.wait_time = duration
 

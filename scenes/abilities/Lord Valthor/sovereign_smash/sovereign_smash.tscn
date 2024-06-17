@@ -12,6 +12,7 @@ size = Vector3(2, 0.025, 7)
 
 [node name="sovereign_smash" type="Node3D"]
 script = ExtResource("1_khasx")
+preview_path = NodePath("dmg_area/preview")
 damage = 600.0
 
 [node name="cd_timer" type="Timer" parent="."]

@@ -192,6 +192,13 @@ func _physics_process(delta):
 				move_and_slide()
 		sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 		
+		## cooldowns debug
+		#var pp = "|"
+		#for key in abilities.keys():
+			#if key in ["Q", "W", "E", "R"]:
+				#pp += abilities[key][0] + ": " + str(snapped(abilities[key][1].cd_timer.time_left, 0.1)) + "| "
+		#Debug.sprint(pp)
+		
 	if Input.is_action_just_pressed("Release Camera"):
 		if locked_camera:
 			locked_camera = false
@@ -304,10 +311,10 @@ func heal(points: float):
 # array containing the name of the ability on [0] and it's node on [1].
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
-	"Q": "savage_cleave",
+	"Q": "",
 	"W": "",
-	"E": "raging_thrust",
-	"R": "titan_strike",
+	"E": "",
+	"R": "",
 	"1": "",
 	"2": "", 
 	"3": "",
@@ -346,10 +353,10 @@ func beginAbilityExecutions():
 			if Input.is_action_just_pressed(key):
 				abilities[key][1].preview.visible = true
 			if Input.is_action_just_released(key):
-				abilities[key][1].preview.visible = false
 				beginRemoteExecution.rpc(key)
-		else:
+		elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
 			abilities[key][1].preview.visible = false
+		else:
 			if Input.is_action_just_pressed(key) and is_multiplayer_authority():
 				beginRemoteExecution.rpc(key)
 

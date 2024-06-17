@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://u781vgdy0mam"]
 
-[ext_resource type="Script" path="res://scenes/abilities/No Character/skillshot_test/projectile.gd" id="1_bqtxo"]
+[ext_resource type="Script" path="res://scenes/abilities/Robin/flechita/projectile.gd" id="1_k7kka"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_asfvw"]
 size = Vector3(0.5, 3, 0.5)
@@ -14,7 +14,8 @@ height = 0.5
 top_level = true
 collision_layer = 0
 collision_mask = 6
-script = ExtResource("1_bqtxo")
+script = ExtResource("1_k7kka")
+speed = 15
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_asfvw")

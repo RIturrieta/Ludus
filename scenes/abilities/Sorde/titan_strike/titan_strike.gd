@@ -1,13 +1,11 @@
 extends Ability
 
 var range: float = 8
-
 var target_player: BaseCharacter
-
 var jumping: bool = false
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 
 func _physics_process(delta):
 	if jumping:

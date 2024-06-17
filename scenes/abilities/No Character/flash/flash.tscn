@@ -21,6 +21,7 @@ height = 0.01
 [node name="flash" type="Node3D"]
 script = ExtResource("1_yg5p5")
 dash_distance = 10.0
+preview_path = NodePath("S1/preview")
 damage = 0.0
 mana_cost = 0.0
 cooldown = 0.0

@@ -12,26 +12,26 @@ radius = 1.0
 
 [node name="tyrant\'s_decree" type="Node3D"]
 script = ExtResource("1_5ei80")
+radius = 6.0
 damage = 0.0
 mana_cost = 1.0
 cooldown = 12.0
-radius = 6.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="area_range" type="Area3D" parent="."]
+[node name="range_area" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="collision" type="CollisionShape3D" parent="area_range"]
+[node name="collision" type="CollisionShape3D" parent="range_area"]
 shape = SubResource("CylinderShape3D_2peub")
 
-[node name="area_mouse" type="Area3D" parent="."]
+[node name="mouse_area" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="collision" type="CollisionShape3D" parent="area_mouse"]
+[node name="collision" type="CollisionShape3D" parent="mouse_area"]
 shape = SubResource("CylinderShape3D_gcdyx")
 
 [node name="preview" type="MeshInstance3D" parent="."]

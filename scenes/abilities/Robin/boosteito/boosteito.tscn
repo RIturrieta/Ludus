@@ -4,6 +4,9 @@
 
 [node name="boosteito" type="Node3D"]
 script = ExtResource("1_0hffu")
+damage = 0.0
+mana_cost = 15.0
+cooldown = 7.5
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true

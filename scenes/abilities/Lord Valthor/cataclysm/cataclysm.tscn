@@ -32,6 +32,7 @@ radius = 2.5
 [node name="cataclysm" type="Node3D"]
 script = ExtResource("1_puu1i")
 dash_distance = 7.0
+preview_path = NodePath("S1/preview")
 damage = 400.0
 cooldown = 60.0
 

@@ -1,6 +1,6 @@
 extends Area3D
 
-var speed: int = 14
+@export var speed: int = 14
 var ray: RayCast3D
 var forward_dir: Vector3 = Vector3(0,0,0)
 #@onready var forward_dir = -ray.global_transform.basis.z.normalized()

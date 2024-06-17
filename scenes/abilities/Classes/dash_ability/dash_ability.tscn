@@ -20,6 +20,7 @@ height = 0.01
 
 [node name="dash_ability" type="Node3D"]
 script = ExtResource("1_xc74s")
+preview_path = NodePath("S1/preview")
 mana_cost = 0.0
 cooldown = 0.0
 

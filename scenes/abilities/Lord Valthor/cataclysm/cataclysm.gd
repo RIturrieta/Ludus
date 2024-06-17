@@ -11,7 +11,7 @@ func _ready():
 	dmg_timer.timeout.connect(dealDamage)
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not dashing:
 		dashCalculation()
 

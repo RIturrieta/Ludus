@@ -24,6 +24,3 @@ func execute():
 
 func endExecution():
 	super()
-
-func _on_cd_timeout():
-	on_cooldown = false

@@ -10,7 +10,7 @@ var limit: Vector3
 var p_scene = load("res://scenes/abilities/Robin/flechita/projectile.tscn")
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 	raycast.global_rotation = chara.projectile_ray.global_rotation
 	raycast.target_position = chara.projectile_ray.target_position.normalized() * radius
 	limit_mark.position = raycast.target_position

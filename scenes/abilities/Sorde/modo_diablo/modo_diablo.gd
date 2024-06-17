@@ -1,7 +1,7 @@
 extends Ability
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:

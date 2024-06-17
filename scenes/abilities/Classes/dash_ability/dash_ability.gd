@@ -15,12 +15,11 @@ class_name DashAbility
 var dashing: bool = false
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 	s1.target_position.z = -dash_distance
 	s2.position.z = s1.target_position.z - 2
 	target.position = s1.target_position
 	original_target.position = s1.target_position
-	preview = $S1/preview
 	
 func dashCalculation():
 	s1.rotation.y = chara.projectile_ray.rotation.y
@@ -50,8 +49,8 @@ func dashCalculation():
 	else:
 		target.position = s1.target_position
 	target.global_position.y = 0
-	
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	if not dashing:
 		dashCalculation()
 

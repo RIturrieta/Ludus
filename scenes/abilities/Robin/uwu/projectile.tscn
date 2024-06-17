@@ -1,20 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw1x5p01eip2t"]
+[gd_scene load_steps=4 format=3 uid="uid://bta5x2yx2xw4v"]
 
-[ext_resource type="Script" path="res://scenes/abilities/No Character/skillshot_test/projectile.gd" id="1_fbjlv"]
+[ext_resource type="Script" path="res://scenes/abilities/Robin/uwu/projectile.gd" id="1_hjj0q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_asfvw"]
-size = Vector3(0.25, 1, 1)
+size = Vector3(1, 3, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dbfn8"]
-top_radius = 0.025
-bottom_radius = 0.025
+top_radius = 0.05
+bottom_radius = 0.05
 height = 1.0
 
-[node name="Projectile" type="RigidBody3D"]
+[node name="Projectile" type="Area3D"]
+top_level = true
 collision_layer = 0
-collision_mask = 0
-gravity_scale = 0.0
-script = ExtResource("1_fbjlv")
+collision_mask = 2
+script = ExtResource("1_hjj0q")
+speed = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_asfvw")

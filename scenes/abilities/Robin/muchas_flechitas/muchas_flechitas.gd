@@ -1,46 +1,64 @@
 extends Ability
 
-@export var radius: float = 1
-
-@onready var area_range: Area3D = $area_range
-@onready var area_mouse: Area3D = $area_mouse
-@onready var collision: CollisionShape3D = $area_range/collision
-var affected_player: BaseCharacter
+@export var range_radius: float = 1
+@export var area_radius: float = 7
+@export var pulse_delay: int = 30
+@export var rain_duration: float = 7
+@onready var rain_timer: Timer = $rain_timer
+@onready var range_area: Area3D = $range_area
+@onready var mouse_area: Area3D = $mouse_area
+@onready var range_collision: CollisionShape3D = $range_area/collision
+@onready var area_collision: CollisionShape3D = $mouse_area/collision
+var casting: bool = false
+var raining: bool = false
+var pulse_frames: int = 0
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
-	collision.shape.radius = radius
+	preview = $mouse_area/preview
+	preview.mesh.top_radius = area_radius
+	preview.mesh.bottom_radius = area_radius
+	super()
+	rain_timer.timeout.connect(_on_rain_timeout)
+	range_collision.shape.radius = range_radius
+	area_collision.shape.radius = area_radius
 	
-func _physics_process(_delta):
-	area_mouse.global_position = chara.mouse_pos
+func _physics_process(delta):
+	if not (casting or raining):
+		if chara.mouse_pos.distance_to(chara.global_position) >= range_radius:
+			var intersection_array = Geometry3D.segment_intersects_sphere(chara.mouse_pos, chara.global_position, chara.global_position, range_radius)
+			if len(intersection_array) > 0:
+				mouse_area.global_position = intersection_array[0]
+		else:
+			mouse_area.global_position = chara.mouse_pos
+	elif raining:
+		pulse_frames += 1
+		if pulse_frames == pulse_delay:
+			pulse_frames = 0
+			for player: BaseCharacter in mouse_area.get_overlapping_bodies():
+				if player.get_parent() != chara.get_parent():
+					player.takeAbilityDamage(damage, chara.spell_power)
 
 func beginExecution():
 	if not on_cooldown and chara.mana >= mana_cost:
-		if area_mouse.has_overlapping_bodies() and area_range.has_overlapping_bodies():
-			var min_distance: float = 999999
-			var distance: float = 0
-			for player in area_mouse.get_overlapping_bodies():
-				if player.get_parent() != chara.get_parent() and player in area_range.get_overlapping_bodies():
-					distance = player.global_position.distance_to(chara.global_position)
-					if distance <= min_distance:
-						min_distance = distance
-						affected_player = player
-			if affected_player != chara and affected_player != null:
-				baseExecutionBegining()
-				chara.character_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		else:
-			affected_player = null
-			
+		baseExecutionBegining()
+		chara.can_act = false
+		casting = true
+		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	if affected_player == null:
-		Debug.sprint("no players affected")
-	else:
-		Debug.sprint("Affected player: " + affected_player.get_parent().name)
-		affected_player.stun(1.25)
+	chara.can_act = true
 
 func endExecution():
-	affected_player = null
+	casting = false
+	raining = true
+	rain_timer.start(rain_duration)
+	preview.visible = true
+	chara.can_act = true
+
+func _on_rain_timeout():
+	raining = false
+	pulse_frames = 0
+	preview.visible = false
 
 func _on_cd_timeout():
 	on_cooldown = false

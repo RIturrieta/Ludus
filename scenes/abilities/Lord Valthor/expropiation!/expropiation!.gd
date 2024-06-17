@@ -10,7 +10,7 @@ var og_spell_armor: float
 var og_physical_armor: float
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 	collision.shape.radius = radius
 
 func beginExecution():

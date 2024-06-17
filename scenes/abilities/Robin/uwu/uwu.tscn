@@ -1,11 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcckhuuaikjqt"]
+[gd_scene load_steps=2 format=3 uid="uid://btcqddqrm7dgf"]
 
-[ext_resource type="Script" path="res://scenes/abilities/Robin/uwu/uwu.gd" id="1_jwu3f"]
+[ext_resource type="Script" path="res://scenes/abilities/Robin/uwu/uwu.gd" id="1_dny6l"]
 
 [node name="uwu" type="Node3D"]
-script = ExtResource("1_jwu3f")
+script = ExtResource("1_dny6l")
+radius = 999.0
+cooldown = 0.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="raycast" type="RayCast3D" parent="."]
+enabled = false
+collision_mask = 0
+
+[node name="limit_mark" type="Marker3D" parent="raycast"]
+
+[node name="projectiles" type="Node3D" parent="."]

@@ -5,12 +5,10 @@ var casting: bool = false
 var dmg_area: Area3D
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
-	dmg_area = $dmg_area
-	preview = $dmg_area/preview
-	preview.visible = false
+	super()
 	# delay = $dmg_area/delay
 	# delay.timeout.connect(_on_delay_timeout)
+	dmg_area = $dmg_area
 	dmg_area.monitoring = true
 
 func beginExecution():

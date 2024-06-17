@@ -25,6 +25,7 @@ radius = 1.0
 [node name="raging_thrust" type="Node3D"]
 script = ExtResource("1_6hcqr")
 dash_distance = 12.0
+preview_path = NodePath("S1/preview")
 damage = 270.0
 cooldown = 14.0
 

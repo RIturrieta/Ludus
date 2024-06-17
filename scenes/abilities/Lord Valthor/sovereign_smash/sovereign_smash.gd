@@ -6,10 +6,8 @@ var players_on_area: Array
 var casting: bool = false
 
 func _ready():
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 	delay.timeout.connect(_on_delay_timeout)
-	preview = $dmg_area/preview
-	preview.visible = false
 	dmg_area.monitoring = true
 
 func _physics_process(_delta):
