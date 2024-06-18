@@ -74,7 +74,8 @@ var can_act: bool = false
 var can_cast: bool = true
 var attack_cooldown: float = 0
 var attack_cooldown_offset: float = 0
-var total_attack_animations: int = 2
+@export var total_attack_animations: int = 2
+@export var attack_duration: float = 1
 var attack_animation_index: int = 0
 var attack_ended: bool = true
 
@@ -85,6 +86,8 @@ func _ready():
 	updateTargetLocation(global_position)
 	label_3d.global_transform = character_node.get_node("HealthMarker").global_transform
 	character_animations = character_node.get_node("AnimationTree")
+	for i in range(total_attack_animations):
+		character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", attack_speed)
 	for key in abilities.keys():
 		loadAbility(key)
 	
@@ -135,8 +138,8 @@ func _physics_process(delta):
 						#if Input.is_action_just_pressed("Move"):
 							#stop_attack()
 				else:
-					#stop_attack()
-					#character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+					stop_attack()
+					character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 					target_player = null
 					attack_cooldown_offset = 0
 					# allow_movement()
@@ -155,12 +158,12 @@ func _physics_process(delta):
 				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 			#if !agent.is_navigation_finished():
 			# if position.distance_to(target) > 0.5:
-			if !agent.is_navigation_finished() and (can_move or is_dashing): #!!!!!
+			if !agent.is_navigation_finished() and (can_move or is_dashing):
 				var current_position = global_transform.origin
 				var target_position = agent.get_next_path_position()
 				var new_velocity = (target_position - current_position).normalized() * SPEED * move_speed / 100
 				velocity = new_velocity
-			elif !agent.is_navigation_finished() and !can_move: #!!!!
+			elif !agent.is_navigation_finished() and !can_move:
 				agent.target_position = global_transform.origin
 			elif agent.is_navigation_finished():
 				velocity = Vector3(0.0, 0.0, 0.0)
@@ -598,7 +601,8 @@ func attack_damage_remote(id: int):
 				target_player = null
 
 func start_attack_offset():
-	attack_cooldown_offset = 1 / attack_speed
+	attack_cooldown_offset = attack_duration / attack_speed
+	Debug.sprint(attack_cooldown_offset)
 
 func start_attack():
 	is_attacking = true
@@ -614,7 +618,7 @@ func start_attack_remote(index: int):
 @rpc("call_local", "reliable")
 func stop_attack():
 	is_attacking = false
-
+	
 func abort_oneshots():
 	character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	attack_cooldown_offset = 0

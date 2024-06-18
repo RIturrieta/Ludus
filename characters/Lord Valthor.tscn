@@ -12,9 +12,9 @@ height = 0.5
 character_node = NodePath("char1v2")
 hp = 3000.0
 attack_damage = 170.0
-attack_speed = 0.857
 attack_range = 3.0
 select_radius = 2.5
+attack_duration = 1.167
 abilities = {
 "1": "cataclysm",
 "2": "",
@@ -32,16 +32,16 @@ abilities = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(1.45331e-05, 1.30209, -0.00627538)
-bones/0/rotation = Quaternion(-0.0262471, 0.704344, -0.02187, 0.709036)
-bones/1/rotation = Quaternion(4.04634e-05, -7.20198e-05, 0.135401, 0.990791)
-bones/4/position = Vector3(0.0352255, 0.361249, -0.452894)
-bones/4/rotation = Quaternion(-0.723203, -0.139667, -0.00873167, 0.676309)
-bones/5/rotation = Quaternion(0.000203856, -1.07229e-05, -0.308211, 0.951318)
-bones/8/rotation = Quaternion(-0.139482, 0.662571, 0.692046, 0.250233)
+bones/0/position = Vector3(3.4307e-06, 1.30049, -0.00148138)
+bones/0/rotation = Quaternion(-0.0212676, 0.70448, -0.0169005, 0.709204)
+bones/1/rotation = Quaternion(1.87573e-06, -3.44202e-06, 0.125154, 0.992137)
+bones/4/position = Vector3(0.0488572, 0.334781, -0.482908)
+bones/4/rotation = Quaternion(-0.734834, -0.138693, -0.0119022, 0.663809)
+bones/5/rotation = Quaternion(0.00021787, -2.67141e-05, -0.305501, 0.952192)
+bones/8/rotation = Quaternion(-0.149418, 0.656365, 0.698574, 0.242597)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00107377, 0.0117542, 0.0242509, 0.0190244, -0.0168593, 0.00901395, 0.0190876, 0.0174648, -0.0076199, 0.528615, 2.38701, -0.111206)
+transform = Transform3D(-0.000571789, 0.0123451, 0.0239727, 0.0192309, -0.0166212, 0.00901803, 0.0189014, 0.0172844, -0.00845006, 0.524165, 2.38475, -0.103589)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

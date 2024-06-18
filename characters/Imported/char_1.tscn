@@ -361,7 +361,7 @@ bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.000305869, 0.012656, 0.0238149, 0.0192143, -0.01661, 0.00907383, 0.0189244, 0.017069, -0.00882793, 0.521791, 2.38428, -0.0982687)
+transform = Transform3D(-0.000305888, 0.012656, 0.0238149, 0.0192143, -0.01661, 0.00907385, 0.0189245, 0.017069, -0.00882789, 0.521791, 2.38428, -0.0982678)
 
 [node name="AnimationPlayer" parent="." index="1"]
 autoplay = "Walk"
