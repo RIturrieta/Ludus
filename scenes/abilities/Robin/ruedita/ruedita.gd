@@ -1,7 +1,13 @@
 extends DashAbility
 
+@onready var area: Area3D = $area
+@onready var area_collision: CollisionShape3D = $area/collision
+@onready var delay_timer: Timer = $delay
+
 func _ready():
 	super()
+	area_collision.shape.radius = chara.attack_range
+	delay_timer.timeout.connect(dealDamage)
 	
 func _physics_process(delta):
 	if not dashing:
@@ -16,12 +22,13 @@ func beginExecution():
 		chara.character_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.updateTargetLocation(target.global_position)
-	chara.dash(275)
-	dashing = true
+	super()
 
 func endExecution():
 	super()
+	delay_timer.start()
 
-func _on_cd_timeout():
-	on_cooldown = false
+func dealDamage():
+	chara.basic_attack.can_cancel = false
+	chara.basic_attack.target_amount = 2 # This should be an Effect
+	chara.basic_attack.beginExecution()

@@ -36,14 +36,10 @@ func beginExecution():
 		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.updateTargetLocation(target.global_position)
-	chara.dash(800)
-	dashing = true
+	super()
 
 func endExecution():
-	chara.clearDash()
-	dashing = false
-	chara.agent.navigation_layers = 0b00000001
+	super()
 	chara.collision_mask = 0b00000011
 	players_affected = []
 	players_on_area = []

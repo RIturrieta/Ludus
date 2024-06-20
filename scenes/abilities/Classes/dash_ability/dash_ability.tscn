@@ -7,14 +7,17 @@
 height = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_kr5j8"]
+resource_local_to_scene = true
 radius = 0.1
 height = 0.2
 
 [sub_resource type="BoxMesh" id="BoxMesh_th6hl"]
+resource_local_to_scene = true
 material = ExtResource("2_4bl8r")
 size = Vector3(1, 0.01, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_iv1qj"]
+resource_local_to_scene = true
 material = ExtResource("2_4bl8r")
 height = 0.01
 

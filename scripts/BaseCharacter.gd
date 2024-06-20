@@ -72,12 +72,9 @@ var initial_attack_speed = attack_speed
 # ========== HIDDEN STATS ========== #
 var can_act: bool = false
 var can_cast: bool = true
-var attack_cooldown: float = 0
-var attack_cooldown_offset: float = 0
 @export var total_attack_animations: int = 2
 @export var attack_duration: float = 1
-var attack_animation_index: int = 0
-var attack_ended: bool = true
+var basic_attack: Ability = null
 
 signal defeated(character_id: int)
 
@@ -88,8 +85,6 @@ func _ready():
 	character_animations = character_node.get_node("AnimationTree")
 	for i in range(total_attack_animations):
 		character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", attack_speed)
-	for key in abilities.keys():
-		loadAbility(key)
 	
 func _physics_process(delta):
 	if can_act:
@@ -108,52 +103,15 @@ func _physics_process(delta):
 				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 				
 		if is_multiplayer_authority():
-			# Lower basic attack cooldown
-			attack_cooldown = max(0, attack_cooldown - delta)
-			attack_cooldown_offset = max(0, attack_cooldown_offset - delta)
-			if attack_cooldown == 0 && attack_cooldown_offset == 0 && !attack_ended:
-				attack_ended = true
-				# character_animations.set("parameters/Attack/blend_position", Vector2(attack_animation_index,0))
-				# character_animations.set("parameters/AttackTransition/blend_position", Vector2(attack_animation_index,0))
-			
-			if Input.is_action_pressed("Move") and !is_dashing:
+			if Input.is_action_pressed("Move") and !is_dashing and can_move:
 				target = screenPointToRay()
 				if Input.is_action_just_pressed("Move"):
 					target.y = 0.1
 					arrows_transform.global_position = target
 					animation_player.play("move_arrows")
 				target.y = 0
-				if can_move:
-					updateTargetLocation(target)
-				if is_target_player(target):
-					target_player = get_target_player(target)
-					if target_player == self:
-						#target_player = null
-						attack_cooldown_offset = 0
-						#character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-						# allow_movement()
-					#start_attack(target_player)
-					#if is_attacking:
-						#updateTargetLocation(target)
-						#if Input.is_action_just_pressed("Move"):
-							#stop_attack()
-				else:
-					stop_attack()
-					character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-					target_player = null
-					attack_cooldown_offset = 0
-					# allow_movement()
-			if target_player:
-				if target_player != self:
-					target = target_player.global_position
-					if global_position.distance_to(target_player.global_position) <= attack_range:
-						target = global_position
-						if attack_ended:
-							start_attack()
-							start_attack_remote.rpc(attack_animation_index)
-						else:
-							stop_attack.rpc()
 				updateTargetLocation(target)
+
 			if velocity.length() > 0.0:
 				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
 			#if !agent.is_navigation_finished():
@@ -165,6 +123,7 @@ func _physics_process(delta):
 				velocity = new_velocity
 			elif !agent.is_navigation_finished() and !can_move:
 				agent.target_position = global_transform.origin
+				updateTargetLocation(global_position)
 			elif agent.is_navigation_finished():
 				velocity = Vector3(0.0, 0.0, 0.0)
 				global_position = lerp(global_position, agent.get_final_position(), 0.3)
@@ -252,7 +211,7 @@ func screenPointToRay():
 	if ray_array.has("position"):
 		return ray_array["position"]
 	return Vector3()
-	
+
 func updateTargetLocation(_target):
 	agent.target_position = _target
 	target = agent.get_final_position()
@@ -314,6 +273,7 @@ func heal(points: float):
 # array containing the name of the ability on [0] and it's node on [1].
 @export_category("Abilities")
 @export  var abilities: Dictionary = {
+	"BA": "basic_attack",
 	"Q": "",
 	"W": "",
 	"E": "",
@@ -335,7 +295,9 @@ func loadAbility(key: String):
 				path = "res://scenes/abilities/" + "No Character" + "/" + abilities[key] + "/" + abilities[key] + ".tscn"
 				if !ResourceLoader.exists(path):
 					path = "res://scenes/abilities/No Character/base_ability/base_ability.tscn"
+					no_ability = true
 			var sceneNode = load(path).instantiate()
+			sceneNode.set_multiplayer_authority(get_multiplayer_authority())
 			if no_ability:
 				abilities[key] = ["base_ability", sceneNode]
 			else:
@@ -352,16 +314,17 @@ func addAbility(ability_name: String, key: String):
 # Executes abilities based on the input
 func beginAbilityExecutions():
 	for key in abilities.keys():
-		if Input.is_action_pressed("Shift") and is_multiplayer_authority():
-			if Input.is_action_just_pressed(key):
-				abilities[key][1].preview.visible = true
-			if Input.is_action_just_released(key):
-				beginRemoteExecution.rpc(key)
-		elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
-			abilities[key][1].preview.visible = false
-		else:
-			if Input.is_action_just_pressed(key) and is_multiplayer_authority():
-				beginRemoteExecution.rpc(key)
+		if key != "BA":
+			if Input.is_action_pressed("Shift") and is_multiplayer_authority():
+				if Input.is_action_just_pressed(key):
+					abilities[key][1].preview.visible = true
+				if Input.is_action_just_released(key):
+					beginRemoteExecution.rpc(key)
+			elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
+				abilities[key][1].preview.visible = false
+			else:
+				if Input.is_action_just_pressed(key) and is_multiplayer_authority():
+					beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations
 func executeAbility(_name):
@@ -559,11 +522,11 @@ func is_target_player(_position: Vector3) -> bool:
 # Returns character closest to mouse cursor
 func get_target_player(_position: Vector3) -> CharacterBody3D:
 	var target_players = get_tree().get_nodes_in_group("players")
-	target_players.erase(self)
+	#target_players.erase(self)
 	var players_in_range = []
 	for player in target_players:
 		var distance = _position.distance_to(player.global_transform.origin)
-		if distance < player.select_radius && player.hp > 0:
+		if distance < player.select_radius and player.hp > 0:
 			players_in_range.append([player, distance])
 	var closest_player = null
 	var shortest_distance = 999999
@@ -576,53 +539,50 @@ func get_target_player(_position: Vector3) -> CharacterBody3D:
 func allow_movement():
 	can_move = true
 
-func attack_hit():
-	if is_multiplayer_authority():
-		if target_player:
-			can_move = false
-			character_node.look_at(target_player.global_position, Vector3.UP)
-			attack_cooldown = attack_cooldown_offset
-			attack_animation_index = (attack_animation_index + 1) % total_attack_animations
-			attack_damage_remote.rpc(target_player.player_info.id)
-
-@rpc("call_local", "reliable")
-func attack_damage_remote(id: int):
-	var target_players = get_tree().get_nodes_in_group("players")
-	var _target_player: BaseCharacter
-	for player in target_players:
-		if player.player_info.id == id:
-			_target_player = player
-			break
-	#for player in get_parent()
-	if _target_player:
-		_target_player.takeAttackDamage(attack_damage)
-		if _target_player.died():
-			if target_player:
-				target_player = null
-
-func start_attack_offset():
-	attack_cooldown_offset = attack_duration / attack_speed
-	Debug.sprint(attack_cooldown_offset)
-
-func start_attack():
-	is_attacking = true
-	# can_move = false
-	attack_ended = false
-	target = global_position
-	character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
-@rpc("call_remote", "reliable")
-func start_attack_remote(index: int):
-	character_animations.set(str("parameters/BasicAttack", index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
-@rpc("call_local", "reliable")
-func stop_attack():
-	is_attacking = false
+#func attack_hit():
+	#if is_multiplayer_authority():
+		#if target_player:
+			#can_move = false
+			#attack_cooldown = attack_cooldown_offset
+			#attack_animation_index = (attack_animation_index + 1) % total_attack_animations
+			#attack_damage_remote.rpc(target_player.player_info.id)
+#
+#@rpc("call_local", "reliable")
+#func attack_damage_remote(id: int):
+	#var target_players = get_tree().get_nodes_in_group("players")
+	#var _target_player: BaseCharacter
+	#for player in target_players:
+		#if player.player_info.id == id:
+			#_target_player = player
+			#break
+	##for player in get_parent()
+	#if _target_player:
+		#_target_player.takeAttackDamage(attack_damage)
+		#if _target_player.died():
+			#if target_player:
+				#target_player = null
+#
+#func start_attack_offset():
+	#attack_cooldown_offset = attack_duration / attack_speed
+#
+#func start_attack():
+	#is_attacking = true
+	## can_move = false
+	#attack_ended = false
+	#target = global_position
+	#character_node.look_at(target_player.global_position, Vector3.UP)
+	#character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+#
+#@rpc("call_remote", "reliable")
+#func start_attack_remote(index: int):
+	#character_animations.set(str("parameters/BasicAttack", index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+#
+#@rpc("call_local", "reliable")
+#func stop_attack():
+	#is_attacking = false
 	
 func abort_oneshots():
-	character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
-	attack_cooldown_offset = 0
-	attack_cooldown = 0
+	basic_attack.stopAttack()
 	character_animations.set(str("parameters/QShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_animations.set(str("parameters/QShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 	character_animations.set(str("parameters/WShot/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
@@ -648,6 +608,9 @@ func setup(player_data: Statics.PlayerData):
 	set_multiplayer_authority(player_info.id)
 	if is_multiplayer_authority():
 		camera_3d.current = true
+	for key in abilities.keys():
+		loadAbility(key)
+	basic_attack = abilities["BA"][1]
 	
 @rpc
 func sendData(pos: Vector3, vel: Vector3, _target: Vector3, rot_y: float):

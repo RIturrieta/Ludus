@@ -4,23 +4,28 @@
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_yx6y1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i70eq"]
+resource_local_to_scene = true
 height = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_kr5j8"]
+resource_local_to_scene = true
 radius = 0.1
 height = 0.2
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_h6qns"]
+resource_local_to_scene = true
 material = ExtResource("2_yx6y1")
 top_radius = 2.5
 bottom_radius = 2.5
 height = 0.01
 
 [sub_resource type="BoxMesh" id="BoxMesh_7tqso"]
+resource_local_to_scene = true
 material = ExtResource("2_yx6y1")
 size = Vector3(1, 0.01, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_s65tv"]
+resource_local_to_scene = true
 material = ExtResource("2_yx6y1")
 height = 0.01
 
@@ -32,6 +37,7 @@ radius = 2.5
 [node name="cataclysm" type="Node3D"]
 script = ExtResource("1_puu1i")
 dash_distance = 7.0
+dash_speed = 250.0
 preview_path = NodePath("S1/preview")
 damage = 400.0
 cooldown = 60.0

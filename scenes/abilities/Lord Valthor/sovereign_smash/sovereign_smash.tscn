@@ -4,9 +4,11 @@
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_db0un"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb6hm"]
+resource_local_to_scene = true
 size = Vector3(2, 2, 7)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pvj1e"]
+resource_local_to_scene = true
 material = ExtResource("2_db0un")
 size = Vector3(2, 0.025, 7)
 

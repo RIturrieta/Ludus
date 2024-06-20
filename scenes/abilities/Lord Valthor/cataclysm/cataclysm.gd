@@ -24,9 +24,7 @@ func beginExecution():
 		chara.character_animations.set("parameters/R2Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.updateTargetLocation(target.global_position)
-	chara.dash(250)
-	dashing = true
+	super()
 	dmg_timer.start()
 
 func dealDamage():

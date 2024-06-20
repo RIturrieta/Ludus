@@ -26,21 +26,16 @@ func beginExecution():
 		chara.character_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.target_player = null
 	var hitbox = chara.get_node("HitBox")
 	if hitbox:
 		hitbox.disabled = true
-	chara.updateTargetLocation(target.global_position)
-	chara.dash(800)
-	dashing = true
+	super()
 
 func endExecution():
-	dashing = false
-	chara.clearDash()
+	super()
 	var hitbox = chara.get_node("HitBox")
 	if hitbox:
 		hitbox.disabled = false
-	chara.agent.navigation_layers = 0b00000001
 	players_affected = []
 	players_on_area = []
 

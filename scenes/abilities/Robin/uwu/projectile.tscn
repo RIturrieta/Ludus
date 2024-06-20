@@ -3,9 +3,11 @@
 [ext_resource type="Script" path="res://scenes/abilities/Robin/uwu/projectile.gd" id="1_hjj0q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_asfvw"]
+resource_local_to_scene = true
 size = Vector3(1, 3, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dbfn8"]
+resource_local_to_scene = true
 top_radius = 0.05
 bottom_radius = 0.05
 height = 1.0

@@ -164,8 +164,8 @@ abilities = {
 "2": "",
 "3": "",
 "4": "",
-"BA": "basic_attack",
 "E": "expropiation!",
+"Move": "basic_attack",
 "Q": "sovereign_smash",
 "R": "oblivion",
 "W": "tyrant's_decree"
@@ -177,25 +177,25 @@ abilities = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(3.64402e-05, 1.30525, -0.0157349)
-bones/0/rotation = Quaternion(-0.0359723, 0.703978, -0.0315761, 0.708607)
-bones/1/rotation = Quaternion(1.69385e-05, -3.02116e-05, 0.129156, 0.991624)
+bones/0/position = Vector3(4.55814e-05, 1.30656, -0.0196821)
+bones/0/rotation = Quaternion(-0.0402832, 0.703772, -0.0358787, 0.708374)
+bones/1/rotation = Quaternion(0.000132294, -0.000235222, 0.159733, 0.98716)
 bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
 bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(0.0085362, 0.413072, -0.39413)
-bones/4/rotation = Quaternion(-0.699789, -0.141453, -0.00251413, 0.7002)
-bones/5/rotation = Quaternion(0.000414161, -0.000250911, -0.267237, 0.963631)
+bones/4/position = Vector3(-0.00620539, 0.441695, -0.361673)
+bones/4/rotation = Quaternion(-0.687333, -0.142314, 0.000709757, 0.712264)
+bones/5/rotation = Quaternion(0.000295141, -0.00011493, -0.290504, 0.956874)
 bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
 bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
 bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.0965782, 0.687349, 0.662241, 0.282243)
+bones/8/rotation = Quaternion(-0.089611, 0.691068, 0.657157, 0.287295)
 bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
 bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
 bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00323621, 0.00912598, 0.0251726, 0.0194503, -0.0166248, 0.00852761, 0.0184019, 0.0191768, -0.00458652, 0.547535, 2.38816, -0.154899)
+transform = Transform3D(-0.0035883, 0.00869173, 0.0252784, 0.0184641, -0.0176369, 0.00868528, 0.0193292, 0.0184611, -0.00360385, 0.550486, 2.39308, -0.135058)
 
 [node name="AnimationTree" parent="BaseCharacter/char1v2" index="3"]
 libraries = {

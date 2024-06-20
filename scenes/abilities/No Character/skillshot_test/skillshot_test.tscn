@@ -4,6 +4,9 @@
 
 [node name="skillshot_test" type="Node3D"]
 script = ExtResource("1_2uxhn")
+damage = 0.0
+mana_cost = 0.0
+cooldown = 0.0
 
 [node name="cd_timer" type="Timer" parent="."]
 one_shot = true

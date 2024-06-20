@@ -134,25 +134,18 @@ mesh = ExtResource("3_4n425")
 transform = Transform3D(-6.95143e-09, 0, 0.15903, 0, 0.15903, 0, -0.15903, 0, -6.95143e-09, 0, 1.41, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0.0277918, -0.772554, -1.02489e-07)
-bones/0/rotation = Quaternion(2.21075e-08, 1.02118e-07, -0.303898, 0.952705)
-bones/1/rotation = Quaternion(-4.61533e-05, -1.87813e-05, -6.79642e-05, 1)
-bones/3/rotation = Quaternion(0.112228, -0.246029, -0.134746, 0.953267)
-bones/4/rotation = Quaternion(-0.13665, 0.233859, 0.159194, 0.949365)
+bones/0/position = Vector3(0.0285117, -0.938912, -1.02574e-07)
+bones/0/rotation = Quaternion(3.27103e-09, 6.68029e-08, -0.022606, 0.999745)
 bones/5/rotation = Quaternion(-0.857493, -2.53747e-08, 4.22912e-08, 0.514496)
-bones/7/rotation = Quaternion(-0.0178112, 0.122362, -0.305773, 0.944041)
-bones/8/rotation = Quaternion(0.729738, 0.51257, -0.402381, 0.206989)
-bones/11/rotation = Quaternion(-0.0577802, 0.0506363, 0.0429825, 0.996117)
-bones/12/rotation = Quaternion(0.674988, -0.429354, 0.595848, 0.0707935)
-bones/13/position = Vector3(-6.661, -6.62419, -1.53456)
-bones/13/rotation = Quaternion(-0.316015, -0.63258, -0.343542, 0.618026)
-bones/14/rotation = Quaternion(-0.615344, 0.348389, -0.599382, 0.375124)
-bones/15/position = Vector3(0.0622234, -6.41385, 1.55582)
-bones/15/rotation = Quaternion(-0.305742, -0.637573, -0.277389, 0.650445)
-bones/16/rotation = Quaternion(-0.616274, -0.346742, 0.600384, 0.373519)
+bones/7/rotation = Quaternion(-0.0282299, 7.54827e-08, -2.92254e-10, 0.999601)
+bones/8/rotation = Quaternion(0.0209775, -3.05401e-08, 1.16047e-09, 0.99978)
+bones/13/rotation = Quaternion(-0.0396105, -0.706013, -0.0706505, 0.703552)
+bones/14/rotation = Quaternion(-0.486056, 0.513588, -0.462953, 0.534464)
+bones/15/rotation = Quaternion(-0.0706505, -0.703552, -0.0396105, 0.706012)
+bones/16/rotation = Quaternion(-0.486056, -0.513588, 0.462953, 0.534464)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.834022, 0.551408, 0.0188572, -0.551396, 0.831844, 0.0632245, 0.0191762, -0.0631284, 0.997821, 2.7192, 2.62194, 0.316927)
+transform = Transform3D(0.998978, 0.0452004, 1.33424e-07, -0.0452004, 0.998978, -9.56067e-09, -1.33719e-07, 3.5201e-09, 1, 0.227193, 3.45217, -8.71015e-08)
 bone_name = "Bone.004"
 bone_idx = 4
 
@@ -166,61 +159,61 @@ damping_coefficient = 0.07
 pinned_points = [600, 452, 132, 596, 448, 128, 696, 428, 228, 692, 424, 224, 854, 349, 389, 850, 353, 385]
 attachments/0/point_index = 600
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-0.0143107, 2.29744, -0.146102)
+attachments/0/offset = Vector3(-0.0143111, 2.29744, -0.146102)
 attachments/1/point_index = 452
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(-0.0143998, 2.33156, -0.000648898)
+attachments/1/offset = Vector3(-0.0144002, 2.33156, -0.000648766)
 attachments/2/point_index = 132
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.0144593, 2.29744, 0.144804)
+attachments/2/offset = Vector3(-0.0144596, 2.29744, 0.144804)
 attachments/3/point_index = 596
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(-0.401492, 2.3634, -0.134648)
+attachments/3/offset = Vector3(-0.401493, 2.3634, -0.134648)
 attachments/4/point_index = 448
 attachments/4/spatial_attachment_path = NodePath("..")
-attachments/4/offset = Vector3(-0.401582, 2.3983, -0.000876498)
+attachments/4/offset = Vector3(-0.401582, 2.3983, -0.000876366)
 attachments/5/point_index = 128
 attachments/5/spatial_attachment_path = NodePath("..")
 attachments/5/offset = Vector3(-0.401641, 2.3634, 0.132895)
 attachments/6/point_index = 696
 attachments/6/spatial_attachment_path = NodePath("..")
-attachments/6/offset = Vector3(-0.401433, 2.48047, -0.246079)
+attachments/6/offset = Vector3(-0.401434, 2.48047, -0.246079)
 attachments/7/point_index = 428
 attachments/7/spatial_attachment_path = NodePath("..")
-attachments/7/offset = Vector3(-0.401582, 2.62542, -0.000876497)
+attachments/7/offset = Vector3(-0.401582, 2.62542, -0.000876366)
 attachments/8/point_index = 228
 attachments/8/spatial_attachment_path = NodePath("..")
-attachments/8/offset = Vector3(-0.40173, 2.48047, 0.244326)
+attachments/8/offset = Vector3(-0.401731, 2.48047, 0.244327)
 attachments/9/point_index = 692
 attachments/9/spatial_attachment_path = NodePath("..")
-attachments/9/offset = Vector3(-0.0142514, 2.41191, -0.25503)
+attachments/9/offset = Vector3(-0.0142518, 2.41191, -0.25503)
 attachments/10/point_index = 424
 attachments/10/spatial_attachment_path = NodePath("..")
-attachments/10/offset = Vector3(-0.0143998, 2.55357, -0.000648897)
+attachments/10/offset = Vector3(-0.0144002, 2.55357, -0.000648766)
 attachments/11/point_index = 224
 attachments/11/spatial_attachment_path = NodePath("..")
-attachments/11/offset = Vector3(-0.0145186, 2.41191, 0.253732)
+attachments/11/offset = Vector3(-0.014519, 2.41191, 0.253733)
 attachments/12/point_index = 854
 attachments/12/spatial_attachment_path = NodePath("..")
-attachments/12/offset = Vector3(-0.401492, 0.0994034, -0.162487)
+attachments/12/offset = Vector3(-0.401493, 0.0994043, -0.162486)
 attachments/13/point_index = 349
 attachments/13/spatial_attachment_path = NodePath("..")
-attachments/13/offset = Vector3(-0.401581, 0.0994034, -0.0008765)
+attachments/13/offset = Vector3(-0.401582, 0.0994043, -0.000876366)
 attachments/14/point_index = 389
 attachments/14/spatial_attachment_path = NodePath("..")
-attachments/14/offset = Vector3(-0.40167, 0.0994034, 0.160734)
+attachments/14/offset = Vector3(-0.401671, 0.0994043, 0.160734)
 attachments/15/point_index = 850
 attachments/15/spatial_attachment_path = NodePath("..")
-attachments/15/offset = Vector3(-0.0142809, 0.0840855, -0.173296)
+attachments/15/offset = Vector3(-0.0142813, 0.0840874, -0.173296)
 attachments/16/point_index = 353
 attachments/16/spatial_attachment_path = NodePath("..")
-attachments/16/offset = Vector3(-0.0143996, 0.0840855, -0.0006489)
+attachments/16/offset = Vector3(-0.0144, 0.0840874, -0.000648766)
 attachments/17/point_index = 385
 attachments/17/spatial_attachment_path = NodePath("..")
-attachments/17/offset = Vector3(-0.0144888, 0.0840855, 0.171998)
+attachments/17/offset = Vector3(-0.0144892, 0.0840874, 0.171998)
 
 [node name="Back" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.506162, 0.707955, -0.492543, -0.742419, 0.6483, 0.168884, 0.438878, 0.280191, 0.853744, 1.9179, 1.88815, -0.000209118)
+transform = Transform3D(0.998978, 0.0452004, 1.33424e-07, -0.0452004, 0.998978, -9.56068e-09, -1.33719e-07, 3.5201e-09, 1, 0.176033, 2.32147, -9.10857e-08)
 bone_name = "Bone.003"
 bone_idx = 3
 
@@ -239,10 +232,10 @@ attachments/1/spatial_attachment_path = NodePath("..")
 attachments/1/offset = Vector3(-0.893122, 1.06716, -0.383812)
 attachments/2/point_index = 54
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.901338, 1.01409, -0.722333)
+attachments/2/offset = Vector3(-0.901339, 1.01409, -0.722333)
 attachments/3/point_index = 37
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(-0.909542, 0.96101, -1.06085)
+attachments/3/offset = Vector3(-0.909542, 0.96101, -1.06086)
 attachments/4/point_index = 36
 attachments/4/spatial_attachment_path = NodePath("..")
 attachments/4/offset = Vector3(-0.917758, 0.907933, -1.39938)
@@ -263,12 +256,12 @@ attachments/9/spatial_attachment_path = NodePath("..")
 attachments/9/offset = Vector3(-1.06661, 1.01484, -1.41209)
 
 [node name="LHand" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.613619, -0.00773496, -0.789564, -0.788639, -0.0433553, 0.613325, -0.038976, 0.999029, 0.0205037, 3.32914, -0.252504, -2.20949)
+transform = Transform3D(0.998978, -0.0256158, 0.0372412, -0.0452004, -0.566134, 0.823072, -1.19681e-07, -0.823915, -0.566714, 0.124179, 1.17545, -3.37035)
 bone_name = "Bone.008_L"
 bone_idx = 8
 
 [node name="bow" parent="Armature/Skeleton3D/LHand" index="0" instance=ExtResource("2_jvoeo")]
-transform = Transform3D(-3.97027, -3.44308, -3.45292, -3.2548, 5.18682, -1.42957, 3.63094, 0.884653, -5.0571, -0.0368111, 2.66266, -0.132379)
+transform = Transform3D(3.27121, -4.99722, -1.9666, 1.90973, -1.06972, 5.89485, -5.01922, -3.66388, 0.961185, -0.0368111, 2.66266, -0.132379)
 rotation_edit_mode = 1
 
 [node name="Skeleton3D" parent="Armature/Skeleton3D/LHand/bow/Bow" index="0"]

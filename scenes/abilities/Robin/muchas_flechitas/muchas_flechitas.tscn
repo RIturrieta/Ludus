@@ -4,10 +4,12 @@
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_3w4l3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2peub"]
+resource_local_to_scene = true
 height = 0.5
 radius = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gcdyx"]
+resource_local_to_scene = true
 height = 0.5
 radius = 1.0
 

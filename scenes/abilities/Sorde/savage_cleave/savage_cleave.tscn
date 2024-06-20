@@ -4,9 +4,11 @@
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_2tjle"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cd5iw"]
+resource_local_to_scene = true
 radius = 3.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xjsck"]
+resource_local_to_scene = true
 material = ExtResource("2_2tjle")
 top_radius = 3.0
 bottom_radius = 3.0

@@ -3,9 +3,11 @@
 [ext_resource type="Script" path="res://scenes/abilities/Robin/flechita/projectile.gd" id="1_k7kka"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_asfvw"]
+resource_local_to_scene = true
 size = Vector3(0.5, 3, 0.5)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dbfn8"]
+resource_local_to_scene = true
 top_radius = 0.025
 bottom_radius = 0.025
 height = 0.5

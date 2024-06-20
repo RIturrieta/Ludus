@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpkvfg4x4g0fh"]
+
+[ext_resource type="Script" path="res://scenes/abilities/No Character/basic_attack/basic_attack.gd" id="1_mwrot"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_besx1"]
+resource_local_to_scene = true
+height = 0.5
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h1car"]
+resource_local_to_scene = true
+height = 0.5
+radius = 1.0
+
+[node name="basic_attack" type="Node3D"]
+script = ExtResource("1_mwrot")
+
+[node name="cd_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="range_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="collision" type="CollisionShape3D" parent="range_area"]
+shape = SubResource("CylinderShape3D_besx1")
+
+[node name="mouse_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="collision" type="CollisionShape3D" parent="mouse_area"]
+shape = SubResource("CylinderShape3D_h1car")

@@ -5,6 +5,7 @@ class_name DashAbility
 
 @export_category("Dash Stats")
 @export var dash_distance: float = 0
+@export var dash_speed: float = 350
 @export var variable_dash_distance = false
 
 # Dash calculation shapecasts
@@ -60,13 +61,11 @@ func beginExecution():
 		chara.character_node.global_rotation.y = chara.projectile_ray.global_rotation.y
 		chara.agent.navigation_layers = 0b00000010
 		#chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-		execute()
 
 func execute():
 	chara.updateTargetLocation(target.global_position)
-	chara.dash(350)
+	chara.dash(dash_speed)
 	dashing = true
-	endExecution()
 
 func endExecution():
 	chara.clearDash()

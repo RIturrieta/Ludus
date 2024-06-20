@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cm2lf6l4pw0o8"]
+[gd_scene load_steps=8 format=3 uid="uid://cm2lf6l4pw0o8"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Robin/ruedita/ruedita.gd" id="1_xn8vx"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_xym2v"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i70eq"]
+resource_local_to_scene = true
 height = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_kr5j8"]
+resource_local_to_scene = true
 radius = 0.1
 height = 0.2
 
@@ -15,12 +17,18 @@ material = ExtResource("2_xym2v")
 size = Vector3(1, 0.01, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_iv1qj"]
+resource_local_to_scene = true
 material = ExtResource("2_xym2v")
 height = 0.01
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_eswq1"]
+resource_local_to_scene = true
+height = 0.5
 
 [node name="ruedita" type="Node3D"]
 script = ExtResource("1_xn8vx")
 dash_distance = 4.0
+dash_speed = 275.0
 preview_path = NodePath("S1/preview")
 damage = 0.0
 mana_cost = 0.0
@@ -63,3 +71,14 @@ skeleton = NodePath("../..")
 [node name="final_pos" type="MeshInstance3D" parent="S1/preview"]
 top_level = true
 mesh = SubResource("CylinderMesh_iv1qj")
+
+[node name="area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="collision" type="CollisionShape3D" parent="area"]
+shape = SubResource("CylinderShape3D_eswq1")
+
+[node name="delay" type="Timer" parent="."]
+wait_time = 0.125
+one_shot = true
