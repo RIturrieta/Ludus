@@ -7,9 +7,6 @@ script = ExtResource("1_ghpu2")
 mana_cost = 15.0
 cooldown = 8.0
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="duration" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true

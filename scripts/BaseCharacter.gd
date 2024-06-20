@@ -139,7 +139,7 @@ func _physics_process(delta):
 		manageSpeedModifiers()
 	
 	if is_multiplayer_authority():
-		if can_cast and !is_silenced and !is_dashing:
+		if can_cast and can_act and !is_silenced and !is_dashing:
 			beginAbilityExecutions()
 		if fixed_movement:
 			velocity = Vector3(0,0,0)
@@ -246,6 +246,7 @@ func takeAttackDamage(damage: float):
 	var total_damage = damage * (1 - physical_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
+		died()
 	else:
 		hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
@@ -254,6 +255,7 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
+		died()
 	else:
 		hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")

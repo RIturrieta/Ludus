@@ -15,7 +15,7 @@ func _physics_process(_delta):
 		dmg_area.global_rotation.y = chara.projectile_ray.global_rotation.y
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.target_player = null
 		preview.visible = true
@@ -40,7 +40,5 @@ func endExecution():
 	casting = false
 	players_on_area = []
 	chara.can_act = true
+	chara.can_cast = true
 	preview.visible = false
-
-func _on_cd_timeout():
-	on_cooldown = false

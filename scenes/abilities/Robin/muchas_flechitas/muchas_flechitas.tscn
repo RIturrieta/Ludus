@@ -29,9 +29,6 @@ cooldown = 30.0
 [node name="rain_timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="range_area" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2

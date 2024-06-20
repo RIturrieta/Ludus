@@ -56,7 +56,7 @@ func _physics_process(_delta):
 		dashCalculation()
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.character_node.global_rotation.y = chara.projectile_ray.global_rotation.y
 		chara.agent.navigation_layers = 0b00000010
@@ -71,6 +71,4 @@ func endExecution():
 	chara.clearDash()
 	dashing = false
 	chara.agent.navigation_layers = 0b00000001
-
-func _on_cd_timeout():
-	on_cooldown = false
+	chara.can_cast = true

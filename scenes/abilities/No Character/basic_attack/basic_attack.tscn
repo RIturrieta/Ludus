@@ -15,9 +15,6 @@ radius = 1.0
 [node name="basic_attack" type="Node3D"]
 script = ExtResource("1_mwrot")
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="preview" type="MeshInstance3D" parent="."]
 
 [node name="range_area" type="Area3D" parent="."]

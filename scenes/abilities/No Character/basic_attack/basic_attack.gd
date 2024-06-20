@@ -73,38 +73,43 @@ func stopAttack():
 	chara.can_move = true
 	attack_cooldown = 0
 	attack_cooldown_offset = 0
-	chara.character_animations.set(str("parameters/BasicAttack", current_attack_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
+	current_attack_index = 0
+	for i in range(chara.total_attack_animations):
+		chara.character_animations.set(str("parameters/BasicAttack", i + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 
 func _physics_process(delta):
-	mouse_area.global_position = chara.mouse_pos
-	attack_cooldown = max(0, attack_cooldown - delta)
-	attack_cooldown_offset = max(0, attack_cooldown_offset - delta)
-	if attack_cooldown == 0 && attack_cooldown_offset == 0 && !attack_ended:
-		attack_ended = true
-	
-	if is_multiplayer_authority():
-		if target_player == null:
-			if Input.is_action_just_pressed("Move"):
-				calculateTargetPlayer()
-		else:
-			if Input.is_action_pressed("Move"):
-				calculateTargetPlayer()
-	
-	if target_player == null and can_cancel:
-		stopAttack()
-	
-	if target_player != null and target_player != chara:
-		if target_player in range_area.get_overlapping_bodies():
-			if !chara.is_dashing:
-				chara.target = chara.global_position
-				chara.updateTargetLocation(chara.target)
-			if attack_ended:
-				calculateAffectedPlayers()
-				beginExecution()
-		else:
-			if !chara.is_dashing:
-				chara.target = target_player.global_position
-				chara.updateTargetLocation(chara.target)
+	if chara.can_act:
+		mouse_area.global_position = chara.mouse_pos
+		attack_cooldown = max(0, attack_cooldown - delta)
+		attack_cooldown_offset = max(0, attack_cooldown_offset - delta)
+		if attack_cooldown == 0 && attack_cooldown_offset == 0 && !attack_ended:
+			attack_ended = true
+		
+		if is_multiplayer_authority():
+			if target_player == null:
+				if Input.is_action_just_pressed("Move"):
+					calculateTargetPlayer()
+			else:
+				if Input.is_action_pressed("Move"):
+					calculateTargetPlayer()
+		
+		if target_player != null and target_player.died():
+			target_player = null
+		if !attack_ended and target_player == null and can_cancel:
+			stopAttack()
+		
+		if target_player != null and target_player != chara:
+			if target_player in range_area.get_overlapping_bodies():
+				if !chara.is_dashing:
+					chara.target = chara.global_position
+					chara.updateTargetLocation(chara.target)
+				if attack_ended:
+					calculateAffectedPlayers()
+					beginExecution()
+			else:
+				if !chara.is_dashing:
+					chara.target = target_player.global_position
+					chara.updateTargetLocation(chara.target)
 	
 func beginExecution():
 	calculateAffectedPlayers()

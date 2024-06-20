@@ -21,7 +21,7 @@ func _physics_process(_delta):
 		mouse_area.global_position = chara.mouse_pos
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		if mouse_area.has_overlapping_bodies():
 			var min_distance: float = 999999
 			var distance: float = 0
@@ -50,6 +50,3 @@ func execute():
 func endExecution():
 	chara.can_cast = true
 	affected_player = null
-
-func _on_cd_timeout():
-	on_cooldown = false

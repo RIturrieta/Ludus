@@ -18,7 +18,7 @@ func _physics_process(_delta):
 				player.takeAbilityDamage(damage, chara.spell_power)
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.target_player = null
 		chara.character_node.rotation.y = chara.projectile_ray.rotation.y
@@ -38,6 +38,3 @@ func endExecution():
 		hitbox.disabled = false
 	players_affected = []
 	players_on_area = []
-
-func _on_cd_timeout():
-	on_cooldown = false

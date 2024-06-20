@@ -29,7 +29,7 @@ func _physics_process(delta):
 				projectile.queue_free()
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.character_node.global_rotation.y = chara.projectile_ray.rotation.y
 		chara.can_act = false
@@ -48,6 +48,3 @@ func endExecution():
 	chara.can_act = true
 	chara.can_cast = true
 	preview.visible = false
-
-func _on_cd_timeout():
-	on_cooldown = false

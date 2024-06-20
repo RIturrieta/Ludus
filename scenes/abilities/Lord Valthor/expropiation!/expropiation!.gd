@@ -14,7 +14,7 @@ func _ready():
 	collision.shape.radius = radius
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.can_cast = false
 		chara.character_animations.set("parameters/WShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
@@ -29,6 +29,3 @@ func execute():
 
 func endExecution():
 	chara.can_cast = true
-
-func _on_cd_timeout():
-	on_cooldown = false

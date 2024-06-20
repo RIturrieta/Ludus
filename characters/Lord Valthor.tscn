@@ -155,7 +155,7 @@ height = 0.5
 character_node = NodePath("char1v2")
 hp = 3000.0
 attack_damage = 170.0
-attack_speed = 1.7
+attack_speed = 0.7
 attack_range = 3.0
 select_radius = 1.5
 attack_duration = 1.167
@@ -177,25 +177,25 @@ abilities = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(3.64402e-05, 1.30525, -0.0157349)
-bones/0/rotation = Quaternion(-0.0359723, 0.703978, -0.0315761, 0.708607)
-bones/1/rotation = Quaternion(1.69385e-05, -3.02116e-05, 0.129156, 0.991624)
+bones/0/position = Vector3(4.48985e-05, 1.30646, -0.0193872)
+bones/0/rotation = Quaternion(-0.0397293, 0.7038, -0.0353259, 0.708406)
+bones/1/rotation = Quaternion(0.000124209, -0.000220852, 0.157593, 0.987504)
 bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
 bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(0.0085362, 0.413072, -0.39413)
-bones/4/rotation = Quaternion(-0.699789, -0.141453, -0.00251413, 0.7002)
-bones/5/rotation = Quaternion(0.000414161, -0.000250911, -0.267237, 0.963631)
+bones/4/position = Vector3(-0.0018158, 0.433172, -0.371338)
+bones/4/rotation = Quaternion(-0.690492, -0.142101, -0.000102721, 0.709244)
+bones/5/rotation = Quaternion(0.000263321, -7.85956e-05, -0.29669, 0.954974)
 bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
 bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
 bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.0965782, 0.687349, 0.662241, 0.282243)
+bones/8/rotation = Quaternion(-0.0988508, 0.686118, 0.663885, 0.280586)
 bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
 bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
 bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00323621, 0.00912598, 0.0251726, 0.0194503, -0.0166248, 0.00852761, 0.0184019, 0.0191768, -0.00458652, 0.547535, 2.38816, -0.154899)
+transform = Transform3D(-0.00312399, 0.0092696, 0.0251343, 0.0185833, -0.0174765, 0.00875512, 0.0192956, 0.0183321, -0.00436263, 0.546511, 2.39243, -0.136555)
 
 [node name="AnimationTree" parent="BaseCharacter/char1v2" index="3"]
 libraries = {

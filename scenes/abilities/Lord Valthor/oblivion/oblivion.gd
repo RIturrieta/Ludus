@@ -27,7 +27,7 @@ func _physics_process(_delta):
 						chara.target_player = null
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.target_player = null
 		chara.character_node.global_rotation.y = chara.projectile_ray.global_rotation.y
@@ -43,6 +43,4 @@ func endExecution():
 	chara.collision_mask = 0b00000011
 	players_affected = []
 	players_on_area = []
-	
-func _on_cd_timeout():
-	on_cooldown = false
+	chara.can_cast = true

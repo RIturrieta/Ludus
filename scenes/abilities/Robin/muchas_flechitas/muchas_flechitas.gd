@@ -39,7 +39,7 @@ func _physics_process(delta):
 					player.takeAbilityDamage(damage, chara.spell_power)
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.can_act = false
 		casting = true
@@ -59,6 +59,4 @@ func _on_rain_timeout():
 	raining = false
 	pulse_frames = 0
 	preview.visible = false
-
-func _on_cd_timeout():
-	on_cooldown = false
+	chara.can_cast = true

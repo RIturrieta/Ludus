@@ -35,9 +35,6 @@ damage = 270.0
 mana_cost = 15.0
 cooldown = 9.0
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="S1" type="ShapeCast3D" parent="."]
 shape = SubResource("CylinderShape3D_i70eq")
 target_position = Vector3(0, 0, -1)

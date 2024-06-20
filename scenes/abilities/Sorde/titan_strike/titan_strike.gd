@@ -16,7 +16,7 @@ func beginExecution():
 		if chara.is_target_player(chara.mouse_pos):
 			target_player = chara.get_target_player(chara.mouse_pos)
 			if chara.global_position.distance_to(target_player.global_position) < range:
-				if target_player != chara and not on_cooldown and chara.mana >= mana_cost:
+				if target_player != chara and charges >= 1 and chara.mana >= mana_cost:
 					#Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 					#on_cooldown = true
 					#cd_timer.start()
@@ -53,6 +53,4 @@ func endExecution():
 	target_player.takeAbilityDamage(damage, chara.spell_power)
 	target_player.modifyStats(4, 1, 0, -25, 0, 1, 1, 0, 1)
 	target_player = null
-
-func _on_cd_timeout():
-	on_cooldown = false
+	chara.can_cast = true

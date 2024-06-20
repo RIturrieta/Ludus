@@ -20,9 +20,6 @@ preview_path = NodePath("dmg_area/preview")
 damage = 325.0
 cooldown = 14.0
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="dmg_area" type="Area3D" parent="."]
 disable_mode = 2
 collision_layer = 0

@@ -13,11 +13,11 @@ func _ready():
 	duration_timer.wait_time = duration
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
-		index = chara.attack_animation_index
+		index = chara.basic_attack.current_attack_index
 		chara.total_attack_animations = 3
-		chara.attack_animation_index = 2
+		chara.basic_attack.current_attack_index = 2
 		chara.character_animations.set("parameters/WWalkBlend/blend_amount", 1)
 		chara.modifySpeed(duration, 100)
 		chara.modifyStats(duration, 1.75)
@@ -30,12 +30,13 @@ func execute():
 	if target_player != null:
 		target_player.modifySpeed(2, -30)
 	chara.total_attack_animations = 2
-	chara.attack_animation_index = index
+	chara.basic_attack.current_attack_index = index
 
 func endExecution():
 	chara.clearStatsModifier(duration, 1.75)
 	chara.clearSpeedModifier(duration, 100)
 	chara.character_animations.set("parameters/WWalkBlend/blend_amount", 0)
+	chara.can_cast = true
 	#chara.total_attack_animations = 2
 	#chara.attack_animation_index = index
 
@@ -44,7 +45,5 @@ func _on_duration_timeout():
 		chasing = false
 		chara.character_animations.set("parameters/WWalkBlend/blend_amount", 0)
 		chara.total_attack_animations = 2
-		chara.attack_animation_index = index
-
-func _on_cd_timeout():
-	on_cooldown = false
+		chara.basic_attack.current_attack_index = index
+		chara.can_cast = true

@@ -3,12 +3,10 @@ extends Ability
 var p_scene = load("res://scenes/abilities/No Character/skillshot_test/projectile.tscn")
 
 func _ready():
-	if is_multiplayer_authority():
-		Debug.sprint(chara.get_parent().name)
-	cd_timer.timeout.connect(_on_cd_timeout)
+	super()
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		execute()
 
@@ -19,8 +17,4 @@ func execute():
 	p.global_position = chara.projectile_spawn_pos
 
 func endExecution():
-	# [What happens after the execution of the ability]
-	pass
-
-func _on_cd_timeout():
-	on_cooldown = false
+	chara.can_cast = true

@@ -12,7 +12,7 @@ func _ready():
 	dmg_area.monitoring = true
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		preview.visible = true
 		chara.can_act = false
@@ -34,6 +34,4 @@ func endExecution():
 	players_on_area = []
 	chara.can_act = true
 	preview.visible = false
-
-func _on_cd_timeout():
-	on_cooldown = false
+	chara.can_cast = true

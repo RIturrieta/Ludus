@@ -5,7 +5,4 @@
 [node name="ability" type="Node3D"]
 script = ExtResource("1_vql10")
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="preview" type="MeshInstance3D" parent="."]

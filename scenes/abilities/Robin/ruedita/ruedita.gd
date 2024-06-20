@@ -14,7 +14,7 @@ func _physics_process(delta):
 		dashCalculation()
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		chara.target_player = null
 		chara.character_node.global_rotation.y = chara.projectile_ray.global_rotation.y
@@ -26,9 +26,13 @@ func execute():
 
 func endExecution():
 	super()
+	chara.can_cast = false
+	chara.can_act = false
 	delay_timer.start()
 
 func dealDamage():
+	chara.can_act = true
 	chara.basic_attack.can_cancel = false
 	chara.basic_attack.target_amount = 2 # This should be an Effect
 	chara.basic_attack.beginExecution()
+	chara.can_cast = true

@@ -8,7 +8,7 @@ func _physics_process(delta):
 		dashCalculation()
 
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		super()
 		chara.target_player = null
 		#chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

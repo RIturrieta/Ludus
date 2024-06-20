@@ -4,7 +4,7 @@ func _ready():
 	super()
 	
 func beginExecution():
-	if not on_cooldown and chara.mana >= mana_cost:
+	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		#chara.character_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
@@ -14,4 +14,4 @@ func execute():
 
 func endExecution():
 	# [What happens after the execution of the ability]
-	pass
+	chara.can_cast = true

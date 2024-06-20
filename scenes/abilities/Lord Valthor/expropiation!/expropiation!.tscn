@@ -11,9 +11,6 @@ script = ExtResource("1_on71n")
 damage = 100.0
 cooldown = 16.0
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="area" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 2

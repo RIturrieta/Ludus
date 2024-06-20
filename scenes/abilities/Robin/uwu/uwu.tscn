@@ -7,9 +7,6 @@ script = ExtResource("1_dny6l")
 radius = 999.0
 cooldown = 0.0
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="preview" type="MeshInstance3D" parent="."]
 
 [node name="raycast" type="RayCast3D" parent="."]

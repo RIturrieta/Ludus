@@ -42,9 +42,6 @@ preview_path = NodePath("S1/preview")
 damage = 400.0
 cooldown = 60.0
 
-[node name="cd_timer" type="Timer" parent="."]
-one_shot = true
-
 [node name="dmg_timer" type="Timer" parent="."]
 wait_time = 0.7
 one_shot = true
