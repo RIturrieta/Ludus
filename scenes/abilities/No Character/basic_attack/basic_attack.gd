@@ -58,14 +58,15 @@ func calculateAffectedPlayers():
 		players_affected.slice(0, target_amount)
 
 func dealDamage():
-	for player_pair in players_affected:
-		for i in range(attack_quantity):
-			player_pair[0].takeAttackDamage(chara.attack_damage)
-			if player_pair[0].died():
-				if chara.target_player:
-					chara.target_player = null
-					chara.target = chara.global_position
-					chara.updateTargetLocation(chara.target)
+	if target_player != null:
+		for player_pair in players_affected:
+			for i in range(attack_quantity):
+				player_pair[0].takeAttackDamage(chara.attack_damage)
+				if player_pair[0].died():
+					if target_player:
+						target_player = null
+						chara.target = chara.global_position
+						chara.updateTargetLocation(chara.target)
 
 func stopAttack():
 	target_player = null

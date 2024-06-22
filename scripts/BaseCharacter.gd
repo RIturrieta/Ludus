@@ -88,7 +88,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if can_act:
-		if character_animations:
+		if character_animations and can_move:
 			var blend_val = min(velocity.length(), 1)
 			var new_walk_vel = lerp(prev_velocity, float(blend_val), 0.5)
 			prev_velocity = new_walk_vel
@@ -122,8 +122,9 @@ func _physics_process(delta):
 				var new_velocity = (target_position - current_position).normalized() * SPEED * move_speed / 100
 				velocity = new_velocity
 			elif !agent.is_navigation_finished() and !can_move:
-				agent.target_position = global_transform.origin
-				updateTargetLocation(global_position)
+				#agent.target_position = global_transform.origin
+				#updateTargetLocation(global_position)
+				velocity = Vector3(0.0, 0.0, 0.0)
 			elif agent.is_navigation_finished():
 				velocity = Vector3(0.0, 0.0, 0.0)
 				global_position = lerp(global_position, agent.get_final_position(), 0.3)
@@ -158,7 +159,7 @@ func _physics_process(delta):
 		#var pp = "|"
 		#for key in abilities.keys():
 			#if key in ["Q", "W", "E", "R"]:
-				#pp += abilities[key][0] + ": " + str(snapped(abilities[key][1].cd_timer.time_left, 0.1)) + "| "
+				#pp += abilities[key][0] + ": " + str(snapped(abilities[key][1].cooldown_timers.get_child(0).time_left, 0.1)) + "| "
 		#Debug.sprint(pp)
 		
 	if Input.is_action_just_pressed("Release Camera"):
@@ -286,32 +287,29 @@ func heal(points: float):
 	"4": "",
 }
 
-# Adds the ability assigned to a certain key as a child of the character and puts
-# it into the dictionary as an array that contains both the name and the node
-func loadAbility(key: String):
-	if abilities.has(key):
-		if abilities[key] is String:
-			var no_ability = false
-			var path = "res://scenes/abilities/" + get_parent().name + "/" + abilities[key] + "/" + abilities[key] + ".tscn"
+# Adds an ability to the player assigning it to a key. If the key is invalid, the ability will be
+# added as a non-input (passive) ability.
+func loadAbility(ability_name: String, key: String = ""):
+	var no_ability = false
+	var path = "res://scenes/abilities/" + get_parent().name + "/" + ability_name + "/" + ability_name + ".tscn"
+	if !ResourceLoader.exists(path):
+		path = "res://scenes/abilities/" + "Blessings" + "/" + ability_name + "/" + ability_name + ".tscn"
+		if !ResourceLoader.exists(path):
+			path = "res://scenes/abilities/" + "No Character" + "/" + ability_name + "/" + ability_name + ".tscn"
 			if !ResourceLoader.exists(path):
-				path = "res://scenes/abilities/" + "No Character" + "/" + abilities[key] + "/" + abilities[key] + ".tscn"
-				if !ResourceLoader.exists(path):
-					path = "res://scenes/abilities/No Character/base_ability/base_ability.tscn"
-					no_ability = true
-			var sceneNode = load(path).instantiate()
-			sceneNode.set_multiplayer_authority(get_multiplayer_authority())
-			if no_ability:
-				abilities[key] = ["base_ability", sceneNode]
-			else:
-				abilities[key] = [abilities[key], sceneNode]
-			$Abilities.add_child(sceneNode, true)
-		
-# Adds a new ability to the character and loads it
-func addAbility(ability_name: String, key: String):
-	if abilities[key] is Array:
-		abilities[key][1].queue_free()
-		abilities[key] = ability_name
-		loadAbility(key)
+				path = "res://scenes/abilities/No Character/base_ability/base_ability.tscn"
+				no_ability = true
+	var sceneNode = load(path).instantiate()
+	sceneNode.set_multiplayer_authority(get_multiplayer_authority())
+	if key in abilities.keys():
+		if abilities[key] is Array:
+			abilities[key][1].queue_free()
+			abilities[key] = ability_name
+		if no_ability:
+			abilities[key] = ["base_ability", sceneNode]
+		else:
+			abilities[key] = [abilities[key], sceneNode]
+	$Abilities.add_child(sceneNode, true)
 
 # Executes abilities based on the input
 func beginAbilityExecutions():
@@ -358,13 +356,19 @@ func updateMousePos(pos: Vector3):
 
 # ========== EFFECTS ========== #
 
+func applyEffect(effect: Effect):
+	effect.set_multiplayer_authority(get_multiplayer_authority())
+	$Effects.add_child(effect)
+	
 func dash(amount: float):
 	is_dashing = true
 	var _dash = DashEffect.create(amount)
+	_dash.set_multiplayer_authority(get_multiplayer_authority())
 	$Effects.add_child(_dash)
 
 func modifySpeed(duration: float, percentage: float):
 	var _modifier = SpeedModifierEffect.create(duration, percentage)
+	_modifier.set_multiplayer_authority(get_multiplayer_authority())
 	$Effects.add_child(_modifier)
 
 func manageSpeedModifiers():
@@ -396,8 +400,6 @@ func manageSpeedModifiers():
 			actual_slow.apply()
 	if _dash != null:
 		_dash.apply()
-	#if is_multiplayer_authority() and actual_slow != null:
-		#Debug.sprint(actual_slow.multiplier)
 
 func stun(duration: float):
 	if $Effects.get_children().any(func (x): return x is StunEffect):
@@ -410,6 +412,7 @@ func stun(duration: float):
 					break
 	else:
 		var _stun = StunEffect.create(duration)
+		_stun.set_multiplayer_authority(get_multiplayer_authority())
 		$Effects.add_child(_stun)
 
 func root(duration: float):
@@ -423,6 +426,7 @@ func root(duration: float):
 					break
 	else:
 		var _root = RootEffect.create(duration)
+		_root.set_multiplayer_authority(get_multiplayer_authority())
 		$Effects.add_child(_root)
 
 func silence(duration: float):
@@ -436,6 +440,7 @@ func silence(duration: float):
 					break
 	else:
 		var _silence = SilenceEffect.create(duration)
+		_silence.set_multiplayer_authority(get_multiplayer_authority())
 		$Effects.add_child(_silence)
 
 func modifyStats(_duration: float, _attack_damage: float = 1, _spell_power: float = 0, 
@@ -447,8 +452,8 @@ func modifyStats(_duration: float, _attack_damage: float = 1, _spell_power: floa
 											  _physical_armor, _spell_armor, 
 											  _attack_speed, _attack_range, 
 											  _cdr, _select_radius)
+	modifier.set_multiplayer_authority(get_multiplayer_authority())
 	$Effects.add_child(modifier)
-
 # Clear effects
 func clearDash():
 	for effect in $Effects.get_children():
@@ -611,8 +616,10 @@ func setup(player_data: Statics.PlayerData):
 	if is_multiplayer_authority():
 		camera_3d.current = true
 	for key in abilities.keys():
-		loadAbility(key)
+		loadAbility(abilities[key], key)
 	basic_attack = abilities["BA"][1]
+	if get_parent().name == "Lord Valthor":
+		loadAbility("add_charges_R")
 	
 @rpc
 func sendData(pos: Vector3, vel: Vector3, _target: Vector3, rot_y: float):

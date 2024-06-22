@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://d15hwn8teia0u"]
+[gd_scene load_steps=48 format=3 uid="uid://d15hwn8teia0u"]
 
 [ext_resource type="PackedScene" uid="uid://5jtb6yq7i3tv" path="res://resources/meshes/char3.glb" id="1_lb223"]
 [ext_resource type="ArrayMesh" uid="uid://k782yhd5s0bv" path="res://resources/meshes/band.tres" id="2_x24it"]
@@ -58,6 +58,8 @@ fadeout_time = 0.1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qmnyu"]
 animation = &"E"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hcpua"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_q8ohi"]
 fadein_time = 0.1
 fadeout_time = 0.1
@@ -70,12 +72,16 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4h3xe"]
 animation = &"Q"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0lpan"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_86bqv"]
 fadein_time = 0.1
 fadeout_time = 0.1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2rntl"]
 animation = &"R1"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_q34da"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_tgito"]
 fadein_time = 0.1
@@ -84,9 +90,13 @@ fadeout_time = 0.1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qp8mh"]
 animation = &"R2"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_fkasv"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_k1fbq"]
 fadein_time = 0.1
 fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_q4ou1"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1s66y"]
 animation = &"W1"
@@ -102,25 +112,27 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_48ckk"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ed1i"]
-graph_offset = Vector2(-53.9208, 106.927)
+graph_offset = Vector2(-173.253, -73.2987)
 nodes/Attack1/node = SubResource("AnimationNodeAnimation_m141q")
-nodes/Attack1/position = Vector2(320, 480)
+nodes/Attack1/position = Vector2(480, 480)
 nodes/Attack2/node = SubResource("AnimationNodeAnimation_d4mbu")
-nodes/Attack2/position = Vector2(500, 480)
+nodes/Attack2/position = Vector2(660, 480)
 nodes/AttackMul1/node = SubResource("AnimationNodeTimeScale_26ni5")
-nodes/AttackMul1/position = Vector2(320, 340)
+nodes/AttackMul1/position = Vector2(480, 340)
 nodes/AttackMul2/node = SubResource("AnimationNodeTimeScale_kknx2")
-nodes/AttackMul2/position = Vector2(500, 340)
+nodes/AttackMul2/position = Vector2(660, 340)
 nodes/AttackMul3/node = SubResource("AnimationNodeTimeScale_mw611")
-nodes/AttackMul3/position = Vector2(680, 340)
+nodes/AttackMul3/position = Vector2(840, 340)
 nodes/BasicAttack1/node = SubResource("AnimationNodeOneShot_62teb")
-nodes/BasicAttack1/position = Vector2(320, 120)
+nodes/BasicAttack1/position = Vector2(480, 120)
 nodes/BasicAttack2/node = SubResource("AnimationNodeOneShot_cltpr")
-nodes/BasicAttack2/position = Vector2(500, 120)
+nodes/BasicAttack2/position = Vector2(660, 120)
 nodes/BasicAttack3/node = SubResource("AnimationNodeOneShot_c3voj")
-nodes/BasicAttack3/position = Vector2(680, 120)
+nodes/BasicAttack3/position = Vector2(840, 120)
 nodes/E/node = SubResource("AnimationNodeAnimation_qmnyu")
-nodes/E/position = Vector2(1180, 340)
+nodes/E/position = Vector2(1180, 460)
+nodes/EMul/node = SubResource("AnimationNodeTimeScale_hcpua")
+nodes/EMul/position = Vector2(1180, 340)
 nodes/EShot/node = SubResource("AnimationNodeOneShot_q8ohi")
 nodes/EShot/position = Vector2(1180, 120)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_f6qt2")
@@ -128,21 +140,29 @@ nodes/Idle/position = Vector2(-100, 60)
 nodes/IdleWalkBlend/node = SubResource("AnimationNodeBlend2_faeqt")
 nodes/IdleWalkBlend/position = Vector2(80, 120)
 nodes/Q/node = SubResource("AnimationNodeAnimation_4h3xe")
-nodes/Q/position = Vector2(1020, 340)
+nodes/Q/position = Vector2(1020, 460)
+nodes/QMul/node = SubResource("AnimationNodeTimeScale_0lpan")
+nodes/QMul/position = Vector2(1020, 340)
 nodes/QShot/node = SubResource("AnimationNodeOneShot_86bqv")
 nodes/QShot/position = Vector2(1020, 120)
 nodes/R1/node = SubResource("AnimationNodeAnimation_2rntl")
-nodes/R1/position = Vector2(1340, 340)
+nodes/R1/position = Vector2(1340, 460)
+nodes/R1Mul/node = SubResource("AnimationNodeTimeScale_q34da")
+nodes/R1Mul/position = Vector2(1340, 340)
 nodes/R1Shot/node = SubResource("AnimationNodeOneShot_tgito")
 nodes/R1Shot/position = Vector2(1340, 120)
 nodes/R2/node = SubResource("AnimationNodeAnimation_qp8mh")
-nodes/R2/position = Vector2(1500, 340)
+nodes/R2/position = Vector2(1500, 460)
+nodes/R2Mul/node = SubResource("AnimationNodeTimeScale_fkasv")
+nodes/R2Mul/position = Vector2(1500, 340)
 nodes/R2Shot/node = SubResource("AnimationNodeOneShot_k1fbq")
 nodes/R2Shot/position = Vector2(1500, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_q4ou1")
+nodes/TimeScale/position = Vector2(300, 120)
 nodes/W1/node = SubResource("AnimationNodeAnimation_1s66y")
 nodes/W1/position = Vector2(-280, 360)
 nodes/W2/node = SubResource("AnimationNodeAnimation_3efka")
-nodes/W2/position = Vector2(680, 480)
+nodes/W2/position = Vector2(840, 480)
 nodes/WWalkBlend/node = SubResource("AnimationNodeBlend2_k1ot2")
 nodes/WWalkBlend/position = Vector2(-100, 220)
 nodes/Walk/node = SubResource("AnimationNodeAnimation_f2131")
@@ -150,21 +170,30 @@ nodes/Walk/position = Vector2(-420, 220)
 nodes/WalkMul/node = SubResource("AnimationNodeTimeScale_48ckk")
 nodes/WalkMul/position = Vector2(-280, 220)
 nodes/output/position = Vector2(1720, 120)
-node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", &"AttackMul3", 0, &"W2", &"BasicAttack1", 0, &"IdleWalkBlend", &"BasicAttack1", 1, &"AttackMul1", &"BasicAttack2", 0, &"BasicAttack1", &"BasicAttack2", 1, &"AttackMul2", &"BasicAttack3", 0, &"BasicAttack2", &"BasicAttack3", 1, &"AttackMul3", &"EShot", 0, &"QShot", &"EShot", 1, &"E", &"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WWalkBlend", &"QShot", 0, &"BasicAttack3", &"QShot", 1, &"Q", &"R1Shot", 0, &"EShot", &"R1Shot", 1, &"R1", &"R2Shot", 0, &"R1Shot", &"R2Shot", 1, &"R2", &"WWalkBlend", 0, &"WalkMul", &"WWalkBlend", 1, &"W1", &"WalkMul", 0, &"Walk", &"output", 0, &"R2Shot"]
+node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", &"AttackMul3", 0, &"W2", &"BasicAttack1", 0, &"TimeScale", &"BasicAttack1", 1, &"AttackMul1", &"BasicAttack2", 0, &"BasicAttack1", &"BasicAttack2", 1, &"AttackMul2", &"BasicAttack3", 0, &"BasicAttack2", &"BasicAttack3", 1, &"AttackMul3", &"EMul", 0, &"E", &"EShot", 0, &"QShot", &"EShot", 1, &"EMul", &"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WWalkBlend", &"QMul", 0, &"Q", &"QShot", 0, &"BasicAttack3", &"QShot", 1, &"QMul", &"R1Mul", 0, &"R1", &"R1Shot", 0, &"EShot", &"R1Shot", 1, &"R1Mul", &"R2Mul", 0, &"R2", &"R2Shot", 0, &"R1Shot", &"R2Shot", 1, &"R2Mul", &"TimeScale", 0, &"IdleWalkBlend", &"WWalkBlend", 0, &"WalkMul", &"WWalkBlend", 1, &"W1", &"WalkMul", 0, &"Walk", &"output", 0, &"R2Shot"]
 
 [node name="char3" instance=ExtResource("1_lb223")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/5/rotation = Quaternion(0.0391906, 0.0578857, 0.826041, 0.559257)
-bones/6/rotation = Quaternion(-0.135111, -0.000375008, -0.101722, 0.985595)
-bones/7/rotation = Quaternion(0.0576111, -0.0326632, 0.492123, 0.868003)
-bones/9/rotation = Quaternion(0.0391906, -0.0578857, -0.826041, 0.559257)
+bones/0/position = Vector3(2.35962e-24, -0.27815, 0.0633858)
+bones/0/rotation = Quaternion(-0.0743476, -2.05874e-25, 1.98749e-17, 0.997232)
+bones/3/rotation = Quaternion(0.0334057, -7.75915e-26, -7.41755e-18, 0.999442)
+bones/4/rotation = Quaternion(0.0270971, 6.35292e-26, -8.98796e-18, 0.999633)
+bones/5/rotation = Quaternion(-0.0559237, -0.00774747, 0.817648, 0.572944)
+bones/6/rotation = Quaternion(-0.322284, 0.0325463, -0.0748588, 0.943117)
+bones/7/rotation = Quaternion(-0.564256, -0.202038, 0.571527, 0.560493)
+bones/8/rotation = Quaternion(-0.0155977, -0.242944, 0.095589, 0.965193)
+bones/9/rotation = Quaternion(0.0784404, -0.0848469, -0.826228, 0.551358)
 bones/10/rotation = Quaternion(-0.135111, 0.000375008, 0.101722, 0.985595)
-bones/11/rotation = Quaternion(0.0576111, 0.0326632, -0.492123, 0.868003)
-bones/13/rotation = Quaternion(-0.724151, -0.0013968, 0.00825377, 0.68959)
+bones/11/rotation = Quaternion(0.0458884, -0.0484423, -0.649104, 0.757767)
+bones/12/rotation = Quaternion(-0.77541, 0.0692832, -0.232281, 0.583082)
+bones/13/rotation = Quaternion(-0.855007, -0.203261, -0.153497, 0.451761)
+bones/14/position = Vector3(-1.7, -5.3783, -1.88881)
+bones/15/position = Vector3(1.7, -5.3783, 3.11119)
+bones/15/rotation = Quaternion(-0.665574, -0.23877, -0.23877, 0.665574)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.2, 0)
+transform = Transform3D(1, -6.95918e-18, 6.68274e-20, 6.95463e-18, 0.999613, 0.0278044, -2.60297e-19, -0.0278044, 0.999613, -1.88466e-16, 4.8736, -0.628049)
 bone_name = "Bone.004"
 bone_idx = 4
 
@@ -179,7 +208,7 @@ damping_coefficient = 0.07
 pinned_points = [2, 6, 3, 7]
 attachments/0/point_index = 2
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933972)
+attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933971)
 attachments/1/point_index = 6
 attachments/1/spatial_attachment_path = NodePath("..")
 attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
@@ -217,7 +246,7 @@ transform = Transform3D(-2.4, -1.62765e-17, -2.09815e-07, 8.48002e-10, 2.39998, 
 visible = false
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+transform = Transform3D(1, -2.49219e-17, -7.97374e-19, 2.49035e-17, 0.996639, 0.0819168, -1.24683e-18, -0.0819168, 0.996639, -1.58559e-16, 3.67763, -0.529749)
 bone_name = "Bone.003"
 bone_idx = 3
 
@@ -254,18 +283,23 @@ parameters/BasicAttack2/request = 0
 parameters/BasicAttack3/active = false
 parameters/BasicAttack3/internal_active = false
 parameters/BasicAttack3/request = 0
+parameters/EMul/scale = 1.0
 parameters/EShot/active = false
 parameters/EShot/internal_active = false
 parameters/EShot/request = 0
 parameters/IdleWalkBlend/blend_amount = 0.0
+parameters/QMul/scale = 1.0
 parameters/QShot/active = false
 parameters/QShot/internal_active = false
 parameters/QShot/request = 0
+parameters/R1Mul/scale = 1.0
 parameters/R1Shot/active = false
 parameters/R1Shot/internal_active = false
 parameters/R1Shot/request = 0
+parameters/R2Mul/scale = 1.0
 parameters/R2Shot/active = false
 parameters/R2Shot/internal_active = false
 parameters/R2Shot/request = 0
+parameters/TimeScale/scale = 1.0
 parameters/WWalkBlend/blend_amount = 0.0
 parameters/WalkMul/scale = 1.0

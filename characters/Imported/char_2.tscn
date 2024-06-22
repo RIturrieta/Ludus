@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://31ralsek04o4"]
+[gd_scene load_steps=41 format=3 uid="uid://31ralsek04o4"]
 
 [ext_resource type="PackedScene" uid="uid://dk4ytipotiqga" path="res://resources/meshes/char2.glb" id="1_kclxa"]
 [ext_resource type="ArrayMesh" uid="uid://bodvfa3ijbuls" path="res://resources/meshes/Cloak.tres" id="2_dbxly"]
@@ -39,6 +39,8 @@ animation = &"BasicAttack"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_apnru"]
 animation = &"E"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_yhqqt"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_qy0wg"]
 fadein_time = 0.1
 fadeout_time = 0.3
@@ -51,12 +53,16 @@ animation = &"Idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hrob0"]
 animation = &"Q"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_m71a6"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_wman8"]
 fadein_time = 0.2
 fadeout_time = 0.5
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n34np"]
 animation = &"R1"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_wirhe"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cwv5h"]
 fadein_time = 0.1
@@ -65,12 +71,18 @@ fadeout_time = 0.1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lliqm"]
 animation = &"R2"
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_67wu3"]
+
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_p7hl8"]
 fadein_time = 0.1
 fadeout_time = 0.2
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_xaq44"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2cjjq"]
 animation = &"Channeling"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_r7y38"]
 
 [sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_ofmr8"]
 fadein_time = 0.1
@@ -82,7 +94,7 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6gr83"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gjn87"]
-graph_offset = Vector2(-686.735, 70.5415)
+graph_offset = Vector2(-540.834, 30.8855)
 nodes/Attack/node = SubResource("AnimationNodeAnimation_pcdut")
 nodes/Attack/position = Vector2(-420, 560)
 nodes/AttackMul1/node = SubResource("AnimationNodeTimeScale_oumbl")
@@ -90,35 +102,47 @@ nodes/AttackMul1/position = Vector2(-420, 420)
 nodes/BasicAttack1/node = SubResource("AnimationNodeOneShot_0i0h8")
 nodes/BasicAttack1/position = Vector2(-420, 200)
 nodes/E/node = SubResource("AnimationNodeAnimation_apnru")
-nodes/E/position = Vector2(120, 420)
+nodes/E/position = Vector2(120, 560)
+nodes/EMul/node = SubResource("AnimationNodeTimeScale_yhqqt")
+nodes/EMul/position = Vector2(120, 420)
 nodes/EShot/node = SubResource("AnimationNodeOneShot_qy0wg")
 nodes/EShot/position = Vector2(120, 200)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_j88sg")
-nodes/Idle/position = Vector2(-760, 160)
+nodes/Idle/position = Vector2(-960, 160)
 nodes/IdleWalkBlend/node = SubResource("AnimationNodeBlend2_uawbp")
-nodes/IdleWalkBlend/position = Vector2(-600, 200)
+nodes/IdleWalkBlend/position = Vector2(-800, 200)
 nodes/Q/node = SubResource("AnimationNodeAnimation_hrob0")
-nodes/Q/position = Vector2(-240, 420)
+nodes/Q/position = Vector2(-240, 560)
+nodes/QMul/node = SubResource("AnimationNodeTimeScale_m71a6")
+nodes/QMul/position = Vector2(-240, 420)
 nodes/QShot/node = SubResource("AnimationNodeOneShot_wman8")
 nodes/QShot/position = Vector2(-240, 200)
 nodes/R1/node = SubResource("AnimationNodeAnimation_n34np")
-nodes/R1/position = Vector2(300, 420)
+nodes/R1/position = Vector2(300, 560)
+nodes/R1Mul/node = SubResource("AnimationNodeTimeScale_wirhe")
+nodes/R1Mul/position = Vector2(300, 420)
 nodes/R1Shot/node = SubResource("AnimationNodeOneShot_cwv5h")
 nodes/R1Shot/position = Vector2(300, 200)
 nodes/R2/node = SubResource("AnimationNodeAnimation_lliqm")
-nodes/R2/position = Vector2(480, 420)
+nodes/R2/position = Vector2(480, 560)
+nodes/R2Mul/node = SubResource("AnimationNodeTimeScale_67wu3")
+nodes/R2Mul/position = Vector2(480, 420)
 nodes/R2Shot/node = SubResource("AnimationNodeOneShot_p7hl8")
 nodes/R2Shot/position = Vector2(480, 200)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_xaq44")
+nodes/TimeScale/position = Vector2(-600, 220)
 nodes/W/node = SubResource("AnimationNodeAnimation_2cjjq")
-nodes/W/position = Vector2(-60, 420)
+nodes/W/position = Vector2(-60, 560)
+nodes/WMul/node = SubResource("AnimationNodeTimeScale_r7y38")
+nodes/WMul/position = Vector2(-60, 420)
 nodes/WShot/node = SubResource("AnimationNodeOneShot_ofmr8")
 nodes/WShot/position = Vector2(-60, 200)
 nodes/Walk/node = SubResource("AnimationNodeAnimation_rorc4")
-nodes/Walk/position = Vector2(-900, 300)
+nodes/Walk/position = Vector2(-1100, 300)
 nodes/WalkMul/node = SubResource("AnimationNodeTimeScale_6gr83")
-nodes/WalkMul/position = Vector2(-760, 300)
+nodes/WalkMul/position = Vector2(-960, 300)
 nodes/output/position = Vector2(660, 200)
-node_connections = [&"AttackMul1", 0, &"Attack", &"BasicAttack1", 0, &"IdleWalkBlend", &"BasicAttack1", 1, &"AttackMul1", &"EShot", 0, &"WShot", &"EShot", 1, &"E", &"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WalkMul", &"QShot", 0, &"BasicAttack1", &"QShot", 1, &"Q", &"R1Shot", 0, &"EShot", &"R1Shot", 1, &"R1", &"R2Shot", 0, &"R1Shot", &"R2Shot", 1, &"R2", &"WShot", 0, &"QShot", &"WShot", 1, &"W", &"WalkMul", 0, &"Walk", &"output", 0, &"R2Shot"]
+node_connections = [&"AttackMul1", 0, &"Attack", &"BasicAttack1", 0, &"TimeScale", &"BasicAttack1", 1, &"AttackMul1", &"EMul", 0, &"E", &"EShot", 0, &"WShot", &"EShot", 1, &"EMul", &"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WalkMul", &"QMul", 0, &"Q", &"QShot", 0, &"BasicAttack1", &"QShot", 1, &"QMul", &"R1Mul", 0, &"R1", &"R1Shot", 0, &"EShot", &"R1Shot", 1, &"R1Mul", &"R2Mul", 0, &"R2", &"R2Shot", 0, &"R1Shot", &"R2Shot", 1, &"R2Mul", &"TimeScale", 0, &"IdleWalkBlend", &"WMul", 0, &"W", &"WShot", 0, &"QShot", &"WShot", 1, &"WMul", &"WalkMul", 0, &"Walk", &"output", 0, &"R2Shot"]
 
 [node name="char2" instance=ExtResource("1_kclxa")]
 
@@ -134,18 +158,25 @@ mesh = ExtResource("3_4n425")
 transform = Transform3D(-6.95143e-09, 0, 0.15903, 0, 0.15903, 0, -0.15903, 0, -6.95143e-09, 0, 1.41, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0.0285117, -0.938912, -1.02574e-07)
-bones/0/rotation = Quaternion(3.27103e-09, 6.68029e-08, -0.022606, 0.999745)
+bones/0/position = Vector3(0.0285781, -1.01266, -1.66204e-07)
+bones/0/rotation = Quaternion(2.15684e-08, 1.01904e-07, -0.312109, 0.950046)
+bones/1/rotation = Quaternion(-4.61533e-05, -1.87813e-05, -6.79642e-05, 1)
+bones/3/rotation = Quaternion(0.151848, -0.287876, -0.137533, 0.935497)
+bones/4/rotation = Quaternion(-0.159456, 0.259156, 0.161778, 0.938744)
 bones/5/rotation = Quaternion(-0.857493, -2.53747e-08, 4.22912e-08, 0.514496)
-bones/7/rotation = Quaternion(-0.0282299, 7.54827e-08, -2.92254e-10, 0.999601)
-bones/8/rotation = Quaternion(0.0209775, -3.05401e-08, 1.16047e-09, 0.99978)
-bones/13/rotation = Quaternion(-0.0396105, -0.706013, -0.0706505, 0.703552)
-bones/14/rotation = Quaternion(-0.486056, 0.513588, -0.462953, 0.534464)
-bones/15/rotation = Quaternion(-0.0706505, -0.703552, -0.0396105, 0.706012)
-bones/16/rotation = Quaternion(-0.486056, -0.513588, 0.462953, 0.534464)
+bones/7/rotation = Quaternion(-0.0866897, 0.182926, -0.295715, 0.933582)
+bones/8/rotation = Quaternion(0.689007, 0.562695, -0.391859, 0.234714)
+bones/11/rotation = Quaternion(-0.0649829, 0.0441465, 0.237057, 0.968314)
+bones/12/rotation = Quaternion(0.625225, -0.490903, 0.601733, 0.0776244)
+bones/13/position = Vector3(-0.35093, -4.60629, -1.53453)
+bones/13/rotation = Quaternion(-0.394996, -0.586516, -0.420415, 0.568532)
+bones/14/rotation = Quaternion(-0.636279, 0.3085, -0.622052, 0.336197)
+bones/15/position = Vector3(-5.20179, -8.05903, 1.55875)
+bones/15/rotation = Quaternion(-0.259338, -0.657815, -0.230137, 0.668625)
+bones/16/rotation = Quaternion(-0.529764, -0.468372, 0.508608, 0.491218)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.998978, 0.0452004, 1.33424e-07, -0.0452004, 0.998978, -9.56067e-09, -1.33719e-07, 3.5201e-09, 1, 0.227193, 3.45217, -8.71015e-08)
+transform = Transform3D(0.822433, 0.568114, -0.0291507, -0.565655, 0.822156, 0.0639789, 0.0603137, -0.0361292, 0.997525, 2.73416, 2.33576, 0.410897)
 bone_name = "Bone.004"
 bone_idx = 4
 
@@ -159,19 +190,19 @@ damping_coefficient = 0.07
 pinned_points = [600, 452, 132, 596, 448, 128, 696, 428, 228, 692, 424, 224, 854, 349, 389, 850, 353, 385]
 attachments/0/point_index = 600
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-0.0143111, 2.29744, -0.146102)
+attachments/0/offset = Vector3(-0.0143112, 2.29743, -0.146102)
 attachments/1/point_index = 452
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(-0.0144002, 2.33156, -0.000648766)
+attachments/1/offset = Vector3(-0.0144003, 2.33156, -0.000648659)
 attachments/2/point_index = 132
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.0144596, 2.29744, 0.144804)
+attachments/2/offset = Vector3(-0.0144597, 2.29743, 0.144804)
 attachments/3/point_index = 596
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(-0.401493, 2.3634, -0.134648)
+attachments/3/offset = Vector3(-0.401493, 2.3634, -0.134647)
 attachments/4/point_index = 448
 attachments/4/spatial_attachment_path = NodePath("..")
-attachments/4/offset = Vector3(-0.401582, 2.3983, -0.000876366)
+attachments/4/offset = Vector3(-0.401582, 2.3983, -0.00087626)
 attachments/5/point_index = 128
 attachments/5/spatial_attachment_path = NodePath("..")
 attachments/5/offset = Vector3(-0.401641, 2.3634, 0.132895)
@@ -180,40 +211,40 @@ attachments/6/spatial_attachment_path = NodePath("..")
 attachments/6/offset = Vector3(-0.401434, 2.48047, -0.246079)
 attachments/7/point_index = 428
 attachments/7/spatial_attachment_path = NodePath("..")
-attachments/7/offset = Vector3(-0.401582, 2.62542, -0.000876366)
+attachments/7/offset = Vector3(-0.401582, 2.62542, -0.00087626)
 attachments/8/point_index = 228
 attachments/8/spatial_attachment_path = NodePath("..")
 attachments/8/offset = Vector3(-0.401731, 2.48047, 0.244327)
 attachments/9/point_index = 692
 attachments/9/spatial_attachment_path = NodePath("..")
-attachments/9/offset = Vector3(-0.0142518, 2.41191, -0.25503)
+attachments/9/offset = Vector3(-0.0142519, 2.41191, -0.25503)
 attachments/10/point_index = 424
 attachments/10/spatial_attachment_path = NodePath("..")
-attachments/10/offset = Vector3(-0.0144002, 2.55357, -0.000648766)
+attachments/10/offset = Vector3(-0.0144003, 2.55357, -0.000648659)
 attachments/11/point_index = 224
 attachments/11/spatial_attachment_path = NodePath("..")
-attachments/11/offset = Vector3(-0.014519, 2.41191, 0.253733)
+attachments/11/offset = Vector3(-0.0145191, 2.41191, 0.253733)
 attachments/12/point_index = 854
 attachments/12/spatial_attachment_path = NodePath("..")
-attachments/12/offset = Vector3(-0.401493, 0.0994043, -0.162486)
+attachments/12/offset = Vector3(-0.401493, 0.0994024, -0.162486)
 attachments/13/point_index = 349
 attachments/13/spatial_attachment_path = NodePath("..")
-attachments/13/offset = Vector3(-0.401582, 0.0994043, -0.000876366)
+attachments/13/offset = Vector3(-0.401582, 0.0994024, -0.000876262)
 attachments/14/point_index = 389
 attachments/14/spatial_attachment_path = NodePath("..")
-attachments/14/offset = Vector3(-0.401671, 0.0994043, 0.160734)
+attachments/14/offset = Vector3(-0.401671, 0.0994024, 0.160734)
 attachments/15/point_index = 850
 attachments/15/spatial_attachment_path = NodePath("..")
-attachments/15/offset = Vector3(-0.0142813, 0.0840874, -0.173296)
+attachments/15/offset = Vector3(-0.0142814, 0.0840845, -0.173296)
 attachments/16/point_index = 353
 attachments/16/spatial_attachment_path = NodePath("..")
-attachments/16/offset = Vector3(-0.0144, 0.0840874, -0.000648766)
+attachments/16/offset = Vector3(-0.0144001, 0.0840845, -0.000648661)
 attachments/17/point_index = 385
 attachments/17/spatial_attachment_path = NodePath("..")
-attachments/17/offset = Vector3(-0.0144892, 0.0840874, 0.171998)
+attachments/17/offset = Vector3(-0.0144892, 0.0840845, 0.171998)
 
 [node name="Back" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.998978, 0.0452004, 1.33424e-07, -0.0452004, 0.998978, -9.56068e-09, -1.33719e-07, 3.5201e-09, 1, 0.176033, 2.32147, -9.10857e-08)
+transform = Transform3D(0.436721, 0.680145, -0.588792, -0.749904, 0.636772, 0.179347, 0.496908, 0.363213, 0.788136, 1.96433, 1.61503, -0.000209191)
 bone_name = "Bone.003"
 bone_idx = 3
 
@@ -226,28 +257,28 @@ damping_coefficient = 0.07
 pinned_points = [2, 50, 54, 37, 36, 0, 33, 55, 49, 40]
 attachments/0/point_index = 2
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-0.884906, 1.12024, -0.0452899)
+attachments/0/offset = Vector3(-0.884906, 1.12024, -0.0452914)
 attachments/1/point_index = 50
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(-0.893122, 1.06716, -0.383812)
+attachments/1/offset = Vector3(-0.893122, 1.06716, -0.383813)
 attachments/2/point_index = 54
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.901339, 1.01409, -0.722333)
+attachments/2/offset = Vector3(-0.901338, 1.01409, -0.722335)
 attachments/3/point_index = 37
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(-0.909542, 0.96101, -1.06086)
+attachments/3/offset = Vector3(-0.909541, 0.96101, -1.06086)
 attachments/4/point_index = 36
 attachments/4/spatial_attachment_path = NodePath("..")
-attachments/4/offset = Vector3(-0.917758, 0.907933, -1.39938)
+attachments/4/offset = Vector3(-0.917757, 0.907933, -1.39938)
 attachments/5/point_index = 0
 attachments/5/spatial_attachment_path = NodePath("..")
-attachments/5/offset = Vector3(-1.52586, 0.57103, -0.100066)
+attachments/5/offset = Vector3(-1.52586, 0.57103, -0.100067)
 attachments/6/point_index = 33
 attachments/6/spatial_attachment_path = NodePath("..")
-attachments/6/offset = Vector3(-1.04859, 1.17872, -0.397102)
+attachments/6/offset = Vector3(-1.04859, 1.17872, -0.397103)
 attachments/7/point_index = 55
 attachments/7/spatial_attachment_path = NodePath("..")
-attachments/7/offset = Vector3(-1.05459, 1.12414, -0.73543)
+attachments/7/offset = Vector3(-1.05459, 1.12414, -0.735431)
 attachments/8/point_index = 49
 attachments/8/spatial_attachment_path = NodePath("..")
 attachments/8/offset = Vector3(-1.0606, 1.06941, -1.07376)
@@ -256,12 +287,12 @@ attachments/9/spatial_attachment_path = NodePath("..")
 attachments/9/offset = Vector3(-1.06661, 1.01484, -1.41209)
 
 [node name="LHand" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.998978, -0.0256158, 0.0372412, -0.0452004, -0.566134, 0.823072, -1.19681e-07, -0.823915, -0.566714, 0.124179, 1.17545, -3.37035)
+transform = Transform3D(-0.755488, -0.131064, -0.641918, -0.623282, -0.158127, 0.765842, -0.201879, 0.978682, 0.0377728, 3.2044, -0.622287, -2.02809)
 bone_name = "Bone.008_L"
 bone_idx = 8
 
 [node name="bow" parent="Armature/Skeleton3D/LHand" index="0" instance=ExtResource("2_jvoeo")]
-transform = Transform3D(3.27121, -4.99722, -1.9666, 1.90973, -1.06972, 5.89485, -5.01922, -3.66388, 0.961185, -0.0368111, 2.66266, -0.132379)
+transform = Transform3D(-3.97027, -3.44308, -3.45293, -3.2548, 5.18682, -1.42957, 3.63093, 0.884653, -5.0571, -0.0368111, 2.66266, -0.132379)
 rotation_edit_mode = 1
 
 [node name="Skeleton3D" parent="Armature/Skeleton3D/LHand/bow/Bow" index="0"]
@@ -298,19 +329,25 @@ parameters/AttackMul1/scale = 1.0
 parameters/BasicAttack1/active = false
 parameters/BasicAttack1/internal_active = false
 parameters/BasicAttack1/request = 0
+parameters/EMul/scale = 1.0
 parameters/EShot/active = false
 parameters/EShot/internal_active = false
 parameters/EShot/request = 0
 parameters/IdleWalkBlend/blend_amount = 1.0
+parameters/QMul/scale = 1.0
 parameters/QShot/active = false
 parameters/QShot/internal_active = false
 parameters/QShot/request = 0
+parameters/R1Mul/scale = 1.0
 parameters/R1Shot/active = false
 parameters/R1Shot/internal_active = false
 parameters/R1Shot/request = 0
+parameters/R2Mul/scale = 1.0
 parameters/R2Shot/active = false
 parameters/R2Shot/internal_active = false
 parameters/R2Shot/request = 0
+parameters/TimeScale/scale = 1.0
+parameters/WMul/scale = 1.0
 parameters/WShot/active = false
 parameters/WShot/internal_active = false
 parameters/WShot/request = 0

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ubhl6aulsmgo"]
+
+[ext_resource type="Script" path="res://scenes/effects/stop_time/stop_time.gd" id="1_2uxi1"]
+
+[node name="stop_time" type="Node3D"]
+script = ExtResource("1_2uxi1")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true

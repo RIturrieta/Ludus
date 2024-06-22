@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cakmqy4wbdbqe"]
+
+[ext_resource type="Script" path="res://scenes/effects/charges_modifier/charges_modifier.gd" id="1_hu070"]
+
+[node name="charges_modifier" type="Node3D"]
+script = ExtResource("1_hu070")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmtkpilsc1ab8"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/add_charges_E/add_charges_E.gd" id="1_w72ep"]
+
+[node name="add_charges_E" type="Node3D"]
+script = ExtResource("1_w72ep")
+
+[node name="preview" type="MeshInstance3D" parent="."]

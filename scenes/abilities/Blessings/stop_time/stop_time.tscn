@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://vlxj5iqujkbo"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/stop_time/stop_time.gd" id="1_sll16"]
+
+[node name="stop_time" type="Node3D"]
+script = ExtResource("1_sll16")
+duration = 7.0
+damage = 0.0
+mana_cost = 50.0
+cooldown = 99.0
+
+[node name="preview" type="MeshInstance3D" parent="."]

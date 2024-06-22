@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl3v8t1a46ugx"]
+
+[ext_resource type="Script" path="res://scenes/effects/basic_attack_modifier/basic_attack_modifier.gd" id="1_wbrvn"]
+
+[node name="basic_attack_modifier" type="Node3D"]
+script = ExtResource("1_wbrvn")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true

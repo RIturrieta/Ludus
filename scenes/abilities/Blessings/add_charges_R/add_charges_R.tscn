@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddo7tva0ipg6l"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/add_charges_R/add_charges_R.gd" id="1_0u5lk"]
+
+[node name="add_charges_R" type="Node3D"]
+script = ExtResource("1_0u5lk")
+
+[node name="preview" type="MeshInstance3D" parent="."]

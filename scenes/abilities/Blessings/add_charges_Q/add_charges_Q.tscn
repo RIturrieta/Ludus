@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bo1qpc2luue60"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/add_charges_Q/add_charges_Q.gd" id="1_umuun"]
+
+[node name="add_charges_Q" type="Node3D"]
+script = ExtResource("1_umuun")
+damage = 0.0
+mana_cost = 0.0
+cooldown = 0.0
+
+[node name="preview" type="MeshInstance3D" parent="."]
