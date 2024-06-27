@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5hufqs7sbm01"]
+[gd_scene load_steps=10 format=3 uid="uid://b5hufqs7sbm01"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ysfbh"]
 [ext_resource type="PackedScene" uid="uid://875aj4ot3cg" path="res://characters/Lord Valthor.tscn" id="2_lwen3"]
 [ext_resource type="PackedScene" uid="uid://dusubx1tn21bq" path="res://characters/Sorde.tscn" id="3_1llaj"]
 [ext_resource type="PackedScene" uid="uid://ct16wr3phrsg1" path="res://characters/Robin.tscn" id="4_6ufd5"]
 [ext_resource type="PackedScene" uid="uid://d02wl7umypceg" path="res://scenes/ui/blessing_panel_choice.tscn" id="4_l4cp8"]
+[ext_resource type="PackedScene" uid="uid://do4ay3txy7cgx" path="res://characters/Airi.tscn" id="5_6rn4y"]
 
 [sub_resource type="Animation" id="Animation_cd0ul"]
 resource_name = "FadeOut"
@@ -58,7 +59,7 @@ _data = {
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ysfbh")
-player_scene = Array[PackedScene]([ExtResource("2_lwen3"), ExtResource("3_1llaj"), ExtResource("4_6ufd5")])
+player_scene = Array[PackedScene]([ExtResource("2_lwen3"), ExtResource("3_1llaj"), ExtResource("4_6ufd5"), ExtResource("5_6rn4y")])
 
 [node name="Players" type="Node3D" parent="."]
 

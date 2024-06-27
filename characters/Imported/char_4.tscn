@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://v8nrt3gq2ybc"]
+
+[ext_resource type="PackedScene" uid="uid://b8yuuqeq384ca" path="res://resources/meshes/char4.glb" id="1_cmnol"]
+[ext_resource type="PackedScene" uid="uid://dlkvxduoii0es" path="res://resources/meshes/the_witchs_hat.glb" id="2_3puxr"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_murr8"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_bswdx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j4tnk"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_k580x"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ul7jd"]
+graph_offset = Vector2(-781.195, -20.911)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_murr8")
+nodes/Idle/position = Vector2(-700, 60)
+nodes/IdleWalkBlend/node = SubResource("AnimationNodeBlend2_bswdx")
+nodes/IdleWalkBlend/position = Vector2(-360, 100)
+nodes/Walk/node = SubResource("AnimationNodeAnimation_j4tnk")
+nodes/Walk/position = Vector2(-800, 200)
+nodes/WalkMul/node = SubResource("AnimationNodeTimeScale_k580x")
+nodes/WalkMul/position = Vector2(-554.769, 204.385)
+node_connections = [&"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WalkMul", &"WalkMul", 0, &"Walk", &"output", 0, &"IdleWalkBlend"]
+
+[node name="char4" instance=ExtResource("1_cmnol")]
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0.0342259, 1.03403, -7.41691e-09)
+bones/0/rotation = Quaternion(-0.00422011, -0.370186, -0.0105893, 0.928888)
+bones/4/rotation = Quaternion(0.000861342, 0.370234, 0.00216148, 0.928936)
+bones/6/rotation = Quaternion(-0.0992867, -0.00616044, -0.0402643, 0.994225)
+bones/7/rotation = Quaternion(0.621113, 0.00825928, -0.382142, 0.684191)
+bones/8/rotation = Quaternion(0.676065, 0.3147, 0.534005, 0.39842)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(0.0330888, 0.0217175, 0.132811, 0.990351)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/rotation = Quaternion(0.55917, 0.226362, -0.580795, 0.546595)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
+bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
+bones/12/position = Vector3(-0.233789, 0.02963, 0.13333)
+bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
+bones/12/scale = Vector3(1, 1, 1)
+
+[node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.999835, 0.0181444, 5.19753e-05, -0.0181444, 0.999835, -9.46224e-07, -5.20349e-05, 6.98492e-10, 1, 0.0483601, 1.65387, -7.41691e-09)
+bone_name = "Bone.004"
+bone_idx = 4
+
+[node name="Sketchfab_Scene" parent="Armature/Skeleton3D/Head" index="0" instance=ExtResource("2_3puxr")]
+transform = Transform3D(0.0118213, -0.00205764, -0.000147919, 0.00206003, 0.0117285, 0.00148225, -0.000109592, -0.00148557, 0.0119072, -0.577516, 3.33353, -3.87736)
+
+[node name="HealthMarker" type="Marker3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44015, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeBlendTree_ul7jd")
+anim_player = NodePath("../AnimationPlayer")
+parameters/IdleWalkBlend/blend_amount = 0.0
+parameters/WalkMul/scale = 1.0
+
+[editable path="Armature/Skeleton3D/Head/Sketchfab_Scene"]

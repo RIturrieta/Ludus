@@ -28,7 +28,7 @@ func _ready() -> void:
 		if player_data.character == (Statics.Character.CHAR1 - test):
 			player = player_scene[0].instantiate()
 		elif player_data.character == (Statics.Character.CHAR3 - test):
-			player = player_scene[2].instantiate()
+			player = player_scene[1].instantiate()
 		
 		var spawn_points = test_arena.get_node("SpawnPoints")
 		for spawn_point in spawn_points.get_children():

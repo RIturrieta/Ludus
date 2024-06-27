@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://do4ay3txy7cgx"]
+
+[ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_dghg7"]
+[ext_resource type="PackedScene" uid="uid://v8nrt3gq2ybc" path="res://characters/Imported/char_4.tscn" id="2_nyjmj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_j8a8k"]
+height = 0.5
+radius = 0.3
+
+[node name="Airi" type="Node3D"]
+
+[node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_dghg7")]
+character_node = NodePath("char4")
+attack_duration = 0.917
+
+[node name="char4" parent="BaseCharacter" instance=ExtResource("2_nyjmj")]
+
+[node name="Skeleton3D" parent="BaseCharacter/char4/Armature" index="0"]
+bones/0/position = Vector3(-0.0606322, 1.0448, -7.48929e-09)
+bones/0/rotation = Quaternion(-3.62767e-06, -0.37021, -9.10271e-06, 0.928948)
+bones/4/rotation = Quaternion(-0.00239581, 0.370227, -0.00601214, 0.928919)
+bones/6/rotation = Quaternion(-0.0837943, -0.0185984, -0.0493732, 0.995085)
+bones/7/rotation = Quaternion(0.602926, 0.0174703, -0.381748, 0.700317)
+bones/9/rotation = Quaternion(0.0545402, 0.052724, 0.136899, 0.987676)
+bones/10/rotation = Quaternion(0.550098, 0.247901, -0.563967, 0.563807)
+
+[node name="Head" parent="BaseCharacter/char4/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.999916, 0.0129632, 5.19454e-05, -0.0129632, 0.999916, -6.78549e-07, -5.20051e-05, 3.72529e-09, 1, -0.06062, 1.6648, -7.49295e-09)
+
+[node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_j8a8k")
+
+[editable path="BaseCharacter"]
+[editable path="BaseCharacter/char4"]
+[editable path="BaseCharacter/char4/Armature/Skeleton3D/Head/Sketchfab_Scene"]
