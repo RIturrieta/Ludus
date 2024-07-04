@@ -25,7 +25,7 @@ bones/9/rotation = Quaternion(0.0545402, 0.052724, 0.136899, 0.987676)
 bones/10/rotation = Quaternion(0.550098, 0.247901, -0.563967, 0.563807)
 
 [node name="Head" parent="BaseCharacter/char4/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.999916, 0.0129632, 5.19454e-05, -0.0129632, 0.999916, -6.78549e-07, -5.20051e-05, 3.72529e-09, 1, -0.06062, 1.6648, -7.49295e-09)
+transform = Transform3D(0.999916, 0.0129632, 5.30183e-05, -0.0129632, 0.999916, -6.87418e-07, -5.31077e-05, -4.65661e-10, 1, -0.0606201, 1.6648, -7.49267e-09)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

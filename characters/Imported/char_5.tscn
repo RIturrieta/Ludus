@@ -1,0 +1,162 @@
+[gd_scene load_steps=26 format=3 uid="uid://bpvdrinxsihjs"]
+
+[ext_resource type="PackedScene" uid="uid://db7nls3qhim1y" path="res://resources/meshes/char5.glb" id="1_i4bru"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m141q"]
+animation = &"BasicAttack1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d4mbu"]
+animation = &"BasicAttack2"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_26ni5"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_kknx2"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_62teb"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_cltpr"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f6qt2"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_faeqt"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4h3xe"]
+animation = &"Q"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0lpan"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_86bqv"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2rntl"]
+animation = &"R1"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_q34da"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_tgito"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qp8mh"]
+animation = &"R2"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_fkasv"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_k1fbq"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_q4ou1"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qmnyu"]
+animation = &"W"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_hcpua"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_q8ohi"]
+fadein_time = 0.1
+fadeout_time = 0.1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f2131"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_48ckk"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2l56q"]
+graph_offset = Vector2(-15.0806, -6.82919)
+nodes/Attack1/node = SubResource("AnimationNodeAnimation_m141q")
+nodes/Attack1/position = Vector2(480, 480)
+nodes/Attack2/node = SubResource("AnimationNodeAnimation_d4mbu")
+nodes/Attack2/position = Vector2(660, 480)
+nodes/AttackMul1/node = SubResource("AnimationNodeTimeScale_26ni5")
+nodes/AttackMul1/position = Vector2(480, 340)
+nodes/AttackMul2/node = SubResource("AnimationNodeTimeScale_kknx2")
+nodes/AttackMul2/position = Vector2(660, 340)
+nodes/BasicAttack1/node = SubResource("AnimationNodeOneShot_62teb")
+nodes/BasicAttack1/position = Vector2(480, 120)
+nodes/BasicAttack2/node = SubResource("AnimationNodeOneShot_cltpr")
+nodes/BasicAttack2/position = Vector2(660, 120)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_f6qt2")
+nodes/Idle/position = Vector2(-100, 60)
+nodes/IdleWalkBlend/node = SubResource("AnimationNodeBlend2_faeqt")
+nodes/IdleWalkBlend/position = Vector2(100, 120)
+nodes/Q/node = SubResource("AnimationNodeAnimation_4h3xe")
+nodes/Q/position = Vector2(1020, 460)
+nodes/QMul/node = SubResource("AnimationNodeTimeScale_0lpan")
+nodes/QMul/position = Vector2(1020, 340)
+nodes/QShot/node = SubResource("AnimationNodeOneShot_86bqv")
+nodes/QShot/position = Vector2(1020, 120)
+nodes/R1/node = SubResource("AnimationNodeAnimation_2rntl")
+nodes/R1/position = Vector2(1340, 460)
+nodes/R1Mul/node = SubResource("AnimationNodeTimeScale_q34da")
+nodes/R1Mul/position = Vector2(1340, 340)
+nodes/R1Shot/node = SubResource("AnimationNodeOneShot_tgito")
+nodes/R1Shot/position = Vector2(1340, 120)
+nodes/R2/node = SubResource("AnimationNodeAnimation_qp8mh")
+nodes/R2/position = Vector2(1500, 460)
+nodes/R2Mul/node = SubResource("AnimationNodeTimeScale_fkasv")
+nodes/R2Mul/position = Vector2(1500, 340)
+nodes/R2Shot/node = SubResource("AnimationNodeOneShot_k1fbq")
+nodes/R2Shot/position = Vector2(1500, 120)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_q4ou1")
+nodes/TimeScale/position = Vector2(300, 120)
+nodes/W/node = SubResource("AnimationNodeAnimation_qmnyu")
+nodes/W/position = Vector2(1180, 460)
+nodes/WMul/node = SubResource("AnimationNodeTimeScale_hcpua")
+nodes/WMul/position = Vector2(1180, 340)
+nodes/WShot/node = SubResource("AnimationNodeOneShot_q8ohi")
+nodes/WShot/position = Vector2(1180, 120)
+nodes/Walk/node = SubResource("AnimationNodeAnimation_f2131")
+nodes/Walk/position = Vector2(-420, 220)
+nodes/WalkMul/node = SubResource("AnimationNodeTimeScale_48ckk")
+nodes/WalkMul/position = Vector2(-280, 220)
+nodes/output/position = Vector2(1720, 120)
+node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", &"BasicAttack1", 0, &"TimeScale", &"BasicAttack1", 1, &"AttackMul1", &"BasicAttack2", 0, &"BasicAttack1", &"BasicAttack2", 1, &"AttackMul2", &"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WalkMul", &"QMul", 0, &"Q", &"QShot", 0, &"BasicAttack2", &"QShot", 1, &"QMul", &"R1Mul", 0, &"R1", &"R1Shot", 0, &"WShot", &"R1Shot", 1, &"R1Mul", &"R2Mul", 0, &"R2", &"R2Shot", 0, &"R1Shot", &"R2Shot", 1, &"R2Mul", &"TimeScale", 0, &"IdleWalkBlend", &"WMul", 0, &"W", &"WShot", 0, &"QShot", &"WShot", 1, &"WMul", &"WalkMul", 0, &"Walk", &"output", 0, &"R2Shot"]
+
+[node name="char5" instance=ExtResource("1_i4bru")]
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0, 0.8, 0)
+bones/2/position = Vector3(-0.189067, 0.400222, 1.2)
+bones/3/position = Vector3(-0.189067, 0.400222, -1.2)
+bones/4/rotation = Quaternion(0.965926, -3.08536e-08, -1.15147e-07, 0.258819)
+bones/5/rotation = Quaternion(0.965926, -4.3693e-17, -5.14141e-17, -0.258819)
+
+[node name="HealthMarker" type="Marker3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83203, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeBlendTree_2l56q")
+anim_player = NodePath("../AnimationPlayer")
+parameters/AttackMul1/scale = 1.0
+parameters/AttackMul2/scale = 1.0
+parameters/BasicAttack1/active = false
+parameters/BasicAttack1/internal_active = false
+parameters/BasicAttack1/request = 0
+parameters/BasicAttack2/active = false
+parameters/BasicAttack2/internal_active = false
+parameters/BasicAttack2/request = 0
+parameters/IdleWalkBlend/blend_amount = 0.0
+parameters/QMul/scale = 1.0
+parameters/QShot/active = false
+parameters/QShot/internal_active = false
+parameters/QShot/request = 0
+parameters/R1Mul/scale = 1.0
+parameters/R1Shot/active = false
+parameters/R1Shot/internal_active = false
+parameters/R1Shot/request = 0
+parameters/R2Mul/scale = 1.0
+parameters/R2Shot/active = false
+parameters/R2Shot/internal_active = false
+parameters/R2Shot/request = 0
+parameters/TimeScale/scale = 1.0
+parameters/WMul/scale = 1.0
+parameters/WShot/active = false
+parameters/WShot/internal_active = false
+parameters/WShot/request = 0
+parameters/WalkMul/scale = 1.0
