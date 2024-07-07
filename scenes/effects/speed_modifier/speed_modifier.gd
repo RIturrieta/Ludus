@@ -13,8 +13,9 @@ static func create(duration_: float, percentage_: float) -> SpeedModifierEffect:
 	return modifier
 
 func _ready():
-	timer.timeout.connect(stop)
-	timer.start(duration)
+	if duration > 0:
+		timer.timeout.connect(stop)
+		timer.start(duration)
 
 func apply():
 	is_applied = true

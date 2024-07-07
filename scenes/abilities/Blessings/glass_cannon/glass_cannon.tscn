@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyrkxua6who6g"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/glass_cannon/glass_cannon.gd" id="1_bfsta"]
+
+[node name="glass_cannon" type="Node3D"]
+script = ExtResource("1_bfsta")
+max_hp_percentage = -50.0
+spell_power_percentage = 90.0
+attack_damage_multiplier = 1.9
+
+[node name="preview" type="MeshInstance3D" parent="."]

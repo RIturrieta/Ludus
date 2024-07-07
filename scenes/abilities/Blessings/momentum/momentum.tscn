@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://byujj6dbo05k7"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/momentum/momentum.gd" id="1_2ko7w"]
+
+[node name="momentum" type="Node3D"]
+script = ExtResource("1_2ko7w")
+damage = 0.0
+cooldown = 30.0
+
+[node name="preview" type="MeshInstance3D" parent="."]

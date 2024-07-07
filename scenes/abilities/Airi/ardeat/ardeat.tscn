@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://de74ff2k63n56"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Airi/ardeat/ardeat.gd" id="1_l3uyd"]
+
+[node name="ardeat" type="Node3D"]
+script = ExtResource("1_l3uyd")
+radius = 8.0
+damage = 200.0
+mana_cost = 14.0
+cooldown = 8.0
+
+[node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="raycast" type="RayCast3D" parent="."]
+enabled = false
+collision_mask = 0
+
+[node name="limit_mark" type="Marker3D" parent="raycast"]
+
+[node name="projectiles" type="Node3D" parent="."]

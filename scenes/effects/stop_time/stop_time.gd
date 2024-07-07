@@ -37,6 +37,17 @@ func stopTime():
 	chara.can_move = false
 	chara.can_rotate = false
 	chara.can_cast = false
+	for key in chara.abilities.keys():
+		for timer: Timer in chara.abilities[key][1].cooldown_timers.get_children():
+			if !timer.is_stopped():
+				timer.paused = true
+	
+	for effect: Effect in chara.effects.get_children():
+		if !effect.timer.is_stopped():
+			effect.timer.paused = true
+	
+	
+	
 	chara.character_animations.set("parameters/TimeScale/scale", 0)
 	for i in range(chara.total_attack_animations):
 		chara.character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", 0)
@@ -60,4 +71,12 @@ func resumeTime():
 	chara.character_animations.set("parameters/EMul/scale", 1)
 	chara.character_animations.set("parameters/R1Mul/scale", 1)
 	chara.character_animations.set("parameters/R2Mul/scale", 1)
+	
+	for key in chara.abilities.keys():
+		for timer: Timer in chara.abilities[key][1].cooldown_timers.get_children():
+			if timer.paused:
+				timer.paused = false
+	for effect: Effect in chara.effects.get_children():
+		if effect.timer.paused:
+			effect.timer.paused = false
 

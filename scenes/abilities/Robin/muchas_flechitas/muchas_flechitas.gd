@@ -35,7 +35,7 @@ func _physics_process(delta):
 		if pulse_frames == pulse_delay:
 			pulse_frames = 0
 			for player: BaseCharacter in mouse_area.get_overlapping_bodies():
-				if player.get_parent() != chara.get_parent():
+				if player.team != chara.team:
 					player.takeAbilityDamage(damage, chara.spell_power)
 
 func beginExecution():
@@ -46,7 +46,7 @@ func beginExecution():
 		chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.can_act = true
+	pass
 
 func endExecution():
 	casting = false
@@ -54,9 +54,9 @@ func endExecution():
 	rain_timer.start(rain_duration)
 	preview.visible = true
 	chara.can_act = true
+	chara.can_cast = true
 
 func _on_rain_timeout():
 	raining = false
 	pulse_frames = 0
 	preview.visible = false
-	chara.can_cast = true

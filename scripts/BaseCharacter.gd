@@ -4,6 +4,7 @@ extends CharacterBody3D
 const SPEED = 4.5
 
 var player_info: Statics.PlayerData = null
+var team: Statics.Role = Statics.Role.NONE
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -24,6 +25,10 @@ var locked_camera = true
 @onready var camera_transform = $CameraTransform
 
 @onready var label_3d = $Label3D
+
+@onready var effects = $Effects
+@onready var abilities_node = $Abilities
+
 
 @export var character_node: Node3D
 var character_animations: AnimationTree
@@ -55,8 +60,10 @@ var mouse_pos: Vector3
 
 # ========== STATS ========== #
 @export_category("Stats")
-@export var hp: float = 1000
-@export var mana: float = 100
+@export var max_hp: float = 1000
+@onready var hp: float = max_hp
+@export var max_mana: float = 100
+@onready var mana: float = max_mana
 @export var attack_damage: float = 100
 @export var spell_power: float = 0
 @export var physical_armor: float = 0
@@ -74,6 +81,7 @@ var can_act: bool = false
 var can_cast: bool = true
 @export var total_attack_animations: int = 2
 @export var attack_duration: float = 1
+@export_range(1,2) var r_index: int = 1
 var basic_attack: Ability = null
 
 signal defeated(character_id: int)
@@ -201,7 +209,7 @@ func _input(event):
 			   # Mouse in viewport coordinates.
 		elif event is InputEventMouseMotion:
 			moveCameraByCursor(event.position)
-	
+
 func screenPointToRay():
 	var space_state = get_world_3d().direct_space_state
 	var mouse_position = get_viewport().get_mouse_position()
@@ -233,7 +241,7 @@ func moveCameraByCursor(_position: Vector2):
 			dir += Vector2(0.0, -camera_follow_speed)
 		path_3d.global_position += Vector3(dir.x, 0.0, dir.y)
 
-# Moves the character to a certain point without using the navigation agent
+## Moves the character to a certain point without using the navigation agent
 @rpc("any_peer", "call_local")
 func fixedMovement(direction: Vector3, speed: float, fixing: bool = true):
 	updateTargetLocation(global_position)
@@ -280,15 +288,16 @@ func heal(points: float):
 	"Q": "",
 	"W": "",
 	"E": "",
-	"R": "",
+	"R1": "",
+	"R2": "",
 	"1": "",
 	"2": "", 
 	"3": "",
 	"4": "",
 }
 
-# Adds an ability to the player assigning it to a key. If the key is invalid, the ability will be
-# added as a non-input (passive) ability.
+## Adds an ability to the player assigning it to a key. If the key is invalid, the ability will be
+## added as a non-input (passive) ability.
 func loadAbility(ability_name: String, key: String = ""):
 	var no_ability = false
 	var path = "res://scenes/abilities/" + get_parent().name + "/" + ability_name + "/" + ability_name + ".tscn"
@@ -301,6 +310,7 @@ func loadAbility(ability_name: String, key: String = ""):
 				no_ability = true
 	var sceneNode = load(path).instantiate()
 	sceneNode.set_multiplayer_authority(get_multiplayer_authority())
+	sceneNode.key = key
 	if key in abilities.keys():
 		if abilities[key] is Array:
 			abilities[key][1].queue_free()
@@ -309,21 +319,28 @@ func loadAbility(ability_name: String, key: String = ""):
 			abilities[key] = ["base_ability", sceneNode]
 		else:
 			abilities[key] = [abilities[key], sceneNode]
-	$Abilities.add_child(sceneNode, true)
+	abilities_node.add_child(sceneNode, true)
 
-# Executes abilities based on the input
+
+## Executes abilities based on the input
 func beginAbilityExecutions():
 	for key in abilities.keys():
 		if key != "BA":
+			var input_key = key
+			if key == "R1" or key == "R2":
+				if key == "R" + str(r_index):
+					input_key = "R"
+				else:
+					continue
 			if Input.is_action_pressed("Shift") and is_multiplayer_authority():
-				if Input.is_action_just_pressed(key):
+				if Input.is_action_just_pressed(input_key):
 					abilities[key][1].preview.visible = true
-				if Input.is_action_just_released(key):
-					beginRemoteExecution.rpc(key)
+				if Input.is_action_just_released(input_key):
+					beginRemoteExecution.rpc(input_key)
 			elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
 				abilities[key][1].preview.visible = false
 			else:
-				if Input.is_action_just_pressed(key) and is_multiplayer_authority():
+				if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
 					beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations
@@ -358,27 +375,27 @@ func updateMousePos(pos: Vector3):
 
 func applyEffect(effect: Effect):
 	effect.set_multiplayer_authority(get_multiplayer_authority())
-	$Effects.add_child(effect)
+	effects.add_child(effect)
 	
 func dash(amount: float):
 	is_dashing = true
 	var _dash = DashEffect.create(amount)
 	_dash.set_multiplayer_authority(get_multiplayer_authority())
-	$Effects.add_child(_dash)
+	effects.add_child(_dash)
 
 func modifySpeed(duration: float, percentage: float):
 	var _modifier = SpeedModifierEffect.create(duration, percentage)
 	_modifier.set_multiplayer_authority(get_multiplayer_authority())
-	$Effects.add_child(_modifier)
+	effects.add_child(_modifier)
 
 func manageSpeedModifiers():
 	var _dash: DashEffect = null
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is DashEffect:
 			_dash = effect
 			break
 	var actual_slow: SpeedModifierEffect = null
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is SpeedModifierEffect:
 			if effect.percentage < 0:     # slow
 				if actual_slow == null:
@@ -402,61 +419,67 @@ func manageSpeedModifiers():
 		_dash.apply()
 
 func stun(duration: float):
-	if $Effects.get_children().any(func (x): return x is StunEffect):
-		for effect in $Effects.get_children():
+	if effects.get_children().any(func (x): return x is StunEffect):
+		for effect in effects.get_children():
 			if effect is StunEffect:
 				if duration > effect.timer.time_left:
 					effect.stop()
 					var _stun = StunEffect.create(duration)
-					$Effects.add_child(_stun)
+					effects.add_child(_stun)
 					break
 	else:
 		var _stun = StunEffect.create(duration)
 		_stun.set_multiplayer_authority(get_multiplayer_authority())
-		$Effects.add_child(_stun)
+		effects.add_child(_stun)
 
 func root(duration: float):
-	if $Effects.get_children().any(func (x): return x is RootEffect):
-		for effect in $Effects.get_children():
+	if effects.get_children().any(func (x): return x is RootEffect):
+		for effect in effects.get_children():
 			if effect is RootEffect:
 				if duration > effect.timer.time_left:
 					effect.stop()
 					var _root = RootEffect.create(duration)
-					$Effects.add_child(_root)
+					effects.add_child(_root)
 					break
 	else:
 		var _root = RootEffect.create(duration)
 		_root.set_multiplayer_authority(get_multiplayer_authority())
-		$Effects.add_child(_root)
+		effects.add_child(_root)
 
 func silence(duration: float):
-	if $Effects.get_children().any(func (x): return x is SilenceEffect):
-		for effect in $Effects.get_children():
+	if effects.get_children().any(func (x): return x is SilenceEffect):
+		for effect in effects.get_children():
 			if effect is SilenceEffect:
 				if duration > effect.timer.time_left:
 					effect.stop()
 					var _silence = SilenceEffect.create(duration)
-					$Effects.add_child(_silence)
+					effects.add_child(_silence)
 					break
 	else:
 		var _silence = SilenceEffect.create(duration)
 		_silence.set_multiplayer_authority(get_multiplayer_authority())
-		$Effects.add_child(_silence)
+		effects.add_child(_silence)
 
 func modifyStats(_duration: float, _attack_damage: float = 1, _spell_power: float = 0, 
 								   _physical_armor: float = 0, _spell_armor: float = 0, 
 								   _attack_speed: float = 1, _attack_range: float = 1,
-								   _cdr: float = 0, _select_radius: float = 1):
+								   _cdr: float = 0, _select_radius: float = 1,
+								   _max_hp: float = 0, _max_mana: float = 0,
+								   _move_speed: float = 0):
 									
-	var modifier = StatsModifierEffect.create(_duration, _attack_damage, _spell_power, 
+	var modifier = StatsModifierEffect.create(_duration, 
+											  _attack_damage, _spell_power, 
 											  _physical_armor, _spell_armor, 
 											  _attack_speed, _attack_range, 
-											  _cdr, _select_radius)
+											  _cdr, _select_radius,
+											  _max_hp, _max_mana,
+											  _move_speed)
 	modifier.set_multiplayer_authority(get_multiplayer_authority())
-	$Effects.add_child(modifier)
+	effects.add_child(modifier)
+	
 # Clear effects
 func clearDash():
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is DashEffect:
 			effect.unapply()
 			effect.queue_free()
@@ -464,32 +487,32 @@ func clearDash():
 			break
 
 func clearStuns():
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is StunEffect:
 			effect.stop()
 			break
 
 func clearRoots():
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is RootEffect:
 			effect.stop()
 			break
 
 func clearSilences():
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is SilenceEffect:
 			effect.stop()
 			break
 
 func clearSpeedModifier(duration: float, percentage: float):
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is SpeedModifierEffect:
 			if effect.duration == duration and effect.percentage == percentage:
 				effect.stop()
 				break
 
 func clearSlows():
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is SpeedModifierEffect:
 			if effect.percentage < 0:
 				effect.stop()
@@ -499,7 +522,7 @@ func clearStatsModifier(_duration: float, _attack_damage: float = 1, _spell_powe
 										  _physical_armor: float = 0, _spell_armor: float = 0, 
 										  _attack_speed: float = 1, _attack_range: float = 1,
 										  _cdr: float = 0, _select_radius: float = 1):
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is StatsModifierEffect:
 			if (effect.duration == _duration and 
 				effect.attack_damage == _attack_damage and effect.spell_power == _spell_power and
@@ -510,7 +533,7 @@ func clearStatsModifier(_duration: float, _attack_damage: float = 1, _spell_powe
 				break
 
 func clearStatsModifiers():
-	for effect in $Effects.get_children():
+	for effect in effects.get_children():
 		if effect is StatsModifierEffect:
 			effect.stop()
 
@@ -529,7 +552,7 @@ func is_target_player(_position: Vector3) -> bool:
 # Returns character closest to mouse cursor
 func get_target_player(_position: Vector3) -> CharacterBody3D:
 	var target_players = get_tree().get_nodes_in_group("players")
-	#target_players.erase(self)
+	target_players.filter(func(player): return player.team == self.team)
 	var players_in_range = []
 	for player in target_players:
 		var distance = _position.distance_to(player.global_transform.origin)
@@ -545,48 +568,6 @@ func get_target_player(_position: Vector3) -> CharacterBody3D:
 
 func allow_movement():
 	can_move = true
-
-#func attack_hit():
-	#if is_multiplayer_authority():
-		#if target_player:
-			#can_move = false
-			#attack_cooldown = attack_cooldown_offset
-			#attack_animation_index = (attack_animation_index + 1) % total_attack_animations
-			#attack_damage_remote.rpc(target_player.player_info.id)
-#
-#@rpc("call_local", "reliable")
-#func attack_damage_remote(id: int):
-	#var target_players = get_tree().get_nodes_in_group("players")
-	#var _target_player: BaseCharacter
-	#for player in target_players:
-		#if player.player_info.id == id:
-			#_target_player = player
-			#break
-	##for player in get_parent()
-	#if _target_player:
-		#_target_player.takeAttackDamage(attack_damage)
-		#if _target_player.died():
-			#if target_player:
-				#target_player = null
-#
-#func start_attack_offset():
-	#attack_cooldown_offset = attack_duration / attack_speed
-#
-#func start_attack():
-	#is_attacking = true
-	## can_move = false
-	#attack_ended = false
-	#target = global_position
-	#character_node.look_at(target_player.global_position, Vector3.UP)
-	#character_animations.set(str("parameters/BasicAttack", attack_animation_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-#
-#@rpc("call_remote", "reliable")
-#func start_attack_remote(index: int):
-	#character_animations.set(str("parameters/BasicAttack", index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-#
-#@rpc("call_local", "reliable")
-#func stop_attack():
-	#is_attacking = false
 	
 func abort_oneshots():
 	basic_attack.stopAttack()
@@ -610,6 +591,7 @@ func died():
 
 func setup(player_data: Statics.PlayerData):
 	player_info = player_data
+	team = player_data.role
 	name = str(player_info.id)
 	label_3d.text = str(player_info.name) + "\n" +str(get_parent().name)
 	set_multiplayer_authority(player_info.id)
@@ -618,8 +600,8 @@ func setup(player_data: Statics.PlayerData):
 	for key in abilities.keys():
 		loadAbility(abilities[key], key)
 	basic_attack = abilities["BA"][1]
-	if get_parent().name == "Lord Valthor":
-		loadAbility("add_charges_R")
+	#if get_parent().name == "Lord Valthor":
+		#loadAbility("add_charges_R")
 	
 @rpc
 func sendData(pos: Vector3, vel: Vector3, _target: Vector3, rot_y: float):

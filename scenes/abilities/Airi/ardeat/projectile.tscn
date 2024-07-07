@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5wxu38ftyoo1"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Airi/ardeat/projectile.gd" id="1_dxh3b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v0tjn"]
+radius = 0.7
+
+[sub_resource type="SphereMesh" id="SphereMesh_81a6f"]
+radius = 0.35
+height = 0.7
+
+[node name="Projectile" type="Area3D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_dxh3b")
+speed = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v0tjn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_81a6f")
+skeleton = NodePath("")

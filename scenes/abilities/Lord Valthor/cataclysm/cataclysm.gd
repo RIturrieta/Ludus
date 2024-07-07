@@ -30,7 +30,7 @@ func execute():
 func dealDamage():
 	for i in range(s3.get_collision_count()):
 		var player = s3.get_collider(i)
-		if player != chara and not player in players_affected:
+		if player.team != chara.team and not player in players_affected:
 			players_affected.append(player)
 			player.stun(3)
 			player.takeAbilityDamage(damage, chara.spell_power)

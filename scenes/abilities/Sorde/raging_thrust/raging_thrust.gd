@@ -13,7 +13,7 @@ func _physics_process(_delta):
 	else:
 		players_on_area = impact_area.get_overlapping_bodies()
 		for player in players_on_area:
-			if not player in players_affected and player.get_parent() != chara.get_parent():
+			if not player in players_affected and player.team != chara.team:
 				players_affected.append(player)
 				player.takeAbilityDamage(damage, chara.spell_power)
 

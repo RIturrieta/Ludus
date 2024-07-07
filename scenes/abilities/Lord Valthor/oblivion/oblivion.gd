@@ -14,7 +14,7 @@ func _physics_process(_delta):
 	else:
 		for i in range(s3.get_collision_count()):
 			var player = s3.get_collider(i)
-			if player != chara and not player in players_affected:
+			if player.team != chara.team and not player in players_affected:
 				var normal = player.global_position - s3.get_collision_normal(i) * (6.5)
 				normal.y = 0
 				players_affected.append(player)

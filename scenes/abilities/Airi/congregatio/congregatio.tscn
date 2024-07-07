@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://wa4wbel8d4d1"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Airi/congregatio/congregatio.gd" id="1_y8e2p"]
+
+[node name="congregatio" type="Node3D"]
+script = ExtResource("1_y8e2p")
+
+[node name="preview" type="MeshInstance3D" parent="."]

@@ -1,12 +1,92 @@
-[gd_scene load_steps=8 format=3 uid="uid://v8nrt3gq2ybc"]
+[gd_scene load_steps=41 format=3 uid="uid://v8nrt3gq2ybc"]
 
 [ext_resource type="PackedScene" uid="uid://b8yuuqeq384ca" path="res://resources/meshes/char4.glb" id="1_cmnol"]
 [ext_resource type="PackedScene" uid="uid://dlkvxduoii0es" path="res://resources/meshes/the_witchs_hat.glb" id="2_3puxr"]
+[ext_resource type="Animation" uid="uid://cry77q00on4kc" path="res://animations/char4/default.res" id="3_rajx8"]
+[ext_resource type="Animation" uid="uid://dfjrw2de8fklk" path="res://animations/char4/atk1.res" id="4_ibntu"]
+[ext_resource type="Animation" uid="uid://chfdh85ytl6m0" path="res://animations/char4/atk2.res" id="5_6tuwi"]
+[ext_resource type="Animation" uid="uid://dqjku7bvqubhm" path="res://animations/char4/channeling.res" id="6_7sxu7"]
+[ext_resource type="Animation" uid="uid://gybxw17rd5hw" path="res://animations/char4/e.res" id="7_cxt1l"]
+[ext_resource type="Animation" uid="uid://bimtf28og3xt6" path="res://animations/char4/idle.res" id="8_u8jg7"]
+[ext_resource type="Animation" uid="uid://ey3sb1pnl1y1" path="res://animations/char4/q.res" id="9_8mabw"]
+[ext_resource type="Animation" uid="uid://dxeo2xvvbneq0" path="res://animations/char4/r1.res" id="10_p7eb0"]
+[ext_resource type="Animation" uid="uid://cktdgxmgrkbv7" path="res://animations/char4/r2.res" id="11_m62ht"]
+[ext_resource type="Animation" uid="uid://c4yes68aex02p" path="res://animations/char4/w.res" id="12_mbruy"]
+[ext_resource type="Animation" uid="uid://b4c2a1dsacy6m" path="res://animations/char4/walk.res" id="13_wpfw7"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ovg72"]
+_data = {
+"APose": ExtResource("3_rajx8"),
+"BasicAttack1": ExtResource("4_ibntu"),
+"BasicAttack2": ExtResource("5_6tuwi"),
+"Channeling": ExtResource("6_7sxu7"),
+"E": ExtResource("7_cxt1l"),
+"Idle": ExtResource("8_u8jg7"),
+"Q": ExtResource("9_8mabw"),
+"R1": ExtResource("10_p7eb0"),
+"R2": ExtResource("11_m62ht"),
+"W": ExtResource("12_mbruy"),
+"Walk": ExtResource("13_wpfw7")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6wxp0"]
+animation = &"BasicAttack1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6gusp"]
+animation = &"BasicAttack2"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x2fd6"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6tvqs"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_s3xgc"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_i6gcd"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kpb3h"]
+animation = &"E"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_4ngcv"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xujpg"]
+fadein_time = 0.1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_murr8"]
 animation = &"Idle"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_bswdx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l7hif"]
+animation = &"Q"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_n4t7q"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_dmnch"]
+fadein_time = 0.1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mcfl"]
+animation = &"R1"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_ajfn6"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_bse5r"]
+fadein_time = 0.1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rek0t"]
+animation = &"R2"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_5unr4"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_yn3k2"]
+fadein_time = 0.1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k7oyb"]
+animation = &"W"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rf41f"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_y73l0"]
+fadein_time = 0.1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j4tnk"]
 animation = &"Walk"
@@ -14,16 +94,59 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_k580x"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ul7jd"]
-graph_offset = Vector2(-781.195, -20.911)
+graph_offset = Vector2(-688.99, 6.15451)
+nodes/Attack1/node = SubResource("AnimationNodeAnimation_6wxp0")
+nodes/Attack1/position = Vector2(-500, 460)
+nodes/Attack2/node = SubResource("AnimationNodeAnimation_6gusp")
+nodes/Attack2/position = Vector2(-340, 460)
+nodes/AttackMul1/node = SubResource("AnimationNodeTimeScale_x2fd6")
+nodes/AttackMul1/position = Vector2(-500, 320)
+nodes/AttackMul2/node = SubResource("AnimationNodeTimeScale_6tvqs")
+nodes/AttackMul2/position = Vector2(-340, 320)
+nodes/BasicAttack1/node = SubResource("AnimationNodeOneShot_s3xgc")
+nodes/BasicAttack1/position = Vector2(-500, 80)
+nodes/BasicAttack2/node = SubResource("AnimationNodeOneShot_i6gcd")
+nodes/BasicAttack2/position = Vector2(-340, 80)
+nodes/E/node = SubResource("AnimationNodeAnimation_kpb3h")
+nodes/E/position = Vector2(140, 460)
+nodes/EMul/node = SubResource("AnimationNodeTimeScale_4ngcv")
+nodes/EMul/position = Vector2(140, 320)
+nodes/EShot/node = SubResource("AnimationNodeOneShot_xujpg")
+nodes/EShot/position = Vector2(140, 80)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_murr8")
-nodes/Idle/position = Vector2(-700, 60)
+nodes/Idle/position = Vector2(-820, 80)
 nodes/IdleWalkBlend/node = SubResource("AnimationNodeBlend2_bswdx")
-nodes/IdleWalkBlend/position = Vector2(-360, 100)
+nodes/IdleWalkBlend/position = Vector2(-660, 80)
+nodes/Q/node = SubResource("AnimationNodeAnimation_l7hif")
+nodes/Q/position = Vector2(-180, 460)
+nodes/QMul/node = SubResource("AnimationNodeTimeScale_n4t7q")
+nodes/QMul/position = Vector2(-180, 320)
+nodes/QShot/node = SubResource("AnimationNodeOneShot_dmnch")
+nodes/QShot/position = Vector2(-180, 80)
+nodes/R1/node = SubResource("AnimationNodeAnimation_7mcfl")
+nodes/R1/position = Vector2(300, 460)
+nodes/R1Mul/node = SubResource("AnimationNodeTimeScale_ajfn6")
+nodes/R1Mul/position = Vector2(300, 320)
+nodes/R1Shot/node = SubResource("AnimationNodeOneShot_bse5r")
+nodes/R1Shot/position = Vector2(300, 80)
+nodes/R2/node = SubResource("AnimationNodeAnimation_rek0t")
+nodes/R2/position = Vector2(460, 460)
+nodes/R2Mul/node = SubResource("AnimationNodeTimeScale_5unr4")
+nodes/R2Mul/position = Vector2(460, 320)
+nodes/R2Shot/node = SubResource("AnimationNodeOneShot_yn3k2")
+nodes/R2Shot/position = Vector2(460, 80)
+nodes/W/node = SubResource("AnimationNodeAnimation_k7oyb")
+nodes/W/position = Vector2(-20, 460)
+nodes/WMul/node = SubResource("AnimationNodeTimeScale_rf41f")
+nodes/WMul/position = Vector2(-20, 320)
+nodes/WShot/node = SubResource("AnimationNodeOneShot_y73l0")
+nodes/WShot/position = Vector2(-20, 80)
 nodes/Walk/node = SubResource("AnimationNodeAnimation_j4tnk")
-nodes/Walk/position = Vector2(-800, 200)
+nodes/Walk/position = Vector2(-640, 460)
 nodes/WalkMul/node = SubResource("AnimationNodeTimeScale_k580x")
-nodes/WalkMul/position = Vector2(-554.769, 204.385)
-node_connections = [&"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WalkMul", &"WalkMul", 0, &"Walk", &"output", 0, &"IdleWalkBlend"]
+nodes/WalkMul/position = Vector2(-640, 320)
+nodes/output/position = Vector2(620, 120)
+node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", &"BasicAttack1", 0, &"IdleWalkBlend", &"BasicAttack1", 1, &"AttackMul1", &"BasicAttack2", 0, &"BasicAttack1", &"BasicAttack2", 1, &"AttackMul2", &"EMul", 0, &"E", &"EShot", 0, &"WShot", &"EShot", 1, &"EMul", &"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WalkMul", &"QMul", 0, &"Q", &"QShot", 0, &"BasicAttack2", &"QShot", 1, &"QMul", &"R1Mul", 0, &"R1", &"R1Shot", 0, &"EShot", &"R1Shot", 1, &"R1Mul", &"R2Mul", 0, &"R2", &"R2Shot", 0, &"R1Shot", &"R2Shot", 1, &"R2Mul", &"WMul", 0, &"W", &"WShot", 0, &"QShot", &"WShot", 1, &"WMul", &"WalkMul", 0, &"Walk", &"output", 0, &"R2Shot"]
 
 [node name="char4" instance=ExtResource("1_cmnol")]
 
@@ -31,16 +154,16 @@ node_connections = [&"IdleWalkBlend", 0, &"Idle", &"IdleWalkBlend", 1, &"WalkMul
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(0.0342259, 1.03403, -7.41691e-09)
-bones/0/rotation = Quaternion(-0.00422011, -0.370186, -0.0105893, 0.928888)
-bones/4/rotation = Quaternion(0.000861342, 0.370234, 0.00216148, 0.928936)
-bones/6/rotation = Quaternion(-0.0992867, -0.00616044, -0.0402643, 0.994225)
-bones/7/rotation = Quaternion(0.621113, 0.00825928, -0.382142, 0.684191)
+bones/0/position = Vector3(-0.0459956, 1.04313, -7.41691e-09)
+bones/0/rotation = Quaternion(-0.000664687, -0.37021, -0.00166786, 0.928946)
+bones/4/rotation = Quaternion(0.00136868, 0.370232, 0.00343461, 0.928932)
+bones/6/rotation = Quaternion(-0.101693, -0.00422495, -0.0388453, 0.994048)
+bones/7/rotation = Quaternion(0.623904, 0.0068264, -0.38218, 0.681642)
 bones/8/rotation = Quaternion(0.676065, 0.3147, 0.534005, 0.39842)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(0.0330888, 0.0217175, 0.132811, 0.990351)
+bones/9/rotation = Quaternion(0.0412028, 0.0296298, 0.144183, 0.988249)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(0.55917, 0.226362, -0.580795, 0.546595)
+bones/10/rotation = Quaternion(0.556464, 0.248857, -0.57924, 0.541202)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
 bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
@@ -49,7 +172,7 @@ bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
 bones/12/scale = Vector3(1, 1, 1)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.999835, 0.0181444, 5.19753e-05, -0.0181444, 0.999835, -9.46224e-07, -5.20349e-05, 6.98492e-10, 1, 0.0483601, 1.65387, -7.41691e-09)
+transform = Transform3D(0.999993, -0.00380369, 5.12302e-05, 0.00380369, 0.999993, 1.99303e-07, -5.12898e-05, -3.95812e-09, 1, -0.0437693, 1.66313, -7.27256e-09)
 bone_name = "Bone.004"
 bone_idx = 4
 
@@ -60,9 +183,40 @@ transform = Transform3D(0.0118213, -0.00205764, -0.000147919, 0.00206003, 0.0117
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44015, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_ovg72")
+}
 tree_root = SubResource("AnimationNodeBlendTree_ul7jd")
 anim_player = NodePath("../AnimationPlayer")
+parameters/AttackMul1/scale = 1.0
+parameters/AttackMul2/scale = 1.0
+parameters/BasicAttack1/active = false
+parameters/BasicAttack1/internal_active = false
+parameters/BasicAttack1/request = 0
+parameters/BasicAttack2/active = false
+parameters/BasicAttack2/internal_active = false
+parameters/BasicAttack2/request = 0
+parameters/EMul/scale = 1.0
+parameters/EShot/active = false
+parameters/EShot/internal_active = false
+parameters/EShot/request = 0
 parameters/IdleWalkBlend/blend_amount = 0.0
+parameters/QMul/scale = 1.0
+parameters/QShot/active = false
+parameters/QShot/internal_active = false
+parameters/QShot/request = 0
+parameters/R1Mul/scale = 1.0
+parameters/R1Shot/active = false
+parameters/R1Shot/internal_active = false
+parameters/R1Shot/request = 0
+parameters/R2Mul/scale = 1.0
+parameters/R2Shot/active = false
+parameters/R2Shot/internal_active = false
+parameters/R2Shot/request = 0
+parameters/WMul/scale = 1.0
+parameters/WShot/active = false
+parameters/WShot/internal_active = false
+parameters/WShot/request = 0
 parameters/WalkMul/scale = 1.0
 
 [editable path="Armature/Skeleton3D/Head/Sketchfab_Scene"]

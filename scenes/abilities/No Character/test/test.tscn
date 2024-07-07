@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7estwv6xflyi"]
+
+[ext_resource type="Script" path="res://scenes/abilities/No Character/test/test.gd" id="1_hjs8k"]
+
+[node name="test" type="Node3D"]
+script = ExtResource("1_hjs8k")
+
+[node name="preview" type="MeshInstance3D" parent="."]

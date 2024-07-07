@@ -15,12 +15,15 @@ var target_amount: int = 1
 var target_player: BaseCharacter = null
 
 func _ready():
-	super()
+	charges = total_charges
+	cooldown_timers.set_name("cooldown_timers")
+	add_child(cooldown_timers)
 	range_collision.shape.radius = chara.attack_range
+	preview.visible = false
 
 func calculateTargetPlayer():
 	var players = mouse_area.get_overlapping_bodies()
-	players.erase(chara)
+	players = players.filter(func(player): return player.team != chara.team)
 	if len(players) > 0:
 		var min_distance: float = 999999
 		var distance: float = 0
@@ -49,7 +52,7 @@ func updateTargetPlayer(id):
 
 func calculateAffectedPlayers():
 	var players = range_area.get_overlapping_bodies()
-	players.erase(chara)
+	players = players.filter(func(player): return (player.team != chara.team))
 	players_affected = []
 	for player in players:
 		players_affected.append([player,chara.global_position.distance_to(player.global_position)])

@@ -31,14 +31,14 @@ dash_distance = 4.0
 dash_speed = 275.0
 preview_path = NodePath("S1/preview")
 damage = 0.0
-mana_cost = 0.0
-cooldown = 0.0
+mana_cost = 12.0
+cooldown = 8.0
 
 [node name="S1" type="ShapeCast3D" parent="."]
 shape = SubResource("CylinderShape3D_i70eq")
 target_position = Vector3(0, 0, -1)
 max_results = 1
-collision_mask = 6
+collision_mask = 4
 debug_shape_custom_color = Color(0.741176, 1, 0.478431, 1)
 
 [node name="S2" type="ShapeCast3D" parent="S1"]
@@ -46,7 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 shape = SubResource("CylinderShape3D_i70eq")
 target_position = Vector3(0, 0, 2)
 max_results = 4
-collision_mask = 6
+collision_mask = 4
 debug_shape_custom_color = Color(0.156863, 0.486275, 1, 1)
 
 [node name="target" type="Node3D" parent="S1"]

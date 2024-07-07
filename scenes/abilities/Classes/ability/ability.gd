@@ -13,6 +13,29 @@ class_name Ability
 @export_range(0, 10) var total_charges: int = 1
 
 var charges: int = 1
+var key: String = ""
+
+func setAnimation():
+	var animation_player: AnimationPlayer = chara.character_node.find_child("AnimationPlayer")
+	var animation: Animation = animation_player.get_animation(key)
+	if animation == null:
+		animation = animation_player.get_animation("Channeling")
+	if animation != null:
+		var track_id = animation.find_track("..", Animation.TYPE_METHOD)
+		var execute_value = { "method": &"executeAbility", "args": [self.name] }
+		var end_value = { "method": &"endAbilityExecution", "args": [self.name] }
+		animation.track_set_key_value(track_id, 0, execute_value)
+		animation.track_set_key_value(track_id, 1, end_value)
+
+func baseExecutionBegining():
+	var cd_timer = cooldown_timers.get_child(charges - 1)
+	cd_timer.start(cooldown - chara.cdr/100)
+	charges -= 1
+	chara.mana -= mana_cost
+	chara.can_cast = false
+	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
+	chara.abort_oneshots()
+	chara.updateTargetLocation(chara.global_position)
 
 func _ready():
 	charges = total_charges
@@ -25,16 +48,7 @@ func _ready():
 		cooldown_timers.add_child(new_timer, true)
 		new_timer.timeout.connect(_on_cd_timeout)
 	preview.visible = false
-
-func baseExecutionBegining():
-	var cd_timer = cooldown_timers.get_child(charges - 1)
-	cd_timer.start(cooldown - chara.cdr/100)
-	charges -= 1
-	chara.mana -= mana_cost
-	chara.can_cast = false
-	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
-	chara.abort_oneshots()
-	chara.updateTargetLocation(chara.global_position)
+	#setAnimation()
 	
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:

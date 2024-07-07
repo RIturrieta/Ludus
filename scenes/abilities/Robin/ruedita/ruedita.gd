@@ -27,7 +27,7 @@ func execute():
 func endExecution():
 	super()
 	chara.can_cast = false
-	chara.can_act = false
+	#chara.can_act = false
 	delay_timer.start()
 
 func dealDamage():

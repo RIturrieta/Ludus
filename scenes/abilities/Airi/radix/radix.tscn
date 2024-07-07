@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2mc40h7tdv1k"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Airi/radix/radix.gd" id="1_j2ohi"]
+
+[node name="radix" type="Node3D"]
+script = ExtResource("1_j2ohi")
+
+[node name="preview" type="MeshInstance3D" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cksqi67ufu2k"]
 
-[ext_resource type="Script" path="res://scenes/abilities/No Character/flash/flash.gd" id="1_yg5p5"]
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/flash/flash.gd" id="1_yg5p5"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_277c4"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i70eq"]

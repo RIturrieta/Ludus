@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://elskquk6cnus"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Airi/fragor/fragor.gd" id="1_cwftk"]
+
+[node name="fragor" type="Node3D"]
+script = ExtResource("1_cwftk")
+
+[node name="preview" type="MeshInstance3D" parent="."]
