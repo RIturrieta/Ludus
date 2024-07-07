@@ -11,13 +11,39 @@ radius = 0.9
 
 [node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_yqgc8")]
 character_node = NodePath("char5")
+hp = 1000.0
+mana = 100.0
+attack_damage = 100.0
+spell_power = 0.0
+physical_armor = 0.0
+spell_armor = 0.0
+move_speed = 100.0
+attack_speed = 1.0
+attack_range = 1.0
+cdr = 0.0
+select_radius = 3.0
+total_attack_animations = 2
 attack_duration = 0.5
+abilities = {
+"1": "",
+"2": "",
+"3": "",
+"4": "",
+"BA": "basic_attack",
+"E": "",
+"Q": "",
+"R": "",
+"W": ""
+}
 
 [node name="char5" parent="BaseCharacter" instance=ExtResource("2_7c825")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char5/Armature" index="0"]
-bones/4/rotation = Quaternion(0.965926, -3.08536e-08, -1.15147e-07, 0.258819)
-bones/5/rotation = Quaternion(0.965926, -4.3693e-17, -5.1414e-17, -0.258819)
+bones/0/position = Vector3(0, 0.7, 0)
+bones/2/position = Vector3(-0.189067, 0.4, 1.2)
+bones/3/position = Vector3(-0.189067, 0.4, -1.2)
+bones/4/rotation = Quaternion(0.953717, -3.58469e-08, -1.13692e-07, 0.300706)
+bones/5/rotation = Quaternion(0.953717, -5.07642e-17, -5.07642e-17, -0.300706)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)

@@ -4,5 +4,7 @@
 
 [node name="add_charges_R" type="Node3D"]
 script = ExtResource("1_0u5lk")
+Name = "Overflow: R"
+Description = "Your R ultimate ability gains 2 extra charges."
 
 [node name="preview" type="MeshInstance3D" parent="."]

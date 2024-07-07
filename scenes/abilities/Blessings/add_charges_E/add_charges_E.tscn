@@ -4,5 +4,7 @@
 
 [node name="add_charges_E" type="Node3D"]
 script = ExtResource("1_w72ep")
+Name = "Overflow: E"
+Description = "Your E basic ability gains 2 extra charges."
 
 [node name="preview" type="MeshInstance3D" parent="."]

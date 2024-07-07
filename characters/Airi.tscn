@@ -11,21 +11,48 @@ radius = 0.3
 
 [node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_dghg7")]
 character_node = NodePath("char4")
+hp = 1000.0
+mana = 100.0
+attack_damage = 100.0
+spell_power = 0.0
+physical_armor = 0.0
+spell_armor = 0.0
+move_speed = 100.0
+attack_speed = 1.0
+attack_range = 1.0
+cdr = 0.0
+select_radius = 3.0
+total_attack_animations = 2
 attack_duration = 0.917
+abilities = {
+"1": "",
+"2": "",
+"3": "",
+"4": "",
+"BA": "basic_attack",
+"E": "",
+"Q": "",
+"R": "",
+"W": ""
+}
 
 [node name="char4" parent="BaseCharacter" instance=ExtResource("2_nyjmj")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char4/Armature" index="0"]
-bones/0/position = Vector3(-0.0606322, 1.0448, -7.48929e-09)
-bones/0/rotation = Quaternion(-3.62767e-06, -0.37021, -9.10271e-06, 0.928948)
-bones/4/rotation = Quaternion(-0.00239581, 0.370227, -0.00601214, 0.928919)
-bones/6/rotation = Quaternion(-0.0837943, -0.0185984, -0.0493732, 0.995085)
-bones/7/rotation = Quaternion(0.602926, 0.0174703, -0.381748, 0.700317)
-bones/9/rotation = Quaternion(0.0545402, 0.052724, 0.136899, 0.987676)
-bones/10/rotation = Quaternion(0.550098, 0.247901, -0.563967, 0.563807)
+bones/0/position = Vector3(-0.0178176, 1.03994, -7.41691e-09)
+bones/0/rotation = Quaternion(-0.00192177, -0.370206, -0.00482218, 0.928935)
+bones/4/rotation = Quaternion(0.00428073, 0.37021, 0.0107422, 0.928876)
+bones/6/rotation = Quaternion(-0.11639, 0.00761913, -0.0301528, 0.992716)
+bones/7/rotation = Quaternion(0.640751, -0.00194113, -0.382277, 0.665806)
+bones/9/rotation = Quaternion(0.0301786, 0.0105696, 0.150078, 0.988157)
+bones/10/rotation = Quaternion(0.561386, 0.249451, -0.591484, 0.522272)
+bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
+bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
+bones/12/position = Vector3(-0.233789, 0.02963, 0.13333)
+bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
 
 [node name="Head" parent="BaseCharacter/char4/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.999916, 0.0129632, 5.30183e-05, -0.0129632, 0.999916, -6.87418e-07, -5.31077e-05, -4.65661e-10, 1, -0.0606201, 1.6648, -7.49267e-09)
+transform = Transform3D(0.999919, -0.0127455, 5.18858e-05, 0.0127455, 0.999919, 6.61239e-07, -5.1856e-05, 9.31323e-10, 1, -0.0113809, 1.6599, -6.26207e-09)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
