@@ -40,11 +40,18 @@ height = 1.5
 character_node = NodePath("char3")
 max_hp = 1800.0
 attack_damage = 150.0
+spell_power = 0.0
+physical_armor = 0.0
+spell_armor = 0.0
+move_speed = 100.0
+attack_speed = 1.0
 attack_range = 2.5
+cdr = 0.0
 select_radius = 2.5
+total_attack_animations = 2
 attack_duration = 0.85
 abilities = {
-"1": "stop_time",
+"1": "",
 "2": "",
 "3": "",
 "4": "",
@@ -86,7 +93,7 @@ parent_collision_ignore = NodePath("../../../../..")
 attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933971)
 attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
 attachments/2/offset = Vector3(0.0340999, 2.17342, 0.934217)
-attachments/3/offset = Vector3(0.357379, 2.16943, 0.888214)
+attachments/3/offset = Vector3(0.357379, 2.16943, 0.888215)
 
 [node name="Band2" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="1"]
 collision_layer = 128

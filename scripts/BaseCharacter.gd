@@ -322,8 +322,14 @@ func loadAbility(ability_name: String, key: String = ""):
 			abilities[key] = [abilities[key], sceneNode]
 	abilities_node.add_child(sceneNode, true)
 
+func addBlessing(ability_name: String):
+	for key in ["1", "2", "3", "4"]:
+		print(abilities[key])
+		if abilities[key][0] == "" or abilities[key][0] == "base_ability":
+			loadAbility(ability_name, key)
+			break
 
-## Executes abilities based on the input
+# Executes abilities based on the input
 func beginAbilityExecutions():
 	for key in abilities.keys():
 		if key != "BA":

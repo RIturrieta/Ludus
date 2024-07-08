@@ -69,6 +69,10 @@ player_scene = Array[PackedScene]([ExtResource("2_lwen3"), ExtResource("3_1llaj"
 [node name="StartTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
+[node name="NextRoundTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUDLayer"]
@@ -135,6 +139,7 @@ text = "Default Timer"
 horizontal_alignment = 1
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="NextRoundTimer" to="." method="_on_next_round_timer_timeout"]
 [connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_entered"]
 [connection signal="mouse_exited" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing1" to="." method="_on_blessing_1_mouse_exited"]
 [connection signal="mouse_entered" from="HUDLayer/MarginContainer/BlessingControl/BlessingContainer/Blessing2" to="." method="_on_blessing_2_mouse_entered"]

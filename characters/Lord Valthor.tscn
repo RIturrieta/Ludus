@@ -156,7 +156,9 @@ character_node = NodePath("char1v2")
 max_hp = 3000.0
 attack_damage = 160.0
 attack_range = 3.0
+cdr = 0.0
 select_radius = 1.5
+total_attack_animations = 2
 attack_duration = 1.167
 abilities = {
 "1": "",

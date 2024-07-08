@@ -8,5 +8,7 @@ duration = 7.0
 damage = 0.0
 mana_cost = 50.0
 cooldown = 99.0
+Name = "Time Stop"
+Description = "Time freezes for every other player for 7 seconds."
 
 [node name="preview" type="MeshInstance3D" parent="."]

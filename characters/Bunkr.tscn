@@ -35,7 +35,30 @@ radius = 0.9
 [node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_yqgc8")]
 collision_mask = 2
 character_node = NodePath("char5")
+hp = 1000.0
+mana = 100.0
+attack_damage = 100.0
+spell_power = 0.0
+physical_armor = 0.0
+spell_armor = 0.0
+move_speed = 100.0
+attack_speed = 1.0
+attack_range = 1.0
+cdr = 0.0
+select_radius = 3.0
+total_attack_animations = 2
 attack_duration = 0.5
+abilities = {
+"1": "",
+"2": "",
+"3": "",
+"4": "",
+"BA": "basic_attack",
+"E": "",
+"Q": "",
+"R": "",
+"W": ""
+}
 
 [node name="char5" parent="BaseCharacter" instance=ExtResource("2_7c825")]
 

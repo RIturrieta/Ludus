@@ -36,6 +36,7 @@ character_node = NodePath("char2")
 max_hp = 1350.0
 attack_damage = 180.0
 attack_range = 7.5
+cdr = 0.0
 select_radius = 1.5
 total_attack_animations = 1
 attack_duration = 1.667
@@ -112,7 +113,7 @@ attachments/5/offset = Vector3(-1.52586, 0.57103, -0.100067)
 attachments/6/offset = Vector3(-1.04859, 1.17872, -0.397103)
 attachments/7/offset = Vector3(-1.05459, 1.12414, -0.735431)
 attachments/8/offset = Vector3(-1.0606, 1.06941, -1.07376)
-attachments/9/offset = Vector3(-1.06661, 1.01484, -1.41209)
+attachments/9/offset = Vector3(-1.06662, 1.01484, -1.41209)
 
 [node name="LHand" parent="BaseCharacter/char2/Armature/Skeleton3D" index="3"]
 transform = Transform3D(-0.762438, -0.173421, -0.623388, -0.593066, -0.197987, 0.780431, -0.258766, 0.964741, 0.0481028, 3.17847, -0.327004, -1.97546)

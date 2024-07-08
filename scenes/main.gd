@@ -9,7 +9,12 @@ var test_arena_scene = preload("res://scenes/levels/test_arena.tscn")
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var start_timer: Timer = %StartTimer
+@onready var next_round_timer: Timer = %NextRoundTimer
 @onready var top_text_label: Label = %TopTextLabel
+@onready var blessing1 = %Blessing1
+@onready var blessing2 = %Blessing2
+@onready var blessing3 = %Blessing3
+
 var round_counter: float = 1
 var start_remaining_time: int = 5
 var started: bool = false
@@ -81,12 +86,30 @@ func on_player_defeated(id: int):
 		else:
 			top_text_label.text = "Victory"
 	else:
-		top_text_label.text = defeated_player.get_parent().name
+		top_text_label.text = defeated_player.get_parent().name + " was slain!"
 	animation_player.play("FadeOutSlow")
 
 func start_blessing_choice():
 	# Play animations
 	# Display blessings choice window
+	var path = "res://scenes/abilities/Blessings"
+	# Iterate through blessings (sub directories) and choose 3 different at random
+	var blessings = []
+	var blessings_dir = DirAccess.open(path)
+	if blessings_dir:
+		blessings_dir.list_dir_begin()
+		while true:
+			var file = blessings_dir.get_next()
+			if file == "":
+				break
+			if blessings_dir.current_is_dir():
+				blessings.append(file)
+
+	blessings.shuffle()
+	# Give the name starting from the last / in the path
+	blessing1.loadBlessing(blessings[0].split("/")[-1])
+	blessing2.loadBlessing(blessings[1].split("/")[-1])
+	blessing3.loadBlessing(blessings[2].split("/")[-1])
 	blessing_container.visible = true
 
 func _input(event):
@@ -96,6 +119,11 @@ func _input(event):
 			if choice != -1:
 				# Play animations
 				# Add blessing to character
+				var blessings = [blessing1, blessing2, blessing3]
+				var player_nodes = get_tree().get_nodes_in_group("players")
+				for player in player_nodes:
+					if player.player_info.id == local_player_id:
+						player.addBlessing(blessings[choice].blessing_name)
 				blessing_container.visible = false
 				set_player_ready.rpc(local_player_id)
 				print(str("choice made: ", local_player_id, " is ready"))
@@ -144,3 +172,7 @@ func _on_blessing_3_mouse_entered():
 
 func _on_blessing_3_mouse_exited():
 	blessing_choice_array[2] = false
+
+func _on_next_round_timer_timeout():
+	# acá se reviven los monos y se devuelven a su pos inicial
+	pass
