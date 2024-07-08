@@ -14,7 +14,7 @@ top_level = true
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_dxh3b")
-speed = 12
+speed = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_v0tjn")

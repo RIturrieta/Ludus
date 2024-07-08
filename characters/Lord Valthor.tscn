@@ -147,7 +147,7 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o7wtb"]
-height = 0.5
+height = 1.5
 
 [node name="Lord Valthor" type="Node3D"]
 
@@ -177,25 +177,25 @@ abilities = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(1.5661e-05, 1.30225, -0.00676243)
-bones/0/rotation = Quaternion(-0.0267233, 0.704329, -0.0223452, 0.709018)
-bones/1/rotation = Quaternion(4.34536e-05, -7.73339e-05, 0.136194, 0.990682)
+bones/0/position = Vector3(4.71532e-05, 1.30679, -0.0203608)
+bones/0/rotation = Quaternion(-0.0408034, 0.703746, -0.036398, 0.708345)
+bones/1/rotation = Quaternion(7.94897e-05, -0.000141377, 0.145751, 0.989321)
 bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
 bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(0.0339044, 0.363815, -0.449985)
-bones/4/rotation = Quaternion(-0.722064, -0.13976, -0.0084241, 0.67751)
-bones/5/rotation = Quaternion(0.000204371, -1.13096e-05, -0.308112, 0.95135)
+bones/4/position = Vector3(-0.00676113, 0.442774, -0.36045)
+bones/4/rotation = Quaternion(-0.686662, -0.142359, 0.000881838, 0.712901)
+bones/5/rotation = Quaternion(0.000468539, -0.000313083, -0.256538, 0.966534)
 bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
 bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
 bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.13828, 0.66331, 0.691247, 0.25115)
+bones/8/rotation = Quaternion(-0.0770772, 0.697549, 0.647843, 0.296285)
 bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
 bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
 bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00113446, 0.0116823, 0.0242828, 0.0190098, -0.0168788, 0.00900834, 0.0190986, 0.0174943, -0.00752408, 0.529151, 2.38722, -0.112164)
+transform = Transform3D(-0.00421453, 0.00790018, 0.025441, 0.0189444, -0.0172199, 0.00848558, 0.0187288, 0.0191959, -0.00285829, 0.555871, 2.39171, -0.15255)
 
 [node name="AnimationTree" parent="BaseCharacter/char1v2" index="3"]
 libraries = {
@@ -203,7 +203,7 @@ libraries = {
 }
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CylinderShape3D_o7wtb")
 
 [editable path="BaseCharacter"]

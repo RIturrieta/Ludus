@@ -35,6 +35,7 @@ func _physics_process(delta):
 				projectile.forward_dir = chara.global_position
 				for player: BaseCharacter in projectile.get_overlapping_bodies():
 					if player == chara:
+						affected_players = []
 						projectile.queue_free()
 					if player.team != chara.team and !(player in affected_players):
 						player.takeAbilityDamage(damage, chara.spell_power)

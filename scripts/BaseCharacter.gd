@@ -97,8 +97,8 @@ func _ready():
 func _physics_process(delta):
 	if can_act:
 		if character_animations and can_move:
-			var blend_val = min(velocity.length(), 1)
-			var new_walk_vel = lerp(prev_velocity, float(blend_val), 0.5)
+			var blend_val = min(velocity.length(), 1.0)
+			var new_walk_vel = lerp(prev_velocity, blend_val, 0.5)
 			prev_velocity = new_walk_vel
 			character_animations.set("parameters/IdleWalkBlend/blend_amount", new_walk_vel)
 			
@@ -154,7 +154,8 @@ func _physics_process(delta):
 			velocity = Vector3(0,0,0)
 			updateTargetLocation(global_position)
 			if global_position.distance_to(fixed_direction) <= 1.5:
-				global_position = lerp(global_position, fixed_direction, 0.3)
+				if get_slide_collision_count() <= 1:
+					global_position = lerp(global_position, fixed_direction, 0.3)
 				updateTargetLocation(target)
 				fixed_movement = false
 				fixedMovement.rpc(fixed_direction, fixed_speed, fixed_movement)

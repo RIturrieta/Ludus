@@ -31,7 +31,7 @@ func beginExecution():
 					if distance <= min_distance:
 						min_distance = distance
 						affected_player = player
-			if affected_player != chara and affected_player != null:
+			if affected_player != null and affected_player.team != chara.team:
 				baseExecutionBegining()
 				chara.character_node.look_at(affected_player.global_position, Vector3.UP)
 				chara.can_cast = false

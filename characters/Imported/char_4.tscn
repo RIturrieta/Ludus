@@ -154,16 +154,16 @@ node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", 
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(-0.0459956, 1.04313, -7.41691e-09)
-bones/0/rotation = Quaternion(-0.000664687, -0.37021, -0.00166786, 0.928946)
-bones/4/rotation = Quaternion(0.00136868, 0.370232, 0.00343461, 0.928932)
-bones/6/rotation = Quaternion(-0.101693, -0.00422495, -0.0388453, 0.994048)
-bones/7/rotation = Quaternion(0.623904, 0.0068264, -0.38218, 0.681642)
+bones/0/position = Vector3(-0.0541488, 1.04406, -9.33982e-09)
+bones/0/rotation = Quaternion(-0.000328727, -0.37021, -0.000824855, 0.928948)
+bones/4/rotation = Quaternion(-0.0040853, 0.370212, -0.0102518, 0.928882)
+bones/6/rotation = Quaternion(-0.0757367, -0.0250512, -0.0540922, 0.995344)
+bones/7/rotation = Quaternion(0.593321, 0.0222486, -0.381442, 0.708503)
 bones/8/rotation = Quaternion(0.676065, 0.3147, 0.534005, 0.39842)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(0.0412028, 0.0296298, 0.144183, 0.988249)
+bones/9/rotation = Quaternion(0.055111, 0.0553824, 0.126511, 0.988883)
 bones/9/scale = Vector3(1, 1, 1)
-bones/10/rotation = Quaternion(0.556464, 0.248857, -0.57924, 0.541202)
+bones/10/rotation = Quaternion(0.549643, 0.231474, -0.559529, 0.575534)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
 bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
@@ -172,7 +172,7 @@ bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
 bones/12/scale = Vector3(1, 1, 1)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.999993, -0.00380369, 5.12302e-05, 0.00380369, 0.999993, 1.99303e-07, -5.12898e-05, -3.95812e-09, 1, -0.0437693, 1.66313, -7.27256e-09)
+transform = Transform3D(0.999716, 0.0238457, 5.19454e-05, -0.0238457, 0.999716, -1.24768e-06, -5.20349e-05, 6.51926e-09, 1, -0.0530478, 1.66406, -9.66461e-09)
 bone_name = "Bone.004"
 bone_idx = 4
 

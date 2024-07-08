@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var speed: int = 10
+@export var speed: int = 9
 var ray: RayCast3D
 var forward_dir: Vector3 = Vector3(0,0,0)
 var returning: bool = false
