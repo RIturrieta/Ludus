@@ -83,6 +83,12 @@ var can_cast: bool = true
 @export var attack_duration: float = 1
 @export_range(1,2) var r_index: int = 1
 var basic_attack: Ability = null
+enum RangedProjectile {
+	NONE,
+	ARROW,
+	BALL
+}
+@export var ranged_projectile: RangedProjectile = RangedProjectile.NONE
 
 signal defeated(character_id: int)
 
@@ -118,7 +124,8 @@ func _physics_process(delta):
 					arrows_transform.global_position = target
 					animation_player.play("move_arrows")
 				target.y = 0
-				updateTargetLocation(target)
+				if target.distance_to(global_position) > 0.5:
+					updateTargetLocation(target)
 
 			if velocity.length() > 0.0:
 				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)

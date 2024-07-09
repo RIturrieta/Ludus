@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cq784ixr847y7"]
+
+[ext_resource type="Script" path="res://scenes/abilities/No Character/ranged_attack/arrow.gd" id="1_lufd5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_asfvw"]
+resource_local_to_scene = true
+size = Vector3(0.5, 3, 0.5)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dbfn8"]
+resource_local_to_scene = true
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.5
+
+[node name="arrow" type="Area3D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_lufd5")
+speed = 12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_asfvw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_dbfn8")
+skeleton = NodePath("")
