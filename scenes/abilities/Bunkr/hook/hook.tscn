@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddctq5u5sekmr"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Bunkr/hook/hook.gd" id="1_jfdlo"]
+
+[node name="hook" type="Node3D"]
+script = ExtResource("1_jfdlo")
+radius = 12.0
+cooldown = 18.0
+Name = "H00K"
+
+[node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="raycast" type="RayCast3D" parent="."]
+enabled = false
+collision_mask = 0
+
+[node name="limit_mark" type="Marker3D" parent="raycast"]
+
+[node name="projectiles" type="Node3D" parent="."]

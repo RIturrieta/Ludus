@@ -13,6 +13,8 @@ func _ready():
 	timer.timeout.connect(onTimeout)
 	timer.start(duration)
 	chara.can_act = false
+	chara.can_cast = false
+	chara.character_animations.set("parameters/TimeScale/scale", 0)
 	chara.updateTargetLocation(chara.global_position)
 
 func stop():
@@ -21,4 +23,6 @@ func stop():
 
 func onTimeout():
 	chara.can_act = true
+	chara.can_cast = true
+	chara.character_animations.set("parameters/TimeScale/scale", 1)
 	queue_free()

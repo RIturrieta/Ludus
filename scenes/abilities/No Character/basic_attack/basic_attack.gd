@@ -64,7 +64,8 @@ func dealDamage():
 	if target_player != null:
 		for player_pair in players_affected:
 			for i in range(attack_quantity):
-				player_pair[0].takeAttackDamage(chara.attack_damage)
+				if is_multiplayer_authority():
+					player_pair[0].takeAttackDamage.rpc(chara.attack_damage)
 				if player_pair[0].died():
 					if target_player:
 						target_player = null

@@ -32,9 +32,9 @@ func _ready() -> void:
 		var player
 		var test = 1 if Game.multiplayer_test else 0
 		if player_data.character == (Statics.Character.CHAR1 - test):
-			player = player_scene[2].instantiate()
+			player = player_scene[0].instantiate()
 		elif player_data.character == (Statics.Character.CHAR3 - test):
-			player = player_scene[3].instantiate()
+			player = player_scene[4].instantiate()
 		
 		var spawn_points = test_arena.get_node("SpawnPoints")
 		for spawn_point in spawn_points.get_children():

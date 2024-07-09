@@ -34,25 +34,30 @@ abilities = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="BaseCharacter/char1v2/Armature" index="0"]
-bones/0/position = Vector3(4.64282e-05, 1.30668, -0.0200477)
-bones/0/rotation = Quaternion(-0.0405634, 0.703758, -0.0361585, 0.708358)
-bones/1/rotation = Quaternion(0.000123662, -0.00021988, 0.157449, 0.987527)
+bones/0/position = Vector3(2.93102e-05, 1.30422, -0.0126562)
+bones/0/rotation = Quaternion(-0.0328726, 0.704109, -0.0284823, 0.708759)
+bones/1/rotation = Quaternion(8.11726e-05, -0.000144368, 0.146197, 0.989256)
 bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
 bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
-bones/4/position = Vector3(-0.0066783, 0.442613, -0.360632)
-bones/4/rotation = Quaternion(-0.686972, -0.142338, 0.000802462, 0.712607)
-bones/5/rotation = Quaternion(0.00036858, -0.000198818, -0.276172, 0.961108)
+bones/4/position = Vector3(0.0170292, 0.396581, -0.41283)
+bones/4/rotation = Quaternion(-0.707341, -0.140902, -0.00449656, 0.692672)
+bones/5/rotation = Quaternion(0.000219716, -2.88217e-05, -0.305143, 0.952306)
 bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
 bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
 bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
-bones/8/rotation = Quaternion(-0.08088, 0.695611, 0.650691, 0.293572)
+bones/8/rotation = Quaternion(-0.121913, 0.673111, 0.680156, 0.263528)
 bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
 bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
 bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
 bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00402549, 0.00814167, 0.0253954, 0.0185083, -0.017638, 0.00858847, 0.0192005, 0.0187091, -0.00295455, 0.554223, 2.39322, -0.138023)
+transform = Transform3D(-0.00196124, 0.0106923, 0.0246829, 0.0188265, -0.017131, 0.00891683, 0.0192129, 0.0178779, -0.00621786, 0.536419, 2.38965, -0.124185)
+
+[node name="AnimationTree" parent="BaseCharacter/char1v2" index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_b6jbf")
+}
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

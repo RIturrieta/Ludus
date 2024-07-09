@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dum04ih27cxv1"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Bunkr/hook/projectile.gd" id="1_cd420"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_asfvw"]
+resource_local_to_scene = true
+size = Vector3(0.7, 3, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4a6b2"]
+resource_local_to_scene = true
+size = Vector3(0.7, 0.7, 0.7)
+
+[node name="Projectile" type="Area3D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_cd420")
+return_speed = 22
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_asfvw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("BoxMesh_4a6b2")
+skeleton = NodePath("")

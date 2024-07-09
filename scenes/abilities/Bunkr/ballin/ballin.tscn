@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://cngx7v0qvui6y"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Bunkr/ballin/ballin.gd" id="1_r4jqy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nk8wr"]
+resource_local_to_scene = true
+radius = 6.5
+
+[node name="ballin" type="Node3D"]
+script = ExtResource("1_r4jqy")
+damage = 900.0
+mana_cost = 25.0
+cooldown = 50.0
+Name = "84LL1N"
+
+[node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="inner_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="inner_collision" type="CollisionShape3D" parent="inner_area"]
+shape = SubResource("CylinderShape3D_nk8wr")
+
+[node name="outer_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="outer_collision" type="CollisionShape3D" parent="outer_area"]
+shape = SubResource("CylinderShape3D_nk8wr")
