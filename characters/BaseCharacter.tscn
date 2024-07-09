@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt5ahf3uukx5o"]
+[gd_scene load_steps=9 format=3 uid="uid://dt5ahf3uukx5o"]
 
 [ext_resource type="Script" path="res://scripts/BaseCharacter.gd" id="1_00iuh"]
 [ext_resource type="Texture2D" uid="uid://cqqk0cyja4kwe" path="res://resources/arrows.png" id="2_55k2c"]
+[ext_resource type="PackedScene" uid="uid://b73fmas38m27p" path="res://scenes/ui/health_bar.tscn" id="3_f2mr7"]
 
 [sub_resource type="Animation" id="Animation_dly2n"]
 resource_name = "move_arrows"
@@ -47,7 +48,11 @@ point_count = 2
 radius = 0.1
 height = 0.2
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_q743j"]
+viewport_path = NodePath("SubViewport")
+
 [node name="BaseCharacter" type="CharacterBody3D" groups=["players"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.443434, 0)
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_00iuh")
@@ -77,6 +82,7 @@ texture = ExtResource("2_55k2c")
 remote_path = NodePath("../Path3D")
 
 [node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.443434, 0)
 top_level = true
 curve = SubResource("Curve3D_5vnbr")
 
@@ -111,3 +117,14 @@ mesh = SubResource("CapsuleMesh_kvtkm")
 [node name="Abilities" type="Node3D" parent="."]
 
 [node name="Effects" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("3_f2mr7")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.54973, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_q743j")

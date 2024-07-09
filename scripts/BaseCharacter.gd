@@ -29,6 +29,8 @@ var locked_camera = true
 @onready var effects = $Effects
 @onready var abilities_node = $Abilities
 
+#barra de vida
+@onready var health_bar = $SubViewport/ProgressBar
 
 @export var character_node: Node3D
 var character_animations: AnimationTree
@@ -88,6 +90,7 @@ signal defeated(character_id: int)
 
 
 func _ready():
+	update_health_bar()
 	updateTargetLocation(global_position)
 	label_3d.global_transform = character_node.get_node("HealthMarker").global_transform
 	character_animations = character_node.get_node("AnimationTree")
@@ -252,23 +255,31 @@ func fixedMovement(direction: Vector3, speed: float, fixing: bool = true):
 	fixed_speed = speed
 	fixed_movement = fixing
 
+func update_health_bar():
+	if health_bar:
+		health_bar.value = hp
+
 func takeAttackDamage(damage: float):
 	var total_damage = damage * (1 - physical_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
+		$SubViewport/HealthBar.value = 0
 		died()
 	else:
+		$SubViewport/HealthBar.value = hp - total_damage
 		hp -= total_damage
-	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
+	update_health_bar()
 
 func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
+		$SubViewport/HealthBar.value = 0
 		died()
 	else:
+		$SubViewport/HealthBar.value = hp - total_damage
 		hp -= total_damage
-	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
+	update_health_bar()
 	
 func heal(points: float):
 	#if hp + points <= hp_max:
