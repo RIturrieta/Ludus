@@ -18,4 +18,5 @@ character = 1
 [node name="Game" type="Node"]
 script = ExtResource("1_fmbhi")
 multiplayer_test = true
+skip_start = true
 test_players = Array[ExtResource("2_xaonh")]([SubResource("Resource_sv5qy"), SubResource("Resource_h8u0t")])

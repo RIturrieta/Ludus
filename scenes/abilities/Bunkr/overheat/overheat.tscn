@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdg5wh7y7hhpm"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Bunkr/overheat/overheat.gd" id="1_2o5kd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_budcv"]
+height = 1.0
+radius = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bonly"]
+transparency = 1
+albedo_color = Color(1, 0.235294, 0.101961, 0.603922)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ojqow"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_bonly")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.1
+
+[node name="overheat" type="Node3D"]
+script = ExtResource("1_2o5kd")
+duration = 6.0
+preview_path = NodePath("area/collision/preview")
+damage = 8.0
+mana_cost = 18.0
+cooldown = 18.0
+Name = "0V3RH34T"
+
+[node name="area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="collision" type="CollisionShape3D" parent="area"]
+shape = SubResource("CylinderShape3D_budcv")
+
+[node name="preview" type="MeshInstance3D" parent="area/collision"]
+mesh = SubResource("CylinderMesh_ojqow")
+skeleton = NodePath("../../..")
+
+[node name="timer" type="Timer" parent="."]

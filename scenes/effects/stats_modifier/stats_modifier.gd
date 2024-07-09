@@ -63,11 +63,11 @@ func _ready():
 	chara.cdr *= (1 + cdr/100)
 	chara.select_radius *= select_radius
 	chara.max_hp *= (1 + max_hp/100)
-	if chara.hp >= max_hp:
-		chara.hp = max_hp
+	if chara.hp >= chara.max_hp:
+		chara.hp = chara.max_hp
 	chara.max_mana *= (1 + max_mana/100)
-	if chara.mana >= max_mana:
-		chara.mana = max_mana
+	if chara.mana >= chara.max_mana:
+		chara.mana = chara.max_mana
 	chara.move_speed *= (1 + move_speed/100)
 
 func stop():
@@ -82,10 +82,10 @@ func stop():
 	chara.cdr /= (1 + cdr/100)
 	chara.select_radius /= select_radius
 	chara.max_hp /= (1 + max_hp/100)
-	if chara.hp >= max_hp:
-		chara.hp = max_hp
+	if chara.hp >= chara.max_hp:
+		chara.hp = chara.max_hp
 	chara.max_mana /= (1 + max_mana/100)
-	if chara.mana >= max_mana:
-		chara.mana = max_mana
+	if chara.mana >= chara.max_mana:
+		chara.mana = chara.max_mana
 	chara.move_speed /= (1 + move_speed/100)
 	queue_free()

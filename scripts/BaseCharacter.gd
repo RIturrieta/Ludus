@@ -252,6 +252,7 @@ func fixedMovement(direction: Vector3, speed: float, fixing: bool = true):
 	fixed_speed = speed
 	fixed_movement = fixing
 
+@rpc("call_local", "reliable", "any_peer")
 func takeAttackDamage(damage: float):
 	var total_damage = damage * (1 - physical_armor/100)
 	if hp - total_damage <= 0:
@@ -261,6 +262,7 @@ func takeAttackDamage(damage: float):
 		hp -= total_damage
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 
+@rpc("call_local", "reliable", "any_peer")
 func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
 	if hp - total_damage <= 0:
@@ -271,11 +273,10 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 	
 func heal(points: float):
-	#if hp + points <= hp_max:
-	#	hp += points
-	#else:
-	#	hp = hp_max
-	hp += points
+	if hp + points <= max_hp:
+		hp += points
+	else:
+		hp = max_hp
 
 # ========== ABILITIES ========== #
 
