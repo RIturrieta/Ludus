@@ -15,7 +15,7 @@ func _ready():
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
-		chara.can_act = false
+		# chara.can_act = false
 		chara.character_animations.set("parameters/R2Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 		chara.collision_layer = 0b00001000
 

@@ -1,33 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://do4ay3txy7cgx"]
+[gd_scene load_steps=4 format=3 uid="uid://do4ay3txy7cgx"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_dghg7"]
 [ext_resource type="PackedScene" uid="uid://v8nrt3gq2ybc" path="res://characters/Imported/char_4.tscn" id="2_nyjmj"]
-[ext_resource type="Animation" uid="uid://cry77q00on4kc" path="res://animations/char4/default.res" id="3_fyrxo"]
-[ext_resource type="Animation" uid="uid://dfjrw2de8fklk" path="res://animations/char4/atk1.res" id="4_q6xea"]
-[ext_resource type="Animation" uid="uid://chfdh85ytl6m0" path="res://animations/char4/atk2.res" id="5_tgl14"]
-[ext_resource type="Animation" uid="uid://dqjku7bvqubhm" path="res://animations/char4/channeling.res" id="6_3ng5n"]
-[ext_resource type="Animation" uid="uid://gybxw17rd5hw" path="res://animations/char4/e.res" id="7_oe64k"]
-[ext_resource type="Animation" uid="uid://bimtf28og3xt6" path="res://animations/char4/idle.res" id="8_0rt43"]
-[ext_resource type="Animation" uid="uid://ey3sb1pnl1y1" path="res://animations/char4/q.res" id="9_xsjw2"]
-[ext_resource type="Animation" uid="uid://dxeo2xvvbneq0" path="res://animations/char4/r1.res" id="10_rc6w7"]
-[ext_resource type="Animation" uid="uid://cktdgxmgrkbv7" path="res://animations/char4/r2.res" id="11_draqi"]
-[ext_resource type="Animation" uid="uid://c4yes68aex02p" path="res://animations/char4/w.res" id="12_wrlyu"]
-[ext_resource type="Animation" uid="uid://b4c2a1dsacy6m" path="res://animations/char4/walk.res" id="13_frrnj"]
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ovg72"]
-_data = {
-"APose": ExtResource("3_fyrxo"),
-"BasicAttack1": ExtResource("4_q6xea"),
-"BasicAttack2": ExtResource("5_tgl14"),
-"Channeling": ExtResource("6_3ng5n"),
-"E": ExtResource("7_oe64k"),
-"Idle": ExtResource("8_0rt43"),
-"Q": ExtResource("9_xsjw2"),
-"R1": ExtResource("10_rc6w7"),
-"R2": ExtResource("11_draqi"),
-"W": ExtResource("12_wrlyu"),
-"Walk": ExtResource("13_frrnj")
-}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j8a8k"]
 height = 1.5
@@ -56,25 +30,20 @@ abilities = {
 [node name="char4" parent="BaseCharacter" instance=ExtResource("2_nyjmj")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char4/Armature" index="0"]
-bones/0/position = Vector3(-0.0464587, 1.04319, -9.33982e-09)
-bones/0/rotation = Quaternion(-0.000645495, -0.37021, -0.0016197, 0.928947)
-bones/4/rotation = Quaternion(-0.00593306, 0.370187, -0.0148886, 0.928819)
-bones/6/rotation = Quaternion(-0.0669114, -0.0321062, -0.0592463, 0.995481)
-bones/7/rotation = Quaternion(0.58269, 0.0274713, -0.381027, 0.717311)
-bones/9/rotation = Quaternion(0.0556418, 0.0582751, 0.115117, 0.990079)
-bones/10/rotation = Quaternion(0.548874, 0.213364, -0.554394, 0.588099)
+bones/0/position = Vector3(-0.0598929, 1.04471, -9.33982e-09)
+bones/0/rotation = Quaternion(-0.000106143, -0.370211, -0.000266338, 0.928948)
+bones/4/rotation = Quaternion(-0.00259793, 0.370226, -0.00651932, 0.928915)
+bones/6/rotation = Quaternion(-0.0828312, -0.0193704, -0.049938, 0.995123)
+bones/7/rotation = Quaternion(0.601783, 0.018042, -0.381715, 0.701303)
+bones/9/rotation = Quaternion(0.0546141, 0.0530428, 0.135658, 0.987826)
+bones/10/rotation = Quaternion(0.550056, 0.245943, -0.563449, 0.565221)
 bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
 bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
 bones/12/position = Vector3(-0.233789, 0.02963, 0.13333)
 bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
 
 [node name="Head" parent="BaseCharacter/char4/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.994774, 0.102105, 5.10216e-05, -0.102105, 0.994774, -5.19305e-06, -5.12898e-05, -4.47035e-08, 1, 0.0474253, 1.65395, 4.76319e-10)
-
-[node name="AnimationTree" parent="BaseCharacter/char4" index="3"]
-libraries = {
-"": SubResource("AnimationLibrary_ovg72")
-}
+transform = Transform3D(0.999893, 0.0146088, 5.20349e-05, -0.0146088, 0.999893, -7.6546e-07, -5.20945e-05, 4.65661e-09, 1, -0.0595373, 1.66471, -9.44808e-09)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

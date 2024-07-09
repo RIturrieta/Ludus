@@ -63,11 +63,6 @@ attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
 [node name="BoneAttachment3D" parent="BaseCharacter/char3/Armature/Skeleton3D" index="2"]
 transform = Transform3D(1, -1.44938e-17, -1.00077e-18, 1.45207e-17, 0.994876, 0.101107, -4.69789e-19, -0.101107, 0.994876, -4.06179e-17, 3.52489, -0.646033)
 
-[node name="AnimationTree" parent="BaseCharacter/char3" index="4"]
-libraries = {
-"": SubResource("AnimationLibrary_tib7k")
-}
-
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 shape = SubResource("CylinderShape3D_jw44a")

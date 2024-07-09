@@ -49,32 +49,32 @@ bones/15/rotation = Quaternion(-0.31436, -0.633368, -0.286184, 0.646623)
 bones/16/rotation = Quaternion(-0.65854, -0.257581, 0.646532, 0.28631)
 
 [node name="Head" parent="BaseCharacter/char2/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.832815, 0.551987, -0.0415836, -0.54915, 0.833313, 0.0634274, 0.0696633, -0.0299876, 0.997119, 2.64915, 2.63074, 0.440425)
+transform = Transform3D(0.8184, 0.573564, -0.0352951, -0.569524, 0.817755, 0.0831826, 0.0765733, -0.0479752, 0.995909, 2.71843, 2.58371, 0.383159)
 
 [node name="Cloak" parent="BaseCharacter/char2/Armature/Skeleton3D/Head" index="0"]
 collision_layer = 0
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(0.0161256, 2.43799, -0.0208717)
-attachments/1/offset = Vector3(0.0161129, 2.44287, -9.26852e-05)
-attachments/2/offset = Vector3(0.0161044, 2.43799, 0.0206863)
-attachments/3/offset = Vector3(-0.0391861, 2.44741, -0.0192354)
-attachments/4/offset = Vector3(-0.0391988, 2.4524, -0.0001252)
-attachments/5/offset = Vector3(-0.0392073, 2.44741, 0.018985)
-attachments/6/offset = Vector3(-0.0391776, 2.46414, -0.0351542)
-attachments/7/offset = Vector3(-0.0391988, 2.48485, -0.0001252)
-attachments/8/offset = Vector3(-0.03922, 2.46414, 0.0349038)
-attachments/9/offset = Vector3(0.0161341, 2.45434, -0.0364329)
-attachments/10/offset = Vector3(0.0161129, 2.47458, -9.26852e-05)
-attachments/11/offset = Vector3(0.0160959, 2.45434, 0.0362475)
-attachments/12/offset = Vector3(-0.0391861, 2.12399, -0.0232124)
-attachments/13/offset = Vector3(-0.0391988, 2.12399, -0.0001252)
-attachments/14/offset = Vector3(-0.0392115, 2.12399, 0.022962)
-attachments/15/offset = Vector3(0.0161298, 2.1218, -0.0247566)
-attachments/16/offset = Vector3(0.0161129, 2.1218, -9.26852e-05)
-attachments/17/offset = Vector3(0.0161001, 2.1218, 0.0245712)
+attachments/0/offset = Vector3(0.016129, 2.438, -0.02087)
+attachments/1/offset = Vector3(0.016117, 2.44287, -9e-05)
+attachments/2/offset = Vector3(0.016105, 2.438, 0.020691)
+attachments/3/offset = Vector3(-0.039184, 2.44742, -0.019234)
+attachments/4/offset = Vector3(-0.039195, 2.4524, -0.000122)
+attachments/5/offset = Vector3(-0.039206, 2.44742, 0.01899)
+attachments/6/offset = Vector3(-0.039175, 2.46414, -0.035149)
+attachments/7/offset = Vector3(-0.039195, 2.48485, -0.000122)
+attachments/8/offset = Vector3(-0.039216, 2.46414, 0.034905)
+attachments/9/offset = Vector3(0.016138, 2.45435, -0.036429)
+attachments/10/offset = Vector3(0.016117, 2.47459, -9e-05)
+attachments/11/offset = Vector3(0.016096, 2.45435, 0.03625)
+attachments/12/offset = Vector3(-0.039182, 2.12399, -0.023208)
+attachments/13/offset = Vector3(-0.039195, 2.12399, -0.000122)
+attachments/14/offset = Vector3(-0.039209, 2.12399, 0.022964)
+attachments/15/offset = Vector3(0.016132, 2.1218, -0.024756)
+attachments/16/offset = Vector3(0.016117, 2.1218, -9e-05)
+attachments/17/offset = Vector3(0.016103, 2.1218, 0.024576)
 
 [node name="Back" parent="BaseCharacter/char2/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.431588, 0.652442, -0.622937, -0.741049, 0.650203, 0.16758, 0.514372, 0.389301, 0.764111, 1.91068, 1.8948, -0.000209126)
+transform = Transform3D(0.414324, 0.671105, -0.614779, -0.742402, 0.63995, 0.198247, 0.526473, 0.374275, 0.763377, 1.95883, 1.85938, -0.0404671)
 
 [node name="Cape" parent="BaseCharacter/char2/Armature/Skeleton3D/Back" index="0"]
 collision_layer = 0
@@ -91,7 +91,7 @@ attachments/8/offset = Vector3(-0.129388, 2.10397, -0.153394)
 attachments/9/offset = Vector3(-0.130247, 2.09618, -0.201726)
 
 [node name="LHand" parent="BaseCharacter/char2/Armature/Skeleton3D" index="3"]
-transform = Transform3D(-0.762438, -0.17342, -0.623388, -0.593066, -0.197988, 0.780431, -0.258766, 0.964741, 0.048104, 3.17847, -0.327, -1.97546)
+transform = Transform3D(-0.778956, -0.174108, -0.602422, -0.577495, -0.175225, 0.797367, -0.244388, 0.969011, 0.0359462, 3.15862, -0.431729, -1.97868)
 
 [node name="bow" parent="BaseCharacter/char2/Armature/Skeleton3D/LHand" index="0"]
 transform = Transform3D(5.76265, -0.511733, -2.46384, 2.34515, 3.32462, 4.79455, 0.912482, -5.31277, 3.23765, -0.0368111, 2.66266, -0.132379)
