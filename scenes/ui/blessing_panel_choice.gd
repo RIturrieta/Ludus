@@ -1,6 +1,7 @@
 extends Control
 
 @onready var name_label: Label = %Name
+@onready var cooldown_label: Label = %Cooldown
 @onready var description_label: Label = %Description
 var blessing_name
 
@@ -20,6 +21,10 @@ func loadBlessing(ability_name: String):
 	var ability = load(path)
 	ability = ability.instantiate()
 	name_label.text = ability.Name
+	if ability.cooldown > 0:
+		cooldown_label.text = "Cooldown: " + str(ability.cooldown)
+	else:
+		cooldown_label.text = "Passive"
 	description_label.text = ability.Description
 	ability.queue_free()
 

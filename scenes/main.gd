@@ -19,7 +19,8 @@ var round_counter: float = 1
 var start_remaining_time: int = 5
 var started: bool = false
 
-@onready var blessing_container: HBoxContainer = %BlessingContainer
+@onready var blessing_container: Control = %BlessingControl
+# @onready var blessing_container: HBoxContainer = %BlessingContainer
 var blessing_choice_array: Array[bool] = [false, false, false]
 
 var local_player_id
@@ -123,10 +124,18 @@ func _input(event):
 				var player_nodes = get_tree().get_nodes_in_group("players")
 				for player in player_nodes:
 					if player.player_info.id == local_player_id:
-						player.addBlessing(blessings[choice].blessing_name)
+						# player.addBlessing(blessings[choice].blessing_name)
+						add_blessing_to_player.rpc(local_player_id, blessings[choice].blessing_name)
 				blessing_container.visible = false
 				set_player_ready.rpc(local_player_id)
 				print(str("choice made: ", local_player_id, " is ready"))
+				
+@rpc("any_peer", "call_local", "reliable")
+func add_blessing_to_player(id: int, bname: String):
+	var player_nodes = get_tree().get_nodes_in_group("players")
+	for player in player_nodes:
+		if player.player_info.id == id:
+			player.addBlessing(bname)
 
 @rpc("any_peer", "call_local", "reliable")
 func set_player_ready(id: int):

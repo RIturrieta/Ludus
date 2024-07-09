@@ -29,6 +29,8 @@ preview_path = NodePath("S1/preview")
 damage = 0.0
 mana_cost = 0.0
 cooldown = 0.0
+Name = "Blink"
+Description = "Quickly teleports your character to the target location."
 
 [node name="S1" type="ShapeCast3D" parent="."]
 shape = SubResource("CylinderShape3D_i70eq")

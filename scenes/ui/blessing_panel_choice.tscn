@@ -32,11 +32,29 @@ layout_mode = 2
 texture = ExtResource("1_586ml")
 stretch_mode = 3
 
+[node name="Separator" type="Label" parent="BlessingVBox"]
+custom_minimum_size = Vector2(10, 20)
+layout_mode = 2
+text = "
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 1
+
 [node name="Name" type="Label" parent="BlessingVBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(10, 20)
 layout_mode = 2
 text = "Blessing Name"
+horizontal_alignment = 1
+vertical_alignment = 2
+autowrap_mode = 1
+
+[node name="Cooldown" type="Label" parent="BlessingVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 20)
+layout_mode = 2
+text = "Cooldown: 10 Seconds."
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 1
@@ -69,4 +87,5 @@ COURAGE: For each stack, Garen gains Armor icon 0.2 bonus armor and Magic resist
 
 Courage
 ACTIVE: Garen reduces incoming damage by 30% for 4 seconds. For the first 0.75 seconds, Garen additionally grants himself a Hybrid resistances icon shield and 60% Tenacity icon tenacity."
-autowrap_mode = 1
+horizontal_alignment = 1
+autowrap_mode = 2

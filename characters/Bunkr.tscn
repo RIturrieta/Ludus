@@ -1,29 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4g35ywf3oisw"]
+[gd_scene load_steps=4 format=3 uid="uid://c4g35ywf3oisw"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_yqgc8"]
 [ext_resource type="PackedScene" uid="uid://bpvdrinxsihjs" path="res://characters/Imported/char_5.tscn" id="2_7c825"]
-[ext_resource type="Animation" uid="uid://bglxguu14npf6" path="res://animations/char5/default.res" id="3_1t88f"]
-[ext_resource type="Animation" uid="uid://nghjk03ahfcf" path="res://animations/char5/atk1.res" id="4_ie8u0"]
-[ext_resource type="Animation" uid="uid://bkty08tcstwa7" path="res://animations/char5/atk2.res" id="5_e5cvn"]
-[ext_resource type="Animation" uid="uid://pdia6ewuwq4i" path="res://animations/char5/idle.res" id="6_tsisc"]
-[ext_resource type="Animation" uid="uid://b1pumi2juuie0" path="res://animations/char5/q.res" id="7_nb0wo"]
-[ext_resource type="Animation" uid="uid://ulkos4oy8epw" path="res://animations/char5/r1.res" id="8_r7n7k"]
-[ext_resource type="Animation" uid="uid://doiekukqs3nrs" path="res://animations/char5/r2.res" id="9_lakpe"]
-[ext_resource type="Animation" uid="uid://cbqekvdkakljw" path="res://animations/char5/w.res" id="10_d2edc"]
-[ext_resource type="Animation" uid="uid://fxyqdi1s52tr" path="res://animations/char5/walk.res" id="11_8vm7r"]
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3bn32"]
-_data = {
-"APose": ExtResource("3_1t88f"),
-"BasicAttack1": ExtResource("4_ie8u0"),
-"BasicAttack2": ExtResource("5_e5cvn"),
-"Idle": ExtResource("6_tsisc"),
-"Q": ExtResource("7_nb0wo"),
-"R1": ExtResource("8_r7n7k"),
-"R2": ExtResource("9_lakpe"),
-"W": ExtResource("10_d2edc"),
-"Walk": ExtResource("11_8vm7r")
-}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_v7whv"]
 resource_local_to_scene = true
@@ -35,18 +13,6 @@ radius = 0.9
 [node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("1_yqgc8")]
 collision_mask = 2
 character_node = NodePath("char5")
-hp = 1000.0
-mana = 100.0
-attack_damage = 100.0
-spell_power = 0.0
-physical_armor = 0.0
-spell_armor = 0.0
-move_speed = 100.0
-attack_speed = 1.0
-attack_range = 1.0
-cdr = 0.0
-select_radius = 3.0
-total_attack_animations = 2
 attack_duration = 0.5
 abilities = {
 "1": "",
@@ -68,11 +34,6 @@ bones/2/position = Vector3(-0.189067, 0.4, 1.2)
 bones/3/position = Vector3(-0.189067, 0.4, -1.2)
 bones/4/rotation = Quaternion(0.953717, -3.58469e-08, -1.13692e-07, 0.300706)
 bones/5/rotation = Quaternion(0.953717, -5.07642e-17, -5.07642e-17, -0.300706)
-
-[node name="AnimationTree" parent="BaseCharacter/char5" index="3"]
-libraries = {
-"": SubResource("AnimationLibrary_3bn32")
-}
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

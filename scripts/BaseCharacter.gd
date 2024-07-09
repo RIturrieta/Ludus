@@ -596,6 +596,19 @@ func died():
 		return true
 	return false
 
+func reset():
+	for key in abilities.keys():
+		for timer: Timer in abilities[key][1].cooldown_timers.get_children():
+			if !timer.is_stopped():
+				timer.stop()
+		abilities[key][1].charges = abilities[key][1].total_charges
+	hp = max_hp
+	mana = max_mana
+	# remover los efectos buenos/malos que no sean de blessings suyos ???
+	for effect in effects.get_children():
+		effect.timer.stop()
+		effect.timer.emit_signal("timeout")
+
 func setup(player_data: Statics.PlayerData):
 	player_info = player_data
 	team = player_data.role

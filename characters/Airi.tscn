@@ -30,16 +30,20 @@ abilities = {
 [node name="char4" parent="BaseCharacter" instance=ExtResource("2_nyjmj")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char4/Armature" index="0"]
-bones/0/position = Vector3(0.0334633, 1.03411, -9.33982e-09)
-bones/0/rotation = Quaternion(-0.0041687, -0.370187, -0.0104603, 0.928889)
-bones/4/rotation = Quaternion(-0.0147596, 0.36994, -0.0370381, 0.9282)
-bones/6/rotation = Quaternion(-0.0244616, -0.0658571, -0.0838266, 0.994001)
-bones/7/rotation = Quaternion(0.530007, 0.0524036, -0.377887, 0.757329)
-bones/9/rotation = Quaternion(0.0520071, 0.0710081, 0.0588689, 0.994378)
-bones/10/rotation = Quaternion(0.541378, 0.124121, -0.525952, 0.644111)
+bones/0/position = Vector3(-0.0464587, 1.04319, -9.33982e-09)
+bones/0/rotation = Quaternion(-0.000645495, -0.37021, -0.0016197, 0.928947)
+bones/4/rotation = Quaternion(-0.00593306, 0.370187, -0.0148886, 0.928819)
+bones/6/rotation = Quaternion(-0.0669114, -0.0321062, -0.0592463, 0.995481)
+bones/7/rotation = Quaternion(0.58269, 0.0274713, -0.381027, 0.717311)
+bones/9/rotation = Quaternion(0.0556418, 0.0582751, 0.115117, 0.990079)
+bones/10/rotation = Quaternion(0.548874, 0.213364, -0.554394, 0.588099)
+bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
+bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
+bones/12/position = Vector3(-0.233789, 0.02963, 0.13333)
+bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
 
 [node name="Head" parent="BaseCharacter/char4/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.994774, 0.102105, 5.19753e-05, -0.102105, 0.994774, -5.33462e-06, -5.22435e-05, 3.72529e-09, 1, 0.0474252, 1.65396, -7.31885e-09)
+transform = Transform3D(0.999368, 0.0355355, 5.20647e-05, -0.0355356, 0.999368, -1.86136e-06, -5.20647e-05, 9.31323e-09, 1, -0.0442966, 1.66318, -8.90675e-09)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
