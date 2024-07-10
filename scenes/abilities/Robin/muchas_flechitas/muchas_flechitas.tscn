@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://delwv2x8u8fg0"]
+[gd_scene load_steps=7 format=3 uid="uid://delwv2x8u8fg0"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Robin/muchas_flechitas/muchas_flechitas.gd" id="1_hbym5"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_3w4l3"]
+[ext_resource type="Texture2D" uid="uid://b50ry6434vbq5" path="res://scenes/abilities/Robin/muchas_flechitas/icon__088.png" id="2_6x6ad"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2peub"]
 resource_local_to_scene = true
@@ -25,6 +26,9 @@ pulse_delay = 15
 preview_path = NodePath("mouse_area/preview")
 damage = 35.0
 cooldown = 30.0
+Icon = ExtResource("2_6x6ad")
+Name = "Arrowstorm"
+Description = "Launch multiple arrows to the sky, dealing 980 damage as they land over 7 seconds."
 
 [node name="rain_timer" type="Timer" parent="."]
 one_shot = true

@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddctq5u5sekmr"]
+[gd_scene load_steps=3 format=3 uid="uid://ddctq5u5sekmr"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Bunkr/hook/hook.gd" id="1_jfdlo"]
+[ext_resource type="Texture2D" uid="uid://dun2hqbm8l5aq" path="res://scenes/abilities/Bunkr/hook/icon__096.png" id="2_ak8mq"]
 
 [node name="hook" type="Node3D"]
 script = ExtResource("1_jfdlo")
 radius = 12.0
 cooldown = 18.0
-Name = "H00K"
+Icon = ExtResource("2_ak8mq")
+Name = "Electromagnetic Grab"
+Description = "Fire a grappling hook dealing 150 damage to the first enemy hit. They are then quickly pulled towards Bunkr."
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

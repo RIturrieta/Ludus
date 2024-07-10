@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://vo7vrn1h83lw"]
+[gd_scene load_steps=5 format=3 uid="uid://vo7vrn1h83lw"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Airi/radix/radix.gd" id="1_j2ohi"]
+[ext_resource type="Texture2D" uid="uid://hw7q7fd7sfuw" path="res://scenes/abilities/Airi/radix/icon__002.png" id="2_k8jlc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmvsc"]
 transparency = 1
@@ -13,9 +14,12 @@ height = 0.1
 
 [node name="radix" type="Node3D"]
 script = ExtResource("1_j2ohi")
-radius = 8.0
+radius = 20.0
 damage = 0.0
 cooldown = 40.0
+Icon = ExtResource("2_k8jlc")
+Name = "Radix"
+Description = "Throw an orb forward. The orb roots the first enemy gladiator it hits and all other in an area around it for 5 seconds. "
 
 [node name="raycast" type="RayCast3D" parent="."]
 enabled = false

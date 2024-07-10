@@ -1,15 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddo7tva0ipg6l"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Blessings/add_charges_R/add_charges_R.gd" id="1_0u5lk"]
-[ext_resource type="Texture2D" uid="uid://skq1plydbwh1" path="res://scenes/abilities/Blessings/add_charges_R/r.png" id="2_kypcc"]
+[ext_resource type="Texture2D" uid="uid://skq1plydbwh1" path="res://scenes/abilities/Blessings/add_charges_R/r.png" id="2_jai8n"]
 
 [node name="add_charges_R" type="Node3D"]
 script = ExtResource("1_0u5lk")
+charge_amount = 1
 damage = 0.0
 mana_cost = 0.0
 cooldown = 0.0
 total_charges = 0
+Icon = ExtResource("2_jai8n")
 Name = "Overflow: R"
-Description = "Your R ultimate ability gains 2 extra charges."
+Description = "Your R ultimate ability gains 1 extra charges."
 
 [node name="preview" type="MeshInstance3D" parent="."]

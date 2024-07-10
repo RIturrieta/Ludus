@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdg5wh7y7hhpm"]
+[gd_scene load_steps=6 format=3 uid="uid://cdg5wh7y7hhpm"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Bunkr/overheat/overheat.gd" id="1_2o5kd"]
+[ext_resource type="Texture2D" uid="uid://df8y6p1yhfdbm" path="res://scenes/abilities/Bunkr/overheat/icon__039.png" id="2_my5xv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_budcv"]
 height = 1.0
@@ -24,7 +25,9 @@ preview_path = NodePath("area/collision/preview")
 damage = 8.0
 mana_cost = 18.0
 cooldown = 18.0
-Name = "0V3RH34T"
+Icon = ExtResource("2_my5xv")
+Name = "Overheat"
+Description = "Bunkr's internal system overheats, dealing 1080 damage over 6 seconds. Gain 25% Movement Speed over the duration."
 
 [node name="area" type="Area3D" parent="."]
 collision_layer = 0

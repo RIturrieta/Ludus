@@ -11,6 +11,6 @@ mana_cost = 0.0
 cooldown = 99.0
 Icon = ExtResource("2_u0fyj")
 Name = "Time Stop"
-Description = "Time freezes for every other player for 7 seconds."
+Description = "Time freezes for every other player for 4 seconds."
 
 [node name="preview" type="MeshInstance3D" parent="."]

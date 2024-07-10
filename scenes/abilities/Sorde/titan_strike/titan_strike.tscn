@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx24me5drf2ml"]
+[gd_scene load_steps=3 format=3 uid="uid://cx24me5drf2ml"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Sorde/titan_strike/titan_strike.gd" id="1_262hg"]
+[ext_resource type="Texture2D" uid="uid://cjjbq52ixn0c7" path="res://scenes/abilities/Sorde/titan_strike/critical_boost.png" id="2_sxbgt"]
 
 [node name="titan_strike" type="Node3D"]
 process_priority = 1
 script = ExtResource("1_262hg")
 damage = 300.0
 cooldown = 14.0
-Name = "titan"
+Icon = ExtResource("2_sxbgt")
+Name = "Titan Strike"
+Description = "Sorde leaps and strikes his foe, dealing 300 damage to them and reducing their armor by 25% for 4 seconds."
 
 [node name="preview" type="MeshInstance3D" parent="."]

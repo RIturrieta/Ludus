@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ofuxqylsgkql"]
+[gd_scene load_steps=6 format=3 uid="uid://ofuxqylsgkql"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Blessings/nuke/nuke.gd" id="1_44ixd"]
+[ext_resource type="Texture2D" uid="uid://dt07n4v7lpo8y" path="res://scenes/abilities/Blessings/nuke/icon__054.png" id="2_u5fh2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i3kja"]
 resource_local_to_scene = true
@@ -23,6 +24,9 @@ preview_path = NodePath("area/preview")
 damage = 9999.0
 mana_cost = 0.0
 cooldown = 999.0
+Icon = ExtResource("2_u5fh2")
+Name = "MOAB"
+Description = "Deploy a huge explosion that deals 9999 damage after 8 seconds. You cannot move during this time."
 
 [node name="area" type="Area3D" parent="."]
 top_level = true

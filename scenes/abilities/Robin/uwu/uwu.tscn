@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://btcqddqrm7dgf"]
+[gd_scene load_steps=3 format=3 uid="uid://btcqddqrm7dgf"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Robin/uwu/uwu.gd" id="1_dny6l"]
+[ext_resource type="Texture2D" uid="uid://bqw4essrff7gw" path="res://scenes/abilities/Robin/uwu/healing_spell.png" id="2_ase7w"]
 
 [node name="uwu" type="Node3D"]
 script = ExtResource("1_dny6l")
 radius = 999.0
 cooldown = 0.0
+Icon = ExtResource("2_ase7w")
+Name = "Sacred Arrow"
+Description = "Launch a huge sacred arrow forward, dealing 150 damage to the first enemy hit, stunning them for a minimum of 1.5 seconds, inreasing with distance. "
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

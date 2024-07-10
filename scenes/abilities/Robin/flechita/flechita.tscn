@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjny03d6ry4bq"]
+[gd_scene load_steps=3 format=3 uid="uid://bjny03d6ry4bq"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Robin/flechita/flechita.gd" id="1_wus66"]
+[ext_resource type="Texture2D" uid="uid://5xuo7uo5wpvt" path="res://scenes/abilities/Robin/flechita/icon__133.png" id="2_kwjne"]
 
 [node name="flechita" type="Node3D"]
 script = ExtResource("1_wus66")
 radius = 8.0
 damage = 375.0
 cooldown = 8.0
+Icon = ExtResource("2_kwjne")
+Name = "Quickdraw"
+Description = "Launch an arrow forward, dealing 375 damage to the first enemy hit."
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

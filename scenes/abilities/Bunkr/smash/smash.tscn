@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://db1gdncldano1"]
+[gd_scene load_steps=4 format=3 uid="uid://db1gdncldano1"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Bunkr/smash/smash.gd" id="1_kbv7b"]
+[ext_resource type="Texture2D" uid="uid://c77a32guldaxa" path="res://scenes/abilities/Bunkr/smash/icon__060.png" id="2_ufp4u"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4bo1b"]
 resource_local_to_scene = true
@@ -12,7 +13,9 @@ radius = 5.6
 mana_cost = 8.0
 cooldown = 12.0
 total_charges = 3
-Name = "5M45H"
+Icon = ExtResource("2_ufp4u")
+Name = "Bunkr smash"
+Description = "Bunkr slams the ground under him, dealing 150 damage and slowing enemies by 15% for 1.3 seconds."
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

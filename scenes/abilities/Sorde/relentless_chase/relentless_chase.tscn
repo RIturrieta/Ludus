@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxmueruwbr4o0"]
+[gd_scene load_steps=3 format=3 uid="uid://cxmueruwbr4o0"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Sorde/relentless_chase/relentless_chase.gd" id="1_ghpu2"]
+[ext_resource type="Texture2D" uid="uid://dw52dumjpi2ej" path="res://scenes/abilities/Sorde/relentless_chase/icon__144.png" id="2_dlrst"]
 
 [node name="relentless_chase" type="Node3D"]
 script = ExtResource("1_ghpu2")
 mana_cost = 15.0
 cooldown = 8.0
+Icon = ExtResource("2_dlrst")
+Name = "Relentless Charge"
+Description = "Gain 100% Movement Speed for 3 seconds. During this duration, Sordes next Basic Attack is enhanced, dealing 75% extra damage and applying a 30% slow for 2 seconds."
 
 [node name="duration" type="Timer" parent="."]
 wait_time = 3.0

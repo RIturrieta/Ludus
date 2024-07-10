@@ -23,7 +23,7 @@ func execute():
 	players_on_area = len(area.get_overlapping_bodies())
 	# chara.spell_armor += 5 * players_on_area
 	# chara.physical_armor += 5 * players_on_area
-	chara.modifyStats(3, 1, 0, 5 * players_on_area, 5 * players_on_area, 1, 1, 0, 1)
+	chara.modifyStats(3, 1, 0, 10 * players_on_area, 10 * players_on_area, 1, 1, 0, 1)
 	chara.heal(5 * players_on_area)
 	Debug.sprint("players: " + str(players_on_area) + " sp: " + str(chara.spell_armor) + " ph: " + str(chara.physical_armor) )
 

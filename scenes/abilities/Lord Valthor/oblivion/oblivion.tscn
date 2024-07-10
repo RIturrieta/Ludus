@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsovn23daqi30"]
+[gd_scene load_steps=9 format=3 uid="uid://bsovn23daqi30"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Lord Valthor/oblivion/oblivion.gd" id="1_f0s4o"]
+[ext_resource type="Texture2D" uid="uid://tadvyed6hcgn" path="res://scenes/abilities/Lord Valthor/oblivion/icon__016.png" id="2_0d3ng"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_8dru8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i70eq"]
@@ -34,6 +35,9 @@ preview_path = NodePath("S1/preview")
 damage = 270.0
 mana_cost = 15.0
 cooldown = 9.0
+Icon = ExtResource("2_0d3ng")
+Name = "Oblivion"
+Description = "Charges forward, pushing the peasants out of his way, dealing 270 damage and briefly stunning them."
 
 [node name="S1" type="ShapeCast3D" parent="."]
 shape = SubResource("CylinderShape3D_i70eq")

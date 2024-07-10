@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cngx7v0qvui6y"]
+[gd_scene load_steps=4 format=3 uid="uid://cngx7v0qvui6y"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Bunkr/ballin/ballin.gd" id="1_r4jqy"]
+[ext_resource type="Texture2D" uid="uid://br65dqiau46ny" path="res://scenes/abilities/Bunkr/ballin/fire_spell_2.png" id="2_ijp7g"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nk8wr"]
 resource_local_to_scene = true
@@ -11,7 +12,9 @@ script = ExtResource("1_r4jqy")
 damage = 900.0
 mana_cost = 25.0
 cooldown = 50.0
-Name = "84LL1N"
+Icon = ExtResource("2_ijp7g")
+Name = "We ballin'"
+Description = "Quickly jump at massive heights. After 2.5 seconds Bunkr lands back in the arena, dealing a maximum of 900 damage to enemies hit, decreasing with distance. Enemies are also slowed by 30% for 4 seconds."
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

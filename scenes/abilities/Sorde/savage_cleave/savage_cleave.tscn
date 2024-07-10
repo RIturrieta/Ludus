@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://do4fl3ip13v3m"]
+[gd_scene load_steps=6 format=3 uid="uid://do4fl3ip13v3m"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Sorde/savage_cleave/savage_cleave.gd" id="1_4g0a8"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_2tjle"]
+[ext_resource type="Texture2D" uid="uid://cf8cqtivy601r" path="res://scenes/abilities/Sorde/savage_cleave/icon__021.png" id="2_il32c"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_cd5iw"]
 resource_local_to_scene = true
@@ -19,6 +20,9 @@ script = ExtResource("1_4g0a8")
 preview_path = NodePath("dmg_area/preview")
 damage = 325.0
 cooldown = 14.0
+Icon = ExtResource("2_il32c")
+Name = "Savage Cleave"
+Description = "Swing your sword around him, dealing 325 damage to enemies hit. Sorde he also frees himself from slows and roots."
 
 [node name="dmg_area" type="Area3D" parent="."]
 disable_mode = 2

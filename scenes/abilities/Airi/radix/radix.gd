@@ -42,7 +42,7 @@ func _physics_process(delta):
 			for player: BaseCharacter in target_players:
 				if player.team != chara.team:
 					if player.global_position.distance_to(affected_player.global_position) <= root_radius:
-						player.root(3)
+						player.root(5)
 						Debug.sprint(player.get_parent().name + " was rooted!")
 			affected_player = null
 		

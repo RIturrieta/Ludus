@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2lx21ty2smlr"]
+[gd_scene load_steps=10 format=3 uid="uid://d2lx21ty2smlr"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Lord Valthor/cataclysm/cataclysm.gd" id="1_puu1i"]
+[ext_resource type="Texture2D" uid="uid://dn3fomoycrgtf" path="res://scenes/abilities/Lord Valthor/cataclysm/icon__018.png" id="2_x5e7d"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_yx6y1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i70eq"]
@@ -41,6 +42,9 @@ dash_speed = 250.0
 preview_path = NodePath("S1/preview")
 damage = 400.0
 cooldown = 60.0
+Icon = ExtResource("2_x5e7d")
+Name = "Cataclysm"
+Description = "Valthor jumps forward and slams the ground as he descends, dealing 400 damage and stunning the enemies in the area by 3 seconds. "
 
 [node name="dmg_timer" type="Timer" parent="."]
 wait_time = 0.7

@@ -12,7 +12,7 @@ func beginExecution():
 		cd_timer.start(cooldown - chara.cdr/100)
 		charges -= 1
 		chara.mana -= mana_cost
-		chara.modifyStats(1, 1, 0, armor_percentage, armor_percentage)
+		chara.modifyStats(2, 1, 0, armor_percentage, armor_percentage)
 
 func execute():
 	pass

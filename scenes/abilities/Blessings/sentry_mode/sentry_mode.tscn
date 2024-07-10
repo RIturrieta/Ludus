@@ -1,16 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1rvj3lved0km"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Blessings/sentry_mode/sentry_mode.gd" id="1_ymjae"]
-[ext_resource type="Texture2D" uid="uid://boqb42hpx1xm2" path="res://scenes/abilities/Blessings/sentry_mode/sentry_mode.png" id="2_6fk4s"]
+[ext_resource type="Texture2D" uid="uid://boqb42hpx1xm2" path="res://scenes/abilities/Blessings/sentry_mode/sentry_mode.png" id="2_ji3ws"]
 
 [node name="sentry_mode" type="Node3D"]
 script = ExtResource("1_ymjae")
 move_speed_percentage = -35.0
-attack_speed_multiplier = 1.35
+attack_speed_multiplier = 1.5
 damage = 0.0
 mana_cost = 0.0
 cooldown = 0.0
+Icon = ExtResource("2_ji3ws")
 Name = "Sentry Mode"
-Description = "Reduces your Movement Speed by 35% but increases your Attack Speed by 35%."
+Description = "Reduces your Movement Speed by 35% but increases your Attack Speed by 50%."
 
 [node name="preview" type="MeshInstance3D" parent="."]

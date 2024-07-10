@@ -1,11 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://didnwyqj41xmt"]
+[gd_scene load_steps=3 format=3 uid="uid://didnwyqj41xmt"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Sorde/modo_diablo/modo_diablo.gd" id="1_agxga"]
+[ext_resource type="Texture2D" uid="uid://c7klwg2erc086" path="res://scenes/abilities/Sorde/modo_diablo/icon__139.png" id="2_xktm8"]
 
 [node name="modo_diablo" type="Node3D"]
 script = ExtResource("1_agxga")
 damage = 0.0
 cooldown = 60.0
+Icon = ExtResource("2_xktm8")
+Name = "modo diablo"
+Description = "Sorde channels his inner Diablo, entering \"Modo Diablo\" state. While in this state, gain 20% Attack Damage and Spell Power and 25% Movement Speed, but decrease your Armor by 20%."
 
 [node name="duration" type="Timer" parent="."]
 wait_time = 8.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwapul6fqh6lf"]
+[gd_scene load_steps=6 format=3 uid="uid://dwapul6fqh6lf"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Lord Valthor/sovereign_smash/sovereign_smash.gd" id="1_khasx"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_db0un"]
+[ext_resource type="Texture2D" uid="uid://cy0ut5agww8da" path="res://scenes/abilities/Lord Valthor/sovereign_smash/icon__125.png" id="2_xak7g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yb6hm"]
 resource_local_to_scene = true
@@ -16,6 +17,9 @@ size = Vector3(2, 0.025, 7)
 script = ExtResource("1_khasx")
 preview_path = NodePath("dmg_area/preview")
 damage = 600.0
+Icon = ExtResource("2_xak7g")
+Name = "Sovereign Smash"
+Description = "Valthor raises his evil club and smashes the ground, crushing the enemies ahead, dealing 600 damage to them."
 
 [node name="dmg_area" type="Area3D" parent="."]
 disable_mode = 2
