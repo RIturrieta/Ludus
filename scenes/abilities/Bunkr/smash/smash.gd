@@ -16,7 +16,8 @@ func beginExecution():
 func execute():
 	for player: BaseCharacter in area.get_overlapping_bodies():
 		if player.team != chara.team:
-			player.takeAbilityDamage(damage, chara.spell_power)
+			if is_multiplayer_authority():
+				player.takeAbilityDamage.rpc(damage, chara.spell_power) 
 			player.modifySpeed(1.3, -15)
 
 func endExecution():

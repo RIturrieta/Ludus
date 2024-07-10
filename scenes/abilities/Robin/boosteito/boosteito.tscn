@@ -6,7 +6,7 @@
 [node name="boosteito" type="Node3D"]
 script = ExtResource("1_0hffu")
 damage = 0.0
-mana_cost = 15.0
+mana_cost = 10.0
 cooldown = 7.5
 Icon = ExtResource("2_j5hdu")
 Name = "Swiftstep"

@@ -6,12 +6,11 @@
 [node name="ardeat" type="Node3D"]
 script = ExtResource("1_l3uyd")
 radius = 8.0
-damage = 200.0
-mana_cost = 14.0
-cooldown = 8.0
+damage = 300.0
+mana_cost = 15.0
 Icon = ExtResource("2_5rrml")
 Name = "Ardeat"
-Description = "Throw a fireball that returns back to Airi. Deals 200 damage on the way out and back. "
+Description = "Throw a fireball that returns back to Airi. Deals 300 damage on the way out and back. "
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

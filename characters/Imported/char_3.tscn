@@ -147,25 +147,25 @@ node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", 
 [node name="char3" instance=ExtResource("1_lb223")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(2.35962e-24, -0.271176, 0.0653782)
-bones/0/rotation = Quaternion(-0.0738704, -1.5367e-25, 1.98749e-17, 0.997268)
+bones/0/position = Vector3(2.35962e-24, -0.360671, 0.0398082)
+bones/0/rotation = Quaternion(-0.0799742, -3.79622e-26, 1.9875e-17, 0.996797)
 bones/3/rotation = Quaternion(0.0334057, -7.75915e-26, -7.41755e-18, 0.999442)
-bones/4/rotation = Quaternion(0.026676, 5.12547e-26, -8.98795e-18, 0.999644)
+bones/4/rotation = Quaternion(0.0320742, -1.20132e-26, -8.98799e-18, 0.999486)
 bones/5/rotation = Quaternion(-0.0559237, -0.00774747, 0.817648, 0.572944)
 bones/6/rotation = Quaternion(-0.322284, 0.0325463, -0.0748588, 0.943117)
-bones/7/rotation = Quaternion(-0.566191, -0.20177, 0.569281, 0.560925)
-bones/8/rotation = Quaternion(-0.0151794, -0.242209, 0.0950221, 0.965441)
+bones/7/rotation = Quaternion(-0.540971, -0.205067, 0.597719, 0.555004)
+bones/8/rotation = Quaternion(-0.0205471, -0.251624, 0.10229, 0.962185)
 bones/9/rotation = Quaternion(0.0784404, -0.0848469, -0.826228, 0.551358)
 bones/10/rotation = Quaternion(-0.135111, 0.000375008, 0.101722, 0.985595)
-bones/11/rotation = Quaternion(0.0440321, -0.0469474, -0.649126, 0.757953)
-bones/12/rotation = Quaternion(-0.775031, 0.0694715, -0.232242, 0.583578)
+bones/11/rotation = Quaternion(0.0678402, -0.0661148, -0.648559, 0.755247)
+bones/12/rotation = Quaternion(-0.77987, 0.0670533, -0.232736, 0.577184)
 bones/13/rotation = Quaternion(-0.855007, -0.203261, -0.153497, 0.451761)
 bones/14/position = Vector3(-1.7, -5.3783, -1.88881)
 bones/15/position = Vector3(1.7, -5.3783, 3.11119)
 bones/15/rotation = Quaternion(-0.665574, -0.23877, -0.23877, 0.665574)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -6.9585e-18, 7.23953e-20, 6.95383e-18, 0.999617, 0.0276898, -2.65047e-19, -0.0276898, 0.999617, -1.88471e-16, 4.88123, -0.621126)
+transform = Transform3D(1, -6.96722e-18, 1.5887e-21, 6.96421e-18, 0.999576, 0.0291319, -2.04556e-19, -0.0291319, 0.999576, -1.88394e-16, 4.78294, -0.709728)
 bone_name = "Bone.004"
 bone_idx = 4
 
@@ -180,16 +180,16 @@ damping_coefficient = 0.07
 pinned_points = [2, 6, 3, 7]
 attachments/0/point_index = 2
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
+attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933972)
 attachments/1/point_index = 6
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
+attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
 attachments/2/point_index = 3
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
+attachments/2/offset = Vector3(0.0340999, 2.17342, 0.934217)
 attachments/3/point_index = 7
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
+attachments/3/offset = Vector3(0.357379, 2.16943, 0.888214)
 
 [node name="Band2" type="SoftBody3D" parent="Armature/Skeleton3D/Head" index="1"]
 transform = Transform3D(4.94924, 0.0632116, -0.707823, -0.0629089, 4.99961, 0.00661412, 0.70785, 0.00235882, 4.94965, -0.113, -10.704, -0.134)
@@ -202,23 +202,23 @@ damping_coefficient = 0.07
 pinned_points = [2, 6, 3, 7]
 attachments/0/point_index = 2
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
+attachments/0/offset = Vector3(-0.265674, 2.33403, 0.938863)
 attachments/1/point_index = 6
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
+attachments/1/offset = Vector3(0.0575712, 2.32992, 0.985094)
 attachments/2/point_index = 3
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
+attachments/2/offset = Vector3(-0.266572, 2.26296, 0.93883)
 attachments/3/point_index = 7
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
+attachments/3/offset = Vector3(0.0566726, 2.25885, 0.985061)
 
 [node name="Hair" parent="Armature/Skeleton3D/Head" index="2" instance=ExtResource("3_6vu7i")]
 transform = Transform3D(-2.4, -1.62765e-17, -2.09815e-07, 8.48002e-10, 2.39998, -0.00970004, 2.09813e-07, -0.00970004, -2.39998, -3.41625e-16, 2.10721, 0.0893897)
 visible = false
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -2.4922e-17, -7.78351e-19, 2.49032e-17, 0.996717, 0.0809629, -1.24196e-18, -0.0809629, 0.996717, -1.58565e-16, 3.68517, -0.52397)
+transform = Transform3D(1, -2.49197e-17, -1.02169e-18, 2.49065e-17, 0.995651, 0.0931602, -1.30428e-18, -0.0931602, 0.995651, -1.58491e-16, 3.58816, -0.597936)
 bone_name = "Bone.003"
 bone_idx = 3
 

@@ -42,9 +42,10 @@ func beginExecution():
 
 func execute():
 	if affected_player == null:
-		Debug.sprint("no players affected")
+		#Debug.sprint("no players affected")
+		return
 	else:
-		Debug.sprint("Affected player: " + affected_player.get_parent().name)
+		#Debug.sprint("Affected player: " + affected_player.get_parent().name)
 		affected_player.stun(1.25)
 
 func endExecution():

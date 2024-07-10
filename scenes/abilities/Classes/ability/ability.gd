@@ -39,7 +39,7 @@ func baseExecutionBegining():
 	charges -= 1
 	chara.mana -= mana_cost
 	chara.can_cast = false
-	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
+	#Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 	chara.abort_oneshots()
 	chara.updateTargetLocation(chara.global_position)
 

@@ -28,7 +28,8 @@ func _ready():
 func onTimeout():
 	for player: BaseCharacter in range_area.get_overlapping_bodies():
 		if player.team != attacker_team:
-			player.takeAbilityDamage(damage, spell_power)
+			if is_multiplayer_authority():
+				player.takeAbilityDamage.rpc(damage, spell_power)
 			if player.get_parent() != chara.get_parent():
 				var effect = FragorMarkEffect.create(attacker_team, spell_power)
 				player.applyEffect(effect)

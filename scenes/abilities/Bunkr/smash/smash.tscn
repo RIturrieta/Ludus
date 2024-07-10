@@ -10,7 +10,7 @@ radius = 6.5
 [node name="smash" type="Node3D"]
 script = ExtResource("1_kbv7b")
 radius = 5.6
-mana_cost = 8.0
+mana_cost = 10.0
 cooldown = 12.0
 total_charges = 3
 Icon = ExtResource("2_ufp4u")

@@ -10,7 +10,7 @@ func setAnimation():
 	var end_value = { "method": &"endAbilityExecution", "args": [name] }
 	animation.track_set_key_value(track_id, 0, execute_value)
 	animation.track_set_key_value(track_id, 1, end_value)
-	Debug.sprint(animation.track_get_key_value(track_id, 1))
+	#Debug.sprint(animation.track_get_key_value(track_id, 1))
 
 func _ready():
 	super()
@@ -20,7 +20,9 @@ func beginExecution():
 	chara.character_animations.set("parameters/" + key + "Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	Debug.sprint(self.name + "1")
+	#Debug.sprint(self.name + "1")
+	pass
 
 func endExecution():
-	Debug.sprint(self.name + "2")
+	#Debug.sprint(self.name + "2")
+	pass

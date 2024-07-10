@@ -20,8 +20,8 @@ func execute():
 	chara.modifyStats(3.7, 1, 0, 50, 50)
 	total_healing = (chara.max_hp - chara.hp) * 0.5
 	heal_per_frame = total_healing / (3.7 * 60)
-	if is_multiplayer_authority():
-		Debug.sprint(heal_per_frame)
+	#if is_multiplayer_authority():
+	#	Debug.sprint(heal_per_frame)
 	healing = true
 
 func _physics_process(delta):

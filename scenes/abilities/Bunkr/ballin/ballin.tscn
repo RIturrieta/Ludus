@@ -9,12 +9,12 @@ radius = 6.5
 
 [node name="ballin" type="Node3D"]
 script = ExtResource("1_r4jqy")
-damage = 900.0
+damage = 800.0
 mana_cost = 25.0
 cooldown = 50.0
 Icon = ExtResource("2_ijp7g")
 Name = "We ballin'"
-Description = "Quickly jump at massive heights. After 2.5 seconds Bunkr lands back in the arena, dealing a maximum of 900 damage to enemies hit, decreasing with distance. Enemies are also slowed by 30% for 4 seconds."
+Description = "Quickly jump at massive heights. After 2.5 seconds Bunkr lands back in the arena, dealing a maximum of 800 damage to enemies hit, decreasing with distance. Enemies are also slowed by 30% for 4 seconds."
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

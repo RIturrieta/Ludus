@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5hufqs7sbm01"]
+[gd_scene load_steps=13 format=3 uid="uid://b5hufqs7sbm01"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_nfu1y"]
 [ext_resource type="PackedScene" uid="uid://875aj4ot3cg" path="res://characters/Lord Valthor.tscn" id="2_r0402"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://do4ay3txy7cgx" path="res://characters/Airi.tscn" id="5_fspt3"]
 [ext_resource type="PackedScene" uid="uid://c4g35ywf3oisw" path="res://characters/Bunkr.tscn" id="6_xbsu8"]
 [ext_resource type="FontFile" uid="uid://pppa457ssxfb" path="res://resources/fonts/Kenney Thick.ttf" id="8_rc6ob"]
+[ext_resource type="PackedScene" uid="uid://ctaf6kdxtdp2u" path="res://scenes/ui/Hud.tscn" id="9_jlt0k"]
 
 [sub_resource type="Animation" id="Animation_cd0ul"]
 resource_name = "FadeOut"
@@ -87,6 +88,15 @@ unique_name_in_owner = true
 [node name="NextRoundTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 2.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("9_jlt0k")]
+unique_name_in_owner = true
+offset_left = 529.0
+offset_top = 585.0
+offset_right = 529.0
+offset_bottom = 585.0
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 

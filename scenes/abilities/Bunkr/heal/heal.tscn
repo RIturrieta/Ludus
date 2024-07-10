@@ -5,6 +5,7 @@
 
 [node name="heal" type="Node3D"]
 script = ExtResource("1_keue5")
+cooldown = 25.0
 Icon = ExtResource("2_dga4k")
 Name = "Maintenance break"
 Description = "For 3.7 seconds heal 50% of your missing HP. While repairing, Bunkr gains 50 Armor. Moving can cancel this process earlier."

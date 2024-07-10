@@ -28,8 +28,11 @@ var team_A_wins: int = 0
 var team_B_wins: int = 0
 var local_player_team: Statics.Role
 
+var local_blessing_count: int = 0
+
 @onready var endgame_container: Control = %EndGameContainer
 @onready var blessing_container: Control = %BlessingControl
+@onready var hud: Control = %Hud
 # @onready var blessing_container: HBoxContainer = %BlessingContainer
 var blessing_choice_array: Array[bool] = [false, false, false]
 var ultimate_choice_array: Array[bool] = [false, false]
@@ -68,6 +71,7 @@ func _ready() -> void:
 			local_player_id = player.get_child(0).player_info.id
 			local_player_team = player.get_child(0).player_info.role
 		# round_start_timer()
+	hud.prepare_icons()
 	if not Game.skip_start:
 		start_blessing_choice()
 
@@ -109,7 +113,7 @@ func on_player_defeated(id: int):
 		else:
 			top_text_label.text = "Victory"
 		if defeated_player.player_info.role == Statics.Role.TEAM_A:
-			Debug.sprint("sumanding")
+			#Debug.sprint("sumanding")
 			team_B_wins += 1
 		else:
 			team_A_wins += 1
@@ -183,7 +187,7 @@ func start_blessing_choice():
 @export_category("Ultimates")
 @export  var ultimates: Dictionary = {
 	"Airi": ["congregatio", "radix"],
-	"Bunkr": ["smash", "overheat"],
+	"Bunkr": ["smash", "ballin"],
 	"Lord Valthor": ["oblivion", "cataclysm"],
 	"Robin": ["muchas_flechitas", "uwu"],
 	"Sorde": ["titan_strike", "modo_diablo"],
@@ -222,6 +226,8 @@ func _input(event):
 					for player in player_nodes:
 						if player.player_info.id == local_player_id:
 							add_blessing_to_player.rpc(local_player_id, blessings[choice].blessing_name)
+					hud.prepare_blessing(local_blessing_count)
+					local_blessing_count += 1
 					blessing_container.visible = false
 					set_player_ready.rpc(local_player_id, true)
 					print(str("choice made: ", local_player_id, " is ready"))
@@ -235,6 +241,7 @@ func _input(event):
 						if player.player_info.id == local_player_id:
 							# Habilitar la ulti con id = choice, con rpc
 							player.setUlt.rpc(choice+1)
+					hud.prepare_icons(choice+1)
 					blessing_container.visible = false
 					set_player_ready.rpc(local_player_id, true)
 					print(str("choice made: ", local_player_id, " is ready"))
@@ -268,6 +275,7 @@ func _on_start_timer_timeout():
 		animation_player.play("FadeOutSlow")
 		for player in players.get_children():
 			player.get_child(0).can_act = true
+		set_player_ready.rpc(local_player_id, false)
 	else:
 		top_text_label.text = str(start_remaining_time)
 		start_remaining_time -= 1

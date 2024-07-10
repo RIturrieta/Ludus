@@ -8,16 +8,15 @@ script = ExtResource("2_xaonh")
 name = "Tank"
 slot = 0
 role = 1
-character = 3
+character = 2
 
 [sub_resource type="Resource" id="Resource_h8u0t"]
 script = ExtResource("2_xaonh")
 name = "Melee DPS"
 slot = 0
 role = 2
-character = 2
+character = 1
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fmbhi")
-multiplayer_test = true
 test_players = Array[ExtResource("2_xaonh")]([SubResource("Resource_sv5qy"), SubResource("Resource_h8u0t")])

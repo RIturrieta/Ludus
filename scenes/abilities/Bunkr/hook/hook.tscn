@@ -6,10 +6,12 @@
 [node name="hook" type="Node3D"]
 script = ExtResource("1_jfdlo")
 radius = 12.0
+damage = 50.0
+mana_cost = 35.0
 cooldown = 18.0
 Icon = ExtResource("2_ak8mq")
 Name = "Electromagnetic Grab"
-Description = "Fire a grappling hook dealing 150 damage to the first enemy hit. They are then quickly pulled towards Bunkr."
+Description = "Fire a grappling hook dealing 50 damage to the first enemy hit. They are then quickly pulled towards Bunkr."
 
 [node name="preview" type="MeshInstance3D" parent="."]
 

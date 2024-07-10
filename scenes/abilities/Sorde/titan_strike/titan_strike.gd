@@ -50,7 +50,8 @@ func endExecution():
 	if hitbox:
 		hitbox.disabled = false
 	chara.agent.navigation_layers = 0b00000001
-	target_player.takeAbilityDamage(damage, chara.spell_power)
+	if is_multiplayer_authority():
+		target_player.takeAbilityDamage.rpc(damage, chara.spell_power)
 	target_player.modifyStats(4, 1, 0, -25, 0, 1, 1, 0, 1)
 	target_player = null
 	chara.can_cast = true

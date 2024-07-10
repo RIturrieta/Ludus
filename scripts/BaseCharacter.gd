@@ -90,11 +90,16 @@ enum RangedProjectile {
 	BALL
 }
 @export var ranged_projectile: RangedProjectile = RangedProjectile.NONE
+var mana_regen: float = 0.03
 
 signal defeated(character_id: int)
 
 signal execution_started(name_: String)
 signal execution_ended(name_: String)
+
+# ========== HEALTH BAR ========== #
+@onready var mana_bar = $SubViewport2/ManaBar
+@onready var health_label = $SubViewport/HealthBar/Label
 
 
 func _ready():
@@ -103,8 +108,17 @@ func _ready():
 	character_animations = character_node.get_node("AnimationTree")
 	for i in range(total_attack_animations):
 		character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", attack_speed)
-	
+		
+	$SubViewport.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
+	$SubViewport2.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
+	init_bar()
+
 func _physics_process(delta):
+	mana += mana_regen
+	if mana > max_mana:
+		mana = max_mana
+	mana_bar.value = mana
+	
 	if can_act:
 		if character_animations:
 			var blend_val = min(velocity.length(), 1.0)
@@ -268,26 +282,38 @@ func takeAttackDamage(damage: float):
 	var total_damage = damage * (1 - physical_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
+		$SubViewport/HealthBar.value = 0
+		health_label.text = str(hp) + " / " + str(max_hp)
 		died()
 	else:
 		hp -= total_damage
-	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
+		$SubViewport/HealthBar.value = hp - total_damage
+		health_label.text = str(hp) + " / " + str(max_hp)
+	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 
 @rpc("call_local", "reliable", "any_peer")
 func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
+		$SubViewport/HealthBar.value = 0
+		health_label.text = str(hp) + " / " + str(max_hp)
 		died()
 	else:
+		$SubViewport/HealthBar.value = hp - total_damage
 		hp -= total_damage
-	Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
+		health_label.text = str(hp) + " / " + str(max_hp)
+	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 	
 func heal(points: float):
 	if hp + points <= max_hp:
 		hp += points
+		$SubViewport/HealthBar.value = hp + points
+		health_label.text = str(hp) + " / " + str(max_hp)
 	else:
 		hp = max_hp
+		$SubViewport/HealthBar.value = max_hp
+		health_label.text = str(hp) + " / " + str(max_hp)
 
 # ========== ABILITIES ========== #
 
@@ -618,6 +644,7 @@ func reset():
 	visible = true
 	can_act = false
 	dead = false
+	init_bar()
 	updateTargetLocation(global_position)
 	character_animations.set("parameters/IdleWalkBlend/blend_amount", 0)
 	var hitbox = get_node("HitBox")
@@ -648,6 +675,13 @@ func setup(player_data: Statics.PlayerData):
 	basic_attack = abilities["BA"][1]
 	#if get_parent().name == "Lord Valthor":
 		#loadAbility("add_charges_R")
+
+func init_bar():
+	$SubViewport/HealthBar.max_value = max_hp
+	$SubViewport/HealthBar.value = max_hp
+	health_label.text = str(hp) + " / " + str(max_hp)
+	$SubViewport2/ManaBar.max_value = max_mana
+	$SubViewport2/ManaBar.value = max_mana
 
 @rpc("call_local", "reliable", "any_peer")
 func setUlt(index: int):

@@ -5,7 +5,7 @@
 
 [node name="relentless_chase" type="Node3D"]
 script = ExtResource("1_ghpu2")
-mana_cost = 15.0
+mana_cost = 35.0
 cooldown = 8.0
 Icon = ExtResource("2_dlrst")
 Name = "Relentless Charge"

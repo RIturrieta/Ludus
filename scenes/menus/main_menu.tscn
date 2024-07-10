@@ -176,6 +176,14 @@ text = "Robin's bow and arrow:
 Kickin' It Studios - Free Low Poly Weapon Pack
 kickin-it-studios.itch.io"
 
+[node name="Label5" type="Label" parent="CreditsMenu/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Skill icons:
+Pixerelia - Basic Skills and buffs
+pixerelia.itch.io"
+
 [node name="ExitCredits" type="Button" parent="CreditsMenu"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)

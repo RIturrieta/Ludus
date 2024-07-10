@@ -27,7 +27,8 @@ func execute():
 		if player.team != chara.team:
 			var distance = max(1.0, player.global_position.distance_to(chara.global_position) - inner_radius + 1.0)
 			var radial_damage = roundf(damage/distance)
-			player.takeAbilityDamage(radial_damage, chara.spell_power)
+			if is_multiplayer_authority():
+				player.takeAbilityDamage.rpc(radial_damage, chara.spell_power)
 			player.modifySpeed(4, -30)
 
 func endExecution():

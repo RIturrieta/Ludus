@@ -101,7 +101,7 @@ func _physics_process(delta):
 					player.takeAttackDamage.rpc(chara.attack_damage)
 				projectile.queue_free()
 				projectiles -= 1
-				if player == target_player and player.died():
+				if player == target_player and player.dead:
 					target_player = null
 					chara.target = chara.global_position
 					chara.updateTargetLocation(chara.target)
@@ -121,7 +121,7 @@ func _physics_process(delta):
 				if Input.is_action_pressed("Move"):
 					calculateTargetPlayer()
 		
-		if target_player != null and target_player.died():
+		if target_player != null and target_player.dead:
 			target_player = null
 		if !attack_ended and target_player == null and can_cancel and !projectile_flying:
 			if is_multiplayer_authority():

@@ -167,6 +167,7 @@ text = "Team A"
 
 [node name="RoleC" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer/VBoxContainer1"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_kt0da")
@@ -187,6 +188,7 @@ text = "Team B"
 
 [node name="RoleD" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_kt0da")

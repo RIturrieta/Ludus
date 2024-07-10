@@ -32,7 +32,7 @@ func execute():
 func on_timeout():
 	preview.visible = false
 	for player: BaseCharacter in area.get_overlapping_bodies():
-		if player.team != chara.team:
-			player.takeAbilityDamage(damage, chara.spell_power)
+		if player.team != chara.team and is_multiplayer_authority():
+			player.takeAbilityDamage.rpc(damage, chara.spell_power)
 	bombing = false
 	chara.can_cast = true

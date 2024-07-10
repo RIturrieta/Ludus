@@ -36,7 +36,8 @@ func dealDamage():
 		if player.team != chara.team and not player in players_affected:
 			players_affected.append(player)
 			player.stun(3)
-			player.takeAbilityDamage(damage, chara.spell_power)
+			if is_multiplayer_authority():
+				player.takeAbilityDamage.rpc(damage, chara.spell_power)
 
 func endExecution():
 	chara.clearDash()

@@ -15,7 +15,8 @@ func _physics_process(_delta):
 		for player in players_on_area:
 			if not player in players_affected and player.team != chara.team:
 				players_affected.append(player)
-				player.takeAbilityDamage(damage, chara.spell_power)
+				if is_multiplayer_authority():
+					player.takeAbilityDamage.rpc(damage, chara.spell_power)
 
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:

@@ -30,8 +30,8 @@ func execute():
 func _on_delay_timeout():
 	players_on_area = dmg_area.get_overlapping_bodies()
 	for player: BaseCharacter in players_on_area:
-		if player.team != chara.team:
-			player.takeAbilityDamage(damage, chara.spell_power)
+		if player.team != chara.team and is_multiplayer_authority():
+			player.takeAbilityDamage.rpc(damage, chara.spell_power)
 
 func endExecution():
 	casting = false

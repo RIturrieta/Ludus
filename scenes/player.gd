@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var score = 1 :
 	set(value):
 		score = value
-		Debug.sprint("Player %s score %d" % [name, score])
+		#Debug.sprint("Player %s score %d" % [name, score])
 
 
 func _input(event: InputEvent) -> void:
@@ -32,5 +32,5 @@ func test(name):
 	var message = "test " + name
 	var sender_id = multiplayer.get_remote_sender_id()
 	var sender_player = Game.get_player(sender_id)
-	Debug.sprint(message)
-	Debug.sprint(sender_player.name)
+	#Debug.sprint(message)
+	#Debug.sprint(sender_player.name)

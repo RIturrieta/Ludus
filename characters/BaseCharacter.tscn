@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dt5ahf3uukx5o"]
+[gd_scene load_steps=11 format=3 uid="uid://dt5ahf3uukx5o"]
 
 [ext_resource type="Script" path="res://scripts/BaseCharacter.gd" id="1_00iuh"]
 [ext_resource type="Texture2D" uid="uid://cqqk0cyja4kwe" path="res://resources/arrows.png" id="2_55k2c"]
+[ext_resource type="PackedScene" uid="uid://du7hsjgvqrpwc" path="res://scenes/ui/health_bar.tscn" id="3_rekvt"]
+[ext_resource type="PackedScene" uid="uid://blh7kcjuhkfsu" path="res://scenes/ui/mana_bar.tscn" id="4_ygt12"]
 
 [sub_resource type="Animation" id="Animation_dly2n"]
 resource_name = "move_arrows"
@@ -47,6 +49,12 @@ point_count = 2
 radius = 0.1
 height = 0.2
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_ewmkl"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_pqpk2"]
+viewport_path = NodePath("SubViewport2")
+
 [node name="BaseCharacter" type="CharacterBody3D" groups=["players"]]
 collision_layer = 2
 collision_mask = 11
@@ -89,6 +97,7 @@ transform = Transform3D(1, 0, 0, 0, 0.500008, 0.866039, 0, -0.866039, 0.500008, 
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72297, 0)
+visible = false
 pixel_size = 0.001
 billboard = 1
 fixed_size = true
@@ -110,3 +119,32 @@ mesh = SubResource("CapsuleMesh_kvtkm")
 [node name="Abilities" type="Node3D" parent="."]
 
 [node name="Effects" type="Node3D" parent="."]
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="HealthBar" parent="SubViewport" instance=ExtResource("3_rekvt")]
+
+[node name="Label" type="Label" parent="SubViewport/HealthBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9587, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_ewmkl")
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="ManaBar" parent="SubViewport2" instance=ExtResource("4_ygt12")]
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83787, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_pqpk2")

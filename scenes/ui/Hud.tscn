@@ -1,0 +1,187 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctaf6kdxtdp2u"]
+
+[ext_resource type="Script" path="res://scenes/ui/Hud.gd" id="1_fc2cn"]
+[ext_resource type="LabelSettings" uid="uid://c7c8gdmcewxjt" path="res://resources/fonts/new_label_settings.tres" id="2_v2d6g"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s8bau"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7o6qb"]
+texture = SubResource("CompressedTexture2D_s8bau")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_575uf"]
+texture = SubResource("CompressedTexture2D_s8bau")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k31dd"]
+texture = SubResource("CompressedTexture2D_s8bau")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_slfwp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfuxv"]
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fc2cn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 212.0
+offset_bottom = 110.0
+
+[node name="Q" type="Panel" parent="HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_7o6qb")
+
+[node name="Label" type="Label" parent="HBoxContainer/Q"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_top = 1.0
+offset_right = 50.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Q"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="W" type="Panel" parent="HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_575uf")
+
+[node name="Label" type="Label" parent="HBoxContainer/W"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_top = 1.0
+offset_right = 50.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "W"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E" type="Panel" parent="HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_k31dd")
+
+[node name="Label" type="Label" parent="HBoxContainer/E"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "E"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="R" type="Panel" parent="HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_slfwp")
+
+[node name="Label" type="Label" parent="HBoxContainer/R"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "R"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+process_priority = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="B1" type="Panel" parent="HBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B1"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "1"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B2" type="Panel" parent="HBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B2"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "2"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B3" type="Panel" parent="HBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B3"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "3"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B4" type="Panel" parent="HBoxContainer2"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B4"]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "4"
+label_settings = ExtResource("2_v2d6g")
+horizontal_alignment = 1
+vertical_alignment = 1

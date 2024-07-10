@@ -24,7 +24,8 @@ func _physics_process(delta):
 		if !projectile.returning:
 			for player: BaseCharacter in projectile.get_overlapping_bodies():
 				if player.team != chara.team:
-					player.takeAbilityDamage(damage, chara.spell_power)
+					if is_multiplayer_authority():
+						player.takeAbilityDamage.rpc(damage, chara.spell_power)
 					affected_player = player
 					affected_player.can_act = false
 					affected_player.can_cast = false

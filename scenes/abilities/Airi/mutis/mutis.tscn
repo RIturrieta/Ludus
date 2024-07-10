@@ -29,7 +29,6 @@ range_radius = 5.0
 area_radius = 3.0
 rain_duration = 5.0
 damage = 20.0
-mana_cost = 16.0
 cooldown = 18.0
 Icon = ExtResource("2_rb3fw")
 Name = "Mutis"

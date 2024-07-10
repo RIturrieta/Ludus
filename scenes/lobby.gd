@@ -104,11 +104,12 @@ func _process(_delta: float) -> void:
 
 
 func _on_upnp_completed(_status) -> void:
-	print(_status)
-	if _status == OK:
-		Debug.sprint("Port Opened", 5)
-	else:
-		Debug.sprint("Port Error", 5)
+	#print(_status)
+	#if _status == OK:
+		#Debug.sprint("Port Opened", 5)
+	#else:
+		#Debug.sprint("Port Error", 5)
+	pass
 
 
 func _on_host_pressed() -> void:
@@ -116,7 +117,7 @@ func _on_host_pressed() -> void:
 	
 	var err = peer.create_server(Statics.PORT, Statics.MAX_CLIENTS)
 	if err:
-		Debug.sprint("Host Error: %d" %err)
+		#Debug.sprint("Host Error: %d" %err)
 		return
 	
 	multiplayer.multiplayer_peer = peer
@@ -135,9 +136,9 @@ func _on_confirm_join_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
 	var err = peer.create_client(ip.text, Statics.PORT)
 	if err:
-		Debug.sprint("Host Error: %d" %err)
+		#Debug.sprint("Host Error: %d" %err)
 		return
-	
+
 	multiplayer.multiplayer_peer = peer
 	
 	var player = Statics.PlayerData.new(multiplayer.get_unique_id(), user.text, 0)
@@ -147,15 +148,17 @@ func _on_confirm_join_pressed() -> void:
 
 
 func _on_connected_to_server() -> void:
-	Debug.sprint("connected_to_server")
+	#Debug.sprint("connected_to_server")
+	pass
 
 
 func _on_connection_failed() -> void:
-	Debug.sprint("connection_failed")
+	#Debug.sprint("connection_failed")
+	pass
 
 
 func _on_peer_connected(id: int) -> void:
-	Debug.sprint("peer_connected %d" % id)
+	#Debug.sprint("peer_connected %d" % id)
 	
 	send_info.rpc_id(id, Game.get_current_player().to_dict())
 	var _local_id = multiplayer.get_unique_id()
@@ -166,7 +169,7 @@ func _on_peer_connected(id: int) -> void:
 
 
 func _on_peer_disconnected(id: int) -> void:
-	Debug.sprint("peer_disconnected %d" % id)
+	#Debug.sprint("peer_disconnected %d" % id)
 	_remove_player(id)
 	if multiplayer.is_server():
 		starting_game.rpc(false)
@@ -177,7 +180,8 @@ func _on_peer_disconnected(id: int) -> void:
 
 
 func _on_server_disconnected() -> void:
-	Debug.sprint("server_disconnected")
+	#Debug.sprint("server_disconnected")
+	pass
 
 
 func _add_player(player: Statics.PlayerData) -> void:

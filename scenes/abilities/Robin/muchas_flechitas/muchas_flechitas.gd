@@ -35,8 +35,8 @@ func _physics_process(delta):
 		if pulse_frames == pulse_delay:
 			pulse_frames = 0
 			for player: BaseCharacter in mouse_area.get_overlapping_bodies():
-				if player.team != chara.team:
-					player.takeAbilityDamage(damage, chara.spell_power)
+				if player.team != chara.team and is_multiplayer_authority():
+					player.takeAbilityDamage.rpc(damage, chara.spell_power)
 
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:

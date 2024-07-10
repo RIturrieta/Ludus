@@ -32,7 +32,6 @@ dash_distance = 4.0
 dash_speed = 275.0
 preview_path = NodePath("S1/preview")
 damage = 0.0
-mana_cost = 12.0
 cooldown = 8.0
 Icon = ExtResource("2_rf705")
 Name = "Huntress roll"

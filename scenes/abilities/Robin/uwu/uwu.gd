@@ -26,9 +26,10 @@ func _physics_process(delta):
 			for body in projectile.get_overlapping_bodies():
 				if body is BaseCharacter:
 					if body.team != chara.team:
-						body.takeAbilityDamage(damage, chara.spell_power)
+						if is_multiplayer_authority():
+							body.takeAbilityDamage.rpc(damage, chara.spell_power)
 						body.stun(1.5 + projectile.traveled_distance * 0.2)
-						Debug.sprint(1.5 + projectile.traveled_distance * 0.2)
+						#Debug.sprint(1.5 + projectile.traveled_distance * 0.2)
 				projectile.queue_free()
 
 func beginExecution():

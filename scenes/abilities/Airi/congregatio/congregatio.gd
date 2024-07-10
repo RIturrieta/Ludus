@@ -40,9 +40,10 @@ func beginExecution():
 
 func execute():
 	if affected_player == null:
-		Debug.sprint("no players affected")
+		#Debug.sprint("no players affected")
+		return
 	else:
-		Debug.sprint("Affected player: " + affected_player.get_parent().name)
+		#Debug.sprint("Affected player: " + affected_player.get_parent().name)
 		var effect = CongregatioMarkEffect.create(chara.team)
 		affected_player.applyEffect(effect)
 

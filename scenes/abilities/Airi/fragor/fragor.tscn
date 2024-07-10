@@ -16,11 +16,12 @@ radius = 1.0
 [node name="fragor" type="Node3D"]
 script = ExtResource("1_cwftk")
 radius = 6.0
+damage = 300.0
 mana_cost = 15.0
 cooldown = 15.0
 Icon = ExtResource("2_mwktq")
 Name = "Fragor"
-Description = "Mark an enemy gladiator. After 4.5 seconds it explodes dealing 150 in an area aroun them. Fragor's mark spreads to other gladiators hit."
+Description = "Mark an enemy gladiator. After 4.5 seconds it explodes dealing 300 in an area around them. Fragor's mark spreads to other gladiators hit."
 
 [node name="range_area" type="Area3D" parent="."]
 collision_layer = 0

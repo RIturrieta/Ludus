@@ -19,8 +19,8 @@ func _physics_process(_delta):
 				normal.y = 0
 				players_affected.append(player)
 				player.stun(0.5)
-				player.takeAbilityDamage(damage, chara.spell_power)
 				if is_multiplayer_authority():
+					player.takeAbilityDamage.rpc(damage, chara.spell_power)
 					player.fixedMovement.rpc(normal, 20)
 
 func beginExecution():

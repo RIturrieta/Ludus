@@ -29,7 +29,8 @@ func _physics_process(delta):
 			if !projectile.returning:
 				for player: BaseCharacter in projectile.get_overlapping_bodies():
 					if player.team != chara.team and !(player in affected_players):
-						player.takeAbilityDamage(damage, chara.spell_power)
+						if is_multiplayer_authority():
+							player.takeAbilityDamage.rpc(damage, chara.spell_power)
 						affected_players.append(player)
 			else:
 				projectile.forward_dir = chara.global_position
@@ -38,7 +39,8 @@ func _physics_process(delta):
 						affected_players = []
 						projectile.queue_free()
 					if player.team != chara.team and !(player in affected_players):
-						player.takeAbilityDamage(damage, chara.spell_power)
+						if is_multiplayer_authority():
+							player.takeAbilityDamage.rpc(damage, chara.spell_power)
 						affected_players.append(player)
 
 func beginExecution():
