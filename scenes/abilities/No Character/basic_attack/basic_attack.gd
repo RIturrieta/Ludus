@@ -33,7 +33,7 @@ func calculateTargetPlayer():
 				min_distance = distance
 				target_player = player
 		updateTargetPlayer.rpc(target_player.player_info.id)
-	elif target_player in range_area.get_overlapping_bodies() and !target_player.died() and chara.velocity == Vector3(0,0,0):
+	elif target_player in range_area.get_overlapping_bodies() and !target_player.dead and chara.velocity == Vector3(0,0,0):
 		target_player = target_player
 	else:
 		target_player = null
@@ -66,7 +66,7 @@ func dealDamage():
 			for i in range(attack_quantity):
 				if is_multiplayer_authority():
 					player_pair[0].takeAttackDamage.rpc(chara.attack_damage)
-				if player_pair[0].died():
+				if player_pair[0].dead:
 					if target_player:
 						target_player = null
 						chara.target = chara.global_position
@@ -98,7 +98,7 @@ func _physics_process(delta):
 				if Input.is_action_pressed("Move"):
 					calculateTargetPlayer()
 		
-		if target_player != null and target_player.died():
+		if target_player != null and target_player.dead:
 			target_player = null
 		if !attack_ended and target_player == null and can_cancel:
 			stopAttack()

@@ -1,0 +1,194 @@
+[gd_scene load_steps=5 format=3 uid="uid://5li7id7d0qr7"]
+
+[ext_resource type="PackedScene" uid="uid://4uchuji1uflh" path="res://scenes/levels/test_arena.tscn" id="1_rvpqp"]
+[ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_sqml1"]
+[ext_resource type="PackedScene" uid="uid://bslhrv3eo36wd" path="res://scenes/lobby.tscn" id="2_4xb0h"]
+[ext_resource type="FontFile" uid="uid://pppa457ssxfb" path="res://resources/fonts/Kenney Thick.ttf" id="2_ab7oi"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sqml1")
+
+[node name="MenuButtons" type="Panel" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 54.0
+offset_top = -258.0
+offset_right = 333.0
+offset_bottom = 1272.0
+
+[node name="Title" type="Label" parent="MenuButtons"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 284.0
+offset_right = 275.0
+offset_bottom = 408.0
+theme_override_fonts/font = ExtResource("2_ab7oi")
+theme_override_font_sizes/font_size = 50
+text = "Ludus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="MenuButtons"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 42.0
+offset_top = 494.0
+offset_right = 242.0
+offset_bottom = 595.0
+
+[node name="Play" type="Button" parent="MenuButtons/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Play"
+
+[node name="Credits" type="Button" parent="MenuButtons/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Credits"
+
+[node name="Exit" type="Button" parent="MenuButtons/ButtonContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Exit"
+
+[node name="TestArena" parent="." instance=ExtResource("1_rvpqp")]
+
+[node name="Lobby" parent="." instance=ExtResource("2_4xb0h")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 451.0
+offset_top = 135.0
+offset_right = 837.0
+offset_bottom = 561.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="CreditsMenu" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 42.0
+offset_top = 31.0
+offset_right = 1238.0
+offset_bottom = 697.0
+
+[node name="Title" type="Label" parent="CreditsMenu"]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 23.0
+offset_right = 754.0
+offset_bottom = 147.0
+theme_override_fonts/font = ExtResource("2_ab7oi")
+theme_override_font_sizes/font_size = 60
+text = "Ludus
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CreditsMenu"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 138.0
+offset_right = 408.0
+offset_bottom = 398.0
+alignment = 1
+
+[node name="Label" type="Label" parent="CreditsMenu/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Developers:"
+
+[node name="Label2" type="Label" parent="CreditsMenu/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Luciano Calvo
+Luciano Providel
+Rodrigo Iturrieta"
+
+[node name="Label3" type="Label" parent="CreditsMenu/VBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Airi's cute hat:
+Vanillain - The Witch's Hat
+https://sketchfab.com/vanillain"
+
+[node name="Label4" type="Label" parent="CreditsMenu/VBoxContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Robin's bow and arrow:
+Kickin' It Studios - Free Low Poly Weapon Pack
+https://kickin-it-studios.itch.io"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CreditsMenu"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 214.0
+offset_right = 1170.0
+offset_bottom = 474.0
+alignment = 1
+
+[node name="Label" type="Label" parent="CreditsMenu/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Resources:"
+
+[node name="Label2" type="Label" parent="CreditsMenu/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Valthor's club and Sorde's sworde:
+CRAFTPIX.NET - Free and Premium Game Assets
+free-game-assets.itch.io"
+
+[node name="Label3" type="Label" parent="CreditsMenu/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Airi's cute hat:
+Vanillain - The Witch's Hat
+sketchfab.com/vanillain"
+
+[node name="Label4" type="Label" parent="CreditsMenu/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ab7oi")
+text = "Robin's bow and arrow:
+Kickin' It Studios - Free Low Poly Weapon Pack
+kickin-it-studios.itch.io"
+
+[node name="ExitCredits" type="Button" parent="CreditsMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 69.0
+offset_top = 579.0
+offset_right = 269.0
+offset_bottom = 622.0
+theme_override_fonts/font = ExtResource("2_ab7oi")
+theme_override_font_sizes/font_size = 20
+text = "Exit"
+
+[connection signal="pressed" from="MenuButtons/ButtonContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MenuButtons/ButtonContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="MenuButtons/ButtonContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CreditsMenu/ExitCredits" to="." method="_on_exit_credits_pressed"]

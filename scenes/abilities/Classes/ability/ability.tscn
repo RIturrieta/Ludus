@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp2n5w6y0af03"]
+[gd_scene load_steps=3 format=3 uid="uid://cp2n5w6y0af03"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Classes/ability/ability.gd" id="1_vql10"]
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="2_p0bvk"]
 
 [node name="ability" type="Node3D"]
 script = ExtResource("1_vql10")
+Icon = ExtResource("2_p0bvk")
 
 [node name="preview" type="MeshInstance3D" parent="."]

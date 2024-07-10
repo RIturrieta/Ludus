@@ -34,9 +34,6 @@ func dealDamage():
 			players_affected.append(player)
 			player.stun(3)
 			player.takeAbilityDamage(damage, chara.spell_power)
-			if player.died():
-				if chara.target_player:
-					chara.target_player = null
 
 func endExecution():
 	chara.clearDash()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cksqi67ufu2k"]
+[gd_scene load_steps=8 format=3 uid="uid://cksqi67ufu2k"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Blessings/flash/flash.gd" id="1_yg5p5"]
 [ext_resource type="Material" uid="uid://bs2alrgparspr" path="res://resources/hitbox_material.tres" id="2_277c4"]
+[ext_resource type="Texture2D" uid="uid://c0md6fghq8q5m" path="res://scenes/abilities/Blessings/flash/flash.png" id="2_fcbjv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_i70eq"]
 resource_local_to_scene = true
@@ -29,6 +30,7 @@ preview_path = NodePath("S1/preview")
 damage = 0.0
 mana_cost = 0.0
 cooldown = 0.0
+Icon = ExtResource("2_fcbjv")
 Name = "Blink"
 Description = "Quickly teleports your character to the target location."
 

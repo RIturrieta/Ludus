@@ -52,15 +52,18 @@ func _ready():
 	og_Q = chara.abilities["Q"][1].total_charges
 	og_W = chara.abilities["W"][1].total_charges
 	og_E = chara.abilities["E"][1].total_charges
-	og_R = chara.abilities["R" + str(chara.r_index)][1].total_charges
+	og_R = chara.abilities["R1"][1].total_charges
+	og_R = chara.abilities["R2"][1].total_charges
 	chara.abilities["Q"][1].total_charges += Q
 	chara.abilities["W"][1].total_charges += W
 	chara.abilities["E"][1].total_charges += E
-	chara.abilities["R" + str(chara.r_index)][1].total_charges += R
+	chara.abilities["R1"][1].total_charges += R
+	chara.abilities["R2"][1].total_charges += R
 	chara.abilities["Q"][1].charges += Q
 	chara.abilities["W"][1].charges += W
 	chara.abilities["E"][1].charges += E
-	chara.abilities["R" + str(chara.r_index)][1].charges += R
+	chara.abilities["R1"][1].charges += R
+	chara.abilities["R2"][1].charges += R
 	
 	if Q > 0:
 		addTimers("Q", Q)
@@ -78,15 +81,20 @@ func _ready():
 		removeTimers("E", -E)
 		
 	if R > 0:
-		addTimers("R" + str(chara.r_index), R)
+		#addTimers("R" + str(chara.r_index), R)
+		addTimers("R1", R)
+		addTimers("R2", R)
 	elif R < 0 and (og_R + R) > 0:
-		removeTimers("R" + str(chara.r_index), -R)
+		#removeTimers("R" + str(chara.r_index), -R)
+		removeTimers("R1", -R)
+		removeTimers("R2", -R)
 
 func stop():
 	chara.abilities["Q"][1].total_charges = og_Q
 	chara.abilities["W"][1].total_charges = og_W
 	chara.abilities["E"][1].total_charges = og_E
-	chara.abilities["R" + str(chara.r_index)][1].total_charges = og_R
+	chara.abilities["R1"][1].total_charges = og_R
+	chara.abilities["R2"][1].total_charges = og_R
 	
 	if Q < 0 and (og_Q + Q) > 0:
 		addTimers("Q", -Q)
@@ -104,7 +112,11 @@ func stop():
 		removeTimers("E", E)
 		
 	if R < 0 and (og_R + R) > 0:
-		addTimers("R" + str(chara.r_index), -R)
+		# addTimers("R" + str(chara.r_index), -R)
+		addTimers("R1", -R)
+		addTimers("R2", -R)
 	elif R > 0:
-		removeTimers("R" + str(chara.r_index), R)
+		# removeTimers("R" + str(chara.r_index), R)
+		removeTimers("R1", R)
+		removeTimers("R2", R)
 	queue_free()

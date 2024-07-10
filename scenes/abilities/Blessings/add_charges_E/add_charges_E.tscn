@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmtkpilsc1ab8"]
+[gd_scene load_steps=3 format=3 uid="uid://dmtkpilsc1ab8"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Blessings/add_charges_E/add_charges_E.gd" id="1_w72ep"]
+[ext_resource type="Texture2D" uid="uid://qma7jxap61lp" path="res://scenes/abilities/Blessings/add_charges_E/e.png" id="2_u6rea"]
 
 [node name="add_charges_E" type="Node3D"]
 script = ExtResource("1_w72ep")
+Icon = ExtResource("2_u6rea")
 Name = "Overflow: E"
 Description = "Your E basic ability gains 2 extra charges."
 

@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyrkxua6who6g"]
+[gd_scene load_steps=3 format=3 uid="uid://dyrkxua6who6g"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Blessings/glass_cannon/glass_cannon.gd" id="1_bfsta"]
+[ext_resource type="Texture2D" uid="uid://dlm00y8cpfcod" path="res://scenes/abilities/Blessings/glass_cannon/glass_cannon.png" id="2_cldbh"]
 
 [node name="glass_cannon" type="Node3D"]
 script = ExtResource("1_bfsta")
 max_hp_percentage = -50.0
 spell_power_percentage = 90.0
 attack_damage_multiplier = 1.9
+Icon = ExtResource("2_cldbh")
 Name = "Glass Cannon"
 Description = "Reduce your Max HP by 50%, but increase your Attack Damage and Spell Power by 90%."
 

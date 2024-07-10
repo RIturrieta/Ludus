@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c7c8gdmcewxjt"]
+
+[ext_resource type="FontFile" uid="uid://pppa457ssxfb" path="res://resources/fonts/Kenney Thick.ttf" id="1_8nprq"]
+
+[resource]
+font = ExtResource("1_8nprq")
+font_size = 14

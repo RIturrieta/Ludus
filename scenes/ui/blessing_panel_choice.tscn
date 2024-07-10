@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d02wl7umypceg"]
+[gd_scene load_steps=4 format=3 uid="uid://d02wl7umypceg"]
 
-[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_586ml"]
 [ext_resource type="Script" path="res://scenes/ui/blessing_panel_choice.gd" id="1_rpgkb"]
+[ext_resource type="Texture2D" uid="uid://byd0u0utp57gk" path="res://scenes/abilities/Blessings/rewind/rewind.png" id="2_k7t0r"]
+[ext_resource type="LabelSettings" uid="uid://c7c8gdmcewxjt" path="res://resources/fonts/new_label_settings.tres" id="3_uruem"]
 
 [node name="Blessing" type="Control"]
 custom_minimum_size = Vector2(100, 112.685)
@@ -27,10 +28,13 @@ offset_bottom = 334.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BlessingVBox"]
+[node name="SkillIcon" type="TextureRect" parent="BlessingVBox"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture = ExtResource("1_586ml")
-stretch_mode = 3
+texture = ExtResource("2_k7t0r")
+stretch_mode = 5
 
 [node name="Separator" type="Label" parent="BlessingVBox"]
 custom_minimum_size = Vector2(10, 20)
@@ -43,18 +47,22 @@ autowrap_mode = 1
 
 [node name="Name" type="Label" parent="BlessingVBox"]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(10, 20)
 layout_mode = 2
 text = "Blessing Name"
+label_settings = ExtResource("3_uruem")
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 1
 
 [node name="Cooldown" type="Label" parent="BlessingVBox"]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(10, 20)
 layout_mode = 2
 text = "Cooldown: 10 Seconds."
+label_settings = ExtResource("3_uruem")
 horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 1
@@ -79,6 +87,7 @@ tooltip_text = "sadasdasdad"
 
 [node name="Description" type="Label" parent="BlessingVBox"]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(10, 20)
 layout_mode = 2
 text = "PASSIVE: Whenever Garen kills an enemy, he generates a stack of Courage, stacking up to 150 times.
@@ -87,5 +96,6 @@ COURAGE: For each stack, Garen gains Armor icon 0.2 bonus armor and Magic resist
 
 Courage
 ACTIVE: Garen reduces incoming damage by 30% for 4 seconds. For the first 0.75 seconds, Garen additionally grants himself a Hybrid resistances icon shield and 60% Tenacity icon tenacity."
+label_settings = ExtResource("3_uruem")
 horizontal_alignment = 1
 autowrap_mode = 2

@@ -15,7 +15,6 @@ collision_mask = 2
 character_node = NodePath("char5")
 attack_range = 1.5
 attack_duration = 0.5
-r_index = 2
 abilities = {
 "1": "",
 "2": "",
@@ -30,6 +29,12 @@ abilities = {
 }
 
 [node name="char5" parent="BaseCharacter" instance=ExtResource("2_7c825")]
+
+[node name="Skeleton3D" parent="BaseCharacter/char5/Armature" index="0"]
+bones/2/position = Vector3(-0.189067, 0.4, 1.2)
+bones/3/position = Vector3(-0.189067, 0.4, -1.2)
+bones/4/rotation = Quaternion(0.953717, -3.58469e-08, -1.13692e-07, 0.300706)
+bones/5/rotation = Quaternion(0.953717, -5.07642e-17, -5.07642e-17, -0.300706)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

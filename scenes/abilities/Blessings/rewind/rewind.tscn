@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfrqvfdebij2n"]
+[gd_scene load_steps=3 format=3 uid="uid://bfrqvfdebij2n"]
 
 [ext_resource type="Script" path="res://scenes/abilities/Blessings/rewind/rewind.gd" id="1_swaa6"]
+[ext_resource type="Texture2D" uid="uid://byd0u0utp57gk" path="res://scenes/abilities/Blessings/rewind/rewind.png" id="2_i0bib"]
 
 [node name="rewind" type="Node3D"]
 script = ExtResource("1_swaa6")
 damage = 0.0
 mana_cost = 50.0
 cooldown = 300.0
+Icon = ExtResource("2_i0bib")
 Name = "Rewind"
 Description = "Reset all your abilities and blessings cooldowns."
 

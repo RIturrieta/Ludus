@@ -14,9 +14,14 @@ extends MarginContainer
 
 @onready var role_a: Button = %RoleA
 @onready var role_b: Button = %RoleB
+@onready var role_c: Button = %RoleC
+@onready var role_d: Button = %RoleD
 
 @onready var char_1: Button = %Char1
+@onready var char_2: Button = %Char2
 @onready var char_3: Button = %Char3
+@onready var char_4: Button = %Char4
+@onready var char_5: Button = %Char5
 
 @onready var back_ready: Button = %BackReady
 @onready var ready_toggle: Button = %Ready
@@ -42,6 +47,8 @@ var status = { 1 : false }
 
 var _menu_stack: Array[Control] = []
 
+signal returned()
+
 func _ready():
 	
 	if Game.multiplayer_test:
@@ -65,11 +72,16 @@ func _ready():
 	back_join.pressed.connect(_back_menu)
 	back_ready.pressed.connect(_back_menu)
 	
-	role_a.pressed.connect(func(): Game.set_current_player_role(Statics.Role.TEAM_A))
-	role_b.pressed.connect(func(): Game.set_current_player_role(Statics.Role.TEAM_B))
-	
+	role_a.pressed.connect(func(): Game.set_current_player_role_and_slot(Statics.Role.TEAM_A, 1))
+	role_b.pressed.connect(func(): Game.set_current_player_role_and_slot(Statics.Role.TEAM_B, 1))
+	role_c.pressed.connect(func(): Game.set_current_player_role_and_slot(Statics.Role.TEAM_A, 2))
+	role_d.pressed.connect(func(): Game.set_current_player_role_and_slot(Statics.Role.TEAM_B, 2))
+
 	char_1.pressed.connect(func(): Game.set_current_player_character(Statics.Character.CHAR1))
+	char_2.pressed.connect(func(): Game.set_current_player_character(Statics.Character.CHAR2))
 	char_3.pressed.connect(func(): Game.set_current_player_character(Statics.Character.CHAR3))
+	char_4.pressed.connect(func(): Game.set_current_player_character(Statics.Character.CHAR4))
+	char_5.pressed.connect(func(): Game.set_current_player_character(Statics.Character.CHAR5))
 	
 	ready_toggle.pressed.connect(_on_ready_toggled)
 	
@@ -109,7 +121,7 @@ func _on_host_pressed() -> void:
 	
 	multiplayer.multiplayer_peer = peer
 	
-	var player = Statics.PlayerData.new(multiplayer.get_unique_id(), user.text)
+	var player = Statics.PlayerData.new(multiplayer.get_unique_id(), user.text, 0)
 	_add_player(player)
 	
 	_go_to_menu(ready_menu)
@@ -128,7 +140,7 @@ func _on_confirm_join_pressed() -> void:
 	
 	multiplayer.multiplayer_peer = peer
 	
-	var player = Statics.PlayerData.new(multiplayer.get_unique_id(), user.text)
+	var player = Statics.PlayerData.new(multiplayer.get_unique_id(), user.text, 0)
 	_add_player(player)
 	
 	_go_to_menu(ready_menu)
@@ -299,3 +311,7 @@ func _back_to_first_menu() -> void:
 		first.show()
 	if Game.is_online():
 		_disconnect()
+
+
+func _on_exit_pressed():
+	returned.emit()

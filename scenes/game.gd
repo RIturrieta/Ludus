@@ -53,7 +53,19 @@ func set_player_role(id: int, role: Statics.Role) -> void:
 
 func set_current_player_role(role: Statics.Role) -> void:
 	set_player_role.rpc(multiplayer.get_unique_id(), role)
-	
+
+
+@rpc("any_peer", "reliable", "call_local")
+func set_player_role_and_slot(id: int, role: Statics.Role, slot: int) -> void:
+	var player = get_player(id)
+	player.role = role
+	player.slot = slot
+	player_updated.emit(id)
+
+
+func set_current_player_role_and_slot(role: Statics.Role, slot: int) -> void:
+	set_player_role_and_slot.rpc(multiplayer.get_unique_id(), role, slot)
+
 
 @rpc("any_peer", "reliable", "call_local")
 func set_player_character(id:int, character: Statics.Character) -> void:

@@ -79,9 +79,10 @@ var initial_attack_speed = attack_speed
 # ========== HIDDEN STATS ========== #
 var can_act: bool = false
 var can_cast: bool = true
+var dead: bool = false
 @export var total_attack_animations: int = 2
 @export var attack_duration: float = 1
-@export_range(1,2) var r_index: int = 1
+@export_range(0,1,2) var r_index: int = 0
 var basic_attack: Ability = null
 
 signal defeated(character_id: int)
@@ -590,14 +591,24 @@ func died():
 	if hp <= 0:
 		visible = false
 		can_act = false
+		dead = true
 		var hitbox = get_node("HitBox")
 		if hitbox:
 			hitbox.disabled = true
+		print("mueroio")
 		defeated.emit(player_info.id)
 		return true
 	return false
 
 func reset():
+	visible = true
+	can_act = false
+	dead = false
+	updateTargetLocation(global_position)
+	character_animations.set("parameters/IdleWalkBlend/blend_amount", 0)
+	var hitbox = get_node("HitBox")
+	if hitbox:
+		hitbox.disabled = false
 	for key in abilities.keys():
 		for timer: Timer in abilities[key][1].cooldown_timers.get_children():
 			if !timer.is_stopped():
@@ -623,7 +634,11 @@ func setup(player_data: Statics.PlayerData):
 	basic_attack = abilities["BA"][1]
 	#if get_parent().name == "Lord Valthor":
 		#loadAbility("add_charges_R")
-	
+
+@rpc("call_local", "reliable", "any_peer")
+func setUlt(index: int):
+	r_index = index
+
 @rpc
 func sendData(pos: Vector3, vel: Vector3, _target: Vector3, rot_y: float):
 	global_position = lerp(global_position, pos, 0.75)

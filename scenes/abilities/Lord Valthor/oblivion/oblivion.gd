@@ -22,9 +22,6 @@ func _physics_process(_delta):
 				player.takeAbilityDamage(damage, chara.spell_power)
 				if is_multiplayer_authority():
 					player.fixedMovement.rpc(normal, 20)
-				if player.died():
-					if chara.target_player:
-						chara.target_player = null
 
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:

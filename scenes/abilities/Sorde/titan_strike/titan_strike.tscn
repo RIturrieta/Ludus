@@ -7,5 +7,6 @@ process_priority = 1
 script = ExtResource("1_262hg")
 damage = 300.0
 cooldown = 14.0
+Name = "titan"
 
 [node name="preview" type="MeshInstance3D" parent="."]

@@ -32,9 +32,6 @@ func _on_delay_timeout():
 	for player: BaseCharacter in players_on_area:
 		if player.team != chara.team:
 			player.takeAbilityDamage(damage, chara.spell_power)
-			if player.died():
-				if chara.target_player:
-					chara.target_player = null
 
 func endExecution():
 	casting = false

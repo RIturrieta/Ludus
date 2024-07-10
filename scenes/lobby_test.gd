@@ -11,6 +11,7 @@ func _ready():
 		var player = Statics.PlayerData.new(
 			1,
 			test_player.name,
+			test_player.slot,
 			test_player.role,
 			test_player.character
 		)

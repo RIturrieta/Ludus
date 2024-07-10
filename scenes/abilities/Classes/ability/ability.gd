@@ -13,6 +13,7 @@ class_name Ability
 @export_range(0, 10) var total_charges: int = 1
 
 @export_category("Ui")
+@export var Icon: CompressedTexture2D
 @export var Name: String = "ability"
 @export var Description: String = "bottom text"
 # @export var Icon: Image
