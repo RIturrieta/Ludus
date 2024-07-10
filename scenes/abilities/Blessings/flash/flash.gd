@@ -20,4 +20,5 @@ func execute():
 	endExecution() # delete if there's an animation call
 
 func endExecution():
+	chara.can_cast = true
 	chara.agent.navigation_layers = 0b00000001

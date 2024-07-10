@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://co2vw6yvsta7d"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/insane_shield/insane_shield.gd" id="1_qrfgp"]
+
+[node name="insane_shield" type="Node3D"]
+script = ExtResource("1_qrfgp")
+damage = 0.0
+mana_cost = 0.0
+
+[node name="preview" type="MeshInstance3D" parent="."]

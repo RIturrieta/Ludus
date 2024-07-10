@@ -6,7 +6,7 @@
 [node name="rewind" type="Node3D"]
 script = ExtResource("1_swaa6")
 damage = 0.0
-mana_cost = 50.0
+mana_cost = 0.0
 cooldown = 300.0
 Icon = ExtResource("2_i0bib")
 Name = "Rewind"

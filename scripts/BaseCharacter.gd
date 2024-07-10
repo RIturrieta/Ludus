@@ -84,8 +84,17 @@ var dead: bool = false
 @export var attack_duration: float = 1
 @export_range(0,1,2) var r_index: int = 0
 var basic_attack: Ability = null
+enum RangedProjectile {
+	NONE,
+	ARROW,
+	BALL
+}
+@export var ranged_projectile: RangedProjectile = RangedProjectile.NONE
 
 signal defeated(character_id: int)
+
+signal execution_started(name_: String)
+signal execution_ended(name_: String)
 
 
 func _ready():
@@ -97,7 +106,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if can_act:
-		if character_animations and can_move:
+		if character_animations:
 			var blend_val = min(velocity.length(), 1.0)
 			var new_walk_vel = lerp(prev_velocity, blend_val, 0.5)
 			prev_velocity = new_walk_vel
@@ -119,7 +128,8 @@ func _physics_process(delta):
 					arrows_transform.global_position = target
 					animation_player.play("move_arrows")
 				target.y = 0
-				updateTargetLocation(target)
+				if target.distance_to(global_position) > 0.5:
+					updateTargetLocation(target)
 
 			if velocity.length() > 0.0:
 				sendData.rpc(global_position, velocity, target, character_node.global_rotation.y)
@@ -341,15 +351,19 @@ func beginAbilityExecutions():
 					input_key = "R"
 				else:
 					continue
-			if Input.is_action_pressed("Shift") and is_multiplayer_authority():
-				if Input.is_action_just_pressed(input_key):
-					abilities[key][1].preview.visible = true
-				if Input.is_action_just_released(input_key):
-					beginRemoteExecution.rpc(input_key)
-			elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
-				abilities[key][1].preview.visible = false
-			else:
-				if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
+			
+			#if Input.is_action_pressed("Shift") and is_multiplayer_authority():
+				#if Input.is_action_just_pressed(input_key):
+					#abilities[key][1].preview.visible = true
+				#if Input.is_action_just_released(input_key):
+					#beginRemoteExecution.rpc(input_key)
+			#elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
+				#abilities[key][1].preview.visible = false
+			#else:
+				#if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
+					#beginRemoteExecution.rpc(key)
+			
+			if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
 					beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations
@@ -357,6 +371,7 @@ func executeAbility(_name):
 	for array: Array in abilities.values():
 		if array.has(_name):
 			array[1].execute()
+			execution_started.emit(_name)
 			break
 
 # Marks the end of the execution of an ability. Used for animations
@@ -364,6 +379,7 @@ func endAbilityExecution(_name):
 	for array: Array in abilities.values():
 		if array.has(_name):
 			array[1].endExecution()
+			execution_ended.emit(_name)
 			break
 
 # RPC call to begin the cast of an ability
@@ -387,7 +403,6 @@ func applyEffect(effect: Effect):
 	effects.add_child(effect)
 	
 func dash(amount: float):
-	is_dashing = true
 	var _dash = DashEffect.create(amount)
 	_dash.set_multiplayer_authority(get_multiplayer_authority())
 	effects.add_child(_dash)
@@ -492,7 +507,6 @@ func clearDash():
 		if effect is DashEffect:
 			effect.unapply()
 			effect.queue_free()
-			is_dashing = false
 			break
 
 func clearStuns():

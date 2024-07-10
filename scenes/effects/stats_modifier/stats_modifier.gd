@@ -53,14 +53,18 @@ func _ready():
 		timer.wait_time = duration
 		timer.start()
 	chara.attack_damage *= attack_damage
-	chara.spell_power *= (1 + spell_power/100)
-	chara.physical_armor *= (1 + physical_armor/100)
-	chara.spell_armor *= (1 + spell_armor/100)
+	#chara.spell_power *= (1 + spell_power/100)
+	#chara.physical_armor *= (1 + physical_armor/100)
+	#chara.spell_armor *= (1 + spell_armor/100)
+	chara.spell_power += spell_power
+	chara.physical_armor += physical_armor
+	chara.spell_armor += spell_armor
 	chara.attack_speed *= attack_speed
 	for i in range(chara.total_attack_animations):
 		chara.character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", chara.attack_speed)
 	chara.attack_range *= attack_range
-	chara.cdr *= (1 + cdr/100)
+	#chara.cdr *= (1 + cdr/100)
+	chara.cdr += cdr
 	chara.select_radius *= select_radius
 	chara.max_hp *= (1 + max_hp/100)
 	if chara.hp >= chara.max_hp:
@@ -72,14 +76,18 @@ func _ready():
 
 func stop():
 	chara.attack_damage /= attack_damage
-	chara.spell_power /= (1 + spell_power/100)
-	chara.physical_armor /= (1 + physical_armor/100)
-	chara.spell_armor /= (1 + spell_armor/100)
+	#chara.spell_power /= (1 + spell_power/100)
+	#chara.physical_armor /= (1 + physical_armor/100)
+	#chara.spell_armor /= (1 + spell_armor/100)
+	chara.spell_power -= spell_power
+	chara.physical_armor -= physical_armor
+	chara.spell_armor -= spell_armor
 	chara.attack_speed /= attack_speed
 	for i in range(chara.total_attack_animations):
 		chara.character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", chara.attack_speed)
 	chara.attack_range /= attack_range
-	chara.cdr /= (1 + cdr/100)
+	#chara.cdr /= (1 + cdr/100)
+	chara.cdr -= cdr
 	chara.select_radius /= select_radius
 	chara.max_hp /= (1 + max_hp/100)
 	if chara.hp >= chara.max_hp:

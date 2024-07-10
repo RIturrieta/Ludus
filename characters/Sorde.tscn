@@ -1,7 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://dusubx1tn21bq"]
+[gd_scene load_steps=17 format=3 uid="uid://dusubx1tn21bq"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_3ek4m"]
 [ext_resource type="PackedScene" uid="uid://d15hwn8teia0u" path="res://characters/Imported/char_3.tscn" id="2_dme4m"]
+[ext_resource type="Animation" uid="uid://cf126gjd71o47" path="res://animations/char3/default.res" id="3_pdtvc"]
+[ext_resource type="Animation" uid="uid://ckhgbyt15g0h1" path="res://animations/char3/atk1.res" id="4_r8d34"]
+[ext_resource type="Animation" uid="uid://2nsymjh4mfxa" path="res://animations/char3/atk2.res" id="5_v6day"]
+[ext_resource type="Animation" uid="uid://5hx0n53844ni" path="res://animations/char3/channeling.res" id="6_ysweg"]
+[ext_resource type="Animation" uid="uid://bkgrwlpdq6pjw" path="res://animations/char3/e.res" id="7_u1nlj"]
+[ext_resource type="Animation" uid="uid://b6gpemu0tysnx" path="res://animations/char3/idle.res" id="8_keqc2"]
+[ext_resource type="Animation" uid="uid://ijk178mqsn0d" path="res://animations/char3/q.res" id="9_hbbj7"]
+[ext_resource type="Animation" uid="uid://dolxvorkximrv" path="res://animations/char3/r1.res" id="10_a4yce"]
+[ext_resource type="Animation" uid="uid://48qg1yehfpdr" path="res://animations/char3/r2.res" id="11_c13bv"]
+[ext_resource type="Animation" uid="uid://dc6vsmgwwslv6" path="res://animations/char3/w1.res" id="12_6yeig"]
+[ext_resource type="Animation" uid="uid://ce2o412y2ubcc" path="res://animations/char3/w2.res" id="13_if7m2"]
+[ext_resource type="Animation" uid="uid://dccnw72t6qp8q" path="res://animations/char3/walk.res" id="14_74brf"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tib7k"]
+_data = {
+"APose": ExtResource("3_pdtvc"),
+"BasicAttack1": ExtResource("4_r8d34"),
+"BasicAttack2": ExtResource("5_v6day"),
+"Channeling": ExtResource("6_ysweg"),
+"E": ExtResource("7_u1nlj"),
+"Idle": ExtResource("8_keqc2"),
+"Q": ExtResource("9_hbbj7"),
+"R1": ExtResource("10_a4yce"),
+"R2": ExtResource("11_c13bv"),
+"W1": ExtResource("12_6yeig"),
+"W2": ExtResource("13_if7m2"),
+"Walk": ExtResource("14_74brf")
+}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jw44a"]
 height = 1.5
@@ -71,6 +99,11 @@ attachments/3/offset = Vector3(0.0566726, 2.25885, 0.985061)
 
 [node name="BoneAttachment3D" parent="BaseCharacter/char3/Armature/Skeleton3D" index="2"]
 transform = Transform3D(1, -1.44975e-17, -7.44531e-19, 1.45089e-17, 0.996491, 0.0837047, -4.71589e-19, -0.0837047, 0.996491, -4.0701e-17, 3.66368, -0.540526)
+
+[node name="AnimationTree" parent="BaseCharacter/char3" index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_tib7k")
+}
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

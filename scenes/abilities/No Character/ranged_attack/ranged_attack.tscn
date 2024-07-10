@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bctm2pia0clru"]
+
+[ext_resource type="Script" path="res://scenes/abilities/No Character/ranged_attack/ranged_attack.gd" id="1_b6qsu"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_besx1"]
+resource_local_to_scene = true
+height = 0.5
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h1car"]
+resource_local_to_scene = true
+height = 0.5
+radius = 1.0
+
+[node name="ranged_attack" type="Node3D"]
+script = ExtResource("1_b6qsu")
+
+[node name="preview" type="MeshInstance3D" parent="."]
+
+[node name="range_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="collision" type="CollisionShape3D" parent="range_area"]
+shape = SubResource("CylinderShape3D_besx1")
+
+[node name="mouse_area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="collision" type="CollisionShape3D" parent="mouse_area"]
+shape = SubResource("CylinderShape3D_h1car")
+
+[node name="projectiles" type="Node3D" parent="."]
+top_level = true

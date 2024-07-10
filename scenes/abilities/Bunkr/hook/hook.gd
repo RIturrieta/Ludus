@@ -21,8 +21,6 @@ func _ready():
 func _physics_process(delta):
 	raycast.global_rotation = chara.projectile_ray.global_rotation
 	for projectile: Area3D in $projectiles.get_children():
-		if is_multiplayer_authority():
-			Debug.sprint(projectile.global_position.y)
 		if !projectile.returning:
 			for player: BaseCharacter in projectile.get_overlapping_bodies():
 				if player.team != chara.team:

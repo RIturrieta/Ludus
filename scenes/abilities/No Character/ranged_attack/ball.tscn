@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh7rg1uo1nitf"]
+
+[ext_resource type="Script" path="res://scenes/abilities/No Character/ranged_attack/ball.gd" id="1_wesue"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_asfvw"]
+resource_local_to_scene = true
+size = Vector3(0.5, 3, 0.5)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ph7c0"]
+resource_local_to_scene = true
+radius = 0.08
+height = 0.16
+
+[node name="ball" type="Area3D"]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_wesue")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_asfvw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_ph7c0")
+skeleton = NodePath("")

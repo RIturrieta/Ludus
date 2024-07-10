@@ -10,3 +10,9 @@ func beginExecution():
 				if !timer.is_stopped():
 					timer.stop()
 			chara.abilities[key][1].charges = chara.abilities[key][1].total_charges
+
+func execute():
+	pass
+
+func endExecution():
+	pass

@@ -5,7 +5,10 @@
 
 [node name="add_charges_R" type="Node3D"]
 script = ExtResource("1_0u5lk")
-Icon = ExtResource("2_kypcc")
+damage = 0.0
+mana_cost = 0.0
+cooldown = 0.0
+total_charges = 0
 Name = "Overflow: R"
 Description = "Your R ultimate ability gains 2 extra charges."
 

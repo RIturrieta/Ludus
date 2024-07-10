@@ -14,7 +14,15 @@ var attack_quantity: int = 1
 var target_amount: int = 1
 var target_player: BaseCharacter = null
 
+var p_scene = load("res://scenes/abilities/No Character/ranged_attack/arrow.tscn")
+var projectiles: int = 0
+var projectile_flying: bool = false
+
 func _ready():
+	if chara.ranged_projectile == chara.RangedProjectile.ARROW:
+		p_scene = load("res://scenes/abilities/No Character/ranged_attack/arrow.tscn")
+	elif chara.ranged_projectile == chara.RangedProjectile.BALL:
+		p_scene = load("res://scenes/abilities/No Character/ranged_attack/ball.tscn")
 	charges = total_charges
 	cooldown_timers.set_name("cooldown_timers")
 	add_child(cooldown_timers)
@@ -33,7 +41,7 @@ func calculateTargetPlayer():
 				min_distance = distance
 				target_player = player
 		updateTargetPlayer.rpc(target_player.player_info.id)
-	elif target_player in range_area.get_overlapping_bodies() and !target_player.dead and chara.velocity == Vector3(0,0,0):
+	elif target_player in range_area.get_overlapping_bodies() and !target_player.died() and chara.velocity == Vector3(0,0,0):
 		target_player = target_player
 	else:
 		target_player = null
@@ -60,17 +68,19 @@ func calculateAffectedPlayers():
 	if len(players_affected) > target_amount:
 		players_affected.slice(0, target_amount)
 
-func dealDamage():
-	if target_player != null:
-		for player_pair in players_affected:
-			for i in range(attack_quantity):
-				if is_multiplayer_authority():
-					player_pair[0].takeAttackDamage.rpc(chara.attack_damage)
-				if player_pair[0].dead:
-					if target_player:
-						target_player = null
-						chara.target = chara.global_position
-						chara.updateTargetLocation(chara.target)
+@rpc("call_local", "reliable")
+func shoot():
+	can_cancel = false
+	chara.can_move = false
+	attack_cooldown = attack_cooldown_offset
+	current_attack_index = (current_attack_index + 1) % chara.total_attack_animations
+	for i in range(len(players_affected)):
+		var p: Area3D = p_scene.instantiate()
+		$projectiles.add_child(p)
+		p.target = players_affected[i][0]
+		p.global_position = chara.global_position
+		p.global_position.y = 1
+		projectiles += 1
 
 @rpc("call_local", "reliable")
 func stopAttack():
@@ -84,6 +94,18 @@ func stopAttack():
 		chara.character_animations.set(str("parameters/BasicAttack", i + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 
 func _physics_process(delta):
+	for projectile: Area3D in $projectiles.get_children():
+		for player: BaseCharacter in projectile.get_overlapping_bodies():
+			if player == projectile.target:
+				if is_multiplayer_authority():
+					player.takeAttackDamage.rpc(chara.attack_damage)
+				projectile.queue_free()
+				projectiles -= 1
+				if player == target_player and player.died():
+					target_player = null
+					chara.target = chara.global_position
+					chara.updateTargetLocation(chara.target)
+					
 	if chara.can_act:
 		mouse_area.global_position = chara.mouse_pos
 		attack_cooldown = max(0, attack_cooldown - delta)
@@ -99,9 +121,9 @@ func _physics_process(delta):
 				if Input.is_action_pressed("Move"):
 					calculateTargetPlayer()
 		
-		if target_player != null and target_player.dead:
+		if target_player != null and target_player.died():
 			target_player = null
-		if !attack_ended and target_player == null and can_cancel:
+		if !attack_ended and target_player == null and can_cancel and !projectile_flying:
 			if is_multiplayer_authority():
 				stopAttack.rpc()
 		
@@ -132,16 +154,8 @@ func beginExecution():
 
 func execute():
 	if is_multiplayer_authority():
-		executeRemote.rpc()
-
-@rpc("call_local","reliable")
-func executeRemote():
-	can_cancel = false
-	chara.can_move = false
-	attack_cooldown = attack_cooldown_offset
-	current_attack_index = (current_attack_index + 1) % chara.total_attack_animations
-	dealDamage()
-
+		shoot.rpc()
+		
 func endExecution():
 	can_cancel = true
 	chara.can_move = true

@@ -10,15 +10,13 @@ static func create(duration_: float) -> RootEffect:
 	return root
 
 func _ready():
-	timer.timeout.connect(onTimeout)
+	timer.timeout.connect(stop)
 	timer.start(duration)
 	chara.can_move = false
+	chara.can_rotate = false
 
 func stop():
-	timer.stop()
-	queue_free()
-
-func onTimeout():
 	chara.can_move = true
+	chara.can_rotate = true
 	queue_free()
 

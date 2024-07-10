@@ -5,7 +5,10 @@
 
 [node name="add_charges_E" type="Node3D"]
 script = ExtResource("1_w72ep")
-Icon = ExtResource("2_u6rea")
+damage = 0.0
+mana_cost = 0.0
+cooldown = 0.0
+total_charges = 0
 Name = "Overflow: E"
 Description = "Your E basic ability gains 2 extra charges."
 

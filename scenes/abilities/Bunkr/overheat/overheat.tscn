@@ -38,3 +38,4 @@ mesh = SubResource("CylinderMesh_ojqow")
 skeleton = NodePath("../../..")
 
 [node name="timer" type="Timer" parent="."]
+one_shot = true

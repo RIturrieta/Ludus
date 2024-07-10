@@ -87,7 +87,7 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_48ckk"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2l56q"]
-graph_offset = Vector2(267.005, -42.3858)
+graph_offset = Vector2(-272.943, -78.5506)
 nodes/Attack1/node = SubResource("AnimationNodeAnimation_m141q")
 nodes/Attack1/position = Vector2(480, 480)
 nodes/Attack2/node = SubResource("AnimationNodeAnimation_d4mbu")
@@ -143,10 +143,11 @@ node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", 
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/2/position = Vector3(-0.189067, 0.4, 1.2)
-bones/3/position = Vector3(-0.189067, 0.4, -1.2)
-bones/4/rotation = Quaternion(0.953717, -3.58469e-08, -1.13692e-07, 0.300706)
-bones/5/rotation = Quaternion(0.953717, -5.07642e-17, -5.07642e-17, -0.300706)
+bones/0/position = Vector3(0, 0.8, 0)
+bones/2/position = Vector3(-0.189067, 0.400222, 1.2)
+bones/3/position = Vector3(-0.189067, 0.400222, -1.2)
+bones/4/rotation = Quaternion(0.965926, -3.08536e-08, -1.15147e-07, 0.258819)
+bones/5/rotation = Quaternion(0.965926, -4.3693e-17, -5.1414e-17, -0.258819)
 
 [node name="HealthMarker" type="Marker3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.83203, 0)

@@ -29,8 +29,7 @@ dash_distance = 10.0
 preview_path = NodePath("S1/preview")
 damage = 0.0
 mana_cost = 0.0
-cooldown = 0.0
-Icon = ExtResource("2_fcbjv")
+cooldown = 15.0
 Name = "Blink"
 Description = "Quickly teleports your character to the target location."
 

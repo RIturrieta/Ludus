@@ -13,7 +13,9 @@ func _ready():
 	pass
 
 func apply():
+	chara.is_dashing = true
 	chara.move_speed = amount
 
 func unapply():
+	chara.is_dashing = false
 	chara.move_speed = 100

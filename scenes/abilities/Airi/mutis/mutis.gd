@@ -22,16 +22,15 @@ func _ready():
 	range_collision.shape.radius = range_radius
 	area_collision.shape.radius = area_radius
 	mouse_area.body_exited.connect(on_body_exited)
+	mouse_area.body_entered.connect(on_body_entered)
 
 func on_body_exited(body):
-	if raining and body is BaseCharacter:
-		var muted = false
-		var silences = body.effects.get_children()
-		silences.filter(func(effect): return effect is SilenceEffect)
-		for silence in silences:
-			silence.timer.paused = false
-			muted = true
-		body.is_silenced = muted
+	if body is BaseCharacter:
+		body.clearSilences()
+
+func on_body_entered(body):
+	if body is BaseCharacter:
+		body.silence(rain_duration)
 
 func _physics_process(delta):
 	if not (casting or raining):
@@ -47,12 +46,7 @@ func _physics_process(delta):
 			pulse_frames = 0
 			for player: BaseCharacter in mouse_area.get_overlapping_bodies():
 				if player.team != chara.team:
-					var silences = player.effects.get_children()
-					silences.filter(func(effect): return effect is SilenceEffect)
-					for silence in silences:
-						silence.timer.paused = true
 					player.takeAbilityDamage(damage, chara.spell_power)
-					player.is_silenced = true
 
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:

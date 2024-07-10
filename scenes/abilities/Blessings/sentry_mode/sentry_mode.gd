@@ -7,3 +7,12 @@ extends Ability
 func _ready():
 	super()
 	chara.modifyStats(-1, 1, 0, 0, 0, attack_speed_multiplier, 1, 0, 1, 0, 0, move_speed_percentage)
+
+func beginExecution():
+	pass
+
+func execute():
+	pass
+
+func endExecution():
+	pass

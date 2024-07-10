@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://ofuxqylsgkql"]
+
+[ext_resource type="Script" path="res://scenes/abilities/Blessings/nuke/nuke.gd" id="1_44ixd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_i3kja"]
+resource_local_to_scene = true
+radius = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gerj8"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.980392, 0.0666667, 0.0823529, 0.772549)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2ps3h"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_gerj8")
+height = 0.1
+
+[node name="nuke" type="Node3D"]
+script = ExtResource("1_44ixd")
+delay = 8.0
+preview_path = NodePath("area/preview")
+damage = 9999.0
+mana_cost = 0.0
+cooldown = 999.0
+
+[node name="area" type="Area3D" parent="."]
+top_level = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="collision" type="CollisionShape3D" parent="area"]
+shape = SubResource("CylinderShape3D_i3kja")
+
+[node name="preview" type="MeshInstance3D" parent="area"]
+mesh = SubResource("CylinderMesh_2ps3h")
+skeleton = NodePath("../..")
+
+[node name="timer" type="Timer" parent="."]
+one_shot = true

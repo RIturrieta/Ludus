@@ -6,6 +6,7 @@
 [node name="momentum" type="Node3D"]
 script = ExtResource("1_2ko7w")
 damage = 0.0
+mana_cost = 0.0
 cooldown = 30.0
 Icon = ExtResource("2_jv25f")
 Name = "Locked In"

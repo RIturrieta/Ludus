@@ -20,6 +20,9 @@ func beginExecution():
 		baseExecutionBegining()
 		chara.target_player = null
 		chara.character_node.global_rotation.y = chara.projectile_ray.global_rotation.y
+		chara.can_rotate = false
+		dashing = true
+		chara.is_dashing = true
 		chara.agent.navigation_layers = 0b00000010
 		chara.character_animations.set("parameters/R2Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
@@ -38,6 +41,7 @@ func dealDamage():
 func endExecution():
 	chara.clearDash()
 	dashing = false
+	chara.can_rotate = true
 	chara.agent.navigation_layers = 0b00000001
 	players_affected = []
 	players_on_area = []

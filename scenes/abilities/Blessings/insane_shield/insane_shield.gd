@@ -1,8 +1,6 @@
 extends Ability
 
-@export var max_hp_percentage: float = 0
-@export var spell_power_percentage: float = 0
-@export var attack_damage_multiplier: float = 1
+@export var armor_percentage: float = 75
 
 
 func _ready():
@@ -14,11 +12,10 @@ func beginExecution():
 		cd_timer.start(cooldown - chara.cdr/100)
 		charges -= 1
 		chara.mana -= mana_cost
-		chara.modifyStats(4, 1, 0, 0, 0, 1, 1, 200, 1, 0, 0, 0)
+		chara.modifyStats(1, 1, 0, armor_percentage, armor_percentage)
 
 func execute():
 	pass
 
 func endExecution():
 	pass
-		

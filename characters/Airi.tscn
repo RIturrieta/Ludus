@@ -13,12 +13,13 @@ radius = 0.3
 character_node = NodePath("char4")
 attack_range = 4.5
 attack_duration = 0.917
+ranged_projectile = 2
 abilities = {
 "1": "",
 "2": "",
 "3": "",
 "4": "",
-"BA": "basic_attack",
+"BA": "ranged_attack",
 "E": "mutis",
 "Q": "ardeat",
 "R1": "congregatio",
@@ -29,20 +30,16 @@ abilities = {
 [node name="char4" parent="BaseCharacter" instance=ExtResource("2_nyjmj")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char4/Armature" index="0"]
-bones/0/position = Vector3(0.0211344, 1.03551, -9.33982e-09)
-bones/0/rotation = Quaternion(-0.00363359, -0.370193, -0.00911756, 0.928903)
-bones/4/rotation = Quaternion(-0.0148741, 0.369936, -0.0373255, 0.928188)
-bones/6/rotation = Quaternion(-0.0230414, -0.066981, -0.084643, 0.993891)
-bones/7/rotation = Quaternion(0.528203, 0.0532316, -0.37775, 0.7586)
-bones/9/rotation = Quaternion(0.053938, 0.0720855, 0.0577264, 0.994265)
-bones/10/rotation = Quaternion(0.54092, 0.122159, -0.524796, 0.645811)
-bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
-bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
-bones/12/position = Vector3(-0.233789, 0.02963, 0.13333)
-bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
+bones/0/position = Vector3(0.0399959, 1.03337, -7.41691e-09)
+bones/0/rotation = Quaternion(-0.00448393, -0.370183, -0.0112513, 0.92888)
+bones/4/rotation = Quaternion(-2.04461e-05, 0.370235, -5.13087e-05, 0.928938)
+bones/6/rotation = Quaternion(-0.0950987, -0.00952683, -0.0427314, 0.994505)
+bones/7/rotation = Quaternion(0.616233, 0.0107522, -0.382061, 0.6886)
+bones/9/rotation = Quaternion(0.0338629, 0.0244725, 0.128621, 0.990813)
+bones/10/rotation = Quaternion(0.558512, 0.220731, -0.57806, 0.552439)
 
 [node name="Head" parent="BaseCharacter/char4/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.995003, 0.0998452, 5.19454e-05, -0.0998452, 0.995003, -5.21727e-06, -5.21243e-05, 1.49012e-08, 1, 0.0333043, 1.65539, -7.60756e-09)
+transform = Transform3D(0.999704, 0.0243323, 5.22137e-05, -0.0243323, 0.999704, -1.27312e-06, -5.22733e-05, 2.37196e-09, 1, 0.0550134, 1.65319, -6.26207e-09)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
