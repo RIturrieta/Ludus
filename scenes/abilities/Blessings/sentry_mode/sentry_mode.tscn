@@ -8,7 +8,7 @@ move_speed_percentage = -35.0
 attack_speed_multiplier = 1.35
 damage = 0.0
 mana_cost = 0.0
-cooldown = 999.0
+cooldown = 0.0
 Name = "Sentry Mode"
 Description = "Reduces your Movement Speed by 35% but increases your Attack Speed by 35%."
 

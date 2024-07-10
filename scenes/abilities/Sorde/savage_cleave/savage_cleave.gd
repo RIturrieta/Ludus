@@ -15,7 +15,6 @@ func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
 		preview.visible = true
-		chara.can_act = false
 		chara.character_animations.set("parameters/QShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
@@ -25,13 +24,9 @@ func execute():
 	for player in players_on_area:
 		if player.team != chara.team:
 			player.takeAbilityDamage(damage, chara.spell_power)
-			if player.died():
-				if chara.target_player:
-					chara.target_player = null
 
 func endExecution():
 	casting = false
 	players_on_area = []
-	chara.can_act = true
 	preview.visible = false
 	chara.can_cast = true

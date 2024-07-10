@@ -5,8 +5,12 @@
 [node name="glass_cannon" type="Node3D"]
 script = ExtResource("1_bfsta")
 max_hp_percentage = -50.0
-spell_power_percentage = 90.0
-attack_damage_multiplier = 1.9
+spell_power_percentage = 60.0
+attack_damage_multiplier = 1.6
+damage = 0.0
+mana_cost = 0.0
+cooldown = 0.0
+total_charges = 0
 Name = "Glass Cannon"
 Description = "Reduce your Max HP by 50%, but increase your Attack Damage and Spell Power by 90%."
 

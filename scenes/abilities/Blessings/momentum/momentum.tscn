@@ -5,6 +5,7 @@
 [node name="momentum" type="Node3D"]
 script = ExtResource("1_2ko7w")
 damage = 0.0
+mana_cost = 0.0
 cooldown = 30.0
 Name = "Locked In"
 Description = "Gain 200% Cooldown Reduction for 4 seconds."

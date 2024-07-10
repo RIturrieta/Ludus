@@ -7,6 +7,7 @@ script = ExtResource("1_umuun")
 damage = 0.0
 mana_cost = 0.0
 cooldown = 0.0
+total_charges = 0
 Name = "Overflow: Q"
 Description = "Your Q basic ability gains 2 extra charges."
 

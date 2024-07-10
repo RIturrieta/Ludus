@@ -72,6 +72,7 @@ func dealDamage():
 						chara.target = chara.global_position
 						chara.updateTargetLocation(chara.target)
 
+@rpc("call_local", "reliable")
 func stopAttack():
 	target_player = null
 	attack_ended = true
@@ -101,7 +102,8 @@ func _physics_process(delta):
 		if target_player != null and target_player.died():
 			target_player = null
 		if !attack_ended and target_player == null and can_cancel:
-			stopAttack()
+			if is_multiplayer_authority():
+				stopAttack.rpc()
 		
 		if target_player != null and target_player != chara:
 			if target_player in range_area.get_overlapping_bodies():
@@ -129,12 +131,17 @@ func beginExecution():
 		chara.character_animations.set(str("parameters/BasicAttack", current_attack_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
+	if is_multiplayer_authority():
+		executeRemote.rpc()
+
+@rpc("call_local","reliable")
+func executeRemote():
 	can_cancel = false
 	chara.can_move = false
 	attack_cooldown = attack_cooldown_offset
 	current_attack_index = (current_attack_index + 1) % chara.total_attack_animations
 	dealDamage()
-	
+
 func endExecution():
 	can_cancel = true
 	chara.can_move = true

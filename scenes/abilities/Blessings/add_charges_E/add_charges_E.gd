@@ -7,4 +7,3 @@ func _ready():
 	super()
 	var effect: ChargesModifierEffect = ChargesModifierEffect.create(duration, 0, 0, charge_amount)
 	chara.applyEffect(effect)
-	

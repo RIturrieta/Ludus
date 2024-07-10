@@ -92,6 +92,9 @@ enum RangedProjectile {
 
 signal defeated(character_id: int)
 
+signal execution_started(name_: String)
+signal execution_ended(name_: String)
+
 
 func _ready():
 	updateTargetLocation(global_position)
@@ -102,7 +105,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if can_act:
-		if character_animations and can_move:
+		if character_animations:
 			var blend_val = min(velocity.length(), 1.0)
 			var new_walk_vel = lerp(prev_velocity, blend_val, 0.5)
 			prev_velocity = new_walk_vel
@@ -347,15 +350,19 @@ func beginAbilityExecutions():
 					input_key = "R"
 				else:
 					continue
-			if Input.is_action_pressed("Shift") and is_multiplayer_authority():
-				if Input.is_action_just_pressed(input_key):
-					abilities[key][1].preview.visible = true
-				if Input.is_action_just_released(input_key):
-					beginRemoteExecution.rpc(input_key)
-			elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
-				abilities[key][1].preview.visible = false
-			else:
-				if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
+			
+			#if Input.is_action_pressed("Shift") and is_multiplayer_authority():
+				#if Input.is_action_just_pressed(input_key):
+					#abilities[key][1].preview.visible = true
+				#if Input.is_action_just_released(input_key):
+					#beginRemoteExecution.rpc(input_key)
+			#elif Input.is_action_just_released("Shift") and is_multiplayer_authority():
+				#abilities[key][1].preview.visible = false
+			#else:
+				#if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
+					#beginRemoteExecution.rpc(key)
+			
+			if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
 					beginRemoteExecution.rpc(key)
 
 # Executes an ability. Used for animations
@@ -363,6 +370,7 @@ func executeAbility(_name):
 	for array: Array in abilities.values():
 		if array.has(_name):
 			array[1].execute()
+			execution_started.emit(_name)
 			break
 
 # Marks the end of the execution of an ability. Used for animations
@@ -370,6 +378,7 @@ func endAbilityExecution(_name):
 	for array: Array in abilities.values():
 		if array.has(_name):
 			array[1].endExecution()
+			execution_ended.emit(_name)
 			break
 
 # RPC call to begin the cast of an ability
@@ -393,7 +402,6 @@ func applyEffect(effect: Effect):
 	effects.add_child(effect)
 	
 func dash(amount: float):
-	is_dashing = true
 	var _dash = DashEffect.create(amount)
 	_dash.set_multiplayer_authority(get_multiplayer_authority())
 	effects.add_child(_dash)
@@ -498,7 +506,6 @@ func clearDash():
 		if effect is DashEffect:
 			effect.unapply()
 			effect.queue_free()
-			is_dashing = false
 			break
 
 func clearStuns():
@@ -628,8 +635,8 @@ func setup(player_data: Statics.PlayerData):
 	for key in abilities.keys():
 		loadAbility(abilities[key], key)
 	basic_attack = abilities["BA"][1]
-	#if get_parent().name == "Lord Valthor":
-		#loadAbility("add_charges_R")
+	if get_parent().name == "Sorde":
+		loadAbility("glass_cannon")
 	
 @rpc
 func sendData(pos: Vector3, vel: Vector3, _target: Vector3, rot_y: float):

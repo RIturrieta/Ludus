@@ -21,7 +21,7 @@ var projectile_flying: bool = false
 func _ready():
 	if chara.ranged_projectile == chara.RangedProjectile.ARROW:
 		p_scene = load("res://scenes/abilities/No Character/ranged_attack/arrow.tscn")
-	else:
+	elif chara.ranged_projectile == chara.RangedProjectile.BALL:
 		p_scene = load("res://scenes/abilities/No Character/ranged_attack/ball.tscn")
 	charges = total_charges
 	cooldown_timers.set_name("cooldown_timers")
@@ -70,6 +70,10 @@ func calculateAffectedPlayers():
 
 @rpc("call_local", "reliable")
 func shoot():
+	can_cancel = false
+	chara.can_move = false
+	attack_cooldown = attack_cooldown_offset
+	current_attack_index = (current_attack_index + 1) % chara.total_attack_animations
 	for i in range(len(players_affected)):
 		var p: Area3D = p_scene.instantiate()
 		$projectiles.add_child(p)
@@ -78,18 +82,7 @@ func shoot():
 		p.global_position.y = 1
 		projectiles += 1
 
-func dealDamage():
-	if target_player != null:
-		for player_pair in players_affected:
-			for i in range(attack_quantity):
-				if is_multiplayer_authority():
-					player_pair[0].takeAttackDamage.rpc(chara.attack_damage)
-				if player_pair[0].died():
-					if target_player:
-						target_player = null
-						chara.target = chara.global_position
-						chara.updateTargetLocation(chara.target)
-
+@rpc("call_local", "reliable")
 func stopAttack():
 	target_player = null
 	attack_ended = true
@@ -131,7 +124,8 @@ func _physics_process(delta):
 		if target_player != null and target_player.died():
 			target_player = null
 		if !attack_ended and target_player == null and can_cancel and !projectile_flying:
-			stopAttack()
+			if is_multiplayer_authority():
+				stopAttack.rpc()
 		
 		if target_player != null and target_player != chara:
 			if target_player in range_area.get_overlapping_bodies():
@@ -159,10 +153,6 @@ func beginExecution():
 		chara.character_animations.set(str("parameters/BasicAttack", current_attack_index + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	can_cancel = false
-	chara.can_move = false
-	attack_cooldown = attack_cooldown_offset
-	current_attack_index = (current_attack_index + 1) % chara.total_attack_animations
 	if is_multiplayer_authority():
 		shoot.rpc()
 		
