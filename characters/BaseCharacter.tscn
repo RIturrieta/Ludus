@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dt5ahf3uukx5o"]
+[gd_scene load_steps=11 format=3 uid="uid://dt5ahf3uukx5o"]
 
 [ext_resource type="Script" path="res://scripts/BaseCharacter.gd" id="1_00iuh"]
 [ext_resource type="Texture2D" uid="uid://cqqk0cyja4kwe" path="res://resources/arrows.png" id="2_55k2c"]
 [ext_resource type="PackedScene" uid="uid://b73fmas38m27p" path="res://scenes/ui/health_bar.tscn" id="3_f2mr7"]
+[ext_resource type="PackedScene" uid="uid://cxhxhp81wsr0h" path="res://scenes/ui/mana_bar.tscn" id="4_jce4b"]
 
 [sub_resource type="Animation" id="Animation_dly2n"]
 resource_name = "move_arrows"
@@ -50,6 +51,9 @@ height = 0.2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q743j"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tqoye"]
+viewport_path = NodePath("SubViewport2")
 
 [node name="BaseCharacter" type="CharacterBody3D" groups=["players"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.443434, 0)
@@ -124,7 +128,34 @@ transparent_bg = true
 
 [node name="HealthBar" parent="SubViewport" instance=ExtResource("3_f2mr7")]
 
+[node name="Label" type="Label" parent="SubViewport/HealthBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.54973, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_q743j")
+
+[node name="SubViewport2" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+
+[node name="ManaBar" parent="SubViewport2" instance=ExtResource("4_jce4b")]
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.43725, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_tqoye")

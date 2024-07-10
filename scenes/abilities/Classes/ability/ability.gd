@@ -37,6 +37,7 @@ func baseExecutionBegining():
 	cd_timer.start(cooldown - chara.cdr/100)
 	charges -= 1
 	chara.mana -= mana_cost
+	chara.mana_bar.value -= mana_cost
 	chara.can_cast = false
 	Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 	chara.abort_oneshots()

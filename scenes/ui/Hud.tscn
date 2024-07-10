@@ -1,0 +1,180 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctaf6kdxtdp2u"]
+
+[ext_resource type="Script" path="res://scenes/ui/Hud.gd" id="1_fc2cn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpl66"]
+bg_color = Color(0.229594, 0.225911, 0.224328, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8e5ip"]
+bg_color = Color(0.229594, 0.225911, 0.224328, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ovq2"]
+bg_color = Color(0.229594, 0.225911, 0.224328, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fc2cn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 60.0
+offset_right = 212.0
+offset_bottom = 110.0
+
+[node name="Q" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_fpl66")
+
+[node name="Label" type="Label" parent="HBoxContainer/Q"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_top = 1.0
+offset_right = 50.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="W" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8e5ip")
+
+[node name="Label" type="Label" parent="HBoxContainer/W"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_top = 1.0
+offset_right = 50.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "W"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="E" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ovq2")
+
+[node name="Label" type="Label" parent="HBoxContainer/E"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="R" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ovq2")
+
+[node name="Label" type="Label" parent="HBoxContainer/R"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "R"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+process_priority = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="B1" type="Panel" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ovq2")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B1"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B2" type="Panel" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ovq2")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B3" type="Panel" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ovq2")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B3"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="B4" type="Panel" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0ovq2")
+
+[node name="Label" type="Label" parent="HBoxContainer2/B4"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
