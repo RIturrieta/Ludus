@@ -253,6 +253,7 @@ func add_blessing_to_player(id: int, bname: String):
 	for player in player_nodes:
 		if player.player_info.id == id:
 			player.addBlessing(bname)
+			player.init_bar()
 
 @rpc("any_peer", "call_local", "reliable")
 func set_player_ready(id: int, state: bool):

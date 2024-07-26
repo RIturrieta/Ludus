@@ -98,9 +98,11 @@ signal execution_started(name_: String)
 signal execution_ended(name_: String)
 
 # ========== HEALTH BAR ========== #
-@onready var mana_bar = $SubViewport2/ManaBar
-@onready var health_label = $SubViewport/HealthBar/Label
-
+@onready var mana_viewport = %Mana
+@onready var health_viewport = %Health
+@onready var mana_bar = %ManaBar
+@onready var health_bar = %HealthBar
+@onready var health_label = %HealthLabel
 
 func _ready():
 	updateTargetLocation(global_position)
@@ -109,8 +111,8 @@ func _ready():
 	for i in range(total_attack_animations):
 		character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", attack_speed)
 		
-	$SubViewport.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
-	$SubViewport2.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
+	mana_viewport.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
+	health_viewport.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
 	init_bar()
 
 func _physics_process(delta):
@@ -282,12 +284,12 @@ func takeAttackDamage(damage: float):
 	var total_damage = damage * (1 - physical_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
-		$SubViewport/HealthBar.value = 0
+		health_bar.value = 0
 		health_label.text = str(hp) + " / " + str(max_hp)
 		died()
 	else:
 		hp -= total_damage
-		$SubViewport/HealthBar.value = hp - total_damage
+		health_bar.value = hp - total_damage
 		health_label.text = str(hp) + " / " + str(max_hp)
 	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 
@@ -296,11 +298,11 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
-		$SubViewport/HealthBar.value = 0
+		health_bar.value = 0
 		health_label.text = str(hp) + " / " + str(max_hp)
 		died()
 	else:
-		$SubViewport/HealthBar.value = hp - total_damage
+		health_bar.value = hp - total_damage
 		hp -= total_damage
 		health_label.text = str(hp) + " / " + str(max_hp)
 	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
@@ -308,11 +310,11 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 func heal(points: float):
 	if hp + points <= max_hp:
 		hp += points
-		$SubViewport/HealthBar.value = hp + points
+		health_bar.value = hp + points
 		health_label.text = str(hp) + " / " + str(max_hp)
 	else:
 		hp = max_hp
-		$SubViewport/HealthBar.value = max_hp
+		health_bar.value = max_hp
 		health_label.text = str(hp) + " / " + str(max_hp)
 
 # ========== ABILITIES ========== #
@@ -661,6 +663,7 @@ func reset():
 	for effect in effects.get_children():
 		effect.timer.stop()
 		effect.timer.emit_signal("timeout")
+	init_bar()
 
 func setup(player_data: Statics.PlayerData):
 	player_info = player_data
@@ -677,11 +680,11 @@ func setup(player_data: Statics.PlayerData):
 		#loadAbility("add_charges_R")
 
 func init_bar():
-	$SubViewport/HealthBar.max_value = max_hp
-	$SubViewport/HealthBar.value = max_hp
+	health_bar.max_value = max_hp
+	health_bar.value = max_hp
 	health_label.text = str(hp) + " / " + str(max_hp)
-	$SubViewport2/ManaBar.max_value = max_mana
-	$SubViewport2/ManaBar.value = max_mana
+	mana_bar.max_value = max_mana
+	mana_bar.value = max_mana
 
 @rpc("call_local", "reliable", "any_peer")
 func setUlt(index: int):

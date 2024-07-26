@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://do4ay3txy7cgx"]
+[gd_scene load_steps=6 format=3 uid="uid://do4ay3txy7cgx"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_dghg7"]
 [ext_resource type="PackedScene" uid="uid://v8nrt3gq2ybc" path="res://characters/Imported/char_4.tscn" id="2_nyjmj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vstjj"]
+viewport_path = NodePath("BaseCharacter/Health")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fpegd"]
+viewport_path = NodePath("BaseCharacter/Mana")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_j8a8k"]
 height = 1.5
@@ -29,19 +35,29 @@ abilities = {
 "W": "fragor"
 }
 
+[node name="Sprite3D" parent="BaseCharacter" index="11"]
+texture = SubResource("ViewportTexture_vstjj")
+
+[node name="Sprite3D2" parent="BaseCharacter" index="13"]
+texture = SubResource("ViewportTexture_fpegd")
+
 [node name="char4" parent="BaseCharacter" instance=ExtResource("2_nyjmj")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char4/Armature" index="0"]
-bones/0/position = Vector3(0.0356165, 1.03387, -9.33982e-09)
-bones/0/rotation = Quaternion(-0.00425585, -0.370186, -0.010679, 0.928887)
-bones/4/rotation = Quaternion(-0.0147013, 0.369943, -0.036892, 0.928205)
-bones/6/rotation = Quaternion(-0.0249505, -0.0654701, -0.0835455, 0.994038)
-bones/7/rotation = Quaternion(0.530628, 0.0521185, -0.377934, 0.756891)
-bones/9/rotation = Quaternion(0.0516392, 0.0706653, 0.0593117, 0.994395)
-bones/10/rotation = Quaternion(0.541534, 0.124797, -0.526349, 0.643524)
+bones/0/position = Vector3(0.0396874, 1.03341, -9.33982e-09)
+bones/0/rotation = Quaternion(-0.00442828, -0.370184, -0.0111116, 0.928881)
+bones/4/rotation = Quaternion(-0.0144304, 0.369953, -0.036212, 0.928232)
+bones/6/rotation = Quaternion(-0.0262472, -0.0644435, -0.0827997, 0.994134)
+bones/7/rotation = Quaternion(0.532273, 0.051362, -0.378057, 0.755725)
+bones/9/rotation = Quaternion(0.0508921, 0.0697774, 0.0605242, 0.994423)
+bones/10/rotation = Quaternion(0.541947, 0.126588, -0.527399, 0.641965)
+bones/11/position = Vector3(0.133272, 0.02963, -0.23726)
+bones/11/rotation = Quaternion(0.131028, -0.119343, -0.7276, 0.662712)
+bones/12/position = Vector3(-0.233789, 0.02963, 0.13333)
+bones/12/rotation = Quaternion(0.722378, 0.56107, 0.157291, 0.372331)
 
 [node name="Head" parent="BaseCharacter/char4/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.994758, 0.102261, 5.32866e-05, -0.102261, 0.994758, -5.48549e-06, -5.3525e-05, 1.11759e-08, 1, 0.0498703, 1.65371, 6.25052e-09)
+transform = Transform3D(0.994812, 0.10173, 5.18858e-05, -0.10173, 0.994812, -5.30574e-06, -5.20945e-05, 7.45058e-09, 1, 0.0545186, 1.65323, -7.03014e-09)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

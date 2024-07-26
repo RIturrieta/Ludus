@@ -23,6 +23,7 @@ offset_right = 333.0
 offset_bottom = 1272.0
 
 [node name="Title" type="Label" parent="MenuButtons"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 12.0
 offset_top = 284.0
@@ -44,18 +45,21 @@ offset_bottom = 595.0
 
 [node name="Play" type="Button" parent="MenuButtons/ButtonContainer"]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ab7oi")
 text = "Play"
 
 [node name="Credits" type="Button" parent="MenuButtons/ButtonContainer"]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ab7oi")
 text = "Credits"
 
 [node name="Exit" type="Button" parent="MenuButtons/ButtonContainer"]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ab7oi")
 text = "Exit"
@@ -86,6 +90,7 @@ offset_right = 1238.0
 offset_bottom = 697.0
 
 [node name="Title" type="Label" parent="CreditsMenu"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 454.0
 offset_top = 23.0
@@ -186,6 +191,7 @@ pixerelia.itch.io"
 
 [node name="ExitCredits" type="Button" parent="CreditsMenu"]
 unique_name_in_owner = true
+texture_filter = 1
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
 offset_left = 69.0

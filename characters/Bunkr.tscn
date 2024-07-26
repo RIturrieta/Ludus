@@ -1,7 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4g35ywf3oisw"]
+[gd_scene load_steps=6 format=3 uid="uid://c4g35ywf3oisw"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_yqgc8"]
 [ext_resource type="PackedScene" uid="uid://bpvdrinxsihjs" path="res://characters/Imported/char_5.tscn" id="2_7c825"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vavk1"]
+viewport_path = NodePath("BaseCharacter/Health")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_cwqxc"]
+viewport_path = NodePath("BaseCharacter/Mana")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_v7whv"]
 resource_local_to_scene = true
@@ -30,9 +36,17 @@ abilities = {
 "W": "heal"
 }
 
+[node name="Sprite3D" parent="BaseCharacter" index="11"]
+texture = SubResource("ViewportTexture_vavk1")
+
+[node name="Sprite3D2" parent="BaseCharacter" index="13"]
+texture = SubResource("ViewportTexture_cwqxc")
+
 [node name="char5" parent="BaseCharacter" instance=ExtResource("2_7c825")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char5/Armature" index="0"]
+bones/2/position = Vector3(-0.189067, 0.4, 1.2)
+bones/3/position = Vector3(-0.189067, 0.4, -1.2)
 bones/4/rotation = Quaternion(0.953717, -3.58469e-08, -1.13692e-07, 0.300706)
 bones/5/rotation = Quaternion(0.953717, -5.07642e-17, -5.07642e-17, -0.300706)
 
