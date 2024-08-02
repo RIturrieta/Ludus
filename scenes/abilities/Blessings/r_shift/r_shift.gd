@@ -1,17 +1,11 @@
 extends Ability
 
+@onready var hud = get_parent().get_parent().get_parent().get_parent().get_parent().find_child("CanvasLayer").get_child(0)
 var input: String = ''
 var can_shift = true
 var r1_name = ''
 var r2_name = ''
 
-#func _physics_process(delta):
-	#print(chara.abilities[input][1].charges)
-	#if can_shift and Input.is_action_just_pressed("R") and is_multiplayer_authority():
-		#print(chara.abilities[input][1].charges)
-		#if chara.abilities[input][1].charges >= 1 and chara.can_act and chara.can_cast:
-			#shiftR.rpc()
-			
 @rpc("call_local", "reliable")
 func shiftR():
 	if chara.r_index == 1:
@@ -25,9 +19,11 @@ func execution_ended(name_):
 		if chara.r_index == 1:
 			if name_ == r1_name:
 				shiftR.rpc()
+				hud.prepare_icons(2)
 		else:
 			if name_ == r2_name:
 				shiftR.rpc()
+				hud.prepare_icons(1)
 
 func _ready():
 	chara.execution_ended.connect(execution_ended)

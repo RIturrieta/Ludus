@@ -1,12 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://ctaf6kdxtdp2u"]
+[gd_scene load_steps=13 format=3 uid="uid://ctaf6kdxtdp2u"]
 
 [ext_resource type="Script" path="res://scenes/ui/Hud.gd" id="1_fc2cn"]
 [ext_resource type="LabelSettings" uid="uid://c7c8gdmcewxjt" path="res://resources/fonts/new_label_settings.tres" id="2_v2d6g"]
+[ext_resource type="Texture2D" uid="uid://5xuo7uo5wpvt" path="res://scenes/abilities/Robin/flechita/icon__133.png" id="3_f7mbu"]
+[ext_resource type="FontFile" uid="uid://pppa457ssxfb" path="res://resources/fonts/Kenney Thick.ttf" id="3_o2c7k"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s8bau"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7o6qb"]
 texture = SubResource("CompressedTexture2D_s8bau")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qdrm7"]
+texture = ExtResource("3_f7mbu")
+modulate_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gp2m3"]
+font = ExtResource("3_o2c7k")
+font_size = 12
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_575uf"]
 texture = SubResource("CompressedTexture2D_s8bau")
@@ -19,6 +29,7 @@ texture = SubResource("CompressedTexture2D_s8bau")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfuxv"]
 
 [node name="Hud" type="Control"]
+process_priority = -1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,6 +64,24 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Charges" type="Panel" parent="HBoxContainer/Q"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer/Q/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1
+
 [node name="W" type="Panel" parent="HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
@@ -72,6 +101,24 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Charges" type="Panel" parent="HBoxContainer/W"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer/W/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1
+
 [node name="E" type="Panel" parent="HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
@@ -90,6 +137,24 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Charges" type="Panel" parent="HBoxContainer/E"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer/E/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1
+
 [node name="R" type="Panel" parent="HBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
@@ -107,6 +172,25 @@ text = "R"
 label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Charges" type="Panel" parent="HBoxContainer/R"]
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer/R/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 process_priority = 1
@@ -132,6 +216,25 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Charges" type="Panel" parent="HBoxContainer2/B1"]
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer2/B1/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1
+
 [node name="B2" type="Panel" parent="HBoxContainer2"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
@@ -149,6 +252,25 @@ text = "2"
 label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Charges" type="Panel" parent="HBoxContainer2/B2"]
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer2/B2/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1
 
 [node name="B3" type="Panel" parent="HBoxContainer2"]
 texture_filter = 1
@@ -168,6 +290,25 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Charges" type="Panel" parent="HBoxContainer2/B3"]
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer2/B3/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1
+
 [node name="B4" type="Panel" parent="HBoxContainer2"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
@@ -185,3 +326,22 @@ text = "4"
 label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Charges" type="Panel" parent="HBoxContainer2/B4"]
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = -3.0
+offset_right = 53.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
+
+[node name="Counter" type="Label" parent="HBoxContainer2/B4/Charges"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 16.0
+offset_bottom = 19.0
+text = "0"
+label_settings = SubResource("LabelSettings_gp2m3")
+horizontal_alignment = 1

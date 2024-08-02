@@ -16,7 +16,6 @@ class_name Ability
 @export var Icon: CompressedTexture2D
 @export var Name: String = "ability"
 @export var Description: String = "bottom text"
-# @export var Icon: Image
 
 var charges: int = 1
 var key: String = ""
@@ -42,6 +41,7 @@ func baseExecutionBegining():
 	#Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
 	chara.abort_oneshots()
 	chara.updateTargetLocation(chara.global_position)
+	
 
 func _ready():
 	charges = total_charges

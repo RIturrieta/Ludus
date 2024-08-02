@@ -27,6 +27,7 @@ func _ready():
 	cooldown_timers.set_name("cooldown_timers")
 	add_child(cooldown_timers)
 	range_collision.shape.radius = chara.attack_range
+	area_collision.shape.radius = 1.75
 	preview.visible = false
 
 func calculateTargetPlayer():

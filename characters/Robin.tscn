@@ -1,13 +1,35 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct16wr3phrsg1"]
+[gd_scene load_steps=16 format=3 uid="uid://ct16wr3phrsg1"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_jh2bu"]
 [ext_resource type="PackedScene" uid="uid://31ralsek04o4" path="res://characters/Imported/char_2.tscn" id="2_3ny37"]
+[ext_resource type="Animation" uid="uid://beiiqt4rjx0jp" path="res://animations/char2/default.res" id="3_mlote"]
+[ext_resource type="Animation" uid="uid://cuacr46ej2j52" path="res://animations/char2/atk.res" id="4_3nne3"]
+[ext_resource type="Animation" uid="uid://pkcruyf70fqc" path="res://animations/char2/channeling.res" id="5_ft8mk"]
+[ext_resource type="Animation" uid="uid://fiijvklkue6x" path="res://animations/char2/e.res" id="6_c5g13"]
+[ext_resource type="Animation" uid="uid://d3dn4yx6n672j" path="res://animations/char2/idle.res" id="7_482du"]
+[ext_resource type="Animation" uid="uid://bxreolpmly634" path="res://animations/char2/q.res" id="8_2d47y"]
+[ext_resource type="Animation" uid="uid://bhb7plvlmhvq2" path="res://animations/char2/r1.res" id="9_v3vr4"]
+[ext_resource type="Animation" uid="uid://c24javleayr1g" path="res://animations/char2/r2.res" id="10_lum6g"]
+[ext_resource type="Animation" uid="uid://dosvsurbix3pu" path="res://animations/char2/walk.res" id="11_umxsp"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3ltxi"]
 viewport_path = NodePath("BaseCharacter/Health")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_eycbq"]
 viewport_path = NodePath("BaseCharacter/Mana")
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qp53c"]
+_data = {
+"APose": ExtResource("3_mlote"),
+"BasicAttack": ExtResource("4_3nne3"),
+"Channeling": ExtResource("5_ft8mk"),
+"E": ExtResource("6_c5g13"),
+"Idle": ExtResource("7_482du"),
+"Q": ExtResource("8_2d47y"),
+"R1": ExtResource("9_v3vr4"),
+"R2": ExtResource("10_lum6g"),
+"Walk": ExtResource("11_umxsp")
+}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_aatfw"]
 height = 1.5
@@ -48,13 +70,13 @@ texture = SubResource("ViewportTexture_eycbq")
 [node name="Skeleton3D" parent="BaseCharacter/char2/Armature" index="0"]
 bones/0/position = Vector3(0.0285118, -0.938912, -1.02574e-07)
 bones/0/rotation = Quaternion(-0.0162801, -0.314973, -0.0917699, 0.944513)
-bones/1/rotation = Quaternion(-0.00901788, -0.00366967, -0.0132822, 0.999864)
-bones/4/rotation = Quaternion(0.0262577, 0.00118805, 0.0351749, 0.999035)
+bones/1/rotation = Quaternion(-0.00137481, -0.000559469, -0.00202493, 0.999997)
+bones/4/rotation = Quaternion(0.0262577, 0.00118807, 0.0351749, 0.999035)
 bones/5/rotation = Quaternion(-0.857493, -2.53747e-08, 4.22912e-08, 0.514496)
-bones/7/rotation = Quaternion(-0.469646, -0.0862792, -0.310072, 0.822097)
-bones/8/rotation = Quaternion(-0.264243, 0.138914, -0.0296336, 0.95394)
-bones/11/rotation = Quaternion(-0.19083, -0.11846, -0.0350569, 0.973818)
-bones/12/rotation = Quaternion(-0.411142, 0.0363458, 0.620442, 0.666853)
+bones/7/rotation = Quaternion(-0.466979, -0.0877028, -0.312582, 0.822515)
+bones/8/rotation = Quaternion(-0.26849, 0.136449, -0.0264985, 0.953201)
+bones/11/rotation = Quaternion(-0.188328, -0.120516, -0.0391676, 0.973896)
+bones/12/rotation = Quaternion(-0.412644, 0.0364953, 0.626828, 0.659909)
 bones/13/position = Vector3(2.12358, -8.67574, -1.53453)
 bones/13/rotation = Quaternion(-0.0149771, -0.810036, -0.0937247, 0.578647)
 bones/14/rotation = Quaternion(-0.486056, 0.513588, -0.462953, 0.534464)
@@ -63,52 +85,57 @@ bones/15/rotation = Quaternion(-0.114746, -0.923584, -0.110324, 0.348791)
 bones/16/rotation = Quaternion(-0.449511, -0.556276, 0.425018, 0.554848)
 
 [node name="Head" parent="BaseCharacter/char2/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.788611, 0.128554, -0.601304, -0.119322, 0.991306, 0.0554426, 0.603204, 0.0280263, 0.797094, 0.942275, 3.35844, 0.124161)
+transform = Transform3D(0.79495, 0.101556, -0.598114, -0.097554, 0.994458, 0.0391944, 0.59878, 0.0271908, 0.800452, 0.851901, 3.37719, 0.119682)
 
 [node name="Cloak" parent="BaseCharacter/char2/Armature/Skeleton3D/Head" index="0"]
 collision_layer = 0
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(-0.0142872, 2.29747, -0.14609)
-attachments/1/offset = Vector3(-0.0143712, 2.33158, -0.00062994)
-attachments/2/offset = Vector3(-0.0144552, 2.29747, 0.144837)
-attachments/3/offset = Vector3(-0.401478, 2.36343, -0.134638)
-attachments/4/offset = Vector3(-0.401555, 2.39832, -0.00085394)
-attachments/5/offset = Vector3(-0.401632, 2.36343, 0.13293)
-attachments/6/offset = Vector3(-0.401415, 2.4805, -0.246043)
-attachments/7/offset = Vector3(-0.401555, 2.62542, -0.00085394)
-attachments/8/offset = Vector3(-0.401702, 2.4805, 0.244335)
-attachments/9/offset = Vector3(-0.0142242, 2.41192, -0.255003)
-attachments/10/offset = Vector3(-0.0143712, 2.5536, -0.00062994)
-attachments/11/offset = Vector3(-0.0145182, 2.41192, 0.25375)
-attachments/12/offset = Vector3(-0.401464, 0.0994234, -0.162456)
-attachments/13/offset = Vector3(-0.401555, 0.0994234, -0.00085394)
-attachments/14/offset = Vector3(-0.401653, 0.0994234, 0.160748)
-attachments/15/offset = Vector3(-0.014266, 0.0840864, -0.173292)
-attachments/16/offset = Vector3(-0.0143711, 0.0840864, -0.00062994)
-attachments/17/offset = Vector3(-0.0144691, 0.0840864, 0.172032)
+attachments/0/offset = Vector3(-0.0143109, 2.29744, -0.146102)
+attachments/1/offset = Vector3(-0.0144, 2.33156, -0.000648852)
+attachments/2/offset = Vector3(-0.0144594, 2.29744, 0.144804)
+attachments/3/offset = Vector3(-0.401493, 2.3634, -0.134648)
+attachments/4/offset = Vector3(-0.401582, 2.3983, -0.000876466)
+attachments/5/offset = Vector3(-0.401641, 2.3634, 0.132895)
+attachments/6/offset = Vector3(-0.401433, 2.48047, -0.246079)
+attachments/7/offset = Vector3(-0.401582, 2.62542, -0.000876466)
+attachments/8/offset = Vector3(-0.40173, 2.48047, 0.244326)
+attachments/9/offset = Vector3(-0.0142516, 2.41191, -0.25503)
+attachments/10/offset = Vector3(-0.0144, 2.55357, -0.000648852)
+attachments/11/offset = Vector3(-0.0145188, 2.41191, 0.253733)
+attachments/12/offset = Vector3(-0.401493, 0.0994043, -0.162487)
+attachments/13/offset = Vector3(-0.401582, 0.0994043, -0.000876466)
+attachments/14/offset = Vector3(-0.401671, 0.0994043, 0.160734)
+attachments/15/offset = Vector3(-0.0142811, 0.0840874, -0.173296)
+attachments/16/offset = Vector3(-0.0143998, 0.0840874, -0.000648852)
+attachments/17/offset = Vector3(-0.014489, 0.0840874, 0.171998)
 
 [node name="Back" parent="BaseCharacter/char2/Armature/Skeleton3D" index="2"]
-transform = Transform3D(0.775092, 0.21503, -0.594133, -0.188401, 0.976188, 0.10752, 0.603106, 0.0285975, 0.797148, 0.698891, 2.25353, 0.0917931)
+transform = Transform3D(0.783325, 0.188415, -0.592369, -0.166977, 0.98171, 0.0914488, 0.598766, 0.0272781, 0.800459, 0.638642, 2.26603, 0.0888065)
 
 [node name="Cape" parent="BaseCharacter/char2/Armature/Skeleton3D/Back" index="0"]
 collision_layer = 0
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(-0.884906, 1.12024, -0.04529)
+attachments/0/offset = Vector3(-0.884906, 1.12024, -0.0452899)
 attachments/1/offset = Vector3(-0.893122, 1.06716, -0.383812)
-attachments/2/offset = Vector3(-0.901338, 1.01409, -0.722333)
-attachments/3/offset = Vector3(-0.909542, 0.96101, -1.06086)
-attachments/4/offset = Vector3(-0.917758, 0.907933, -1.39938)
-attachments/5/offset = Vector3(-1.52586, 0.57103, -0.100066)
-attachments/6/offset = Vector3(-1.04859, 1.17872, -0.397102)
+attachments/2/offset = Vector3(-0.901338, 1.01408, -0.722333)
+attachments/3/offset = Vector3(-0.909542, 0.96101, -1.06085)
+attachments/4/offset = Vector3(-0.917758, 0.907932, -1.39938)
+attachments/5/offset = Vector3(-1.52586, 0.571029, -0.100066)
+attachments/6/offset = Vector3(-1.04859, 1.17871, -0.397102)
 attachments/7/offset = Vector3(-1.05459, 1.12414, -0.73543)
 attachments/8/offset = Vector3(-1.0606, 1.06941, -1.07376)
 attachments/9/offset = Vector3(-1.06661, 1.01484, -1.41209)
 
 [node name="LHand" parent="BaseCharacter/char2/Armature/Skeleton3D" index="3"]
-transform = Transform3D(0.441751, -0.173607, 0.88018, 0.578738, -0.694515, -0.427447, 0.685506, 0.698218, -0.206329, 2.18515, 0.279867, -0.153929)
+transform = Transform3D(0.431293, -0.153803, 0.889005, 0.589144, -0.69826, -0.406622, 0.683297, 0.699126, -0.210543, 2.1942, 0.338415, -0.165884)
 
 [node name="bow" parent="BaseCharacter/char2/Armature/Skeleton3D/LHand" index="0"]
 transform = Transform3D(5.76265, -0.511733, -2.46384, 2.34515, 3.32462, 4.79455, 0.912482, -5.31277, 3.23765, -0.0368111, 2.66266, -0.132379)
+
+[node name="AnimationTree" parent="BaseCharacter/char2" index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_qp53c")
+}
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

@@ -10,6 +10,7 @@ attack_speed_multiplier = 1.5
 damage = 0.0
 mana_cost = 0.0
 cooldown = 0.0
+total_charges = 0
 Icon = ExtResource("2_ji3ws")
 Name = "Sentry Mode"
 Description = "Reduces your Movement Speed by 35% but increases your Attack Speed by 50%."

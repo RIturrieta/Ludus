@@ -6,7 +6,7 @@
 [node name="flechita" type="Node3D"]
 script = ExtResource("1_wus66")
 radius = 8.0
-damage = 375.0
+damage = 400.0
 mana_cost = 10.0
 cooldown = 8.0
 Icon = ExtResource("2_kwjne")

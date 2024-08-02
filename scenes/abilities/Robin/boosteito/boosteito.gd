@@ -6,7 +6,7 @@ func _ready():
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:
 		#Debug.sprint(get_parent().get_parent().get_parent().name + " executing " + name)
-		chara.abort_oneshots()
+		#chara.abort_oneshots()
 		var cd_timer = cooldown_timers.get_child(charges-1)
 		cd_timer.start(cooldown - chara.cdr/100)
 		charges -= 1

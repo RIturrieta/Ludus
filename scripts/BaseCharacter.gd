@@ -643,12 +643,25 @@ func died():
 	return false
 
 func reset():
+	clearRoots()
+	clearSlows()
+	clearDash()
+	clearSilences()
+	clearStuns()
 	visible = true
 	can_act = false
 	dead = false
 	init_bar()
 	updateTargetLocation(global_position)
 	character_animations.set("parameters/IdleWalkBlend/blend_amount", 0)
+	character_animations.set("parameters/TimeScale/scale", 1)
+	for i in range(total_attack_animations):
+		character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", attack_speed)
+	character_animations.set("parameters/QMul/scale", 1)
+	character_animations.set("parameters/WMul/scale", 1)
+	character_animations.set("parameters/EMul/scale", 1)
+	character_animations.set("parameters/R1Mul/scale", 1)
+	character_animations.set("parameters/R2Mul/scale", 1)
 	var hitbox = get_node("HitBox")
 	if hitbox:
 		hitbox.disabled = false

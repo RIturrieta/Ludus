@@ -15,6 +15,7 @@ func _ready():
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
+		chara.can_cast = true
 		index = chara.basic_attack.current_attack_index
 		chara.total_attack_animations = 3
 		chara.basic_attack.current_attack_index = 2

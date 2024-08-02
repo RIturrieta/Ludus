@@ -14,12 +14,7 @@ static func create(duration_: float) -> StopTimeEffect:
 	return stun
 
 func _ready():
-	og_can_act = chara.can_act
-	og_can_move = chara.can_move
-	og_can_rotate = chara.can_rotate
-	og_can_cast = chara.can_cast
 	timer.timeout.connect(onTimeout)
-	timer.start(duration)
 	stopTime.rpc()
 	
 func stop():
@@ -32,6 +27,11 @@ func onTimeout():
 
 @rpc("reliable","call_local")
 func stopTime():
+	timer.start(duration)
+	og_can_act = chara.can_act
+	og_can_move = chara.can_move
+	og_can_rotate = chara.can_rotate
+	og_can_cast = chara.can_cast
 	chara.basic_attack.target_player = null
 	chara.can_act = false
 	chara.can_move = false
@@ -43,10 +43,9 @@ func stopTime():
 				timer.paused = true
 	
 	for effect: Effect in chara.effects.get_children():
-		if !effect.timer.is_stopped():
-			effect.timer.paused = true
-	
-	
+		if not effect is StopTimeEffect:
+			if !effect.timer.is_stopped():
+				effect.timer.paused = true
 	
 	chara.character_animations.set("parameters/TimeScale/scale", 0)
 	for i in range(chara.total_attack_animations):
@@ -77,6 +76,7 @@ func resumeTime():
 			if timer.paused:
 				timer.paused = false
 	for effect: Effect in chara.effects.get_children():
-		if effect.timer.paused:
-			effect.timer.paused = false
+		if not effect is StopTimeEffect:
+			if effect.timer.paused:
+				effect.timer.paused = false
 

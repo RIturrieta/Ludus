@@ -6,7 +6,8 @@
 [node name="uwu" type="Node3D"]
 script = ExtResource("1_dny6l")
 radius = 999.0
-cooldown = 0.0
+damage = 200.0
+cooldown = 30.0
 Icon = ExtResource("2_ase7w")
 Name = "Sacred Arrow"
 Description = "Launch a huge sacred arrow forward, dealing 150 damage to the first enemy hit, stunning them for a minimum of 1.5 seconds, inreasing with distance. "
