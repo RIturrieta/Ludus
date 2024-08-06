@@ -93,10 +93,6 @@ wait_time = 2.0
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("9_jlt0k")]
 unique_name_in_owner = true
-offset_left = 529.0
-offset_top = 585.0
-offset_right = 529.0
-offset_bottom = 585.0
 
 [node name="HUDLayer" type="CanvasLayer" parent="."]
 

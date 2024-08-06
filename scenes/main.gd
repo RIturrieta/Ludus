@@ -141,6 +141,8 @@ func do_next():
 				or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB1"):
 					player.global_position = spawn_point.global_position
 					player.reset()
+					%Hud.target_info.visible = false
+					%Hud.disconnect_target()
 					break
 		if team_A_wins + team_B_wins == 1:
 			start_ultimate_choice()

@@ -44,6 +44,18 @@ func baseExecutionBegining():
 	
 
 func _ready():
+	# Adds linebreakers to the description to fit in the tooltip box
+	var desc_len = Description.length()
+	if desc_len > 40:
+		var n = desc_len
+		var i = 40
+		while i < desc_len:
+			if n > 40:
+				if Description[i] == " ":
+					Description[i] = "\n"
+					n = 0
+			n += 1
+			i += 1
 	charges = total_charges
 	cooldown_timers.set_name("cooldown_timers")
 	add_child(cooldown_timers)

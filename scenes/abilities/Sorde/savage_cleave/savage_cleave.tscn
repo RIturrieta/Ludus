@@ -22,7 +22,7 @@ damage = 325.0
 cooldown = 14.0
 Icon = ExtResource("2_il32c")
 Name = "Savage Cleave"
-Description = "Swing your sword around him, dealing 325 damage to enemies hit. Sorde he also frees himself from slows and roots."
+Description = "Sorde swings his sword around him, dealing 325 damage to enemies hit. He also frees himself from slows and roots."
 
 [node name="dmg_area" type="Area3D" parent="."]
 disable_mode = 2

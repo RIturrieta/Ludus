@@ -8,7 +8,7 @@ script = ExtResource("1_agxga")
 damage = 0.0
 cooldown = 60.0
 Icon = ExtResource("2_xktm8")
-Name = "modo diablo"
+Name = "Modo Diablo"
 Description = "Sorde channels his inner Diablo, entering \"Modo Diablo\" state. While in this state, gain 20% Attack Damage and Spell Power and 25% Movement Speed, but decrease your Armor by 20%."
 
 [node name="duration" type="Timer" parent="."]

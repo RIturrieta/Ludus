@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cteih8an7io2y"]
+[gd_scene load_steps=3 format=3 uid="uid://cteih8an7io2y"]
 
 [ext_resource type="Script" path="res://scenes/abilities/No Character/base_ability/base_ability.gd" id="1_43v5d"]
+[ext_resource type="Texture2D" uid="uid://b27wmj7k1o60l" path="res://scenes/abilities/No Character/base_ability/empty_icon.png" id="2_urjjy"]
 
 [node name="base_ability" type="Node3D"]
 script = ExtResource("1_43v5d")
+Icon = ExtResource("2_urjjy")
+Name = ""
+Description = ""
 
 [node name="preview" type="MeshInstance3D" parent="."]

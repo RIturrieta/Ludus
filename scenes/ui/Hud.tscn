@@ -1,14 +1,65 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctaf6kdxtdp2u"]
+[gd_scene load_steps=24 format=3 uid="uid://ctaf6kdxtdp2u"]
 
 [ext_resource type="Script" path="res://scenes/ui/Hud.gd" id="1_fc2cn"]
 [ext_resource type="LabelSettings" uid="uid://c7c8gdmcewxjt" path="res://resources/fonts/new_label_settings.tres" id="2_v2d6g"]
 [ext_resource type="Texture2D" uid="uid://5xuo7uo5wpvt" path="res://scenes/abilities/Robin/flechita/icon__133.png" id="3_f7mbu"]
 [ext_resource type="FontFile" uid="uid://pppa457ssxfb" path="res://resources/fonts/Kenney Thick.ttf" id="3_o2c7k"]
+[ext_resource type="FontFile" uid="uid://bopejsh2fxtpt" path="res://resources/fonts/m5x7.ttf" id="5_otbki"]
+[ext_resource type="Theme" uid="uid://e56n47x0skca" path="res://resources/hud/hud_theme.tres" id="6_77t44"]
+[ext_resource type="StyleBox" uid="uid://b0jr7ibxw1b18" path="res://resources/hud/stat_icon_stylebox.tres" id="7_lwtv0"]
+[ext_resource type="Texture2D" uid="uid://c4fwatsvieab3" path="res://scenes/abilities/Airi/ardeat/fire_spell.png" id="7_qis2u"]
+[ext_resource type="LabelSettings" uid="uid://0diilajqm4h6" path="res://resources/hud/bar_label.tres" id="7_tu1ah"]
+[ext_resource type="Texture2D" uid="uid://cnkk1ro4vj4sq" path="res://scenes/abilities/Blessings/add_charges_Q/q.png" id="9_5s0k1"]
+[ext_resource type="StyleBox" uid="uid://c3u3u2m6f7fov" path="res://resources/hud/ability_icon_stylebox.tres" id="10_4tdrf"]
+[ext_resource type="Texture2D" uid="uid://lxftrecvpyl6" path="res://scenes/abilities/Blessings/stop_time/stop_time.png" id="10_m73xg"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s8bau"]
+[sub_resource type="LabelSettings" id="LabelSettings_5jvsv"]
+font = ExtResource("3_o2c7k")
+font_size = 24
+outline_size = 5
+outline_color = Color(0.301961, 0.0313726, 0.513726, 1)
+shadow_size = 4
+shadow_color = Color(0.980392, 0.462745, 0.658824, 0.776471)
+shadow_offset = Vector2(1.5, 1.5)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7o6qb"]
-texture = SubResource("CompressedTexture2D_s8bau")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvkf0"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgpy1"]
+bg_color = Color(0, 0.831373, 0.117647, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_og8bu"]
+font = ExtResource("5_otbki")
+font_size = 30
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.776471)
+shadow_offset = Vector2(1.75, 1.75)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_243li"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vio2e"]
+bg_color = Color(0.180392, 0.647059, 0.862745, 1)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_kx1kd"]
+font = ExtResource("5_otbki")
+font_size = 24
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.768627)
+shadow_offset = Vector2(1.75, 1.75)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qdrm7"]
 texture = ExtResource("3_f7mbu")
@@ -18,18 +69,25 @@ modulate_color = Color(0, 0, 0, 1)
 font = ExtResource("3_o2c7k")
 font_size = 12
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_575uf"]
-texture = SubResource("CompressedTexture2D_s8bau")
+[sub_resource type="LabelSettings" id="LabelSettings_y8vts"]
+font = ExtResource("3_o2c7k")
+outline_size = 5
+outline_color = Color(0.301961, 0.0313726, 0.513726, 1)
+shadow_size = 4
+shadow_color = Color(0.980392, 0.462745, 0.658824, 0.776471)
+shadow_offset = Vector2(1.5, 1.5)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k31dd"]
-texture = SubResource("CompressedTexture2D_s8bau")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_slfwp"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cfuxv"]
+[sub_resource type="LabelSettings" id="LabelSettings_r5df1"]
+font = ExtResource("5_otbki")
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.301961)
+shadow_offset = Vector2(1.75, 1.75)
 
 [node name="Hud" type="Control"]
 process_priority = -1
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,21 +95,435 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fc2cn")
+metadata/_edit_lock_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_top = 60.0
-offset_right = 212.0
-offset_bottom = 110.0
+[node name="CharaInfo" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -429.0
+offset_top = -171.0
+offset_right = 429.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("6_77t44")
 
-[node name="Q" type="Panel" parent="HBoxContainer"]
+[node name="Stats" type="MarginContainer" parent="CharaInfo"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -72.0
+offset_right = 214.0
+offset_bottom = 72.0
+grow_vertical = 2
+theme = ExtResource("6_77t44")
+
+[node name="GridContainer" type="GridContainer" parent="CharaInfo/Stats"]
+layout_mode = 2
+columns = 2
+
+[node name="AttackDamage" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/AttackDamage"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/AttackDamage/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Attack Damage"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/AttackDamage"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="SpellPower" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/SpellPower"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/SpellPower/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Spell Power"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/SpellPower"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="PhysicalArmor" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/PhysicalArmor"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/PhysicalArmor/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Physical Armor"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/PhysicalArmor"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="SpellArmor" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/SpellArmor"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/SpellArmor/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Spell Armor"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/SpellArmor"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="AttackSpeed" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/AttackSpeed"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/AttackSpeed/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Attack Speed"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/AttackSpeed"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="AttackRange" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/AttackRange"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/AttackRange/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Attack Range"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/AttackRange"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="CDR" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/CDR"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/CDR/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Cooldown Reduction"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/CDR"]
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="MoveSpeed" type="HSplitContainer" parent="CharaInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="CharaInfo/Stats/GridContainer/MoveSpeed"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/Stats/GridContainer/MoveSpeed/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Movement Speed"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/MoveSpeed"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharaInfo"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.0
+offset_top = -42.5
+offset_right = 135.0
+offset_bottom = 42.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="CharaName" type="Label" parent="CharaInfo/VBoxContainer"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Lord Valthor"
+label_settings = SubResource("LabelSettings_5jvsv")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CharaBars" type="VBoxContainer" parent="CharaInfo/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="HealthBar" type="ProgressBar" parent="CharaInfo/VBoxContainer/CharaBars"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fvkf0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tgpy1")
+max_value = 1000.0
+value = 777.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CharaInfo/VBoxContainer/CharaBars/HealthBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -17.5
+offset_right = 69.5
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "777 / 1000"
+label_settings = SubResource("LabelSettings_og8bu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaBar" type="ProgressBar" parent="CharaInfo/VBoxContainer/CharaBars"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_243li")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vio2e")
+max_value = 1000.0
+value = 850.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CharaInfo/VBoxContainer/CharaBars/ManaBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -16.5
+offset_right = 69.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "777 / 1000"
+label_settings = SubResource("LabelSettings_kx1kd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CharaAbilities" type="HBoxContainer" parent="CharaInfo"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 189.0
+offset_top = -72.0
+offset_right = 401.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_group_ = true
+
+[node name="Q" type="Panel" parent="CharaInfo/CharaAbilities"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_styles/panel = SubResource("StyleBoxTexture_7o6qb")
+theme_override_styles/panel = ExtResource("7_lwtv0")
 
-[node name="Label" type="Label" parent="HBoxContainer/Q"]
+[node name="CharaQ" type="TextureRect" parent="CharaInfo/CharaAbilities/Q"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+texture = ExtResource("9_5s0k1")
+
+[node name="Label" type="Label" parent="CharaInfo/CharaAbilities/Q"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -64,7 +536,8 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer/Q"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaAbilities/Q"]
+visible = false
 layout_mode = 0
 offset_left = 35.0
 offset_top = -3.0
@@ -72,7 +545,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer/Q/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaAbilities/Q/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -82,13 +555,19 @@ text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
 
-[node name="W" type="Panel" parent="HBoxContainer"]
+[node name="W" type="Panel" parent="CharaInfo/CharaAbilities"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_575uf")
+theme_override_styles/panel = ExtResource("10_4tdrf")
 
-[node name="Label" type="Label" parent="HBoxContainer/W"]
+[node name="CharaW" type="TextureRect" parent="CharaInfo/CharaAbilities/W"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="CharaInfo/CharaAbilities/W"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -101,7 +580,8 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer/W"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaAbilities/W"]
+visible = false
 layout_mode = 0
 offset_left = 35.0
 offset_top = -3.0
@@ -109,7 +589,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer/W/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaAbilities/W/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -119,13 +599,19 @@ text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
 
-[node name="E" type="Panel" parent="HBoxContainer"]
+[node name="E" type="Panel" parent="CharaInfo/CharaAbilities"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_k31dd")
+theme_override_styles/panel = ExtResource("10_4tdrf")
 
-[node name="Label" type="Label" parent="HBoxContainer/E"]
+[node name="CharaE" type="TextureRect" parent="CharaInfo/CharaAbilities/E"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="CharaInfo/CharaAbilities/E"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -137,7 +623,8 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer/E"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaAbilities/E"]
+visible = false
 layout_mode = 0
 offset_left = 35.0
 offset_top = -3.0
@@ -145,7 +632,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer/E/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaAbilities/E/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -155,13 +642,19 @@ text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
 
-[node name="R" type="Panel" parent="HBoxContainer"]
+[node name="R" type="Panel" parent="CharaInfo/CharaAbilities"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_slfwp")
+theme_override_styles/panel = ExtResource("10_4tdrf")
 
-[node name="Label" type="Label" parent="HBoxContainer/R"]
+[node name="CharaR" type="TextureRect" parent="CharaInfo/CharaAbilities/R"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="CharaInfo/CharaAbilities/R"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -173,7 +666,7 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer/R"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaAbilities/R"]
 visible = false
 layout_mode = 0
 offset_left = 35.0
@@ -182,7 +675,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer/R/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaAbilities/R/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -192,19 +685,35 @@ text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="CharaBlessings" type="HBoxContainer" parent="CharaInfo"]
 process_priority = 1
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 189.0
+offset_top = -135.0
+offset_right = 401.0
+offset_bottom = -85.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_group_ = true
 
-[node name="B1" type="Panel" parent="HBoxContainer2"]
+[node name="B1" type="Panel" parent="CharaInfo/CharaBlessings"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+theme_override_styles/panel = ExtResource("10_4tdrf")
 
-[node name="Label" type="Label" parent="HBoxContainer2/B1"]
+[node name="CharaB1" type="TextureRect" parent="CharaInfo/CharaBlessings/B1"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="CharaInfo/CharaBlessings/B1"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -216,7 +725,7 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer2/B1"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaBlessings/B1"]
 visible = false
 layout_mode = 0
 offset_left = 35.0
@@ -225,7 +734,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer2/B1/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaBlessings/B1/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -235,13 +744,19 @@ text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
 
-[node name="B2" type="Panel" parent="HBoxContainer2"]
+[node name="B2" type="Panel" parent="CharaInfo/CharaBlessings"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+theme_override_styles/panel = ExtResource("10_4tdrf")
 
-[node name="Label" type="Label" parent="HBoxContainer2/B2"]
+[node name="CharaB2" type="TextureRect" parent="CharaInfo/CharaBlessings/B2"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="CharaInfo/CharaBlessings/B2"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -253,7 +768,7 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer2/B2"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaBlessings/B2"]
 visible = false
 layout_mode = 0
 offset_left = 35.0
@@ -262,7 +777,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer2/B2/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaBlessings/B2/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -272,13 +787,19 @@ text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
 
-[node name="B3" type="Panel" parent="HBoxContainer2"]
+[node name="B3" type="Panel" parent="CharaInfo/CharaBlessings"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+theme_override_styles/panel = ExtResource("10_4tdrf")
 
-[node name="Label" type="Label" parent="HBoxContainer2/B3"]
+[node name="CharaB3" type="TextureRect" parent="CharaInfo/CharaBlessings/B3"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="CharaInfo/CharaBlessings/B3"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -290,7 +811,7 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer2/B3"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaBlessings/B3"]
 visible = false
 layout_mode = 0
 offset_left = 35.0
@@ -299,7 +820,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer2/B3/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaBlessings/B3/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -309,13 +830,19 @@ text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
 
-[node name="B4" type="Panel" parent="HBoxContainer2"]
+[node name="B4" type="Panel" parent="CharaInfo/CharaBlessings"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_cfuxv")
+theme_override_styles/panel = ExtResource("10_4tdrf")
 
-[node name="Label" type="Label" parent="HBoxContainer2/B4"]
+[node name="CharaB4" type="TextureRect" parent="CharaInfo/CharaBlessings/B4"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Label" type="Label" parent="CharaInfo/CharaBlessings/B4"]
 texture_filter = 1
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 0
@@ -327,7 +854,7 @@ label_settings = ExtResource("2_v2d6g")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Charges" type="Panel" parent="HBoxContainer2/B4"]
+[node name="Charges" type="Panel" parent="CharaInfo/CharaBlessings/B4"]
 visible = false
 layout_mode = 0
 offset_left = 35.0
@@ -336,7 +863,7 @@ offset_right = 53.0
 offset_bottom = 15.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_qdrm7")
 
-[node name="Counter" type="Label" parent="HBoxContainer2/B4/Charges"]
+[node name="Counter" type="Label" parent="CharaInfo/CharaBlessings/B4/Charges"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 3.0
@@ -345,3 +872,484 @@ offset_bottom = 19.0
 text = "0"
 label_settings = SubResource("LabelSettings_gp2m3")
 horizontal_alignment = 1
+
+[node name="TargetInfo" type="Panel" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 396.0
+offset_bottom = 137.0
+theme = ExtResource("6_77t44")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TargetInfo"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 0
+offset_left = 193.0
+offset_top = 11.0
+offset_right = 378.0
+offset_bottom = 124.0
+alignment = 1
+
+[node name="TargetName" type="Label" parent="TargetInfo/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "ROBIN"
+label_settings = SubResource("LabelSettings_y8vts")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="TargetBars" type="VBoxContainer" parent="TargetInfo/VBoxContainer"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="HealthBar" type="ProgressBar" parent="TargetInfo/VBoxContainer/TargetBars"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fvkf0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tgpy1")
+max_value = 1000.0
+value = 1000.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="TargetInfo/VBoxContainer/TargetBars/HealthBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -16.0
+offset_right = 69.5
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "777 / 1000"
+label_settings = ExtResource("7_tu1ah")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaBar" type="ProgressBar" parent="TargetInfo/VBoxContainer/TargetBars"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_243li")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vio2e")
+max_value = 1000.0
+value = 850.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="TargetInfo/VBoxContainer/TargetBars/ManaBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.5
+offset_top = -16.5
+offset_right = 69.5
+offset_bottom = 14.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "777 / 1000"
+label_settings = SubResource("LabelSettings_r5df1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetBlessings" type="HBoxContainer" parent="TargetInfo/VBoxContainer"]
+custom_minimum_size = Vector2(144, 32)
+layout_mode = 2
+alignment = 1
+
+[node name="B1" type="Panel" parent="TargetInfo/VBoxContainer/TargetBlessings"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TargetB1" type="TextureRect" parent="TargetInfo/VBoxContainer/TargetBlessings/B1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Overflow: Q
+Your Q basic ability gains 2 extra charges."
+texture = ExtResource("9_5s0k1")
+expand_mode = 2
+
+[node name="B2" type="Panel" parent="TargetInfo/VBoxContainer/TargetBlessings"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TargetB2" type="TextureRect" parent="TargetInfo/VBoxContainer/TargetBlessings/B2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Time Stop
+Time freezes for every other player for 4 seconds.
+LOREM IPSUM
+blablablabla
+quququuquququ
+"
+texture = ExtResource("10_m73xg")
+
+[node name="B3" type="Panel" parent="TargetInfo/VBoxContainer/TargetBlessings"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TargetB3" type="TextureRect" parent="TargetInfo/VBoxContainer/TargetBlessings/B3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B4" type="Panel" parent="TargetInfo/VBoxContainer/TargetBlessings"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TargetB4" type="TextureRect" parent="TargetInfo/VBoxContainer/TargetBlessings/B4"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 18.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stats" type="MarginContainer" parent="TargetInfo"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -72.0
+offset_right = 214.0
+offset_bottom = 72.0
+grow_vertical = 2
+theme = ExtResource("6_77t44")
+
+[node name="GridContainer" type="GridContainer" parent="TargetInfo/Stats"]
+texture_filter = 1
+layout_mode = 2
+columns = 2
+
+[node name="AttackDamage" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/AttackDamage"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/AttackDamage/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Attack Damage"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/AttackDamage"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="SpellPower" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/SpellPower"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/SpellPower/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Spell Power"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/SpellPower"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="PhysicalArmor" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/PhysicalArmor"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/PhysicalArmor/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Physical Armor"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/PhysicalArmor"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="SpellArmor" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/SpellArmor"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/SpellArmor/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Spell Armor"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/SpellArmor"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="AttackSpeed" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/AttackSpeed"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/AttackSpeed/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Attack Speed"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/AttackSpeed"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="AttackRange" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/AttackRange"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/AttackRange/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Attack Range"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/AttackRange"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="CDR" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/CDR"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/CDR/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Cooldown Reduction"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/CDR"]
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="MoveSpeed" type="HSplitContainer" parent="TargetInfo/Stats/GridContainer"]
+layout_mode = 2
+dragger_visibility = 1
+
+[node name="Panel" type="Panel" parent="TargetInfo/Stats/GridContainer/MoveSpeed"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="TargetInfo/Stats/GridContainer/MoveSpeed/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.5
+offset_top = -11.5
+offset_right = 11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Movement Speed"
+theme = ExtResource("6_77t44")
+texture = ExtResource("7_qis2u")
+
+[node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/MoveSpeed"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 23)
+layout_mode = 2
+size_flags_vertical = 0
+text = "10"
+clip_text = true
+text_overrun_behavior = 3

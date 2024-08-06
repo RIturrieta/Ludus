@@ -100,8 +100,8 @@ signal execution_ended(name_: String)
 # ========== HEALTH BAR ========== #
 @onready var mana_viewport = %Mana
 @onready var health_viewport = %Health
-@onready var mana_bar = %ManaBar
-@onready var health_bar = %HealthBar
+@onready var mana_bar: ProgressBar = %ManaBar
+@onready var health_bar: ProgressBar = %HealthBar
 @onready var health_label = %HealthLabel
 
 func _ready():
@@ -284,13 +284,11 @@ func takeAttackDamage(damage: float):
 	var total_damage = damage * (1 - physical_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
-		health_bar.value = 0
-		health_label.text = str(hp) + " / " + str(max_hp)
 		died()
 	else:
 		hp -= total_damage
-		health_bar.value = hp - total_damage
-		health_label.text = str(hp) + " / " + str(max_hp)
+	health_bar.value = hp
+	health_label.text = str(hp) + " / " + str(max_hp)
 	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 
 @rpc("call_local", "reliable", "any_peer")
@@ -298,24 +296,20 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	var total_damage = (damage * (1 + attacker_spell_power/100)) * (1 - spell_armor/100)
 	if hp - total_damage <= 0:
 		hp = 0
-		health_bar.value = 0
-		health_label.text = str(hp) + " / " + str(max_hp)
 		died()
 	else:
-		health_bar.value = hp - total_damage
 		hp -= total_damage
-		health_label.text = str(hp) + " / " + str(max_hp)
+	health_bar.value = hp
+	health_label.text = str(hp) + " / " + str(max_hp)
 	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 	
 func heal(points: float):
 	if hp + points <= max_hp:
 		hp += points
-		health_bar.value = hp + points
-		health_label.text = str(hp) + " / " + str(max_hp)
 	else:
 		hp = max_hp
-		health_bar.value = max_hp
-		health_label.text = str(hp) + " / " + str(max_hp)
+	health_bar.value = max_hp
+	health_label.text = str(hp) + " / " + str(max_hp)
 
 # ========== ABILITIES ========== #
 

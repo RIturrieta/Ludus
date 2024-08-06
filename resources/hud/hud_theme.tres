@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://e56n47x0skca"]
+
+[ext_resource type="FontFile" uid="uid://pppa457ssxfb" path="res://resources/fonts/Kenney Thick.ttf" id="1_c8j4u"]
+[ext_resource type="FontFile" uid="uid://bopejsh2fxtpt" path="res://resources/fonts/m5x7.ttf" id="2_fetgl"]
+[ext_resource type="StyleBox" uid="uid://cq753d1vlgwrd" path="res://resources/hud/hud_stylebox.tres" id="3_43n7r"]
+[ext_resource type="StyleBox" uid="uid://b0jr7ibxw1b18" path="res://resources/hud/stat_icon_stylebox.tres" id="3_nvax4"]
+[ext_resource type="StyleBox" uid="uid://clss7jmm6na63" path="res://resources/hud/tooltip_panel.tres" id="5_l6guw"]
+
+[resource]
+default_font = ExtResource("2_fetgl")
+default_font_size = 32
+Fonts/fonts/large = ExtResource("1_c8j4u")
+Fonts/fonts/normal = ExtResource("2_fetgl")
+IconPanel/styles/IconBox = ExtResource("3_nvax4")
+Label/colors/font_outline_color = Color(0.301961, 0.0313726, 0.513726, 1)
+Label/colors/font_shadow_color = Color(0.980392, 0.462745, 0.658824, 0.776471)
+Label/constants/outline_size = 2
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 28
+Label/fonts/font = ExtResource("2_fetgl")
+Panel/styles/panel = ExtResource("3_43n7r")
+TooltipPanel/styles/panel = ExtResource("5_l6guw")
