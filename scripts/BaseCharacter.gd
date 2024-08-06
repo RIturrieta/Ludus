@@ -21,6 +21,9 @@ var camera_target_pos = 0.0
 # @onready var arrows = $PathArrows
 @onready var arrows_transform = $ArrowsTransform
 
+@onready var particles = $Particles
+var animated_number = load("res://scenes/ui/animated_number.tscn")
+
 var locked_camera = true
 @onready var camera_transform = $CameraTransform
 
@@ -289,6 +292,10 @@ func takeAttackDamage(damage: float):
 		hp -= total_damage
 	health_bar.value = hp
 	health_label.text = str(hp) + " / " + str(max_hp)
+	var damage_number = animated_number.instantiate()
+	damage_number.value = total_damage
+	damage_number.type = "damage"
+	particles.add_child(damage_number)
 	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 
 @rpc("call_local", "reliable", "any_peer")
@@ -301,6 +308,10 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 		hp -= total_damage
 	health_bar.value = hp
 	health_label.text = str(hp) + " / " + str(max_hp)
+	var damage_number = animated_number.instantiate()
+	damage_number.value = total_damage
+	damage_number.type = "damage"
+	particles.add_child(damage_number)
 	# Debug.sprint(get_parent().name + " recieved " + str(total_damage) + " and now has " + str(hp) + " hp")
 	
 func heal(points: float):
@@ -310,6 +321,10 @@ func heal(points: float):
 		hp = max_hp
 	health_bar.value = max_hp
 	health_label.text = str(hp) + " / " + str(max_hp)
+	var heal_number = animated_number.instantiate()
+	heal_number.value = points
+	heal_number.type = "heal"
+	particles.add_child(heal_number)
 
 # ========== ABILITIES ========== #
 
@@ -625,7 +640,9 @@ func abort_oneshots():
 
 func died():
 	if hp <= 0:
-		visible = false
+		health_bar.visible = false
+		mana_bar.visible = false
+		character_node.visible = false
 		can_act = false
 		dead = true
 		var hitbox = get_node("HitBox")
@@ -642,7 +659,9 @@ func reset():
 	clearDash()
 	clearSilences()
 	clearStuns()
-	visible = true
+	health_bar.visible = true
+	mana_bar.visible = true
+	character_node.visible = true
 	can_act = false
 	dead = false
 	init_bar()

@@ -117,9 +117,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -72.0
-offset_right = 214.0
-offset_bottom = 72.0
+offset_left = 7.0
+offset_top = -71.5
+offset_right = 221.0
+offset_bottom = 72.5
 grow_vertical = 2
 theme = ExtResource("6_77t44")
 
@@ -426,14 +427,84 @@ grow_vertical = 2
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="CharaName" type="Label" parent="CharaInfo/VBoxContainer"]
-custom_minimum_size = Vector2(200, 25)
+[node name="HBoxContainer" type="HBoxContainer" parent="CharaInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="CharaName" type="Label" parent="CharaInfo/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 25)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Lord Valthor"
 label_settings = SubResource("LabelSettings_5jvsv")
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Effects" type="HBoxContainer" parent="CharaInfo/VBoxContainer/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="Stun" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Stun"]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="Root" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Root"]
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="Silence" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Silence"]
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="Slow" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Slow"]
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="SpeedBoost" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/SpeedBoost"]
+offset_right = 24.0
+offset_bottom = 24.0
+
+[node name="Modifier" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("7_lwtv0")
+
+[node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Modifier"]
+offset_right = 24.0
+offset_bottom = 24.0
 
 [node name="CharaBars" type="VBoxContainer" parent="CharaInfo/VBoxContainer"]
 layout_mode = 2

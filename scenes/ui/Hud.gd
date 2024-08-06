@@ -10,7 +10,7 @@ extends Control
 @onready var chara_mana_label = $CharaInfo/VBoxContainer/CharaBars/ManaBar/Label
 
 # CHARACTER NAME
-@onready var chara_name: Label = $CharaInfo/VBoxContainer/CharaName
+@onready var chara_name: Label = $CharaInfo/VBoxContainer/HBoxContainer/CharaName
 
 # CHARACTER STATS
 @onready var chara_ad = $CharaInfo/Stats/GridContainer/AttackDamage/Label
@@ -21,6 +21,15 @@ extends Control
 @onready var chara_ar = $CharaInfo/Stats/GridContainer/AttackRange/Label
 @onready var chara_cdr = $CharaInfo/Stats/GridContainer/CDR/Label
 @onready var chara_ms = $CharaInfo/Stats/GridContainer/MoveSpeed/Label
+
+# CHARACTER EFFECTS
+@onready var chara_stun = $CharaInfo/VBoxContainer/HBoxContainer/Effects/Stun
+@onready var chara_root = $CharaInfo/VBoxContainer/HBoxContainer/Effects/Root
+@onready var chara_silence = $CharaInfo/VBoxContainer/HBoxContainer/Effects/Silence
+@onready var chara_slow = $CharaInfo/VBoxContainer/HBoxContainer/Effects/Slow
+@onready var chara_speed_boost = $CharaInfo/VBoxContainer/HBoxContainer/Effects/SpeedBoost
+@onready var chara_modifier = $CharaInfo/VBoxContainer/HBoxContainer/Effects/Modifier
+
 
 # TARGET NODE
 @onready var target_player: BaseCharacter = null
@@ -52,7 +61,6 @@ extends Control
 @onready var target_b2 = $TargetInfo/VBoxContainer/TargetBlessings/B2/TargetB2
 @onready var target_b3 = $TargetInfo/VBoxContainer/TargetBlessings/B3/TargetB3
 @onready var target_b4 = $TargetInfo/VBoxContainer/TargetBlessings/B4/TargetB4
-
 
 
 
@@ -209,6 +217,52 @@ func update_chara_stats():
 	chara_cdr.text = str(local_player.cdr)
 	chara_ms.text = str(local_player.move_speed)
 
+func update_chara_effects():
+	var is_stun = false
+	var is_root = false
+	var is_silence = false
+	var is_slow = false
+	var is_speed_boost = false
+	var is_modifier = false
+	for effect: Effect in local_player.effects.get_children():
+		if effect is StunEffect:
+			is_stun = true
+		if effect is RootEffect:
+			is_root  = true
+		if effect is SilenceEffect:
+			is_silence = true
+		if effect is SpeedModifierEffect:
+			if effect.percentage < 0:
+				is_slow  = true
+			elif effect.percentage > 0:
+				is_speed_boost = true
+		if effect is StatsModifierEffect:
+			is_modifier = true
+	if is_stun:
+		chara_stun.visible = true
+	else:
+		chara_stun.visible = false
+	if is_root:
+		chara_root.visible = true
+	else:
+		chara_root.visible = false
+	if is_silence:
+		chara_silence.visible = true
+	else:
+		chara_silence.visible = false
+	if is_slow:
+		chara_slow.visible = true
+	else:
+		chara_slow.visible = false
+	if is_speed_boost:
+		chara_speed_boost.visible = true
+	else:
+		chara_speed_boost.visible = false
+	if is_modifier:
+		chara_modifier.visible = true
+	else:
+		chara_modifier.visible = false
+
 func update_target_stats():
 	if target_player != null:
 		target_ad.text = str(target_player.attack_damage)
@@ -279,4 +333,6 @@ func _physics_process(delta):
 		
 	update_target_stats()
 	update_chara_stats()
+	update_chara_effects()
 	update_ability_icons()
+		

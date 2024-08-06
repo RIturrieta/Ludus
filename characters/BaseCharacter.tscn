@@ -121,6 +121,9 @@ mesh = SubResource("CapsuleMesh_kvtkm")
 
 [node name="Effects" type="Node3D" parent="."]
 
+[node name="Particles" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
 [node name="Health" type="SubViewport" parent="."]
 unique_name_in_owner = true
 disable_3d = true
