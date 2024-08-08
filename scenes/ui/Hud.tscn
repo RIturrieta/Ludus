@@ -1,17 +1,29 @@
-[gd_scene load_steps=24 format=3 uid="uid://ctaf6kdxtdp2u"]
+[gd_scene load_steps=36 format=3 uid="uid://ctaf6kdxtdp2u"]
 
 [ext_resource type="Script" path="res://scenes/ui/Hud.gd" id="1_fc2cn"]
 [ext_resource type="LabelSettings" uid="uid://c7c8gdmcewxjt" path="res://resources/fonts/new_label_settings.tres" id="2_v2d6g"]
 [ext_resource type="Texture2D" uid="uid://5xuo7uo5wpvt" path="res://scenes/abilities/Robin/flechita/icon__133.png" id="3_f7mbu"]
 [ext_resource type="FontFile" uid="uid://pppa457ssxfb" path="res://resources/fonts/Kenney Thick.ttf" id="3_o2c7k"]
+[ext_resource type="Texture2D" uid="uid://cmin03eot5pxw" path="res://scenes/ui/icons/attack.png" id="4_32lnv"]
+[ext_resource type="Texture2D" uid="uid://dqrb4dshn0awp" path="res://scenes/ui/icons/spell_power.png" id="5_4hwj1"]
 [ext_resource type="FontFile" uid="uid://bopejsh2fxtpt" path="res://resources/fonts/m5x7.ttf" id="5_otbki"]
+[ext_resource type="Texture2D" uid="uid://r3v0lsiq86fq" path="res://scenes/ui/icons/armor.png" id="6_6o2m6"]
 [ext_resource type="Theme" uid="uid://e56n47x0skca" path="res://resources/hud/hud_theme.tres" id="6_77t44"]
+[ext_resource type="Texture2D" uid="uid://dnokgci64grk8" path="res://scenes/ui/icons/stun.png" id="6_s1atv"]
 [ext_resource type="StyleBox" uid="uid://b0jr7ibxw1b18" path="res://resources/hud/stat_icon_stylebox.tres" id="7_lwtv0"]
-[ext_resource type="Texture2D" uid="uid://c4fwatsvieab3" path="res://scenes/abilities/Airi/ardeat/fire_spell.png" id="7_qis2u"]
+[ext_resource type="Texture2D" uid="uid://q2t35cvulm33" path="res://scenes/ui/icons/root.png" id="7_sswre"]
 [ext_resource type="LabelSettings" uid="uid://0diilajqm4h6" path="res://resources/hud/bar_label.tres" id="7_tu1ah"]
+[ext_resource type="Texture2D" uid="uid://b7jxfa8v4y7pg" path="res://scenes/ui/icons/spell_armor.png" id="7_xvegc"]
+[ext_resource type="Texture2D" uid="uid://bjoeoqhoxg5dm" path="res://scenes/ui/icons/attack_speed.png" id="8_am15l"]
+[ext_resource type="Texture2D" uid="uid://bvy5lef3s2vk7" path="res://scenes/ui/icons/silence.png" id="8_xxvnc"]
 [ext_resource type="Texture2D" uid="uid://cnkk1ro4vj4sq" path="res://scenes/abilities/Blessings/add_charges_Q/q.png" id="9_5s0k1"]
+[ext_resource type="Texture2D" uid="uid://ihgstebsmc7g" path="res://scenes/ui/icons/attack_range.png" id="9_ash8d"]
+[ext_resource type="Texture2D" uid="uid://o5f5vycfw0hv" path="res://scenes/ui/icons/slow.png" id="9_xihfr"]
 [ext_resource type="StyleBox" uid="uid://c3u3u2m6f7fov" path="res://resources/hud/ability_icon_stylebox.tres" id="10_4tdrf"]
+[ext_resource type="Texture2D" uid="uid://bjjm6u28k8cbc" path="res://scenes/ui/icons/cdr.png" id="10_23v20"]
 [ext_resource type="Texture2D" uid="uid://lxftrecvpyl6" path="res://scenes/abilities/Blessings/stop_time/stop_time.png" id="10_m73xg"]
+[ext_resource type="Texture2D" uid="uid://dkjmb2ayqkxcd" path="res://scenes/ui/icons/speed.png" id="10_vtpkk"]
+[ext_resource type="Texture2D" uid="uid://dsfl4ym1fg1d6" path="res://scenes/ui/icons/modifier.png" id="11_urdfm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5jvsv"]
 font = ExtResource("3_o2c7k")
@@ -153,7 +165,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Attack Damage"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("4_32lnv")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/AttackDamage"]
 clip_contents = true
@@ -188,7 +200,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Spell Power"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("5_4hwj1")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/SpellPower"]
 clip_contents = true
@@ -223,7 +235,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Physical Armor"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("6_6o2m6")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/PhysicalArmor"]
 clip_contents = true
@@ -258,7 +270,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Spell Armor"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("7_xvegc")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/SpellArmor"]
 clip_contents = true
@@ -294,7 +306,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Attack Speed"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("8_am15l")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/AttackSpeed"]
 clip_contents = true
@@ -330,7 +342,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Attack Range"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("9_ash8d")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/AttackRange"]
 clip_contents = true
@@ -365,7 +377,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Cooldown Reduction"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("10_23v20")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/CDR"]
 custom_minimum_size = Vector2(50, 23)
@@ -399,7 +411,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Movement Speed"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("10_vtpkk")
 
 [node name="Label" type="Label" parent="CharaInfo/Stats/GridContainer/MoveSpeed"]
 clip_contents = true
@@ -455,6 +467,7 @@ theme_override_styles/panel = ExtResource("7_lwtv0")
 layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
+texture = ExtResource("6_s1atv")
 
 [node name="Root" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
 visible = false
@@ -463,8 +476,10 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("7_lwtv0")
 
 [node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Root"]
+layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
+texture = ExtResource("7_sswre")
 
 [node name="Silence" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
 visible = false
@@ -473,8 +488,10 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("7_lwtv0")
 
 [node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Silence"]
+layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
+texture = ExtResource("8_xxvnc")
 
 [node name="Slow" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
 visible = false
@@ -483,8 +500,10 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("7_lwtv0")
 
 [node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Slow"]
+layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
+texture = ExtResource("9_xihfr")
 
 [node name="SpeedBoost" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
 visible = false
@@ -493,8 +512,10 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("7_lwtv0")
 
 [node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/SpeedBoost"]
+layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
+texture = ExtResource("10_vtpkk")
 
 [node name="Modifier" type="Panel" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects"]
 visible = false
@@ -503,8 +524,10 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("7_lwtv0")
 
 [node name="TextureRect" type="TextureRect" parent="CharaInfo/VBoxContainer/HBoxContainer/Effects/Modifier"]
+layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
+texture = ExtResource("11_urdfm")
 
 [node name="CharaBars" type="VBoxContainer" parent="CharaInfo/VBoxContainer"]
 layout_mode = 2
@@ -1167,7 +1190,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Attack Damage"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("4_32lnv")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/AttackDamage"]
 clip_contents = true
@@ -1203,7 +1226,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Spell Power"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("5_4hwj1")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/SpellPower"]
 clip_contents = true
@@ -1238,7 +1261,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Physical Armor"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("6_6o2m6")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/PhysicalArmor"]
 clip_contents = true
@@ -1273,7 +1296,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Spell Armor"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("7_xvegc")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/SpellArmor"]
 clip_contents = true
@@ -1309,7 +1332,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Attack Speed"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("8_am15l")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/AttackSpeed"]
 clip_contents = true
@@ -1345,7 +1368,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Attack Range"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("9_ash8d")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/AttackRange"]
 clip_contents = true
@@ -1380,7 +1403,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Cooldown Reduction"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("10_23v20")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/CDR"]
 custom_minimum_size = Vector2(50, 23)
@@ -1414,7 +1437,7 @@ grow_horizontal = 2
 grow_vertical = 2
 tooltip_text = "Movement Speed"
 theme = ExtResource("6_77t44")
-texture = ExtResource("7_qis2u")
+texture = ExtResource("10_vtpkk")
 
 [node name="Label" type="Label" parent="TargetInfo/Stats/GridContainer/MoveSpeed"]
 clip_contents = true

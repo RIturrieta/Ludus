@@ -1,6 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://rksngjfvhni8"]
+[gd_scene load_steps=6 format=3 uid="uid://rksngjfvhni8"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="2_navb4"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yumwp"]
+viewport_path = NodePath("BaseCharacter/Health")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jh40q"]
+viewport_path = NodePath("BaseCharacter/Mana")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xi3h4"]
 height = 0.5
@@ -11,12 +17,31 @@ height = 1.8
 
 [node name="ExampleCharacter" type="Node3D"]
 
-[node name="BaseCharacter" parent="." instance=ExtResource("2_navb4")]
+[node name="BaseCharacter" parent="." node_paths=PackedStringArray("character_node") instance=ExtResource("2_navb4")]
+character_node = NodePath("Char")
+
+[node name="Sprite3D" parent="BaseCharacter" index="12"]
+texture = SubResource("ViewportTexture_yumwp")
+
+[node name="Sprite3D2" parent="BaseCharacter" index="14"]
+texture = SubResource("ViewportTexture_jh40q")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CylinderShape3D_xi3h4")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="BaseCharacter"]
+[node name="Char" type="Node3D" parent="BaseCharacter"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="BaseCharacter/Char"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.907356, 0)
 mesh = SubResource("CapsuleMesh_4hxlo")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BaseCharacter/Char"]
+
+[node name="HealthMarker" type="Marker3D" parent="BaseCharacter/Char"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4608, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="BaseCharacter/Char"]
+
+[editable path="BaseCharacter"]

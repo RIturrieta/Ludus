@@ -296,6 +296,14 @@ func _go_to_menu(menu: Control) -> void:
 	_hide_menus()
 	_menu_stack.push_back(menu)
 	menu.show()
+	# if the menu is the ready menu, move anchor to center left
+	if menu == ready_menu:
+		print("aaaa")
+		set_anchors_preset(LayoutPreset.PRESET_CENTER_LEFT)
+	else:
+		print("b")
+		set_anchors_preset(LayoutPreset.PRESET_CENTER_LEFT)
+	print(anchors_preset)
 
 
 func _back_menu() -> void:
@@ -304,6 +312,7 @@ func _back_menu() -> void:
 	var menu = _menu_stack.back()
 	if menu:
 		menu.show()
+		set_anchors_preset(LayoutPreset.PRESET_FULL_RECT)
 	_disconnect()
 
 

@@ -69,16 +69,7 @@ text = "Exit"
 [node name="Lobby" parent="." instance=ExtResource("2_4xb0h")]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 451.0
-offset_top = 135.0
-offset_right = 837.0
-offset_bottom = 561.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 1
 
 [node name="CreditsMenu" type="Panel" parent="."]
 unique_name_in_owner = true
