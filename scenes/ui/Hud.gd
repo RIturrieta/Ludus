@@ -140,10 +140,14 @@ func prepare_icons(index: int = 0):
 			update_chara_hp(0)
 			update_chara_max_mana()
 			update_chara_mana(chara_mana_bar.max_value)
-			local_player.health_bar.value_changed.connect(update_chara_hp)
-			local_player.health_bar.changed.connect(update_chara_max_hp)
-			local_player.mana_bar.value_changed.connect(update_chara_mana)
-			local_player.mana_bar.changed.connect(update_chara_max_mana)
+			if !local_player.health_bar.value_changed.is_connected(update_chara_hp):
+				local_player.health_bar.value_changed.connect(update_chara_hp)
+			if !local_player.health_bar.changed.is_connected(update_chara_max_hp):
+				local_player.health_bar.changed.connect(update_chara_max_hp)
+			if !local_player.mana_bar.value_changed.is_connected(update_chara_mana):
+				local_player.mana_bar.value_changed.connect(update_chara_mana)
+			if !local_player.mana_bar.changed.is_connected(update_chara_max_mana):
+				local_player.mana_bar.changed.connect(update_chara_max_mana)
 			
 	var texture_q = local_player.abilities["Q"][1].Icon
 	var tooltip_q = local_player.abilities["Q"][1].Name + "\n" + local_player.abilities["Q"][1].Description

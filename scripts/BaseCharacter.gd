@@ -101,11 +101,12 @@ signal execution_started(name_: String)
 signal execution_ended(name_: String)
 
 # ========== HEALTH BAR ========== #
-@onready var mana_viewport = %Mana
 @onready var health_viewport = %Health
-@onready var mana_bar: ProgressBar = %ManaBar
-@onready var health_bar: ProgressBar = %HealthBar
-@onready var health_label = %HealthLabel
+@onready var bars = $Health/Bars
+@onready var health_bar: ProgressBar = $Health/Bars.get_child(0).get_child(0)
+@onready var mana_bar: ProgressBar = $Health/Bars.get_child(0).get_child(1)
+@onready var health_sprite = $HealthSprite
+
 
 func _ready():
 	updateTargetLocation(global_position)
@@ -113,8 +114,8 @@ func _ready():
 	character_animations = character_node.get_node("AnimationTree")
 	for i in range(total_attack_animations):
 		character_animations.set("parameters/AttackMul" + str(i + 1) + "/scale", attack_speed)
-		
-	mana_viewport.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
+	
+	health_sprite.global_position = character_node.find_child("HealthMarker").global_position
 	health_viewport.set_update_mode(SubViewport.UPDATE_WHEN_PARENT_VISIBLE)
 	init_bar()
 
@@ -291,7 +292,6 @@ func takeAttackDamage(damage: float):
 	else:
 		hp -= total_damage
 	health_bar.value = hp
-	health_label.text = str(hp) + " / " + str(max_hp)
 	var damage_number = animated_number.instantiate()
 	damage_number.value = total_damage
 	damage_number.type = "damage"
@@ -307,7 +307,6 @@ func takeAbilityDamage(damage: float, attacker_spell_power: float):
 	else:
 		hp -= total_damage
 	health_bar.value = hp
-	health_label.text = str(hp) + " / " + str(max_hp)
 	var damage_number = animated_number.instantiate()
 	damage_number.value = total_damage
 	damage_number.type = "damage"
@@ -320,7 +319,6 @@ func heal(points: float):
 	else:
 		hp = max_hp
 	health_bar.value = max_hp
-	health_label.text = str(hp) + " / " + str(max_hp)
 	var heal_number = animated_number.instantiate()
 	heal_number.value = points
 	heal_number.type = "heal"
@@ -683,12 +681,12 @@ func reset():
 			if !timer.is_stopped():
 				timer.stop()
 		abilities[key][1].charges = abilities[key][1].total_charges
-	hp = max_hp
-	mana = max_mana
 	# remover los efectos buenos/malos que no sean de blessings suyos ???
 	for effect in effects.get_children():
 		effect.timer.stop()
 		effect.timer.emit_signal("timeout")
+	hp = max_hp
+	mana = max_mana
 	init_bar()
 
 func setup(player_data: Statics.PlayerData):
@@ -708,7 +706,6 @@ func setup(player_data: Statics.PlayerData):
 func init_bar():
 	health_bar.max_value = max_hp
 	health_bar.value = max_hp
-	health_label.text = str(hp) + " / " + str(max_hp)
 	mana_bar.max_value = max_mana
 	mana_bar.value = max_mana
 

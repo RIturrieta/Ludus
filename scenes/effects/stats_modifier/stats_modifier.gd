@@ -67,6 +67,7 @@ func _ready():
 	chara.cdr += cdr
 	chara.select_radius *= select_radius
 	chara.max_hp *= (1 + max_hp/100)
+	chara.bars.update_size()
 	if chara.hp >= chara.max_hp:
 		chara.hp = chara.max_hp
 	chara.max_mana *= (1 + max_mana/100)
@@ -90,6 +91,7 @@ func stop():
 	chara.cdr -= cdr
 	chara.select_radius /= select_radius
 	chara.max_hp /= (1 + max_hp/100)
+	chara.bars.update_size()
 	if chara.hp >= chara.max_hp:
 		chara.hp = chara.max_hp
 	chara.max_mana /= (1 + max_mana/100)
