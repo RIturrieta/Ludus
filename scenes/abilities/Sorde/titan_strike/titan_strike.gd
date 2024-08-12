@@ -35,7 +35,7 @@ func beginExecutionRemote(id: int):
 	chara.character_animations.set("parameters/R1Shot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
 func execute():
-	chara.target_player = null
+	chara.abilities["BA"][1].target_player = null
 	var hitbox = chara.get_node("HitBox")
 	if hitbox:
 		hitbox.disabled = true

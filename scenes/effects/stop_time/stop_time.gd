@@ -23,7 +23,6 @@ func stop():
 
 func onTimeout():
 	resumeTime.rpc()
-	queue_free()
 
 @rpc("reliable","call_local")
 func stopTime():
@@ -79,4 +78,5 @@ func resumeTime():
 		if not effect is StopTimeEffect:
 			if effect.timer.paused:
 				effect.timer.paused = false
+	queue_free()
 

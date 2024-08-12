@@ -42,7 +42,6 @@ var prev_velocity = 0.0
 var is_attacking = false
 var target_player: BaseCharacter = null
 var can_move = true
-
 var can_rotate = true
 var is_dashing = false
 var is_silenced = false
@@ -318,7 +317,7 @@ func heal(points: float):
 		hp += points
 	else:
 		hp = max_hp
-	health_bar.value = max_hp
+	health_bar.value = hp
 	var heal_number = animated_number.instantiate()
 	heal_number.value = points
 	heal_number.type = "heal"
@@ -399,7 +398,8 @@ func beginAbilityExecutions():
 					#beginRemoteExecution.rpc(key)
 			
 			if Input.is_action_just_pressed(input_key) and is_multiplayer_authority():
-					beginRemoteExecution.rpc(key)
+				beginRemoteExecution.rpc(key)
+				break # Prevents casting more than one ability on the same frame
 
 # Executes an ability. Used for animations
 func executeAbility(_name):

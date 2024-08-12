@@ -13,6 +13,7 @@ height = 0.5
 radius = 1.0
 
 [node name="basic_attack" type="Node3D"]
+process_physics_priority = -2
 script = ExtResource("1_mwrot")
 
 [node name="preview" type="MeshInstance3D" parent="."]

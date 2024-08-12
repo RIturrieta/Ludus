@@ -16,7 +16,7 @@ func _physics_process(delta):
 func beginExecution():
 	if charges >= 1 and chara.mana >= mana_cost:
 		baseExecutionBegining()
-		chara.target_player = null
+		chara.abilities["BA"][1].target_player = null
 		chara.character_node.global_rotation.y = chara.projectile_ray.global_rotation.y
 		chara.agent.navigation_layers = 0b00000010
 		chara.character_animations.set("parameters/EShot/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)

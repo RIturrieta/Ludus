@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://31ralsek04o4"]
+[gd_scene load_steps=41 format=3 uid="uid://31ralsek04o4"]
 
 [ext_resource type="PackedScene" uid="uid://dk4ytipotiqga" path="res://resources/meshes/char2.glb" id="1_kclxa"]
 [ext_resource type="ArrayMesh" uid="uid://bodvfa3ijbuls" path="res://resources/meshes/Cloak.tres" id="2_dbxly"]
@@ -6,6 +6,28 @@
 [ext_resource type="ArrayMesh" uid="uid://cenanxt0ltoxh" path="res://resources/meshes/HalfCape.tres" id="3_4n425"]
 [ext_resource type="ArrayMesh" uid="uid://gl0fg2p811jk" path="res://resources/meshes/cloak.obj" id="4_vjxau"]
 [ext_resource type="ArrayMesh" uid="uid://20pg2npbcerp" path="res://resources/meshes/halfcape.obj" id="5_tkid5"]
+[ext_resource type="Animation" uid="uid://beiiqt4rjx0jp" path="res://animations/char2/default.res" id="7_j20l7"]
+[ext_resource type="Animation" uid="uid://cuacr46ej2j52" path="res://animations/char2/atk.res" id="8_3s64d"]
+[ext_resource type="Animation" uid="uid://pkcruyf70fqc" path="res://animations/char2/channeling.res" id="9_x6pts"]
+[ext_resource type="Animation" uid="uid://fiijvklkue6x" path="res://animations/char2/e.res" id="10_7wcpe"]
+[ext_resource type="Animation" uid="uid://d3dn4yx6n672j" path="res://animations/char2/idle.res" id="11_exff3"]
+[ext_resource type="Animation" uid="uid://bxreolpmly634" path="res://animations/char2/q.res" id="12_m6q5w"]
+[ext_resource type="Animation" uid="uid://bhb7plvlmhvq2" path="res://animations/char2/r1.res" id="13_fxnxe"]
+[ext_resource type="Animation" uid="uid://c24javleayr1g" path="res://animations/char2/r2.res" id="14_uii01"]
+[ext_resource type="Animation" uid="uid://dosvsurbix3pu" path="res://animations/char2/walk.res" id="15_aytqk"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qp53c"]
+_data = {
+"APose": ExtResource("7_j20l7"),
+"BasicAttack": ExtResource("8_3s64d"),
+"Channeling": ExtResource("9_x6pts"),
+"E": ExtResource("10_7wcpe"),
+"Idle": ExtResource("11_exff3"),
+"Q": ExtResource("12_m6q5w"),
+"R1": ExtResource("13_fxnxe"),
+"R2": ExtResource("14_uii01"),
+"Walk": ExtResource("15_aytqk")
+}
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pcdut"]
 animation = &"BasicAttack"
@@ -166,58 +188,58 @@ damping_coefficient = 0.07
 pinned_points = [600, 452, 132, 596, 448, 128, 696, 428, 228, 692, 424, 224, 854, 349, 389, 850, 353, 385]
 attachments/0/point_index = 600
 attachments/0/spatial_attachment_path = NodePath("..")
-attachments/0/offset = Vector3(0.016129, 2.438, -0.02087)
+attachments/0/offset = Vector3(0.0161256, 2.43799, -0.0208717)
 attachments/1/point_index = 452
 attachments/1/spatial_attachment_path = NodePath("..")
-attachments/1/offset = Vector3(0.016117, 2.44287, -9e-05)
+attachments/1/offset = Vector3(0.0161129, 2.44287, -9.26852e-05)
 attachments/2/point_index = 132
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(0.016105, 2.438, 0.020691)
+attachments/2/offset = Vector3(0.0161044, 2.43799, 0.0206863)
 attachments/3/point_index = 596
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(-0.039184, 2.44742, -0.019234)
+attachments/3/offset = Vector3(-0.0391861, 2.44741, -0.0192354)
 attachments/4/point_index = 448
 attachments/4/spatial_attachment_path = NodePath("..")
-attachments/4/offset = Vector3(-0.039195, 2.4524, -0.000122)
+attachments/4/offset = Vector3(-0.0391988, 2.4524, -0.0001252)
 attachments/5/point_index = 128
 attachments/5/spatial_attachment_path = NodePath("..")
-attachments/5/offset = Vector3(-0.039206, 2.44742, 0.01899)
+attachments/5/offset = Vector3(-0.0392073, 2.44741, 0.018985)
 attachments/6/point_index = 696
 attachments/6/spatial_attachment_path = NodePath("..")
-attachments/6/offset = Vector3(-0.039175, 2.46414, -0.035149)
+attachments/6/offset = Vector3(-0.0391776, 2.46414, -0.0351542)
 attachments/7/point_index = 428
 attachments/7/spatial_attachment_path = NodePath("..")
-attachments/7/offset = Vector3(-0.039195, 2.48485, -0.000122)
+attachments/7/offset = Vector3(-0.0391988, 2.48485, -0.0001252)
 attachments/8/point_index = 228
 attachments/8/spatial_attachment_path = NodePath("..")
-attachments/8/offset = Vector3(-0.039216, 2.46414, 0.034905)
+attachments/8/offset = Vector3(-0.03922, 2.46414, 0.0349038)
 attachments/9/point_index = 692
 attachments/9/spatial_attachment_path = NodePath("..")
-attachments/9/offset = Vector3(0.016138, 2.45435, -0.036429)
+attachments/9/offset = Vector3(0.0161341, 2.45434, -0.0364329)
 attachments/10/point_index = 424
 attachments/10/spatial_attachment_path = NodePath("..")
-attachments/10/offset = Vector3(0.016117, 2.47459, -9e-05)
+attachments/10/offset = Vector3(0.0161129, 2.47458, -9.26852e-05)
 attachments/11/point_index = 224
 attachments/11/spatial_attachment_path = NodePath("..")
-attachments/11/offset = Vector3(0.016096, 2.45435, 0.03625)
+attachments/11/offset = Vector3(0.0160959, 2.45434, 0.0362475)
 attachments/12/point_index = 854
 attachments/12/spatial_attachment_path = NodePath("..")
-attachments/12/offset = Vector3(-0.039182, 2.12399, -0.023208)
+attachments/12/offset = Vector3(-0.0391861, 2.12399, -0.0232124)
 attachments/13/point_index = 349
 attachments/13/spatial_attachment_path = NodePath("..")
-attachments/13/offset = Vector3(-0.039195, 2.12399, -0.000122)
+attachments/13/offset = Vector3(-0.0391988, 2.12399, -0.0001252)
 attachments/14/point_index = 389
 attachments/14/spatial_attachment_path = NodePath("..")
-attachments/14/offset = Vector3(-0.039209, 2.12399, 0.022964)
+attachments/14/offset = Vector3(-0.0392115, 2.12399, 0.022962)
 attachments/15/point_index = 850
 attachments/15/spatial_attachment_path = NodePath("..")
-attachments/15/offset = Vector3(0.016132, 2.1218, -0.024756)
+attachments/15/offset = Vector3(0.0161298, 2.1218, -0.0247566)
 attachments/16/point_index = 353
 attachments/16/spatial_attachment_path = NodePath("..")
-attachments/16/offset = Vector3(0.016117, 2.1218, -9e-05)
+attachments/16/offset = Vector3(0.0161129, 2.1218, -9.26852e-05)
 attachments/17/point_index = 385
 attachments/17/spatial_attachment_path = NodePath("..")
-attachments/17/offset = Vector3(0.016103, 2.1218, 0.024576)
+attachments/17/offset = Vector3(0.0161001, 2.1218, 0.0245712)
 
 [node name="Back" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
 transform = Transform3D(0.7846, 0.184091, -0.592041, -0.163487, 0.982536, 0.0888514, 0.598059, 0.0270784, 0.800994, 0.628853, 2.2679, 0.0883545)
@@ -296,6 +318,9 @@ transform = Transform3D(1, 2.98023e-08, -6.98492e-10, 0, 1, 1.39698e-09, -2.3283
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.84663, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_qp53c")
+}
 tree_root = SubResource("AnimationNodeBlendTree_gjn87")
 anim_player = NodePath("../AnimationPlayer")
 parameters/AttackMul1/scale = 1.0

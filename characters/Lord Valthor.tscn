@@ -186,22 +186,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bones/0/position = Vector3(4.54401e-05, 1.30654, -0.0196211)
 bones/0/rotation = Quaternion(-0.0402364, 0.703775, -0.035832, 0.708377)
 bones/1/rotation = Quaternion(0.000131502, -0.000233813, 0.159523, 0.987194)
-bones/2/rotation = Quaternion(-0.706641, 0.151086, -0.144507, 0.67598)
-bones/3/rotation = Quaternion(0.0428388, 0.0111374, -0.0901663, 0.994943)
 bones/4/position = Vector3(-0.00560326, 0.440526, -0.362999)
 bones/4/rotation = Quaternion(-0.687393, -0.14231, 0.000694304, 0.712206)
 bones/5/rotation = Quaternion(0.000287849, -0.000106601, -0.291923, 0.956442)
-bones/6/rotation = Quaternion(0.144471, 0.675696, 0.706913, 0.15112)
-bones/7/rotation = Quaternion(0.0428388, -0.0111373, 0.0901664, 0.994943)
-bones/8/position = Vector3(-0.195774, 0.343267, -0.569978)
 bones/8/rotation = Quaternion(-0.0913945, 0.690124, 0.658465, 0.286006)
-bones/10/position = Vector3(-0.304441, 0.0863808, -0.00408576)
-bones/10/rotation = Quaternion(0.506592, -0.49332, 0.506591, -0.49332)
-bones/11/position = Vector3(0.326416, 0.046454, 0.196609)
-bones/11/rotation = Quaternion(0.506592, 0.49332, -0.506591, -0.49332)
 
 [node name="hammer_13" parent="BaseCharacter/char1v2/Armature/Skeleton3D" index="0"]
-transform = Transform3D(-0.00349878, 0.0088036, 0.0252522, 0.0184823, -0.0176105, 0.00870027, 0.0193283, 0.0184333, -0.00374835, 0.549721, 2.39296, -0.135294)
+transform = Transform3D(-0.00349878, 0.00880362, 0.0252522, 0.0184823, -0.0176105, 0.00870028, 0.0193283, 0.0184333, -0.00374835, 0.549721, 2.39296, -0.135295)
 
 [node name="HealthMarker" parent="BaseCharacter/char1v2" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.76287, 0)

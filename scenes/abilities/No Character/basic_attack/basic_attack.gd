@@ -13,6 +13,7 @@ var players_affected: Array = []
 var attack_quantity: int = 1
 var target_amount: int = 1
 var target_player: BaseCharacter = null
+var attack_stopped = false
 
 func _ready():
 	charges = total_charges
@@ -75,24 +76,26 @@ func dealDamage():
 
 @rpc("call_local", "reliable")
 func stopAttack():
-	target_player = null
-	attack_ended = true
+	#target_player = null
+	attack_ended = false
 	chara.can_move = true
 	attack_cooldown = 0
 	attack_cooldown_offset = 0
-	current_attack_index = 0
+	#current_attack_index = 0
 	for i in range(chara.total_attack_animations):
 		chara.character_animations.set(str("parameters/BasicAttack", i + 1,"/request"), AnimationNodeOneShot.ONE_SHOT_REQUEST_ABORT)
 
 func _physics_process(delta):
-	if chara.can_act:
+	if chara.can_act and chara.can_cast:
 		mouse_area.global_position = chara.mouse_pos
 		attack_cooldown = max(0, attack_cooldown - delta)
 		attack_cooldown_offset = max(0, attack_cooldown_offset - delta)
-		if attack_cooldown == 0 && attack_cooldown_offset == 0 && !attack_ended:
+		if attack_cooldown == 0 and attack_cooldown_offset == 0 and !attack_ended:
+			if is_multiplayer_authority():
+				Debug.sprint("ATTACK ENDED")
 			attack_ended = true
 		
-		if is_multiplayer_authority():
+		if is_multiplayer_authority() and !chara.is_dashing:
 			if target_player == null:
 				if Input.is_action_just_pressed("Move"):
 					calculateTargetPlayer()
@@ -108,18 +111,18 @@ func _physics_process(delta):
 		
 		if target_player != null and target_player != chara:
 			if target_player in range_area.get_overlapping_bodies():
-				if !chara.is_dashing:
+				if !chara.is_dashing and chara.can_cast:
 					chara.target = chara.global_position
 					chara.updateTargetLocation(chara.target)
-				if attack_ended:
-					calculateAffectedPlayers()
-					beginExecution()
+					if attack_ended:
+						beginExecution()
 			else:
 				if !chara.is_dashing:
 					chara.target = target_player.global_position
 					chara.updateTargetLocation(chara.target)
 	
 func beginExecution():
+	chara.abort_oneshots()
 	calculateAffectedPlayers()
 	if len(players_affected) > 0:
 		if target_player == null:

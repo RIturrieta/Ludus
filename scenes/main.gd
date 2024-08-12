@@ -49,7 +49,7 @@ func _ready() -> void:
 		if player_data.character == (Statics.Character.CHAR1 - test):
 			player = player_scene[0].instantiate()
 		elif player_data.character == (Statics.Character.CHAR2 - test):
-			player = player_scene[4].instantiate()
+			player = player_scene[1].instantiate()
 		elif player_data.character == (Statics.Character.CHAR3 - test):
 			player = player_scene[2].instantiate()
 		elif player_data.character == (Statics.Character.CHAR4 - test):

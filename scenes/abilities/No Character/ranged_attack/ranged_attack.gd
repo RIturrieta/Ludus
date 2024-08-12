@@ -85,7 +85,7 @@ func shoot():
 
 @rpc("call_local", "reliable")
 func stopAttack():
-	target_player = null
+	# target_player = null
 	attack_ended = true
 	chara.can_move = true
 	attack_cooldown = 0
@@ -107,7 +107,7 @@ func _physics_process(delta):
 					chara.target = chara.global_position
 					chara.updateTargetLocation(chara.target)
 					
-	if chara.can_act:
+	if chara.can_act and chara.can_cast:
 		mouse_area.global_position = chara.mouse_pos
 		attack_cooldown = max(0, attack_cooldown - delta)
 		attack_cooldown_offset = max(0, attack_cooldown_offset - delta)
@@ -115,7 +115,7 @@ func _physics_process(delta):
 			attack_ended = true
 		
 		if is_multiplayer_authority():
-			if target_player == null:
+			if target_player == null and !chara.is_dashing:
 				if Input.is_action_just_pressed("Move"):
 					calculateTargetPlayer()
 			else:
@@ -130,7 +130,7 @@ func _physics_process(delta):
 		
 		if target_player != null and target_player != chara:
 			if target_player in range_area.get_overlapping_bodies():
-				if !chara.is_dashing:
+				if !chara.is_dashing and chara.can_cast:
 					chara.target = chara.global_position
 					chara.updateTargetLocation(chara.target)
 				if attack_ended:

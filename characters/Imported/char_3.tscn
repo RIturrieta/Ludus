@@ -1,12 +1,40 @@
-[gd_scene load_steps=35 format=3 uid="uid://d15hwn8teia0u"]
+[gd_scene load_steps=48 format=3 uid="uid://d15hwn8teia0u"]
 
 [ext_resource type="PackedScene" uid="uid://5jtb6yq7i3tv" path="res://resources/meshes/char3.glb" id="1_lb223"]
 [ext_resource type="ArrayMesh" uid="uid://k782yhd5s0bv" path="res://resources/meshes/band.tres" id="2_x24it"]
 [ext_resource type="PackedScene" uid="uid://bhjui30n1esoj" path="res://scenes/abilities/Sorde/modo_diablo/hair.glb" id="3_6vu7i"]
 [ext_resource type="ArrayMesh" uid="uid://bf83jmo3hyp8v" path="res://resources/meshes/char3.obj" id="3_xc21j"]
+[ext_resource type="Animation" uid="uid://cf126gjd71o47" path="res://animations/char3/default.res" id="5_2xe5w"]
+[ext_resource type="Animation" uid="uid://ckhgbyt15g0h1" path="res://animations/char3/atk1.res" id="6_p0efx"]
+[ext_resource type="Animation" uid="uid://2nsymjh4mfxa" path="res://animations/char3/atk2.res" id="7_oqoa0"]
+[ext_resource type="Animation" uid="uid://5hx0n53844ni" path="res://animations/char3/channeling.res" id="8_phsx5"]
+[ext_resource type="Animation" uid="uid://bkgrwlpdq6pjw" path="res://animations/char3/e.res" id="9_5yqsa"]
+[ext_resource type="Animation" uid="uid://b6gpemu0tysnx" path="res://animations/char3/idle.res" id="10_w223k"]
+[ext_resource type="Animation" uid="uid://ijk178mqsn0d" path="res://animations/char3/q.res" id="11_11g0e"]
+[ext_resource type="Animation" uid="uid://dolxvorkximrv" path="res://animations/char3/r1.res" id="12_b67kd"]
+[ext_resource type="Animation" uid="uid://48qg1yehfpdr" path="res://animations/char3/r2.res" id="13_bkmam"]
+[ext_resource type="Animation" uid="uid://dc6vsmgwwslv6" path="res://animations/char3/w1.res" id="14_nas2p"]
+[ext_resource type="Animation" uid="uid://ce2o412y2ubcc" path="res://animations/char3/w2.res" id="15_2oeao"]
+[ext_resource type="Animation" uid="uid://dccnw72t6qp8q" path="res://animations/char3/walk.res" id="16_65xpv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_heh3e"]
 size = Vector3(1.82, 2.285, 0.7)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tib7k"]
+_data = {
+"APose": ExtResource("5_2xe5w"),
+"BasicAttack1": ExtResource("6_p0efx"),
+"BasicAttack2": ExtResource("7_oqoa0"),
+"Channeling": ExtResource("8_phsx5"),
+"E": ExtResource("9_5yqsa"),
+"Idle": ExtResource("10_w223k"),
+"Q": ExtResource("11_11g0e"),
+"R1": ExtResource("12_b67kd"),
+"R2": ExtResource("13_bkmam"),
+"W1": ExtResource("14_nas2p"),
+"W2": ExtResource("15_2oeao"),
+"Walk": ExtResource("16_65xpv")
+}
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m141q"]
 animation = &"BasicAttack1"
@@ -84,7 +112,7 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_48ckk"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8ed1i"]
-graph_offset = Vector2(-213.531, -18.7923)
+graph_offset = Vector2(-102.482, 18.9856)
 nodes/Attack1/node = SubResource("AnimationNodeAnimation_m141q")
 nodes/Attack1/position = Vector2(480, 480)
 nodes/Attack2/node = SubResource("AnimationNodeAnimation_d4mbu")
@@ -147,25 +175,25 @@ node_connections = [&"AttackMul1", 0, &"Attack1", &"AttackMul2", 0, &"Attack2", 
 [node name="char3" instance=ExtResource("1_lb223")]
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/0/position = Vector3(2.35962e-24, -0.360671, 0.0398082)
-bones/0/rotation = Quaternion(-0.0799742, -3.79622e-26, 1.9875e-17, 0.996797)
+bones/0/position = Vector3(7.6268e-17, -0.291248, 0.0596434)
+bones/0/rotation = Quaternion(-0.075257, -3.99399e-26, 1.46627e-17, 0.997164)
 bones/3/rotation = Quaternion(0.0334057, -7.75915e-26, -7.41755e-18, 0.999442)
-bones/4/rotation = Quaternion(0.0320742, -1.20132e-26, -8.98799e-18, 0.999486)
+bones/4/rotation = Quaternion(0.027895, 1.14334e-19, -8.9884e-18, 0.999611)
 bones/5/rotation = Quaternion(-0.0559237, -0.00774747, 0.817648, 0.572944)
 bones/6/rotation = Quaternion(-0.322284, 0.0325463, -0.0748588, 0.943117)
-bones/7/rotation = Quaternion(-0.540971, -0.205067, 0.597719, 0.555004)
-bones/8/rotation = Quaternion(-0.0205471, -0.251624, 0.10229, 0.962185)
+bones/7/rotation = Quaternion(-0.560608, -0.202535, 0.575733, 0.55967)
+bones/8/rotation = Quaternion(-0.0163835, -0.244324, 0.0966536, 0.964725)
 bones/9/rotation = Quaternion(0.0784404, -0.0848469, -0.826228, 0.551358)
 bones/10/rotation = Quaternion(-0.135111, 0.000375008, 0.101722, 0.985595)
-bones/11/rotation = Quaternion(0.0678402, -0.0661148, -0.648559, 0.755247)
-bones/12/rotation = Quaternion(-0.77987, 0.0670533, -0.232736, 0.577184)
+bones/11/rotation = Quaternion(0.0493752, -0.05125, -0.649052, 0.757408)
+bones/12/rotation = Quaternion(-0.776133, 0.0689235, -0.232356, 0.582132)
 bones/13/rotation = Quaternion(-0.855007, -0.203261, -0.153497, 0.451761)
 bones/14/position = Vector3(-1.7, -5.3783, -1.88881)
 bones/15/position = Vector3(1.7, -5.3783, 3.11119)
 bones/15/rotation = Quaternion(-0.665574, -0.23877, -0.23877, 0.665574)
 
 [node name="Head" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -6.96722e-18, 1.5887e-21, 6.96421e-18, 0.999576, 0.0291319, -2.04556e-19, -0.0291319, 0.999576, -1.88394e-16, 4.78294, -0.709728)
+transform = Transform3D(1, 3.45972e-18, -2.08193e-19, -3.45253e-18, 0.999607, 0.0280317, 3.05094e-19, -0.0280317, 0.999607, -5.80979e-17, 4.85923, -0.641187)
 bone_name = "Bone.004"
 bone_idx = 4
 
@@ -208,17 +236,17 @@ attachments/1/spatial_attachment_path = NodePath("..")
 attachments/1/offset = Vector3(0.0575712, 2.32992, 0.985094)
 attachments/2/point_index = 3
 attachments/2/spatial_attachment_path = NodePath("..")
-attachments/2/offset = Vector3(-0.266572, 2.26296, 0.93883)
+attachments/2/offset = Vector3(-0.266572, 2.26296, 0.938829)
 attachments/3/point_index = 7
 attachments/3/spatial_attachment_path = NodePath("..")
-attachments/3/offset = Vector3(0.0566726, 2.25885, 0.985061)
+attachments/3/offset = Vector3(0.0566726, 2.25885, 0.98506)
 
 [node name="Hair" parent="Armature/Skeleton3D/Head" index="2" instance=ExtResource("3_6vu7i")]
 transform = Transform3D(-2.4, -1.62765e-17, -2.09815e-07, 8.48002e-10, 2.39998, -0.00970004, 2.09813e-07, -0.00970004, -2.39998, -3.41625e-16, 2.10721, 0.0893897)
 visible = false
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -2.49197e-17, -1.02169e-18, 2.49065e-17, 0.995651, 0.0931602, -1.30428e-18, -0.0931602, 0.995651, -1.58491e-16, 3.58816, -0.597936)
+transform = Transform3D(1, -1.44975e-17, -7.44969e-19, 1.45089e-17, 0.996488, 0.0837344, -4.71586e-19, -0.0837344, 0.996488, -4.07009e-17, 3.66344, -0.540706)
 bone_name = "Bone.003"
 bone_idx = 3
 
@@ -238,6 +266,9 @@ mesh = ExtResource("2_x24it")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2275, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_tib7k")
+}
 tree_root = SubResource("AnimationNodeBlendTree_8ed1i")
 anim_player = NodePath("../AnimationPlayer")
 parameters/AttackMul1/scale = 1.0

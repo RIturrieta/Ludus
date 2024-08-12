@@ -103,32 +103,42 @@ func update_target_max_mana():
 
 func prepare_blessing(index: int):
 	var inputs = ["1", "2", "3", "4"]
-	var texture = local_player.abilities[inputs[index]][1].Icon
-	var tooltip = local_player.abilities[inputs[index]][1].Name + "\n" + local_player.abilities[inputs[index]][1].Description
+	var ability  = local_player.abilities[inputs[index]][1]
+	var texture = ability.Icon
+	var tooltip = ability.Name + "\n" + ability.Description
 	if index == 0:
 		%CharaB1.texture = texture
-		%CharaB1.tooltip_text = tooltip
-		if local_player.abilities[inputs[index]][1].total_charges > 0:
+		$CharaInfo/CharaBlessings/B1.tooltip_text = tooltip
+		if ability.total_charges > 0:
 			$CharaInfo/CharaBlessings/B1/Charges.visible = true
-		$CharaInfo/CharaBlessings/B1/Charges/Counter.text = str(local_player.abilities[inputs[index]][1].charges)
+			$CharaInfo/CharaBlessings/B1/Clock.max_value = ability.cooldown
+			$CharaInfo/CharaBlessings/B1/Clock.value = ability.cooldown
+		$CharaInfo/CharaBlessings/B1/Charges/Counter.text = str(ability.charges)
 	elif index == 1:
 		%CharaB2.texture = texture
-		%CharaB2.tooltip_text = tooltip
-		if local_player.abilities[inputs[index]][1].total_charges > 0:
+		$CharaInfo/CharaBlessings/B2.tooltip_text = tooltip
+		if ability.total_charges > 0:
 			$CharaInfo/CharaBlessings/B2/Charges.visible = true
-		$CharaInfo/CharaBlessings/B2/Charges/Counter.text = str(local_player.abilities[inputs[index]][1].charges)
+			$CharaInfo/CharaBlessings/B2/Clock.max_value = ability.cooldown
+			$CharaInfo/CharaBlessings/B2/Clock.value = ability.cooldown
+		$CharaInfo/CharaBlessings/B2/Charges/Counter.text = str(ability.charges)
+		
 	elif index == 2:
 		%CharaB3.texture = texture
-		%CharaB3.tooltip_text = tooltip
-		if local_player.abilities[inputs[index]][1].total_charges > 0:
+		$CharaInfo/CharaBlessings/B3.tooltip_text = tooltip
+		if ability.total_charges > 0:
 			$CharaInfo/CharaBlessings/B3/Charges.visible = true
-		$CharaInfo/CharaBlessings/B3/Charges/Counter.text = str(local_player.abilities[inputs[index]][1].charges)
+			$CharaInfo/CharaBlessings/B3/Clock.max_value = ability.cooldown
+			$CharaInfo/CharaBlessings/B3/Clock.value = ability.cooldown
+		$CharaInfo/CharaBlessings/B3/Charges/Counter.text = str(ability.charges)
 	else:
 		%CharaB4.texture = texture
-		%CharaB4.tooltip_text = tooltip
-		if local_player.abilities[inputs[index]][1].total_charges > 0:
+		$CharaInfo/CharaBlessings/B4.tooltip_text = tooltip
+		if ability.total_charges > 0:
 			$CharaInfo/CharaBlessings/B4/Charges.visible = true
-		$CharaInfo/CharaBlessings/B4/Charges/Counter.text = str(local_player.abilities[inputs[index]][1].charges)
+			$CharaInfo/CharaBlessings/B4/Clock.max_value = ability.cooldown
+			$CharaInfo/CharaBlessings/B4/Clock.value = ability.cooldown
+		$CharaInfo/CharaBlessings/B4/Charges/Counter.text = str(ability.charges)
 
 func prepare_icons(index: int = 0):
 	var player_nodes = get_tree().get_nodes_in_group("players")
@@ -148,44 +158,67 @@ func prepare_icons(index: int = 0):
 				local_player.mana_bar.value_changed.connect(update_chara_mana)
 			if !local_player.mana_bar.changed.is_connected(update_chara_max_mana):
 				local_player.mana_bar.changed.connect(update_chara_max_mana)
-			
-	var texture_q = local_player.abilities["Q"][1].Icon
-	var tooltip_q = local_player.abilities["Q"][1].Name + "\n" + local_player.abilities["Q"][1].Description
-	%CharaQ.texture = texture_q
-	%CharaQ.tooltip_text = tooltip_q
-	if local_player.abilities["Q"][1].total_charges > 0:
+	
+	var Q = local_player.abilities["Q"][1]
+	var Q_tooltip = Q.Name + "\nCost: " + str(Q.mana_cost) + "  |  Cooldown: " + str(Q.cooldown) + "s" + "\n" + Q.Description
+	%CharaQ.texture = Q.Icon
+	$CharaInfo/CharaAbilities/Q.tooltip_text = Q_tooltip
+	if Q.total_charges > 0:
 		$CharaInfo/CharaAbilities/Q/Charges.visible = true
-	$CharaInfo/CharaAbilities/Q/Charges/Counter.text = str(local_player.abilities["Q"][1].charges)
+	$CharaInfo/CharaAbilities/Q/Charges/Counter.text = str(Q.charges)
+	$CharaInfo/CharaAbilities/Q/Clock.max_value = Q.cooldown
+	$CharaInfo/CharaAbilities/Q/Clock.value = Q.cooldown
+	$CharaInfo/CharaAbilities/Q/ManaMeter.max_value = Q.mana_cost
+	$CharaInfo/CharaAbilities/Q/ManaMeter.min_value = 0
+	$CharaInfo/CharaAbilities/Q/ManaMeter.value = Q.mana_cost
 	
-	var texture_w = local_player.abilities["W"][1].Icon
-	var tooltip_w = local_player.abilities["W"][1].Name + "\n" + local_player.abilities["W"][1].Description
-	%CharaW.texture = texture_w
-	%CharaW.tooltip_text = tooltip_w
-	if local_player.abilities["W"][1].total_charges > 0:
+	
+	var W = local_player.abilities["W"][1]
+	var W_tooltip = W.Name + "\nCost: " + str(W.mana_cost) + "  |  Cooldown: " + str(W.cooldown) + "s" + "\n" + W.Description
+	%CharaW.texture = W.Icon
+	$CharaInfo/CharaAbilities/W.tooltip_text = W_tooltip
+	if W.total_charges > 0:
 		$CharaInfo/CharaAbilities/W/Charges.visible = true
-	$CharaInfo/CharaAbilities/W/Charges/Counter.text = str(local_player.abilities["W"][1].charges)
+	$CharaInfo/CharaAbilities/W/Charges/Counter.text = str(W.charges)
+	$CharaInfo/CharaAbilities/W/Clock.max_value = W.cooldown
+	$CharaInfo/CharaAbilities/W/Clock.value = W.cooldown
+	$CharaInfo/CharaAbilities/W/ManaMeter.max_value = W.mana_cost
+	$CharaInfo/CharaAbilities/W/ManaMeter.min_value = 0
+	$CharaInfo/CharaAbilities/W/ManaMeter.value = W.mana_cost
 	
-	var texture_e = local_player.abilities["E"][1].Icon
-	var tooltip_e = local_player.abilities["E"][1].Name + "\n" + local_player.abilities["E"][1].Description
-	%CharaE.texture = texture_e
-	%CharaE.tooltip_text = tooltip_e
-	if local_player.abilities["E"][1].total_charges > 0:
+	var E = local_player.abilities["E"][1]
+	var E_tooltip = E.Name + "\nCost: " + str(E.mana_cost) + "  |  Cooldown: " + str(E.cooldown) + "s" + "\n" + E.Description
+	%CharaE.texture = E.Icon
+	$CharaInfo/CharaAbilities/E.tooltip_text = E_tooltip
+	if E.total_charges > 0:
 		$CharaInfo/CharaAbilities/E/Charges.visible = true
-	$CharaInfo/CharaAbilities/E/Charges/Counter.text = str(local_player.abilities["E"][1].charges)
+	$CharaInfo/CharaAbilities/E/Charges/Counter.text = str(E.charges)
+	$CharaInfo/CharaAbilities/E/Clock.max_value = E.cooldown
+	$CharaInfo/CharaAbilities/E/Clock.value = E.cooldown
+	$CharaInfo/CharaAbilities/E/ManaMeter.max_value = E.mana_cost
+	$CharaInfo/CharaAbilities/E/ManaMeter.min_value = 0
+	$CharaInfo/CharaAbilities/E/ManaMeter.value = E.mana_cost
 	
 	if index != 0:
-		var texture_r = local_player.abilities["R" + str(index)][1].Icon
-		var tooltip_r = local_player.abilities["R" + str(index)][1].Name + "\n" + local_player.abilities["R" + str(index)][1].Description
-		%CharaR.texture = texture_r
-		%CharaR.tooltip_text = tooltip_r
-		if local_player.abilities["R" + str(index)][1].total_charges > 0:
+		var R = local_player.abilities["R" + str(index)][1]
+		var R_tooltip = R.Name + "\nCost: " + str(R.mana_cost) + "  |  Cooldown: " + str(R.cooldown) + "s" + "\n" + R.Description
+		%CharaR.texture = R.Icon
+		$CharaInfo/CharaAbilities/R.tooltip_text = R_tooltip
+		if R.total_charges > 0:
 			$CharaInfo/CharaAbilities/R/Charges.visible = true
-		$CharaInfo/CharaAbilities/R/Charges/Counter.text = str(local_player.abilities["R" + str(index)][1].charges)
+		$CharaInfo/CharaAbilities/R/Charges/Counter.text = str(R.charges)
+		$CharaInfo/CharaAbilities/R/Clock.max_value = R.cooldown
+		$CharaInfo/CharaAbilities/R/Clock.value = R.cooldown
+		$CharaInfo/CharaAbilities/R/ManaMeter.max_value = R.mana_cost
+		$CharaInfo/CharaAbilities/R/ManaMeter.min_value = 0
+		$CharaInfo/CharaAbilities/R/ManaMeter.value = R.mana_cost
 
 func update_ability_icons():
 	for key in ["Q","W","E","R"]:
 		var panel = $CharaInfo/CharaAbilities
-		var counter = panel.find_child(key).get_child(2).get_child(0)
+		var counter = panel.find_child(key).get_child(4).get_child(0)
+		var clock = panel.find_child(key).get_child(1)
+		var meter = panel.find_child(key).get_child(2)
 		var ability: Ability
 		if key == "R":
 			if local_player.r_index == 0:
@@ -197,19 +230,87 @@ func update_ability_icons():
 		else:
 			ability = local_player.abilities[key][1]
 		counter.text = str(ability.charges)
+		var icon_panel = get_node("CharaInfo/CharaAbilities/" + key)
+		var icon = get_node("CharaInfo/CharaAbilities/" + key + "/Chara" + key)
+		var pulse_color: Color
 		if ability.charges == 0 and ability.charges < ability.total_charges:
-			get_node("CharaInfo/CharaAbilities/" + key + "/Chara" + key).modulate = Color("1d1d1d")
+			pulse_color = Color("ff0088")
+			if icon.modulate == Color.WHITE:
+				icon.modulate = Color("1d1d1d")
+			#if meter.visible:
+				#meter.visible = false
+			if not clock.visible:
+				clock.visible = true
+			else:
+				var time_left = ability.cooldown_timers.get_child(0).time_left
+				clock.value = ability.cooldown - time_left
+				if clock.value == clock.max_value:
+					clock.visible = false
 		else:
-			get_node("CharaInfo/CharaAbilities/" + key + "/Chara" + key).modulate = Color(1, 1, 1)
+			if clock.visible:
+				clock.visible = false
+		
+		if ability.mana_cost > local_player.mana:
+			pulse_color = Color.CYAN
+			if icon.modulate == Color.WHITE:
+				icon.modulate = Color("1d1d1d")
+			if not meter.visible:
+				var tween = create_tween()
+				meter.visible = true
+			else:
+				meter.value = local_player.mana
+		else:
+			if meter.visible:
+				meter.visible = false
+				
+		if not ability.mana_cost > local_player.mana and not (ability.charges == 0 and ability.charges < ability.total_charges):
+			if icon_panel.self_modulate != Color.WHITE:
+				icon_panel.self_modulate = Color.WHITE
+			if icon.modulate != Color.WHITE:
+				icon.modulate = Color.WHITE
+		else:
+			if Input.is_action_just_pressed(key):
+				var tween = create_tween()
+				tween.tween_property(icon_panel, "self_modulate", pulse_color, 0)
+				tween.parallel().tween_property(icon, "modulate", pulse_color, 0)
+				tween.parallel().tween_property(clock, "modulate", pulse_color, 0)
+				tween.parallel().tween_property(meter, "modulate", pulse_color, 0)
+				tween.tween_property(icon_panel, "self_modulate", Color.WHITE, 0.5)
+				tween.parallel().tween_property(icon, "modulate", Color("1d1d1d"), 0.5)
+				tween.parallel().tween_property(clock, "modulate", Color("cd007f86"), 0.5)
+				tween.parallel().tween_property(meter, "modulate", Color("259aff5a"), 0.5)
+			
 	for key in ["1","2","3","4"]:
 		var panel = $CharaInfo/CharaBlessings
-		var counter = panel.find_child("B" + key).get_child(2).get_child(0)
+		var counter = panel.find_child("B" + key).get_child(3).get_child(0)
+		var clock = panel.find_child("B" + key).get_child(1)
 		var ability: Ability = local_player.abilities[key][1]
+		var icon = get_node("CharaInfo/CharaBlessings/B" + key + "/CharaB" + key)
+		var icon_panel = get_node("CharaInfo/CharaBlessings/B" + key)
 		counter.text = str(ability.charges)
 		if ability.charges == 0 and ability.charges < ability.total_charges:
-			get_node("CharaInfo/CharaBlessings/B" + key + "/CharaB" + key).modulate = Color("1d1d1d")
+			var pulse_color: Color = Color("ff0088")
+			if icon.modulate == Color.WHITE:
+				icon.modulate = Color("1d1d1d")
+			if not clock.visible:
+				clock.visible = true
+			else:
+				var time_left = ability.cooldown_timers.get_child(0).time_left
+				clock.value = ability.cooldown - time_left
+			if Input.is_action_just_pressed(key):
+				var tween = create_tween()
+				tween.tween_property(icon_panel, "self_modulate", pulse_color, 0)
+				tween.parallel().tween_property(icon, "modulate", pulse_color, 0)
+				tween.parallel().tween_property(clock, "modulate", pulse_color, 0)
+				tween.tween_property(icon_panel, "self_modulate", Color.WHITE, 0.5)
+				tween.parallel().tween_property(icon, "modulate", Color("1d1d1d"), 0.5)
+				tween.parallel().tween_property(clock, "modulate", Color("cd007f86"), 0.5)
+				
 		else:
-			get_node("CharaInfo/CharaBlessings/B" + key + "/CharaB" + key).modulate = Color(1, 1, 1)
+			if icon.modulate != Color.WHITE:
+				icon.modulate = Color.WHITE
+			if clock.visible:
+				clock.visible = false
 
 func update_chara_stats():
 	chara_ad.text = str(local_player.attack_damage)
@@ -334,7 +435,7 @@ func _physics_process(delta):
 			target_info.visible = true
 		else:
 			target_info.visible = false
-		
+	
 	update_target_stats()
 	update_chara_stats()
 	update_chara_effects()

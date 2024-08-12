@@ -19,7 +19,6 @@ func _ready():
 func stop():
 	if is_multiplayer_authority():
 		resumeTime.rpc()
-	queue_free()
 
 @rpc("reliable","call_local")
 func stopTime():
@@ -52,3 +51,4 @@ func resumeTime():
 	chara.character_animations.set("parameters/EMul/scale", 1)
 	chara.character_animations.set("parameters/R1Mul/scale", 1)
 	chara.character_animations.set("parameters/R2Mul/scale", 1)
+	queue_free()
