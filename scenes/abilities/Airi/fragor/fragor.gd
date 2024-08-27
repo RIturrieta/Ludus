@@ -51,4 +51,3 @@ func execute():
 func endExecution():
 	chara.can_cast = true
 	affected_player = null
-

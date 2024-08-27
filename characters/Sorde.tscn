@@ -1,38 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://dusubx1tn21bq"]
+[gd_scene load_steps=5 format=3 uid="uid://dusubx1tn21bq"]
 
 [ext_resource type="PackedScene" uid="uid://dt5ahf3uukx5o" path="res://characters/BaseCharacter.tscn" id="1_3ek4m"]
 [ext_resource type="PackedScene" uid="uid://d15hwn8teia0u" path="res://characters/Imported/char_3.tscn" id="2_dme4m"]
-[ext_resource type="Animation" uid="uid://cf126gjd71o47" path="res://animations/char3/default.res" id="3_ue33m"]
-[ext_resource type="Animation" uid="uid://ckhgbyt15g0h1" path="res://animations/char3/atk1.res" id="4_88d35"]
-[ext_resource type="Animation" uid="uid://2nsymjh4mfxa" path="res://animations/char3/atk2.res" id="5_gxein"]
-[ext_resource type="Animation" uid="uid://5hx0n53844ni" path="res://animations/char3/channeling.res" id="6_kguly"]
-[ext_resource type="Animation" uid="uid://bkgrwlpdq6pjw" path="res://animations/char3/e.res" id="7_5dfdy"]
-[ext_resource type="Animation" uid="uid://b6gpemu0tysnx" path="res://animations/char3/idle.res" id="8_g8g4m"]
-[ext_resource type="Animation" uid="uid://ijk178mqsn0d" path="res://animations/char3/q.res" id="9_cmwlb"]
-[ext_resource type="Animation" uid="uid://dolxvorkximrv" path="res://animations/char3/r1.res" id="10_bhvq7"]
-[ext_resource type="Animation" uid="uid://48qg1yehfpdr" path="res://animations/char3/r2.res" id="11_a2jlx"]
-[ext_resource type="Animation" uid="uid://dc6vsmgwwslv6" path="res://animations/char3/w1.res" id="12_rs1g6"]
-[ext_resource type="Animation" uid="uid://ce2o412y2ubcc" path="res://animations/char3/w2.res" id="13_pnsl8"]
-[ext_resource type="Animation" uid="uid://dccnw72t6qp8q" path="res://animations/char3/walk.res" id="14_liciu"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pu4dj"]
-viewport_path = NodePath("BaseCharacter/Health")
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_tib7k"]
-_data = {
-"APose": ExtResource("3_ue33m"),
-"BasicAttack1": ExtResource("4_88d35"),
-"BasicAttack2": ExtResource("5_gxein"),
-"Channeling": ExtResource("6_kguly"),
-"E": ExtResource("7_5dfdy"),
-"Idle": ExtResource("8_g8g4m"),
-"Q": ExtResource("9_cmwlb"),
-"R1": ExtResource("10_bhvq7"),
-"R2": ExtResource("11_a2jlx"),
-"W1": ExtResource("12_rs1g6"),
-"W2": ExtResource("13_pnsl8"),
-"Walk": ExtResource("14_liciu")
-}
+viewport_path = NodePath("Health")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jw44a"]
 height = 1.5
@@ -65,51 +37,37 @@ texture = SubResource("ViewportTexture_pu4dj")
 [node name="char3" parent="BaseCharacter" instance=ExtResource("2_dme4m")]
 
 [node name="Skeleton3D" parent="BaseCharacter/char3/Armature" index="0"]
-bones/0/position = Vector3(3.67719e-17, -0.499226, 0.000221064)
-bones/0/rotation = Quaternion(-0.0894004, 0, 1.86173e-17, 0.995996)
-bones/3/rotation = Quaternion(0.0334057, -7.75915e-26, -7.41755e-18, 0.999442)
-bones/4/rotation = Quaternion(0.0403439, 1.83743e-20, -8.9876e-18, 0.999186)
-bones/5/rotation = Quaternion(-0.0559237, -0.00774747, 0.817648, 0.572944)
-bones/6/rotation = Quaternion(-0.322284, 0.0325463, -0.0748588, 0.943117)
-bones/7/rotation = Quaternion(-0.500435, -0.209558, 0.639891, 0.544233)
-bones/8/rotation = Quaternion(-0.0288038, -0.26603, 0.113444, 0.956833)
-bones/9/rotation = Quaternion(0.0784404, -0.0848469, -0.826228, 0.551358)
-bones/10/rotation = Quaternion(-0.135111, 0.000375008, 0.101722, 0.985595)
-bones/11/rotation = Quaternion(0.104518, -0.0956222, -0.646479, 0.749664)
-bones/12/rotation = Quaternion(-0.787213, 0.0633206, -0.233463, 0.567258)
-bones/13/rotation = Quaternion(-0.855007, -0.203261, -0.153497, 0.451761)
-bones/14/position = Vector3(-1.7, -5.3783, -1.88881)
-bones/15/position = Vector3(1.7, -5.3783, 3.11119)
-bones/15/rotation = Quaternion(-0.665574, -0.23877, -0.23877, 0.665574)
+bones/0/position = Vector3(7.6268e-17, -0.38853, 0.0318487)
+bones/0/rotation = Quaternion(-0.0818905, -5.04292e-26, 1.46626e-17, 0.996641)
+bones/4/rotation = Quaternion(0.0337544, 1.14334e-19, -8.98837e-18, 0.99943)
+bones/7/rotation = Quaternion(-0.532956, -0.20603, 0.60639, 0.552992)
+bones/8/rotation = Quaternion(-0.0222172, -0.254546, 0.104549, 0.961136)
+bones/11/rotation = Quaternion(0.0752381, -0.0720685, -0.648258, 0.75426)
+bones/12/rotation = Quaternion(-0.781355, 0.0663042, -0.232885, 0.575198)
 
 [node name="Head" parent="BaseCharacter/char3/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -4.47121e-18, -2.18907e-19, 4.47588e-18, 0.999504, 0.031501, 7.79509e-20, -0.031501, 0.999504, -1.38448e-16, 4.62929, -0.846495)
+transform = Transform3D(1, 3.4488e-18, -3.38216e-19, -3.43727e-18, 0.999561, 0.0296146, 4.40202e-19, -0.0296146, 0.999561, -5.8033e-17, 4.75217, -0.73746)
 
 [node name="Band1" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="0"]
 collision_layer = 128
 collision_mask = 128
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(0.0349421, 2.24449, 0.933971)
-attachments/1/offset = Vector3(0.358221, 2.2405, 0.887969)
-attachments/2/offset = Vector3(0.0340999, 2.17342, 0.934217)
-attachments/3/offset = Vector3(0.357379, 2.16943, 0.888214)
+attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
+attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
+attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
+attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
 
 [node name="Band2" parent="BaseCharacter/char3/Armature/Skeleton3D/Head" index="1"]
 collision_layer = 128
 collision_mask = 128
 parent_collision_ignore = NodePath("../../../../..")
-attachments/0/offset = Vector3(-0.265674, 2.33403, 0.938863)
-attachments/1/offset = Vector3(0.0575712, 2.32992, 0.985094)
-attachments/2/offset = Vector3(-0.266572, 2.26296, 0.938829)
-attachments/3/offset = Vector3(0.0566726, 2.25885, 0.98506)
+attachments/0/offset = Vector3(-0.032656, 2.60711, 0.220183)
+attachments/1/offset = Vector3(0.032656, 2.60711, 0.220183)
+attachments/2/offset = Vector3(-0.032656, 2.59289, 0.220183)
+attachments/3/offset = Vector3(0.032656, 2.59289, 0.220183)
 
 [node name="BoneAttachment3D" parent="BaseCharacter/char3/Armature/Skeleton3D" index="2"]
-transform = Transform3D(1, -2.23981e-17, -1.34058e-18, 2.24073e-17, 0.99371, 0.111981, -1.176e-18, -0.111981, 0.99371, -1.1157e-16, 3.43684, -0.712118)
-
-[node name="AnimationTree" parent="BaseCharacter/char3" index="4"]
-libraries = {
-"": SubResource("AnimationLibrary_tib7k")
-}
+transform = Transform3D(1, -1.4495e-17, -9.40085e-19, 1.45179e-17, 0.995286, 0.096988, -4.70189e-19, -0.096988, 0.995286, -4.0639e-17, 3.55782, -0.621075)
 
 [node name="HitBox" type="CollisionShape3D" parent="BaseCharacter"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

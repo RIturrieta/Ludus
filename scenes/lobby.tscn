@@ -163,16 +163,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_kt0da")
 theme_override_font_sizes/font_size = 14
-text = "Team A"
+text = "Team A-1"
 
 [node name="RoleC" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer/VBoxContainer1"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_kt0da")
 theme_override_font_sizes/font_size = 14
-text = "Team B"
+text = "Team A-2
+"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer"]
 layout_mode = 2
@@ -184,16 +184,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_kt0da")
 theme_override_font_sizes/font_size = 14
-text = "Team B"
+text = "Team B-1"
 
 [node name="RoleD" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("4_kt0da")
 theme_override_font_sizes/font_size = 14
-text = "Team B"
+text = "Team B-2"
 
 [node name="PanelContainer2" type="PanelContainer" parent="PanelContainer/Menus/ReadyMenu"]
 custom_minimum_size = Vector2(0, 5)

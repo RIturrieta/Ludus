@@ -109,4 +109,3 @@ func _ready():
 func _exit_tree():
 	# Wait for thread finish here to handle game exit while the thread is running.
 	thread.wait_to_finish()
-

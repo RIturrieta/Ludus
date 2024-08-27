@@ -62,6 +62,7 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
 	Game.player_updated.connect(func(_id) : _check_ready())
+	Game.player_updated.connect(func(_id) : _update_buttons())
 	Game.players_updated.connect(_check_ready)
 	
 	host.pressed.connect(_on_host_pressed)
@@ -138,7 +139,7 @@ func _on_confirm_join_pressed() -> void:
 	if err:
 		#Debug.sprint("Host Error: %d" %err)
 		return
-
+	print("pasastes")
 	multiplayer.multiplayer_peer = peer
 	
 	var player = Statics.PlayerData.new(multiplayer.get_unique_id(), user.text, 0)
@@ -244,6 +245,8 @@ func set_player_ready(id: int, value: bool):
 func starting_game(value: bool):
 	role_a.disabled = value
 	role_b.disabled = value
+	role_c.disabled = value
+	role_d.disabled = value
 	back_ready.disabled = value
 	time_container.visible = value
 	if value:
@@ -269,6 +272,21 @@ func _check_ready() -> void:
 			ready_toggle.disabled = true
 			break
 
+func _update_buttons() -> void:
+	var buttons = [[role_a, role_c], [role_b, role_d]]
+	var names = ["Team A", "Team B"]
+	for teams in buttons:
+		for i in teams:
+			i.disabled = false
+			i.text = names[buttons.find(teams)] + str("-",teams.find(i) + 1)
+	var team
+	var slot
+	for player in Game.players:
+		if player.role != Statics.Role.NONE:
+			team = player.role - 1
+			slot = player.slot - 1
+			buttons[team][slot].disabled = true
+			buttons[team][slot].text = player.name
 
 func _disconnect():
 	multiplayer.multiplayer_peer.close()
@@ -298,12 +316,12 @@ func _go_to_menu(menu: Control) -> void:
 	menu.show()
 	# if the menu is the ready menu, move anchor to center left
 	if menu == ready_menu:
-		print("aaaa")
+		#print("aaaa")
 		set_anchors_preset(LayoutPreset.PRESET_CENTER_LEFT)
 	else:
-		print("b")
+		#print("b")
 		set_anchors_preset(LayoutPreset.PRESET_CENTER_LEFT)
-	print(anchors_preset)
+	#print(anchors_preset)
 
 
 func _back_menu() -> void:

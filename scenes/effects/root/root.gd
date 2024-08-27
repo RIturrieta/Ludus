@@ -19,4 +19,3 @@ func stop():
 	chara.can_move = true
 	chara.can_rotate = true
 	queue_free()
-

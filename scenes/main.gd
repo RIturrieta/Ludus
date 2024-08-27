@@ -59,8 +59,8 @@ func _ready() -> void:
 		
 		var spawn_points = test_arena.get_node("SpawnPoints")
 		for spawn_point in spawn_points.get_children():
-			if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA1") \
-			or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB1"):
+			if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA"+str(player_data.slot)) \
+			or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB"+str(player_data.slot)):
 				player.global_position = spawn_point.global_position
 				break
 		players.add_child(player, true)
@@ -137,8 +137,8 @@ func do_next():
 		for player in player_nodes:
 			for spawn_point in spawn_points.get_children():
 				var player_data = player.player_info
-				if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA1") \
-				or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB1"):
+				if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA"+str(player_data.slot)) \
+				or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB"+str(player_data.slot)):
 					player.global_position = spawn_point.global_position
 					player.reset()
 					%Hud.target_info.visible = false

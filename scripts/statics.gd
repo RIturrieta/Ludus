@@ -2,7 +2,7 @@ class_name Statics
 extends Node
 
 
-const MAX_CLIENTS = 1
+const MAX_CLIENTS = 3
 const PORT = 5409
 
 
