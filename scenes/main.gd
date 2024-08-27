@@ -58,9 +58,10 @@ func _ready() -> void:
 			player = player_scene[4].instantiate()
 		
 		var spawn_points = test_arena.get_node("SpawnPoints")
+		var slot = 1 if player_data.slot == 0 else player_data.slot
 		for spawn_point in spawn_points.get_children():
-			if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA"+str(player_data.slot)) \
-			or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB"+str(player_data.slot)):
+			if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA"+str(slot)) \
+			or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB"+str(slot)):
 				player.global_position = spawn_point.global_position
 				break
 		players.add_child(player, true)
@@ -135,10 +136,11 @@ func do_next():
 		var test_arena = arenas.get_child(0)
 		var spawn_points = test_arena.get_node("SpawnPoints")
 		for player in player_nodes:
+			var player_data = player.player_info
+			var slot = 1 if player_data.slot == 0 else player_data.slot
 			for spawn_point in spawn_points.get_children():
-				var player_data = player.player_info
-				if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA"+str(player_data.slot)) \
-				or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB"+str(player_data.slot)):
+				if (player_data.role == Statics.Role.TEAM_A and spawn_point.name == "TeamA"+str(slot)) \
+				or (player_data.role == Statics.Role.TEAM_B and spawn_point.name == "TeamB"+str(slot)):
 					player.global_position = spawn_point.global_position
 					player.reset()
 					%Hud.target_info.visible = false

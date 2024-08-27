@@ -29,7 +29,9 @@ func on_body_exited(body):
 		body.clearSilences()
 
 func on_body_entered(body):
-	if body is BaseCharacter:
+	if body is BaseCharacter and raining:
+		print("owo")
+		print(body.name)
 		body.silence(rain_duration)
 
 func _physics_process(delta):

@@ -12,6 +12,6 @@ cooldown = 0.0
 total_charges = 0
 Icon = ExtResource("2_jai8n")
 Name = "Overflow: R"
-Description = "Your R ultimate ability gains 1 extra charges."
+Description = "Your R ultimate ability gains 1 extra charge."
 
 [node name="preview" type="MeshInstance3D" parent="."]
